@@ -9,6 +9,7 @@
 #======================================================================================
 #Importation des bibliothèques nécessaires
 import math
+import cmath
 import numpy as np
 import matplotlib.pyplot as plt
 from functools import lru_cache
@@ -350,7 +351,104 @@ def polynome2(a,b,c):
     f"x₂ = {x2.real:.2f} {x2.imag:+.2f}i"
 )
 
+#Polynome3
+
+def polynome3(a, b, c, d):
+    """
+    Résout l'équation cubique : ax³ + bx² + cx + d = 0
+    """
+    try:
+        a = float(a)
+        b = float(b)
+        c = float(c)
+        d = float(d)
+    except ValueError:
+        return "⚠️ Les valeurs doivent être numériques"
+    
+    # Cas dégénérés
+    if a == 0:
+        if b == 0:
+            if c == 0:
+                return "❌ Pas de solution" if d != 0 else "✅ Infinité de solutions"
+            else:
+                # Équation de degré 1
+                x = -d / c
+                return f"✅ Équation de degré 1 : x = {x:.2f}"
+        else:
+            # Équation de degré 2
+            disc = c**2 - 4*b*d
+            if disc > 0:
+                x1 = (-c - math.sqrt(disc)) / (2*b)
+                x2 = (-c + math.sqrt(disc)) / (2*b)
+                return f"✅ Équation de degré 2 : x₁ = {x1:.2f}, x₂ = {x2:.2f}"
+            elif disc == 0:
+                x = -c / (2*b)
+                return f"✅ Équation de degré 2 : solution double x = {x:.2f}"
+            else:
+                x1 = complex(-c / (2*b), -math.sqrt(-disc) / (2*b))
+                x2 = complex(-c / (2*b), +math.sqrt(-disc) / (2*b))
+                return (
+                    "✅ Équation de degré 2 : pas de solution réelle\n"
+                    f"Deux solutions complexes :\n"
+                    f"x₁ = {x1.real:.2f} {x1.imag:+.2f}i\n"
+                    f"x₂ = {x2.real:.2f} {x2.imag:+.2f}i"
+                )
+    
+    # Équation cubique normale
+    # Méthode de Cardan
+    p = (3*a*c - b**2) / (3*a**2)
+    q = (2*b**3 - 9*a*b*c + 27*a**2*d) / (27*a**3)
+    
+    delta = (q/2)**2 + (p/3)**3
+    
+    if delta > 0:
+        # Une racine réelle, deux complexes
+        u = (-q/2 + math.sqrt(delta))**(1/3)
+        v = (-q/2 - math.sqrt(delta))**(1/3)
         
+        x1 = u + v - b/(3*a)
+        
+        # Racines complexes
+        x2 = complex(-(u+v)/2 - b/(3*a), (u-v)*math.sqrt(3)/2)
+        x3 = complex(-(u+v)/2 - b/(3*a), -(u-v)*math.sqrt(3)/2)
+        
+        return (
+            f"✅ Une solution réelle et deux complexes :\n"
+            f"x₁ = {x1:.2f}\n"
+            f"x₂ = {x2.real:.2f} {x2.imag:+.2f}i\n"
+            f"x₃ = {x3.real:.2f} {x3.imag:+.2f}i"
+        )
+    
+    elif delta == 0:
+        # Trois racines réelles (au moins deux égales)
+        if q == 0:
+            x = -b/(3*a)
+            return f"✅ Trois solutions réelles identiques : x = {x:.2f}"
+        else:
+            u = (-q/2)**(1/3)
+            x1 = 2*u - b/(3*a)
+            x2 = -u - b/(3*a)
+            return f"✅ Deux solutions réelles : x₁ = {x1:.2f}, x₂ = {x2:.2f} (double)"
+    
+    else:
+        # Trois racines réelles distinctes (cas irréductible)
+        r = math.sqrt(-(p/3)**3)
+        theta = math.acos(-q/(2*r))
+        
+        x1 = 2 * math.sqrt(-p/3) * math.cos(theta/3) - b/(3*a)
+        x2 = 2 * math.sqrt(-p/3) * math.cos((theta + 2*math.pi)/3) - b/(3*a)
+        x3 = 2 * math.sqrt(-p/3) * math.cos((theta + 4*math.pi)/3) - b/(3*a)
+        
+        # Trier les solutions
+        solutions = sorted([x1, x2, x3])
+        
+        return (
+            "✅ Trois solutions réelles distinctes :\n"
+            f"x₁ = {solutions[0]:.2f}\n"
+            f"x₂ = {solutions[1]:.2f}\n"
+            f"x₃ = {solutions[2]:.2f}"
+        )
+
 
 #Opération de base sur les matrices
 #======================================================================================
@@ -628,3 +726,153 @@ def equilibrer_parentheses(expr: str) -> str:
     if manque > 0:
         expr += ")" * manque
     return expr
+
+
+#=============================================================================================================================
+"""===============================================Virsualisation des graphes==============================================="""
+#=============================================================================================================================
+
+
+#Affichage polynome de dégré 1
+def voir_graphe1(a, b):
+    """
+    Affiche le graphique de la fonction f(x) = ax + b
+    """
+    # Conversion sécurisée
+    try:
+        a_val = float(a)
+        b_val = float(b)
+    except (ValueError, TypeError) as e:
+        print(f"Erreur de conversion : {e}")
+        return
+    
+    # Création des données
+    x = np.linspace(-100, 100, 1000)
+    y = a_val * x + b_val
+    
+    # Création du graphique
+    plt.figure(figsize=(10, 6))
+    plt.plot(x, y, 'b-', linewidth=2, label=f'f(x) = {a_val}x + {b_val}')
+    
+    # Ajout des axes
+    plt.axhline(y=0, color='k', linewidth=0.5)
+    plt.axvline(x=0, color='k', linewidth=0.5)
+    
+    # Configuration
+    plt.title(f"Fonction affine : f(x) = {a_val}x + {b_val}")
+    plt.xlabel("x")
+    plt.ylabel("f(x)")
+    plt.grid(True, alpha=0.3)
+    plt.legend()
+    
+    plt.tight_layout()
+    plt.show()
+
+
+
+
+#Affichage polynome de dégré 2
+def voir_graphe2(a, b, c):
+    """
+    Affiche le graphique de la fonction f(x) = ax² + bx + c
+    """
+    # Conversion sécurisée
+    try:
+        a_val = float(a)
+        b_val = float(b)
+        c_val = float(c)
+    except (ValueError, TypeError) as e:
+        print(f"Erreur de conversion : {e}")
+        return
+    
+    # Ajustement dynamique du domaine selon les racines
+    discriminant = b_val**2 - 4*a_val*c_val
+    
+    if a_val != 0 and discriminant >= 0:
+        # Si racines réelles, centrer autour des racines
+        racine1 = (-b_val - np.sqrt(discriminant)) / (2*a_val)
+        racine2 = (-b_val + np.sqrt(discriminant)) / (2*a_val)
+        centre = (racine1 + racine2) / 2
+        x_min = min(racine1, racine2) - 5
+        x_max = max(racine1, racine2) + 5
+    else:
+        # Sinon domaine par défaut
+        centre = 0
+        x_min, x_max = -10, 10
+    
+    x = np.linspace(x_min, x_max, 1000)
+    y = a_val * x**2 + b_val * x + c_val
+    
+    # Création du graphique
+    plt.figure(figsize=(10, 6))
+    plt.plot(x, y, 'b-', linewidth=2, label=f'f(x) = {a_val}x² + {b_val}x + {c_val}')
+    
+    # Ajout des axes
+    plt.axhline(y=0, color='k', linewidth=0.5)
+    plt.axvline(x=0, color='k', linewidth=0.5)
+    
+    # Marquer les racines si elles existent
+    if a_val != 0 and discriminant >= 0:
+        plt.scatter([racine1, racine2], [0, 0], color='red', zorder=5, 
+                   label=f'Racines: x₁={racine1:.2f}, x₂={racine2:.2f}')
+    
+    # Marquer le sommet
+    sommet_x = -b_val / (2*a_val) if a_val != 0 else 0
+    sommet_y = a_val * sommet_x**2 + b_val * sommet_x + c_val
+    plt.scatter(sommet_x, sommet_y, color='green', zorder=5, 
+               label=f'Sommet: ({sommet_x:.2f}, {sommet_y:.2f})')
+    
+    # Configuration
+    plt.title(f"Fonction du second degré : f(x) = {a_val}x² + {b_val}x + {c_val}")
+    plt.xlabel("x")
+    plt.ylabel("f(x)")
+    plt.grid(True, alpha=0.3)
+    plt.legend()
+    
+    plt.tight_layout()
+    plt.show()
+
+
+
+#Affichage polynome de dégré 3
+def voir_graphe3(a, b, c, d):
+    """
+    Affiche le graphique de la fonction f(x) = ax³ + bx² + cx + d
+    """
+    # Conversion sécurisée
+    try:
+        a_val = float(a)
+        b_val = float(b)
+        c_val = float(c)
+        d_val = float(d)
+    except (ValueError, TypeError) as e:
+        print(f"Erreur de conversion : {e}")
+        return
+    
+    # Domaine adaptatif centré autour du point d'inflexion
+    if a_val != 0:
+        centre = -b_val / (3*a_val)  # Point d'inflexion
+        x_min, x_max = centre - 8, centre + 8
+    else:
+        x_min, x_max = -10, 10
+    
+    x = np.linspace(x_min, x_max, 1000)
+    y = a_val * x**3 + b_val * x**2 + c_val * x + d_val
+    
+    # Création du graphique
+    plt.figure(figsize=(10, 6))
+    plt.plot(x, y, 'b-', linewidth=2, label=f'f(x) = {a_val}x³ + {b_val}x² + {c_val}x + {d_val}')
+    
+    # Ajout des axes
+    plt.axhline(y=0, color='k', linewidth=0.5)
+    plt.axvline(x=0, color='k', linewidth=0.5)
+    
+    # Configuration
+    plt.title(f"Fonction cubique : f(x) = {a_val}x³ + {b_val}x² + {c_val}x + {d_val}")
+    plt.xlabel("x")
+    plt.ylabel("f(x)")
+    plt.grid(True, alpha=0.3)
+    plt.legend()
+    
+    plt.tight_layout()
+    plt.show()
