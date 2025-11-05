@@ -170,7 +170,6 @@ numpy>=1.20.0
 matplotlib>=3.3.0
 ```
 
-Voilà ! Votre README est maintenant plus complet et professionnel. N'oubliez pas d'ajouter une capture d'écran dans le dossier `Image/` ! 🚀
 
 ## 📧 Contact
 📧 **Email** : junioragbenonzan31@gmail.com  
