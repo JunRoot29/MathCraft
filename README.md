@@ -1,9 +1,6 @@
 # 🧮 MathCraft
 > *Un espace malin pour calculer et s'amuser avec les maths. 🧠✨*
 
-![Python Version](https://img.shields.io/badge/python-3.x-blue)
-![License](https://img.shields.io/badge/license-Educational-green)
-![Status](https://img.shields.io/badge/status-in%20development-yellow)
 
 ## 📝 Description
 MathCraft est une application éducative interactive développée en Python avec Tkinter, offrant une plateforme complète pour explorer et pratiquer différents concepts mathématiques de manière ludique et intuitive. L'application propose 7 modules couvrant un large éventail de domaines mathématiques.
