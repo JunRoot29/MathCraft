@@ -161,6 +161,17 @@ Projet inspiré par la passion de rendre les mathématiques accessibles à tous.
 
 Pour toute utilisation commerciale, veuillez contacter l'auteur.
 
+## 📦 Fichier `requirements`
+
+
+
+```txt
+numpy>=1.20.0
+matplotlib>=3.3.0
+```
+
+Voilà ! Votre README est maintenant plus complet et professionnel. N'oubliez pas d'ajouter une capture d'écran dans le dossier `Image/` ! 🚀
+
 ## 📧 Contact
 📧 **Email** : junioragbenonzan31@gmail.com  
 🐙 **GitHub** : [@JunRoot29](https://github.com/JunRoot29)
