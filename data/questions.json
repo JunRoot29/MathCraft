@@ -1,0 +1,1622 @@
+{
+  "Débutant": [
+    {
+      "question": "2 + 3 = ?",
+      "reponse": 5,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "7 × 4 = ?",
+      "reponse": 28,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "15 - 9 = ?",
+      "reponse": 6,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "20 ÷ 4 = ?",
+      "reponse": 5,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "8 + 6 - 3 = ?",
+      "reponse": 11,
+      "points": 15,
+      "type": "arithmetique"
+    },
+    {
+      "question": "9 × 5 = ?",
+      "reponse": 45,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "12 ÷ 3 = ?",
+      "reponse": 4,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "14 - 7 + 2 = ?",
+      "reponse": 9,
+      "points": 15,
+      "type": "arithmetique"
+    },
+    {
+      "question": "6 × 6 = ?",
+      "reponse": 36,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "25 ÷ 5 = ?",
+      "reponse": 5,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "3 + 8 = ?",
+      "reponse": 11,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "10 - 4 = ?",
+      "reponse": 6,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "5 × 7 = ?",
+      "reponse": 35,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "16 ÷ 2 = ?",
+      "reponse": 8,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "4 + 9 - 2 = ?",
+      "reponse": 11,
+      "points": 15,
+      "type": "arithmetique"
+    },
+    {
+      "question": "11 × 3 = ?",
+      "reponse": 33,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "18 ÷ 6 = ?",
+      "reponse": 3,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "7 + 5 = ?",
+      "reponse": 12,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "20 - 13 = ?",
+      "reponse": 7,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "9 × 9 = ?",
+      "reponse": 81,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "4 + 4 = ?",
+      "reponse": 8,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "6 × 3 = ?",
+      "reponse": 18,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "21 ÷ 7 = ?",
+      "reponse": 3,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "13 - 8 = ?",
+      "reponse": 5,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "2 + 9 = ?",
+      "reponse": 11,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "8 × 8 = ?",
+      "reponse": 64,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "30 ÷ 5 = ?",
+      "reponse": 6,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "17 - 6 = ?",
+      "reponse": 11,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "10 + 15 = ?",
+      "reponse": 25,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "12 × 2 = ?",
+      "reponse": 24,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "40 ÷ 8 = ?",
+      "reponse": 5,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "9 + 6 = ?",
+      "reponse": 15,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "14 - 4 = ?",
+      "reponse": 10,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "7 × 2 = ?",
+      "reponse": 14,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "18 ÷ 9 = ?",
+      "reponse": 2,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "11 + 12 = ?",
+      "reponse": 23,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "15 - 5 = ?",
+      "reponse": 10,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "6 × 7 = ?",
+      "reponse": 42,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "24 ÷ 6 = ?",
+      "reponse": 4,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "8 + 12 = ?",
+      "reponse": 20,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "5 × 5 = ?",
+      "reponse": 25,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "9 ÷ 3 = ?",
+      "reponse": 3,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "7 + 8 = ?",
+      "reponse": 15,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "20 - 7 = ?",
+      "reponse": 13,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "3 × 12 = ?",
+      "reponse": 36,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "50 ÷ 10 = ?",
+      "reponse": 5,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "4 + 15 = ?",
+      "reponse": 19,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "18 - 9 = ?",
+      "reponse": 9,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "7 × 9 = ?",
+      "reponse": 63,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "36 ÷ 6 = ?",
+      "reponse": 6,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "42 ÷ 7 = ?",
+      "reponse": 6,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "8 + 11 = ?",
+      "reponse": 19,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "19 - 9 = ?",
+      "reponse": 10,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "4 × 9 = ?",
+      "reponse": 36,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "27 ÷ 3 = ?",
+      "reponse": 9,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "6 + 14 = ?",
+      "reponse": 20,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "22 - 7 = ?",
+      "reponse": 15,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "5 × 8 = ?",
+      "reponse": 40,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "45 ÷ 9 = ?",
+      "reponse": 5,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "9 + 9 = ?",
+      "reponse": 18,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "28 - 12 = ?",
+      "reponse": 16,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "3 × 11 = ?",
+      "reponse": 33,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "36 ÷ 12 = ?",
+      "reponse": 3,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "7 + 13 = ?",
+      "reponse": 20,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "25 - 15 = ?",
+      "reponse": 10,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "6 × 8 = ?",
+      "reponse": 48,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "54 ÷ 6 = ?",
+      "reponse": 9,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "10 + 18 = ?",
+      "reponse": 28,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "30 - 11 = ?",
+      "reponse": 19,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "4 × 12 = ?",
+      "reponse": 48,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "60 ÷ 10 = ?",
+      "reponse": 6,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "13 + 7 = ?",
+      "reponse": 20,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "21 - 14 = ?",
+      "reponse": 7,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "9 × 4 = ?",
+      "reponse": 36,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "32 ÷ 8 = ?",
+      "reponse": 4,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "15 + 6 = ?",
+      "reponse": 21,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "40 - 25 = ?",
+      "reponse": 15,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "7 × 7 = ?",
+      "reponse": 49,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "63 ÷ 9 = ?",
+      "reponse": 7,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "18 + 12 = ?",
+      "reponse": 30,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "22 - 8 = ?",
+      "reponse": 14,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "5 × 9 = ?",
+      "reponse": 45,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "72 ÷ 12 = ?",
+      "reponse": 6,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "11 + 14 = ?",
+      "reponse": 25,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "35 - 19 = ?",
+      "reponse": 16,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "8 × 6 = ?",
+      "reponse": 48,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "81 ÷ 9 = ?",
+      "reponse": 9,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "20 + 15 = ?",
+      "reponse": 35,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "27 - 13 = ?",
+      "reponse": 14,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "3 × 15 = ?",
+      "reponse": 45,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "90 ÷ 10 = ?",
+      "reponse": 9,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "12 + 19 = ?",
+      "reponse": 31,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "28 - 9 = ?",
+      "reponse": 19,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "6 × 9 = ?",
+      "reponse": 54,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "45 ÷ 5 = ?",
+      "reponse": 9,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "14 + 16 = ?",
+      "reponse": 30,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "50 - 22 = ?",
+      "reponse": 28,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "9 × 8 = ?",
+      "reponse": 72,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "100 ÷ 20 = ?",
+      "reponse": 5,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "17 + 18 = ?",
+      "reponse": 35,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "33 - 11 = ?",
+      "reponse": 22,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "4 × 14 = ?",
+      "reponse": 56,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "60 ÷ 15 = ?",
+      "reponse": 4,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "19 + 21 = ?",
+      "reponse": 40,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "26 - 14 = ?",
+      "reponse": 12,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "7 × 10 = ?",
+      "reponse": 70,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "84 ÷ 12 = ?",
+      "reponse": 7,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "15 + 25 = ?",
+      "reponse": 40,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "29 - 17 = ?",
+      "reponse": 12,
+      "points": 10,
+      "type": "arithmetique"
+    },
+    {
+      "question": "2 × 20 = ?",
+      "reponse": 40,
+      "points": 10,
+      "type": "arithmetique"
+    }
+  ],
+  "Intermédiaire": [
+    {
+      "question": "√25 = ?",
+      "reponse": 5,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "3² + 4² = ?",
+      "reponse": 25,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "PGCD de 18 et 24 ?",
+      "reponse": 6,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "2³ × 2² = ?",
+      "reponse": 32,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "5! = ?",
+      "reponse": 120,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "√81 = ?",
+      "reponse": 9,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 36 et 48 ?",
+      "reponse": 12,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "4! = ?",
+      "reponse": 24,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "2⁴ = ?",
+      "reponse": 16,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "Est-ce que 45 est divisible par 9 ?",
+      "reponse": 1,
+      "points": 20,
+      "type": "divisibilite"
+    },
+    {
+      "question": "√49 = ?",
+      "reponse": 7,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 20 et 30 ?",
+      "reponse": 10,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "6! = ?",
+      "reponse": 720,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "3³ = ?",
+      "reponse": 27,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√100 = ?",
+      "reponse": 10,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 40 et 60 ?",
+      "reponse": 20,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "7! = ?",
+      "reponse": 5040,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "5² = ?",
+      "reponse": 25,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√144 = ?",
+      "reponse": 12,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 27 et 36 ?",
+      "reponse": 9,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "8! = ?",
+      "reponse": 40320,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "2⁵ = ?",
+      "reponse": 32,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√169 = ?",
+      "reponse": 13,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 50 et 75 ?",
+      "reponse": 25,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "9! = ?",
+      "reponse": 362880,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "3⁴ = ?",
+      "reponse": 81,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√196 = ?",
+      "reponse": 14,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 28 et 42 ?",
+      "reponse": 14,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "10! = ?",
+      "reponse": 3628800,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "4³ = ?",
+      "reponse": 64,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√225 = ?",
+      "reponse": 15,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 32 et 48 ?",
+      "reponse": 16,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "11! = ?",
+      "reponse": 39916800,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "6² = ?",
+      "reponse": 36,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√256 = ?",
+      "reponse": 16,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 45 et 60 ?",
+      "reponse": 15,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "12! = ?",
+      "reponse": 479001600,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "7² = ?",
+      "reponse": 49,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√289 = ?",
+      "reponse": 17,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 54 et 72 ?",
+      "reponse": 18,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "√324 = ?",
+      "reponse": 18,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 60 et 90 ?",
+      "reponse": 30,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "13! = ?",
+      "reponse": 6227020800,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "8² = ?",
+      "reponse": 64,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√361 = ?",
+      "reponse": 19,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 63 et 81 ?",
+      "reponse": 9,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "14! = ?",
+      "reponse": 87178291200,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "9² = ?",
+      "reponse": 81,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√400 = ?",
+      "reponse": 20,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 72 et 96 ?",
+      "reponse": 24,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "15! = ?",
+      "reponse": 1307674368000,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "10² = ?",
+      "reponse": 100,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√441 = ?",
+      "reponse": 21,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 80 et 100 ?",
+      "reponse": 20,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "16! = ?",
+      "reponse": 20922789888000,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "11² = ?",
+      "reponse": 121,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√484 = ?",
+      "reponse": 22,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 84 et 126 ?",
+      "reponse": 42,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "17! = ?",
+      "reponse": 355687428096000,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "12² = ?",
+      "reponse": 144,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√529 = ?",
+      "reponse": 23,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 90 et 135 ?",
+      "reponse": 45,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "18! = ?",
+      "reponse": 6402373705728000,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "13² = ?",
+      "reponse": 169,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√576 = ?",
+      "reponse": 24,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 96 et 144 ?",
+      "reponse": 48,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "19! = ?",
+      "reponse": 121645100408832000,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "14² = ?",
+      "reponse": 196,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√625 = ?",
+      "reponse": 25,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 100 et 150 ?",
+      "reponse": 50,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "20! = ?",
+      "reponse": 2432902008176640000,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "15² = ?",
+      "reponse": 225,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√676 = ?",
+      "reponse": 26,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 108 et 162 ?",
+      "reponse": 54,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "21! = ?",
+      "reponse": 51090942171709440000,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "16² = ?",
+      "reponse": 256,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√729 = ?",
+      "reponse": 27,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 120 et 180 ?",
+      "reponse": 60,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "22! = ?",
+      "reponse": 1124000727777607680000,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "17² = ?",
+      "reponse": 289,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√784 = ?",
+      "reponse": 28,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 126 et 189 ?",
+      "reponse": 63,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "23! = ?",
+      "reponse": 25852016738884976640000,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "18² = ?",
+      "reponse": 324,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√841 = ?",
+      "reponse": 29,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 132 et 198 ?",
+      "reponse": 66,
+      "points": 25,
+      "type": "pgcd"
+    },
+    {
+      "question": "24! = ?",
+      "reponse": 620448401733239439360000,
+      "points": 25,
+      "type": "factorielle"
+    },
+    {
+      "question": "19² = ?",
+      "reponse": 361,
+      "points": 20,
+      "type": "puissance"
+    },
+    {
+      "question": "√900 = ?",
+      "reponse": 30,
+      "points": 20,
+      "type": "racine"
+    },
+    {
+      "question": "PGCD de 140 et 210 ?",
+      "reponse": 70,
+      "points": 25,
+      "type": "pgcd"
+    }
+  ],
+  "Expert": [
+    {
+      "question": "2x + 5 = 15 → x = ?",
+      "reponse": 5,
+      "points": 30,
+      "type": "equation"
+    },
+    {
+      "question": "sin(π/2) = ?",
+      "reponse": 1,
+      "points": 30,
+      "type": "trigonometrie"
+    },
+    {
+      "question": "Dérivée de x² en x=3",
+      "reponse": 6,
+      "points": 35,
+      "type": "derivee"
+    },
+    {
+      "question": "∫x dx de 0 à 2 = ?",
+      "reponse": 2,
+      "points": 40,
+      "type": "integrale"
+    },
+    {
+      "question": "lim(x→∞) 1/x = ?",
+      "reponse": 0,
+      "points": 35,
+      "type": "limite"
+    },
+    {
+      "question": "cos(0) = ?",
+      "reponse": 1,
+      "points": 30,
+      "type": "trigonometrie"
+    },
+    {
+      "question": "Résoudre 3x - 9 = 0",
+      "reponse": 3,
+      "points": 30,
+      "type": "equation"
+    },
+    {
+      "question": "Dérivée de x³ en x=2",
+      "reponse": 12,
+      "points": 35,
+      "type": "derivee"
+    },
+    {
+      "question": "∫x² dx de 0 à 1 = ?",
+      "reponse": 0.333,
+      "points": 40,
+      "type": "integrale"
+    },
+    {
+      "question": "log₁₀(1000) = ?",
+      "reponse": 3,
+      "points": 35,
+      "type": "logarithme"
+    },
+    {
+      "question": "4x - 12 = 0 → x = ?",
+      "reponse": 3,
+      "points": 30,
+      "type": "equation"
+    },
+    {
+      "question": "tan(π/4) = ?",
+      "reponse": 1,
+      "points": 30,
+      "type": "trigonometrie"
+    },
+    {
+      "question": "Dérivée de x⁴ en x=1",
+      "reponse": 4,
+      "points": 35,
+      "type": "derivee"
+    },
+    {
+      "question": "∫2x dx de 0 à 3 = ?",
+      "reponse": 9,
+      "points": 40,
+      "type": "integrale"
+    },
+    {
+      "question": "lim(x→0) sin(x)/x = ?",
+      "reponse": 1,
+      "points": 35,
+      "type": "limite"
+    },
+    {
+      "question": "Résoudre x² = 16",
+      "reponse": 4,
+      "points": 30,
+      "type": "equation"
+    },
+    {
+      "question": "cos(π) = ?",
+      "reponse": -1,
+      "points": 30,
+      "type": "trigonometrie"
+    },
+    {
+      "question": "Dérivée de 2x² en x=5",
+      "reponse": 20,
+      "points": 35,
+      "type": "derivee"
+    },
+    {
+      "question": "∫x³ dx de 0 à 2 = ?",
+      "reponse": 4,
+      "points": 40,
+      "type": "integrale"
+    },
+    {
+      "question": "log₂(16) = ?",
+      "reponse": 4,
+      "points": 35,
+      "type": "logarithme"
+    },
+    {
+      "question": "5x + 10 = 0 → x = ?",
+      "reponse": -2,
+      "points": 30,
+      "type": "equation"
+    },
+    {
+      "question": "sin(π) = ?",
+      "reponse": 0,
+      "points": 30,
+      "type": "trigonometrie"
+    },
+    {
+      "question": "Dérivée de x⁵ en x=2",
+      "reponse": 80,
+      "points": 35,
+      "type": "derivee"
+    },
+    {
+      "question": "∫cos(x) dx de 0 à π/2 = ?",
+      "reponse": 1,
+      "points": 40,
+      "type": "integrale"
+    },
+    {
+      "question": "lim(x→∞) (2x/x) = ?",
+      "reponse": 2,
+      "points": 35,
+      "type": "limite"
+    },
+    {
+      "question": "Résoudre 2x² - 8 = 0",
+      "reponse": 2,
+      "points": 30,
+      "type": "equation"
+    },
+    {
+      "question": "tan(π/6) = ?",
+      "reponse": 0.577,
+      "points": 30,
+      "type": "trigonometrie"
+    },
+    {
+      "question": "Dérivée de ln(x) en x=1",
+      "reponse": 1,
+      "points": 35,
+      "type": "derivee"
+    },
+    {
+      "question": "∫e^x dx de 0 à 1 = ?",
+      "reponse": 1.718,
+      "points": 40,
+      "type": "integrale"
+    },
+    {
+      "question": "log₁₀(1) = ?",
+      "reponse": 0,
+      "points": 35,
+      "type": "logarithme"
+    },
+    {
+      "question": "lim(x→0) (1 - cos(x))/x² = ?",
+      "reponse": 0.5,
+      "points": 35,
+      "type": "limite"
+    },
+    {
+      "question": "Résoudre x² - 9 = 0",
+      "reponse": 3,
+      "points": 30,
+      "type": "equation"
+    },
+    {
+      "question": "sin(π/6) = ?",
+      "reponse": 0.5,
+      "points": 30,
+      "type": "trigonometrie"
+    },
+    {
+      "question": "Dérivée de x³ + 2x en x=1",
+      "reponse": 5,
+      "points": 35,
+      "type": "derivee"
+    },
+    {
+      "question": "∫x² dx de 1 à 3 = ?",
+      "reponse": 26,
+      "points": 40,
+      "type": "integrale"
+    },
+    {
+      "question": "logₑ(e³) = ?",
+      "reponse": 3,
+      "points": 35,
+      "type": "logarithme"
+    },
+    {
+      "question": "Résoudre 2x + 7 = 15",
+      "reponse": 4,
+      "points": 30,
+      "type": "equation"
+    },
+    {
+      "question": "cos(π/3) = ?",
+      "reponse": 0.5,
+      "points": 30,
+      "type": "trigonometrie"
+    },
+    {
+      "question": "Dérivée de x⁴ en x=2",
+      "reponse": 32,
+      "points": 35,
+      "type": "derivee"
+    },
+    {
+      "question": "∫sin(x) dx de 0 à π = ?",
+      "reponse": 2,
+      "points": 40,
+      "type": "integrale"
+    },
+    {
+      "question": "lim(x→∞) (x²+1)/x² = ?",
+      "reponse": 1,
+      "points": 35,
+      "type": "limite"
+    },
+    {
+      "question": "Résoudre 5x - 20 = 0",
+      "reponse": 4,
+      "points": 30,
+      "type": "equation"
+    },
+    {
+      "question": "tan(π/3) = ?",
+      "reponse": 1.732,
+      "points": 30,
+      "type": "trigonometrie"
+    },
+    {
+      "question": "Dérivée de ln(x) en x=2",
+      "reponse": 0.5,
+      "points": 35,
+      "type": "derivee"
+    },
+    {
+      "question": "∫e^x dx de 0 à ln(2) = ?",
+      "reponse": 1,
+      "points": 40,
+      "type": "integrale"
+    },
+    {
+      "question": "log₁₀(100) = ?",
+      "reponse": 2,
+      "points": 35,
+      "type": "logarithme"
+    },
+    {
+      "question": "Résoudre x² + 2x - 8 = 0",
+      "reponse": 2,
+      "points": 30,
+      "type": "equation"
+    },
+    {
+      "question": "sin(π/4) = ?",
+      "reponse": 0.707,
+      "points": 30,
+      "type": "trigonometrie"
+    },
+    {
+      "question": "Dérivée de cos(x) en x=0",
+      "reponse": 0,
+      "points": 35,
+      "type": "derivee"
+    },
+    {
+      "question": "∫1/x dx de 1 à e = ?",
+      "reponse": 1,
+      "points": 40,
+      "type": "integrale"
+    },
+    {
+      "question": "lim(x→0) ln(1+x)/x = ?",
+      "reponse": 1,
+      "points": 35,
+      "type": "limite"
+    },
+    {
+      "question": "Résoudre 4x² - 16 = 0",
+      "reponse": 2,
+      "points": 30,
+      "type": "equation"
+    },
+    {
+      "question": "cos(π/2) = ?",
+      "reponse": 0,
+      "points": 30,
+      "type": "trigonometrie"
+    },
+    {
+      "question": "Dérivée de e^x en x=0",
+      "reponse": 1,
+      "points": 35,
+      "type": "derivee"
+    },
+    {
+      "question": "∫x dx de 2 à 4 = ?",
+      "reponse": 6,
+      "points": 40,
+      "type": "integrale"
+    },
+    {
+      "question": "log₂(8) = ?",
+      "reponse": 3,
+      "points": 35,
+      "type": "logarithme"
+    },
+    {
+      "question": "Résoudre x² - 25 = 0",
+      "reponse": 5,
+      "points": 30,
+      "type": "equation"
+    },
+    {
+      "question": "Dérivée de x²+3x en x=2",
+      "reponse": 7,
+      "points": 35,
+      "type": "derivee"
+    },
+    {
+      "question": "∫cos(x) dx de 0 à π = ?",
+      "reponse": 0,
+      "points": 40,
+      "type": "integrale"
+    },
+    {
+      "question": "lim(x→∞) (x+1)/x = ?",
+      "reponse": 1,
+      "points": 35,
+      "type": "limite"
+    },
+    {
+      "question": "Résoudre 6x + 12 = 0",
+      "reponse": -2,
+      "points": 30,
+      "type": "equation"
+    },
+    {
+      "question": "sin(π) = ?",
+      "reponse": 0,
+      "points": 30,
+      "type": "trigonometrie"
+    },
+    {
+      "question": "Dérivée de x³ en x=4",
+      "reponse": 48,
+      "points": 35,
+      "type": "derivee"
+    },
+    {
+      "question": "∫x² dx de 0 à 2 = ?",
+      "reponse": "8/3",
+      "points": 40,
+      "type": "integrale"
+    },
+    {
+      "question": "logₑ(1) = ?",
+      "reponse": 0,
+      "points": 35,
+      "type": "logarithme"
+    },
+    {
+      "question": "Résoudre x² - 4x + 4 = 0",
+      "reponse": 2,
+      "points": 30,
+      "type": "equation"
+    },
+    {
+      "question": "cos(π/4) = ?",
+      "reponse": 0.707,
+      "points": 30,
+      "type": "trigonometrie"
+    },
+    {
+      "question": "Dérivée de sin(x) en x=π/2",
+      "reponse": 0,
+      "points": 35,
+      "type": "derivee"
+    },
+    {
+      "question": "∫x dx de 0 à 5 = ?",
+      "reponse": 12.5,
+      "points": 40,
+      "type": "integrale"
+    }
+  ]
+}

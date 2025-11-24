@@ -6,10 +6,12 @@ from App import theorie_des_nombres as theorie
 from App import conversion as conv
 from App import chaine_de_caractere as ch
 from App import integration_numerique as int_num
-from App.interface_historique import InterfaceHistorique  # ← CORRIGÉ
+from App.interface_historique import InterfaceHistorique  
+from App import explorateur_concepts as exp_concepts
+
 
 # Initialiser l'interface historique
-historique_interface = InterfaceHistorique(parent=None)  # ← CORRIGÉ
+historique_interface = InterfaceHistorique(parent=None)  
 
 # Fenetre principal
 fenetre = Tk()
@@ -142,11 +144,13 @@ bouton3 = ttk.Button(
     command=conv.launch_conversion
 )
 
+
 bouton4 = ttk.Button(
     scrollable_frame,
     text="Module 4 : Explorateur de Concepts (Jeu) 🎯",
-    style="Custom.TButton",
+    style="Custom.TButton", 
     compound=LEFT,
+    command=exp_concepts.lancer_explorateur_concepts  # ← Maintenant ça marche !
 )
 
 bouton6 = ttk.Button(
@@ -180,6 +184,7 @@ bouton_historique = ttk.Button(
     compound=LEFT,
     command=lambda: historique_interface.afficher_historique()  # ← CORRIGÉ
 )
+
 
 
 # Place-le dans la liste des boutons (après bouton9)
