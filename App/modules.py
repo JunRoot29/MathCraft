@@ -631,8 +631,19 @@ def racinePointFixe(g,x0,epsilon):
         i += 1
     return (x0,i)
 
+
+
+#======================================================================================
+#Intégration Numérique
+#======================================================================================
+# Dans la section INTÉGRATION NUMÉRIQUE du fichier modules.py
+
+# Dans la section INTÉGRATION NUMÉRIQUE du fichier modules.py
+
 def intRectangleRetro(f, a, b, n):
-    """Méthode des rectangles rétrograde"""
+    """Méthode des rectangles rétrograde (gauche)"""
+    if n <= 0:
+        raise ValueError("Le nombre de subdivisions n doit être positif")
     h = (b - a) / n
     somme = 0
     for i in range(n):
@@ -640,7 +651,9 @@ def intRectangleRetro(f, a, b, n):
     return somme * h
 
 def intRectanglePro(f, a, b, n):
-    """Méthode des rectangles progressive"""
+    """Méthode des rectangles progressive (droite)"""
+    if n <= 0:
+        raise ValueError("Le nombre de subdivisions n doit être positif")
     h = (b - a) / n
     somme = 0
     for i in range(1, n + 1):
@@ -649,6 +662,8 @@ def intRectanglePro(f, a, b, n):
 
 def intRectangleCentre(f, a, b, n):
     """Méthode des rectangles centrée"""
+    if n <= 0:
+        raise ValueError("Le nombre de subdivisions n doit être positif")
     h = (b - a) / n
     somme = 0
     for i in range(n):
@@ -657,6 +672,8 @@ def intRectangleCentre(f, a, b, n):
 
 def intTrapezeC(f, a, b, n):
     """Méthode des trapèzes composite"""
+    if n <= 0:
+        raise ValueError("Le nombre de subdivisions n doit être positif")
     h = (b - a) / n
     somme = 0
     for i in range(1, n):
@@ -665,30 +682,35 @@ def intTrapezeC(f, a, b, n):
 
 def intTrapezeS(f, a, b, n):
     """Méthode des trapèzes simple"""
+    # Pour la méthode simple, on ignore n et on utilise seulement 1 trapèze
     h = (b - a)
     return (h / 2) * (f(a) + f(b))
 
 def intSimpsonC(f, a, b, n):
     """Méthode de Simpson composite"""
+    if n <= 0:
+        raise ValueError("Le nombre de subdivisions n doit être positif")
     if n % 2 != 0:
-        n += 1
+        n += 1  # Simpson nécessite un nombre pair de subdivisions
     h = (b - a) / n
-    somme_pairs = 0
     somme_impairs = 0
+    somme_pairs = 0
     
+    # Points impairs
     for i in range(1, n, 2):
         somme_impairs += f(a + i * h)
     
-    for i in range(2, n - 1, 2):
+    # Points pairs
+    for i in range(2, n-1, 2):
         somme_pairs += f(a + i * h)
     
     return (h / 3) * (f(a) + f(b) + 4 * somme_impairs + 2 * somme_pairs)
 
 def intSimpsonS(f, a, b, n):
     """Méthode de Simpson simple"""
+    # Pour Simpson simple, on ignore n et on utilise seulement 3 points
     h = (b - a) / 2
-    milieu = (a + b) / 2
-    return (h / 3) * (f(a) + 4 * f(milieu) + f(b))
+    return (h / 3) * (f(a) + 4 * f(a + h) + f(b))
 
 def prepare_expression(expr: str) -> str:
     """Prépare l'expression mathématique pour évaluation"""

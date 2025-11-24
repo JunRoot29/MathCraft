@@ -1,7 +1,9 @@
 import math
 from tkinter import *
 from tkinter import ttk
-import scipy as sci
+import sys
+import os
+sys.path.append(os.path.dirname(__file__))
 
 """================================Dictionnaire des conversions====================================="""
 
@@ -144,23 +146,35 @@ def convertir_angles(valeur, unite_depart, unite_arrivee):
 
 """===================================================================================="""
 # Style global pour les boutons arrondis
-style = ttk.Style()
-style.configure("Rounded.TButton",
-                foreground="#3C3C3C",
-                background="#C7C3BB",
-                font=("Century Gothic", 14),
-                padding=15,
-                relief="flat",
-                width=40)
+def configurer_style():
+    style = ttk.Style()
+    style.configure("Custom.TButton",
+                    foreground="#FFFFFF",
+                    background="#3B82F6",  # Bleu moderne comme main.py
+                    font=("Century Gothic", 14),
+                    padding=15,
+                    relief="flat",
+                    width=40)
+    
+    # Style spécial pour le bouton Quitter
+    style.configure("Quit.TButton",
+                    foreground="#FFFFFF",
+                    background="#DC2626",  # Rouge
+                    font=("Century Gothic", 14),
+                    padding=15,
+                    relief="flat",
+                    width=40)
+    return style
 
 def launch_conversion(parent=None):
     conversion = Toplevel(parent)
     conversion.title("Conversion")
     conversion.geometry("600x700")
-    conversion.configure(bg="#F5F0E6")
+    conversion.configure(bg="#F0F4F8")  # Même fond que main.py
 
-    Label(conversion, text="Conversion", font=("Century Gothic", 24, "bold")).pack()
-    Label(conversion, text="Et si on s'amusait à convertir ? \n Choisi ton Opération!", font=("Century Gothic", 14)).pack()
+    Label(conversion, text="Conversion", font=("Century Gothic", 24, "bold"), bg="#F0F4F8", fg="#1E40AF").pack()
+    Label(conversion, text="Et si on s'amusait à convertir ? \n Choisi ton Opération!", 
+          font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF").pack()
 
     options = ["Longueur 📏", "Masse et Poids 🏋️", "Température🌡️", "Vitesse 🏃🏾", "Angles 📐", "Données 🖲️"]
     combo = ttk.Combobox(conversion, values=options, font=("Century Gothic", 14), state="readonly")
@@ -200,24 +214,24 @@ def launch_conversion(parent=None):
             if isinstance(widget, Frame):
                 widget.destroy()
 
-        cadre_longueur = Frame(conversion, bg="#F5F0E6")
+        cadre_longueur = Frame(conversion, bg="#F0F4F8")
         cadre_longueur.pack(pady=10)
 
-        Label(cadre_longueur, text="Valeur à convertir :", font=("Century Gothic", 14), bg="#F5F0E6").pack()
+        Label(cadre_longueur, text="Valeur à convertir :", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF").pack()
         champ_valeur = Entry(cadre_longueur, font=("Century Gothic", 14), textvariable=champ_valeur_var)
         champ_valeur.pack()
 
-        Label(cadre_longueur, text="De :", font=("Century Gothic", 14), bg="#F5F0E6").pack()
+        Label(cadre_longueur, text="De :", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF").pack()
         unite_depart = ttk.Combobox(cadre_longueur, values=list(unit_to_meter.keys()), font=("Century Gothic", 12), state="readonly")
         unite_depart.set("Mètre")
         unite_depart.pack()
 
-        Label(cadre_longueur, text="Vers :", font=("Century Gothic", 14), bg="#F5F0E6").pack()
+        Label(cadre_longueur, text="Vers :", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF").pack()
         unite_arrivee = ttk.Combobox(cadre_longueur, values=list(unit_to_meter.keys()), font=("Century Gothic", 12), state="readonly")
         unite_arrivee.set("Kilomètre")
         unite_arrivee.pack()
 
-        champ_resultat = Label(cadre_longueur, text="", font=("Century Gothic", 14), bg="#F5F0E6")
+        champ_resultat = Label(cadre_longueur, text="", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
         champ_resultat.pack(pady=10)
 
         def calculer():
@@ -225,34 +239,41 @@ def launch_conversion(parent=None):
             u1 = unite_depart.get()
             u2 = unite_arrivee.get()
             res = convertir_longueur(val, u1, u2)
-            champ_resultat.config(text=f"Résultat : {res} {u2}")
+            if "✅" in res:
+                champ_resultat.config(text=f"Résultat : {res} {u2}", fg="#1E40AF")
+            else:
+                champ_resultat.config(text=f"Résultat : {res} {u2}", fg="#DC2626")
 
-        bouton_convertir = ttk.Button(cadre_longueur, text="Convertir", style="Rounded.TButton", command=calculer)
+        bouton_convertir = ttk.Button(cadre_longueur, text="Convertir", style="Custom.TButton", command=calculer)
         bouton_convertir.pack(pady=5)
+
+        # Bouton Quitter
+        bouton_quitter = ttk.Button(cadre_longueur, text="Quitter", style="Quit.TButton", command=conversion.destroy)
+        bouton_quitter.pack(pady=10)
 
     def lancer_vitesse():
         for widget in conversion.winfo_children():
             if isinstance(widget, Frame):
                 widget.destroy()
 
-        cadre_vitesse = Frame(conversion, bg="#F5F0E6")
+        cadre_vitesse = Frame(conversion, bg="#F0F4F8")
         cadre_vitesse.pack(pady=10)
 
-        Label(cadre_vitesse, text="Valeur à convertir :", font=("Century Gothic", 14), bg="#F5F0E6").pack()
+        Label(cadre_vitesse, text="Valeur à convertir :", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF").pack()
         champ_valeur = Entry(cadre_vitesse, font=("Century Gothic", 14), textvariable=champ_valeur_var)
         champ_valeur.pack()
 
-        Label(cadre_vitesse, text="De :", font=("Century Gothic", 14), bg="#F5F0E6").pack()
+        Label(cadre_vitesse, text="De :", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF").pack()
         unite_depart = ttk.Combobox(cadre_vitesse, values=list(unit_to_vitesse.keys()), font=("Century Gothic", 12), state="readonly")
         unite_depart.set("Kilomètre par heure")
         unite_depart.pack()
 
-        Label(cadre_vitesse, text="Vers :", font=("Century Gothic", 14), bg="#F5F0E6").pack()
+        Label(cadre_vitesse, text="Vers :", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF").pack()
         unite_arrivee = ttk.Combobox(cadre_vitesse, values=list(unit_to_vitesse.keys()), font=("Century Gothic", 12), state="readonly")
         unite_arrivee.set("Kilomètre par seconde")
         unite_arrivee.pack()
 
-        champ_resultat = Label(cadre_vitesse, text="", font=("Century Gothic", 14), bg="#F5F0E6")
+        champ_resultat = Label(cadre_vitesse, text="", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
         champ_resultat.pack(pady=10)
 
         def calculer():
@@ -260,14 +281,35 @@ def launch_conversion(parent=None):
             u1 = unite_depart.get()
             u2 = unite_arrivee.get()
             res = convertir_vitesse(val, u1, u2)
-            champ_resultat.config(text=f"Résultat : {res} {u2}")
+            if "✅" in res:
+                champ_resultat.config(text=f"Résultat : {res} {u2}", fg="#1E40AF")
+            else:
+                champ_resultat.config(text=f"Résultat : {res} {u2}", fg="#DC2626")
 
-        bouton_convertir = ttk.Button(cadre_vitesse, text="Convertir", style="Rounded.TButton", command=calculer)
+        bouton_convertir = ttk.Button(cadre_vitesse, text="Convertir", style="Custom.TButton", command=calculer)
         bouton_convertir.pack(pady=5)
+
+        # Bouton Quitter
+        bouton_quitter = ttk.Button(cadre_vitesse, text="Quitter", style="Quit.TButton", command=conversion.destroy)
+        bouton_quitter.pack(pady=10)
     
 
     def lancer_donnees():
-        return 0
+        for widget in conversion.winfo_children():
+            if isinstance(widget, Frame):
+                widget.destroy()
+
+        cadre_donnees = Frame(conversion, bg="#F0F4F8")
+        cadre_donnees.pack(pady=10)
+
+        Label(cadre_donnees, text="Module Données - En développement", 
+              font=("Century Gothic", 16), bg="#F0F4F8", fg="#1E40AF").pack(pady=20)
+        Label(cadre_donnees, text="Cette fonctionnalité sera disponible prochainement", 
+              font=("Century Gothic", 12), bg="#F0F4F8", fg="#1E40AF").pack(pady=10)
+
+        # Bouton Quitter
+        bouton_quitter = ttk.Button(cadre_donnees, text="Quitter", style="Quit.TButton", command=conversion.destroy)
+        bouton_quitter.pack(pady=20)
         
 
     def lancer_masse_poids():
@@ -275,24 +317,24 @@ def launch_conversion(parent=None):
             if isinstance(widget, Frame):
                 widget.destroy()
 
-        cadre_masse = Frame(conversion, bg="#F5F0E6")
+        cadre_masse = Frame(conversion, bg="#F0F4F8")
         cadre_masse.pack(pady=10)
 
-        Label(cadre_masse, text="Valeur à convertir :", font=("Century Gothic", 14), bg="#F5F0E6").pack()
+        Label(cadre_masse, text="Valeur à convertir :", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF").pack()
         champ_valeur = Entry(cadre_masse, font=("Century Gothic", 14), textvariable=champ_valeur_var)
         champ_valeur.pack()
 
-        Label(cadre_masse, text="De :", font=("Century Gothic", 14), bg="#F5F0E6").pack()
+        Label(cadre_masse, text="De :", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF").pack()
         unite_depart = ttk.Combobox(cadre_masse, values=list(unit_to_masse_et_poids.keys()), font=("Century Gothic", 12), state="readonly")
         unite_depart.set("Gramme")
         unite_depart.pack()
 
-        Label(cadre_masse, text="Vers :", font=("Century Gothic", 14), bg="#F5F0E6").pack()
+        Label(cadre_masse, text="Vers :", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF").pack()
         unite_arrivee = ttk.Combobox(cadre_masse, values=list(unit_to_masse_et_poids.keys()), font=("Century Gothic", 12), state="readonly")
         unite_arrivee.set("Kilogramme")
         unite_arrivee.pack()
 
-        champ_resultat = Label(cadre_masse, text="", font=("Century Gothic", 14), bg="#F5F0E6")
+        champ_resultat = Label(cadre_masse, text="", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
         champ_resultat.pack(pady=10)
 
         def calculer():
@@ -300,34 +342,41 @@ def launch_conversion(parent=None):
             u1 = unite_depart.get()
             u2 = unite_arrivee.get()
             res = convertir_masse_et_poids(val, u1, u2)
-            champ_resultat.config(text=f"Résultat : {res} {u2}")
+            if "✅" in res:
+                champ_resultat.config(text=f"Résultat : {res} {u2}", fg="#1E40AF")
+            else:
+                champ_resultat.config(text=f"Résultat : {res} {u2}", fg="#DC2626")
 
-        bouton_convertir = ttk.Button(cadre_masse, text="Convertir", style="Rounded.TButton", command=calculer)
+        bouton_convertir = ttk.Button(cadre_masse, text="Convertir", style="Custom.TButton", command=calculer)
         bouton_convertir.pack(pady=5)
+
+        # Bouton Quitter
+        bouton_quitter = ttk.Button(cadre_masse, text="Quitter", style="Quit.TButton", command=conversion.destroy)
+        bouton_quitter.pack(pady=10)
 
     def lancer_temperature():
         for widget in conversion.winfo_children():
             if isinstance(widget, Frame):
                 widget.destroy()
         
-        cadre_temperature = Frame(conversion, bg="#F5F0E6")
+        cadre_temperature = Frame(conversion, bg="#F0F4F8")
         cadre_temperature.pack(pady=10)
 
-        Label(cadre_temperature, text="Valeur à convertir :", font=("Century Gothic", 14), bg="#F5F0E6").pack()
+        Label(cadre_temperature, text="Valeur à convertir :", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF").pack()
         champ_valeur = Entry(cadre_temperature, font=("Century Gothic", 14), textvariable=champ_valeur_var)
         champ_valeur.pack()
 
-        Label(cadre_temperature, text="De :", font=("Century Gothic", 14), bg="#F5F0E6").pack()
+        Label(cadre_temperature, text="De :", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF").pack()
         unite_depart = ttk.Combobox(cadre_temperature, values=list(unit_to_temperature.keys()), font=("Century Gothic", 12), state="readonly")
         unite_depart.set("Dégrés (°C)")
         unite_depart.pack()
 
-        Label(cadre_temperature, text="Vers :", font=("Century Gothic", 14), bg="#F5F0E6").pack()
+        Label(cadre_temperature, text="Vers :", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF").pack()
         unite_arrivee = ttk.Combobox(cadre_temperature, values=list(unit_to_temperature.keys()), font=("Century Gothic", 12), state="readonly")
         unite_arrivee.set("Fahrenheit (°F)")
         unite_arrivee.pack()
 
-        champ_resultat = Label(cadre_temperature, text="", font=("Century Gothic", 14), bg="#F5F0E6")
+        champ_resultat = Label(cadre_temperature, text="", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
         champ_resultat.pack(pady=10)
 
         def calculer():
@@ -335,34 +384,41 @@ def launch_conversion(parent=None):
             u1 = unite_depart.get()
             u2 = unite_arrivee.get()
             res = convertir_temperature(val, u1, u2)
-            champ_resultat.config(text=f"Résultat : {res} {u2}")
+            if "✅" in res:
+                champ_resultat.config(text=f"Résultat : {res} {u2}", fg="#1E40AF")
+            else:
+                champ_resultat.config(text=f"Résultat : {res} {u2}", fg="#DC2626")
 
-        bouton_convertir = ttk.Button(cadre_temperature, text="Convertir", style="Rounded.TButton", command=calculer)
+        bouton_convertir = ttk.Button(cadre_temperature, text="Convertir", style="Custom.TButton", command=calculer)
         bouton_convertir.pack(pady=5)
+
+        # Bouton Quitter
+        bouton_quitter = ttk.Button(cadre_temperature, text="Quitter", style="Quit.TButton", command=conversion.destroy)
+        bouton_quitter.pack(pady=10)
 
     def lancer_angles():
         for widget in conversion.winfo_children():
             if isinstance(widget, Frame):
                 widget.destroy()
 
-        cadre_angles = Frame(conversion, bg="#F5F0E6")
+        cadre_angles = Frame(conversion, bg="#F0F4F8")
         cadre_angles.pack(pady=10)
 
-        Label(cadre_angles, text="Valeur à convertir :", font=("Century Gothic", 14), bg="#F5F0E6").pack()
+        Label(cadre_angles, text="Valeur à convertir :", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF").pack()
         champ_valeur = Entry(cadre_angles, font=("Century Gothic", 14), textvariable=champ_valeur_var)
         champ_valeur.pack()
 
-        Label(cadre_angles, text="De :", font=("Century Gothic", 14), bg="#F5F0E6").pack()
+        Label(cadre_angles, text="De :", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF").pack()
         unite_depart = ttk.Combobox(cadre_angles, values=list(unit_to_angles.keys()), font=("Century Gothic", 12), state="readonly")
         unite_depart.set("Radian")
         unite_depart.pack()
 
-        Label(cadre_angles, text="Vers :", font=("Century Gothic", 14), bg="#F5F0E6").pack()
+        Label(cadre_angles, text="Vers :", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF").pack()
         unite_arrivee = ttk.Combobox(cadre_angles, values=list(unit_to_angles.keys()), font=("Century Gothic", 12), state="readonly")
         unite_arrivee.set("Degré")
         unite_arrivee.pack()
 
-        champ_resultat = Label(cadre_angles, text="", font=("Century Gothic", 14), bg="#F5F0E6")
+        champ_resultat = Label(cadre_angles, text="", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
         champ_resultat.pack(pady=10)
 
         def calculer():
@@ -370,7 +426,14 @@ def launch_conversion(parent=None):
             u1 = unite_depart.get()
             u2 = unite_arrivee.get()
             res = convertir_angles(val, u1, u2)
-            champ_resultat.config(text=f"Résultat : {res} {u2}")
+            if "✅" in res:
+                champ_resultat.config(text=f"Résultat : {res} {u2}", fg="#1E40AF")
+            else:
+                champ_resultat.config(text=f"Résultat : {res} {u2}", fg="#DC2626")
 
-        bouton_convertir = ttk.Button(cadre_angles, text="Convertir", style="Rounded.TButton", command=calculer)
+        bouton_convertir = ttk.Button(cadre_angles, text="Convertir", style="Custom.TButton", command=calculer)
         bouton_convertir.pack(pady=5)
+
+        # Bouton Quitter
+        bouton_quitter = ttk.Button(cadre_angles, text="Quitter", style="Quit.TButton", command=conversion.destroy)
+        bouton_quitter.pack(pady=10)
