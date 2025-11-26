@@ -9,6 +9,16 @@ from tkinter import ttk, messagebox
 import json
 import os
 
+# Palette unifiée (identique aux autres fichiers)
+PALETTE = {
+    "fond_principal": "#F0F4F8",
+    "primaire": "#1E40AF",
+    "secondaire": "#3B82F6", 
+    "erreur": "#DC2626",
+    "texte_fonce": "#1E40AF",
+    "texte_clair": "#1E40AF"
+}
+
 # =============================================================================
 # GUIDES ET EXEMPLES POUR TOUS LES JEUX
 # =============================================================================
@@ -182,15 +192,15 @@ def afficher_guide_jeu(nom_jeu, parent=None):
     fenetre_guide = Toplevel(parent)
     fenetre_guide.title(guide["titre"])
     fenetre_guide.geometry("800x700")
-    fenetre_guide.configure(bg="#F0F4F8")
+    fenetre_guide.configure(bg=PALETTE["fond_principal"])
     
     # Cadre principal avec scrollbar
-    main_frame = Frame(fenetre_guide, bg="#F0F4F8")
+    main_frame = Frame(fenetre_guide, bg=PALETTE["fond_principal"])
     main_frame.pack(fill=BOTH, expand=True, padx=20, pady=10)
     
-    canvas = Canvas(main_frame, bg="#F0F4F8", highlightthickness=0)
+    canvas = Canvas(main_frame, bg=PALETTE["fond_principal"], highlightthickness=0)
     scrollbar = ttk.Scrollbar(main_frame, orient="vertical", command=canvas.yview)
-    scrollable_frame = Frame(canvas, bg="#F0F4F8")
+    scrollable_frame = Frame(canvas, bg=PALETTE["fond_principal"])
     
     scrollable_frame.bind(
         "<Configure>",
@@ -210,50 +220,50 @@ def afficher_guide_jeu(nom_jeu, parent=None):
     
     # Contenu du guide
     Label(scrollable_frame, text=guide["titre"], 
-          font=("Century Gothic", 20, "bold"), bg="#F0F4F8", fg="#1E40AF").pack(pady=20)
+          font=("Century Gothic", 20, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack(pady=20)
     
     # Partie guide
-    guide_frame = Frame(scrollable_frame, bg="#F0F4F8")
+    guide_frame = Frame(scrollable_frame, bg=PALETTE["fond_principal"])
     guide_frame.pack(fill=X, pady=10)
     
     for ligne in guide["contenu"]:
         if ligne.startswith("•"):
             Label(guide_frame, text=ligne, font=("Century Gothic", 11), 
-                  bg="#F0F4F8", fg="#374151", justify="left", anchor="w").pack(fill=X, padx=20, pady=1)
+                  bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"], justify="left", anchor="w").pack(fill=X, padx=20, pady=1)
         elif ligne.startswith("📝") or ligne.startswith("🎮") or ligne.startswith("🏆") or ligne.startswith("💡"):
             Label(guide_frame, text=ligne, font=("Century Gothic", 12, "bold"), 
-                  bg="#F0F4F8", fg="#1E40AF", justify="left", anchor="w").pack(fill=X, padx=10, pady=(15,5))
+                  bg=PALETTE["fond_principal"], fg=PALETTE["primaire"], justify="left", anchor="w").pack(fill=X, padx=10, pady=(15,5))
         else:
             Label(guide_frame, text=ligne, font=("Century Gothic", 11), 
-                  bg="#F0F4F8", fg="#64748B", justify="left", anchor="w").pack(fill=X, padx=20, pady=2)
+                  bg=PALETTE["fond_principal"], fg=PALETTE["texte_clair"], justify="left", anchor="w").pack(fill=X, padx=20, pady=2)
     
     # Séparateur
     ttk.Separator(scrollable_frame, orient='horizontal').pack(fill=X, pady=20)
     
     # Partie exemples
-    exemples_frame = Frame(scrollable_frame, bg="#F0F4F8")
+    exemples_frame = Frame(scrollable_frame, bg=PALETTE["fond_principal"])
     exemples_frame.pack(fill=X, pady=10)
     
     for ligne in guide["exemples"]:
         if ligne.startswith("🧮"):
             Label(exemples_frame, text=ligne, font=("Century Gothic", 14, "bold"), 
-                  bg="#F0F4F8", fg="#8B5CF6", justify="left", anchor="w").pack(fill=X, padx=10, pady=(10,5))
+                  bg=PALETTE["fond_principal"], fg=PALETTE["primaire"], justify="left", anchor="w").pack(fill=X, padx=10, pady=(10,5))
         elif ligne.startswith("•"):
             Label(exemples_frame, text=ligne, font=("Century Gothic", 11), 
-                  bg="#F0F4F8", fg="#7C3AED", justify="left", anchor="w").pack(fill=X, padx=25, pady=1)
+                  bg=PALETTE["fond_principal"], fg=PALETTE["primaire"], justify="left", anchor="w").pack(fill=X, padx=25, pady=1)
         elif ligne == "":
             Label(exemples_frame, text=" ", font=("Century Gothic", 4), 
-                  bg="#F0F4F8").pack(fill=X, pady=2)
+                  bg=PALETTE["fond_principal"]).pack(fill=X, pady=2)
         else:
             Label(exemples_frame, text=ligne, font=("Century Gothic", 11, "italic"), 
-                  bg="#F0F4F8", fg="#6D28D9", justify="left", anchor="w").pack(fill=X, padx=20, pady=2)
+                  bg=PALETTE["fond_principal"], fg=PALETTE["primaire"], justify="left", anchor="w").pack(fill=X, padx=20, pady=2)
     
     # Bouton fermer
     ttk.Button(scrollable_frame, text="Fermer le guide", 
               command=fenetre_guide.destroy).pack(pady=20)
     
     # Espace final
-    Label(scrollable_frame, text="", bg="#F0F4F8", height=2).pack()
+    Label(scrollable_frame, text="", bg=PALETTE["fond_principal"], height=2).pack()
 
 # =============================================================================
 # INTERFACE DE SÉLECTION DES JEUX AVEC SCROLLBAR
@@ -264,7 +274,7 @@ def creer_interface_jeux(parent=None):
     fenetre_jeux = Toplevel(parent) if parent else Tk()
     fenetre_jeux.title("🎮 MathCraft - Sélection des Jeux")
     fenetre_jeux.geometry("900x800")
-    fenetre_jeux.configure(bg="#F0F4F8")
+    fenetre_jeux.configure(bg=PALETTE["fond_principal"])
     
     # Style
     style = ttk.Style()
@@ -278,22 +288,22 @@ def creer_interface_jeux(parent=None):
                    padding=8)
     
     # En-tête fixe
-    header_frame = Frame(fenetre_jeux, bg="#1E40AF")
+    header_frame = Frame(fenetre_jeux, bg=PALETTE["primaire"])
     header_frame.pack(fill=X, pady=(0, 10))
     
     Label(header_frame, text="🎮 MATHCRAFT - ESPACE JEUX", 
-          font=("Century Gothic", 24, "bold"), bg="#1E40AF", fg="white").pack(pady=20)
+          font=("Century Gothic", 24, "bold"), bg=PALETTE["primaire"], fg="white").pack(pady=20)
     
     Label(header_frame, text="Choisis ton aventure mathématique !", 
-          font=("Century Gothic", 14), bg="#1E40AF", fg="#E0F2FE").pack(pady=(0, 15))
+          font=("Century Gothic", 14), bg=PALETTE["primaire"], fg="white").pack(pady=(0, 15))
     
     # Cadre principal avec scrollbar
-    main_frame = Frame(fenetre_jeux, bg="#F0F4F8")
+    main_frame = Frame(fenetre_jeux, bg=PALETTE["fond_principal"])
     main_frame.pack(fill=BOTH, expand=True, padx=20, pady=10)
     
-    canvas = Canvas(main_frame, bg="#F0F4F8", highlightthickness=0)
+    canvas = Canvas(main_frame, bg=PALETTE["fond_principal"], highlightthickness=0)
     scrollbar = ttk.Scrollbar(main_frame, orient="vertical", command=canvas.yview)
-    scrollable_frame = Frame(canvas, bg="#F0F4F8")
+    scrollable_frame = Frame(canvas, bg=PALETTE["fond_principal"])
     
     scrollable_frame.bind(
         "<Configure>",
@@ -316,7 +326,7 @@ def creer_interface_jeux(parent=None):
     
     # Section jeux disponibles
     Label(content_frame, text="🎯 JEUX DISPONIBLES", 
-          font=("Century Gothic", 18, "bold"), bg="#F0F4F8", fg="#1E40AF").pack(pady=20)
+          font=("Century Gothic", 18, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack(pady=20)
     
     # Création des cartes de jeux
     for i, jeu in enumerate(JEUX_DISPONIBLES):
@@ -334,12 +344,12 @@ def creer_interface_jeux(parent=None):
         
         titre_label = Label(text_frame, text=jeu["nom"], 
                            font=("Century Gothic", 16, "bold"), 
-                           bg="white", fg="#1E40AF", anchor="w")
+                           bg="white", fg=PALETTE["primaire"], anchor="w")
         titre_label.pack(fill=X)
         
         desc_label = Label(text_frame, text=jeu["description"],
                           font=("Century Gothic", 11),
-                          bg="white", fg="#64748B", justify="left", anchor="w")
+                          bg="white", fg=PALETTE["texte_clair"], justify="left", anchor="w")
         desc_label.pack(fill=X, pady=(5, 0))
         
         # Boutons
@@ -381,11 +391,11 @@ def creer_interface_jeux(parent=None):
         status_label.pack(side=LEFT)
     
     # Section informations
-    info_frame = Frame(content_frame, bg="#E0F2FE", relief="solid", borderwidth=1)
+    info_frame = Frame(content_frame, bg=PALETTE["secondaire"], relief="solid", borderwidth=1)
     info_frame.pack(fill=X, padx=10, pady=30, ipady=15)
     
     Label(info_frame, text="💡 Informations importantes", 
-          font=("Century Gothic", 14, "bold"), bg="#E0F2FE", fg="#1E40AF").pack(pady=(0, 10))
+          font=("Century Gothic", 14, "bold"), bg=PALETTE["secondaire"], fg="white").pack(pady=(0, 10))
     
     infos = [
         "• Chaque jeu propose des défis adaptés à ton niveau",
@@ -396,7 +406,7 @@ def creer_interface_jeux(parent=None):
     
     for info in infos:
         Label(info_frame, text=info, font=("Century Gothic", 10), 
-              bg="#E0F2FE", fg="#1E40AF", justify="left", anchor="w").pack(fill=X, padx=20, pady=2)
+              bg=PALETTE["secondaire"], fg="white", justify="left", anchor="w").pack(fill=X, padx=20, pady=2)
     
     # Bouton fermer
     ttk.Button(content_frame, text="🚪 Fermer", 
@@ -404,7 +414,7 @@ def creer_interface_jeux(parent=None):
               style="Jeu.TButton").pack(pady=30)
     
     # Espace final pour le défilement
-    Label(content_frame, text="", bg="#F0F4F8", height=2).pack()
+    Label(content_frame, text="", bg=PALETTE["fond_principal"], height=2).pack()
     
     return fenetre_jeux
 
@@ -467,7 +477,7 @@ class MathQuizzChallenge:
         self.fenetre_jeu = Toplevel(self.parent)
         self.fenetre_jeu.title("🎯 Math Quizz Challenge Pro")
         self.fenetre_jeu.geometry("700x800")
-        self.fenetre_jeu.configure(bg="#F0F4F8")
+        self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
         
         self._creer_interface_avance()
         self._prochaine_question()
@@ -475,52 +485,52 @@ class MathQuizzChallenge:
     def _creer_interface_avance(self):
         """Crée l'interface avancée avec timer et progression"""
         # En-tête
-        header_frame = Frame(self.fenetre_jeu, bg="#1E40AF")
+        header_frame = Frame(self.fenetre_jeu, bg=PALETTE["primaire"])
         header_frame.pack(fill=X, pady=(0, 20))
         
         Label(header_frame, text="🎯 MATH QUIZZ CHALLENGE PRO", 
-              font=("Century Gothic", 20, "bold"), bg="#1E40AF", fg="white").pack(pady=15)
+              font=("Century Gothic", 20, "bold"), bg=PALETTE["primaire"], fg="white").pack(pady=15)
 
         # Frame des statistiques
-        stats_frame = Frame(self.fenetre_jeu, bg="#F0F4F8")
+        stats_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
         stats_frame.pack(fill=X, padx=20, pady=10)
         
         # Score
         self.score_label = Label(stats_frame, text=f"🏆 Score: {self.score}",
-                                font=("Century Gothic", 14, "bold"), bg="#F0F4F8", fg="#1E40AF")
+                                font=("Century Gothic", 14, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
         self.score_label.pack(side=LEFT, padx=20)
         
         # Niveau
         self.niveau_label = Label(stats_frame, text=f"📊 Niveau: {self.niveau_actuel}",
-                                 font=("Century Gothic", 12), bg="#F0F4F8", fg="#64748B")
+                                 font=("Century Gothic", 12), bg=PALETTE["fond_principal"], fg=PALETTE["texte_clair"])
         self.niveau_label.pack(side=LEFT, padx=20)
         
         # Timer
         self.timer_label = Label(stats_frame, text=f"⏱️ Temps: {self.temps_restant}s",
-                                font=("Century Gothic", 12, "bold"), bg="#F0F4F8", fg="#DC2626")
+                                font=("Century Gothic", 12, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["erreur"])
         self.timer_label.pack(side=RIGHT, padx=20)
 
         # Barre de progression
-        progress_frame = Frame(self.fenetre_jeu, bg="#F0F4F8")
+        progress_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
         progress_frame.pack(fill=X, padx=20, pady=10)
         
         Label(progress_frame, text="Progression:", 
-              font=("Century Gothic", 10), bg="#F0F4F8").pack(anchor=W)
+              font=("Century Gothic", 10), bg=PALETTE["fond_principal"]).pack(anchor=W)
         
         self.progress_bar = ttk.Progressbar(progress_frame, orient=HORIZONTAL, 
                                            length=600, mode='determinate')
         self.progress_bar.pack(fill=X, pady=5)
         
         self.progress_label = Label(progress_frame, text="0/0 questions",
-                                   font=("Century Gothic", 9), bg="#F0F4F8", fg="#64748B")
+                                   font=("Century Gothic", 9), bg=PALETTE["fond_principal"], fg=PALETTE["texte_clair"])
         self.progress_label.pack(anchor=W)
 
         # Badges
-        self.badges_frame = Frame(self.fenetre_jeu, bg="#F0F4F8")
+        self.badges_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
         self.badges_frame.pack(fill=X, padx=20, pady=10)
         
         self.badges_label = Label(self.badges_frame, text="🎖️ Badges: Aucun pour le moment",
-                                 font=("Century Gothic", 10), bg="#F0F4F8", fg="#64748B")
+                                 font=("Century Gothic", 10), bg=PALETTE["fond_principal"], fg=PALETTE["texte_clair"])
         self.badges_label.pack(anchor=W)
 
         # Bouton guide
@@ -532,19 +542,19 @@ class MathQuizzChallenge:
         ttk.Separator(self.fenetre_jeu, orient='horizontal').pack(fill=X, padx=20, pady=10)
 
         # Question
-        question_frame = Frame(self.fenetre_jeu, bg="#F0F4F8")
+        question_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
         question_frame.pack(fill=BOTH, expand=True, padx=20, pady=20)
         
         self.question_label = Label(question_frame, text="", font=("Century Gothic", 18, "bold"),
-                                   bg="#F0F4F8", fg="#1E293B", wraplength=600, justify="center")
+                                   bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"], wraplength=600, justify="center")
         self.question_label.pack(pady=30)
 
         # Réponse
-        reponse_frame = Frame(self.fenetre_jeu, bg="#F0F4F8")
+        reponse_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
         reponse_frame.pack(fill=X, padx=20, pady=10)
         
         Label(reponse_frame, text="Ta réponse:", 
-              font=("Century Gothic", 12), bg="#F0F4F8").pack(pady=5)
+              font=("Century Gothic", 12), bg=PALETTE["fond_principal"]).pack(pady=5)
         
         self.reponse_entry = Entry(reponse_frame, font=("Century Gothic", 16), 
                                   width=20, justify="center")
@@ -553,11 +563,11 @@ class MathQuizzChallenge:
 
         # Points de la question
         self.points_label = Label(reponse_frame, text="", 
-                                 font=("Century Gothic", 11), bg="#F0F4F8", fg="#8B5CF6")
+                                 font=("Century Gothic", 11), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
         self.points_label.pack()
 
         # Boutons
-        buttons_frame = Frame(self.fenetre_jeu, bg="#F0F4F8")
+        buttons_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
         buttons_frame.pack(fill=X, padx=20, pady=20)
         
         ttk.Button(buttons_frame, text="✅ Vérifier la réponse", 
@@ -571,7 +581,7 @@ class MathQuizzChallenge:
 
         # Feedback
         self.feedback_label = Label(self.fenetre_jeu, text="", font=("Century Gothic", 13), 
-                                   bg="#F0F4F8", wraplength=500)
+                                   bg=PALETTE["fond_principal"], wraplength=500)
         self.feedback_label.pack(pady=10)
 
     def _demarrer_timer(self):
@@ -600,7 +610,7 @@ class MathQuizzChallenge:
             
             # Changement de couleur selon le temps restant
             if self.temps_restant <= 10:
-                self.timer_label.config(fg="#DC2626")  # Rouge
+                self.timer_label.config(fg=PALETTE["erreur"])  # Rouge
             elif self.temps_restant <= 20:
                 self.timer_label.config(fg="#F59E0B")  # Orange
             
@@ -617,7 +627,7 @@ class MathQuizzChallenge:
         """Quand le temps est écoulé"""
         self.timer_actif = False
         self.feedback_label.config(text="⏰ Temps écoulé ! Passage à la question suivante...", 
-                                 fg="#DC2626")
+                                 fg=PALETTE["erreur"])
         self.fenetre_jeu.after(2000, self._prochaine_question)
 
     def _mettre_a_jour_progression(self):
@@ -670,12 +680,12 @@ class MathQuizzChallenge:
         badges_window = Toplevel(self.fenetre_jeu)
         badges_window.title("🎖️ Mes Badges")
         badges_window.geometry("400x300")
-        badges_window.configure(bg="#F0F4F8")
+        badges_window.configure(bg=PALETTE["fond_principal"])
         
         Label(badges_window, text="🎖️ MES BADGES", 
-              font=("Century Gothic", 18, "bold"), bg="#F0F4F8", fg="#1E40AF").pack(pady=20)
+              font=("Century Gothic", 18, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack(pady=20)
         
-        badges_frame = Frame(badges_window, bg="#F0F4F8")
+        badges_frame = Frame(badges_window, bg=PALETTE["fond_principal"])
         badges_frame.pack(fill=BOTH, expand=True, padx=20)
         
         # Liste des badges possibles
@@ -693,10 +703,10 @@ class MathQuizzChallenge:
             
             Label(badges_frame, text=f"{emoji} {badge}", 
                   font=("Century Gothic", 11, "bold" if obtenu else "normal"),
-                  bg="#F0F4F8", fg=color).pack(anchor=W, pady=2)
+                  bg=PALETTE["fond_principal"], fg=color).pack(anchor=W, pady=2)
             
             Label(badges_frame, text=f"   {description}", 
-                  font=("Century Gothic", 9), bg="#F0F4F8", fg="#64748B").pack(anchor=W, pady=(0, 8))
+                  font=("Century Gothic", 9), bg=PALETTE["fond_principal"], fg=PALETTE["texte_clair"]).pack(anchor=W, pady=(0, 8))
 
     def _prochaine_question(self):
         """Passe à la question suivante - version corrigée"""
@@ -777,7 +787,7 @@ class MathQuizzChallenge:
                 self.score_label.config(text=f"🏆 Score: {self.score}")
                 self.feedback_label.config(text=f"✅ Correct ! +{points} points{bonus_text}", fg="#10B981")
             else:
-                self.feedback_label.config(text=f"❌ Incorrect. Réponse: {reponse_correcte}", fg="#DC2626")
+                self.feedback_label.config(text=f"❌ Incorrect. Réponse: {reponse_correcte}", fg=PALETTE["erreur"])
 
             # Vérifier les badges
             self._verifier_et_attribuer_badges()
@@ -786,7 +796,7 @@ class MathQuizzChallenge:
             self.fenetre_jeu.after(2500, self._prochaine_question)
 
         except ValueError:
-            self.feedback_label.config(text="❌ Entrez une réponse valide", fg="#DC2626")
+            self.feedback_label.config(text="❌ Entrez une réponse valide", fg=PALETTE["erreur"])
             self.fenetre_jeu.after(1500, self._prochaine_question)
 
 # =============================================================================
@@ -809,7 +819,7 @@ class CourseAuxNombres:
         self.fenetre_jeu = Toplevel(self.parent)
         self.fenetre_jeu.title("🏆 Course aux Nombres")
         self.fenetre_jeu.geometry("800x700")
-        self.fenetre_jeu.configure(bg="#F0F4F8")
+        self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
         self.fenetre_jeu.protocol("WM_DELETE_WINDOW", self._fermer_jeu)
         
         self._creer_interface()
@@ -818,26 +828,26 @@ class CourseAuxNombres:
     def _creer_interface(self):
         """Crée l'interface du jeu"""
         # En-tête
-        header_frame = Frame(self.fenetre_jeu, bg="#1E40AF")
+        header_frame = Frame(self.fenetre_jeu, bg=PALETTE["primaire"])
         header_frame.pack(fill=X, pady=(0, 20))
         
         Label(header_frame, text="🏆 COURSE AUX NOMBRES", 
-              font=("Century Gothic", 20, "bold"), bg="#1E40AF", fg="white").pack(pady=15)
+              font=("Century Gothic", 20, "bold"), bg=PALETTE["primaire"], fg="white").pack(pady=15)
 
         # Statistiques
-        stats_frame = Frame(self.fenetre_jeu, bg="#F0F4F8")
+        stats_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
         stats_frame.pack(fill=X, padx=20, pady=10)
         
         self.score_label = Label(stats_frame, text=f"🎯 Score: {self.score}",
-                                font=("Century Gothic", 14, "bold"), bg="#F0F4F8", fg="#1E40AF")
+                                font=("Century Gothic", 14, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
         self.score_label.pack(side=LEFT, padx=20)
         
         self.niveau_label = Label(stats_frame, text=f"📊 Niveau: {self.niveau}",
-                                 font=("Century Gothic", 12), bg="#F0F4F8", fg="#64748B")
+                                 font=("Century Gothic", 12), bg=PALETTE["fond_principal"], fg=PALETTE["texte_clair"])
         self.niveau_label.pack(side=LEFT, padx=20)
         
         self.timer_label = Label(stats_frame, text=f"⏱️ Temps: {self.temps_limite}s",
-                                font=("Century Gothic", 12, "bold"), bg="#F0F4F8", fg="#DC2626")
+                                font=("Century Gothic", 12, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["erreur"])
         self.timer_label.pack(side=RIGHT, padx=20)
 
         # Bouton guide
@@ -846,32 +856,32 @@ class CourseAuxNombres:
         guide_button.pack(side=RIGHT, padx=10)
 
         # Cible
-        cible_frame = Frame(self.fenetre_jeu, bg="#F0F4F8")
+        cible_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
         cible_frame.pack(fill=X, padx=20, pady=20)
         
         Label(cible_frame, text="🎯 CIBLE À ATTEINDRE:", 
-              font=("Century Gothic", 14, "bold"), bg="#F0F4F8").pack(pady=5)
+              font=("Century Gothic", 14, "bold"), bg=PALETTE["fond_principal"]).pack(pady=5)
         
         self.cible_label = Label(cible_frame, text="", 
-                                font=("Century Gothic", 40, "bold"), bg="#F0F4F8", fg="#DC2626")
+                                font=("Century Gothic", 40, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["erreur"])
         self.cible_label.pack(pady=10)
 
         # Nombres disponibles
-        nombres_frame = Frame(self.fenetre_jeu, bg="#F0F4F8")
+        nombres_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
         nombres_frame.pack(fill=X, padx=20, pady=15)
         
         Label(nombres_frame, text="🔢 NOMBRES DISPONIBLES:", 
-              font=("Century Gothic", 12, "bold"), bg="#F0F4F8").pack(pady=5)
+              font=("Century Gothic", 12, "bold"), bg=PALETTE["fond_principal"]).pack(pady=5)
         
-        self.nombres_frame = Frame(nombres_frame, bg="#F0F4F8")
+        self.nombres_frame = Frame(nombres_frame, bg=PALETTE["fond_principal"])
         self.nombres_frame.pack(pady=10)
 
         # Zone de saisie
-        saisie_frame = Frame(self.fenetre_jeu, bg="#F0F4F8")
+        saisie_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
         saisie_frame.pack(fill=X, padx=20, pady=20)
         
         Label(saisie_frame, text="🧮 TON CALCUL:", 
-              font=("Century Gothic", 12, "bold"), bg="#F0F4F8").pack(pady=5)
+              font=("Century Gothic", 12, "bold"), bg=PALETTE["fond_principal"]).pack(pady=5)
         
         self.calcul_entry = Entry(saisie_frame, font=("Century Gothic", 16), 
                                  width=30, justify="center")
@@ -880,10 +890,10 @@ class CourseAuxNombres:
         
         # Exemple
         Label(saisie_frame, text="Exemple: (5 + 3) * 2", 
-              font=("Century Gothic", 10), bg="#F0F4F8", fg="#64748B").pack()
+              font=("Century Gothic", 10), bg=PALETTE["fond_principal"], fg=PALETTE["texte_clair"]).pack()
 
         # Boutons
-        buttons_frame = Frame(self.fenetre_jeu, bg="#F0F4F8")
+        buttons_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
         buttons_frame.pack(fill=X, padx=20, pady=15)
         
         ttk.Button(buttons_frame, text="✅ Vérifier le calcul", 
@@ -896,14 +906,14 @@ class CourseAuxNombres:
                   command=self._afficher_solutions).pack(side=RIGHT, padx=10)
 
         # Solutions trouvées
-        solutions_frame = Frame(self.fenetre_jeu, bg="#F0F4F8")
+        solutions_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
         solutions_frame.pack(fill=BOTH, expand=True, padx=20, pady=15)
         
         Label(solutions_frame, text="✅ SOLUTIONS TROUVÉES:", 
-              font=("Century Gothic", 11, "bold"), bg="#F0F4F8").pack(anchor=W)
+              font=("Century Gothic", 11, "bold"), bg=PALETTE["fond_principal"]).pack(anchor=W)
         
         self.solutions_text = Text(solutions_frame, height=6, font=("Century Gothic", 10),
-                                  bg="#F8FAFC", fg="#1E293B", wrap=WORD)
+                                  bg="#F8FAFC", fg=PALETTE["texte_fonce"], wrap=WORD)
         scrollbar = Scrollbar(solutions_frame, command=self.solutions_text.yview)
         self.solutions_text.config(yscrollcommand=scrollbar.set)
         self.solutions_text.pack(side=LEFT, fill=BOTH, expand=True)
@@ -911,7 +921,7 @@ class CourseAuxNombres:
         
         # Feedback
         self.feedback_label = Label(self.fenetre_jeu, text="", 
-                                   font=("Century Gothic", 12), bg="#F0F4F8")
+                                   font=("Century Gothic", 12), bg=PALETTE["fond_principal"])
         self.feedback_label.pack(pady=10)
 
     def _generer_defi(self):
@@ -938,7 +948,7 @@ class CourseAuxNombres:
         for i, nombre in enumerate(self.nombres_actuels):
             Label(self.nombres_frame, text=str(nombre), 
                   font=("Century Gothic", 20, "bold"), 
-                  bg="#3B82F6", fg="white", 
+                  bg=PALETTE["secondaire"], fg="white", 
                   width=4, height=2, relief="raised",
                   borderwidth=2).grid(row=0, column=i, padx=10)
 
@@ -978,7 +988,7 @@ class CourseAuxNombres:
                 
                 # Changement de couleur
                 if self.temps_restant <= 30:
-                    self.timer_label.config(fg="#DC2626")
+                    self.timer_label.config(fg=PALETTE["erreur"])
                 elif self.temps_restant <= 60:
                     self.timer_label.config(fg="#F59E0B")
                     
@@ -988,7 +998,7 @@ class CourseAuxNombres:
 
     def _temps_ecoule(self):
         """Quand le temps est écoulé"""
-        self.feedback_label.config(text="⏰ Temps écoulé ! Nouveau défi...", fg="#DC2626")
+        self.feedback_label.config(text="⏰ Temps écoulé ! Nouveau défi...", fg=PALETTE["erreur"])
         self.fenetre_jeu.after(2000, self._nouveau_defi)
 
     def _verifier_calcul(self):
@@ -996,14 +1006,14 @@ class CourseAuxNombres:
         calcul = self.calcul_entry.get().strip()
         
         if not calcul:
-            self.feedback_label.config(text="❌ Entre un calcul", fg="#DC2626")
+            self.feedback_label.config(text="❌ Entre un calcul", fg=PALETTE["erreur"])
             return
             
         try:
             # Vérifier que seuls les nombres autorisés sont utilisés
             nombres_utilises = self._extraire_nombres(calcul)
             if not self._verifier_nombres_autorises(nombres_utilises):
-                self.feedback_label.config(text="❌ Utilise seulement les nombres donnés", fg="#DC2626")
+                self.feedback_label.config(text="❌ Utilise seulement les nombres donnés", fg=PALETTE["erreur"])
                 return
             
             # Évaluer le résultat
@@ -1028,10 +1038,10 @@ class CourseAuxNombres:
                 else:
                     self.feedback_label.config(text="⚠️ Solution déjà trouvée", fg="#F59E0B")
             else:
-                self.feedback_label.config(text=f"❌ Résultat: {resultat}, cible: {self.cible_actuelle}", fg="#DC2626")
+                self.feedback_label.config(text=f"❌ Résultat: {resultat}, cible: {self.cible_actuelle}", fg=PALETTE["erreur"])
                 
         except Exception as e:
-            self.feedback_label.config(text="❌ Calcul invalide", fg="#DC2626")
+            self.feedback_label.config(text="❌ Calcul invalide", fg=PALETTE["erreur"])
 
     def _extraire_nombres(self, calcul):
         """Extrait les nombres utilisés dans le calcul"""
@@ -1140,7 +1150,7 @@ class MathEmoji:
         self.fenetre_jeu = Toplevel(self.parent)
         self.fenetre_jeu.title("🍎 Math Emoji")
         self.fenetre_jeu.geometry("700x600")
-        self.fenetre_jeu.configure(bg="#F0F4F8")
+        self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
         
         self._creer_interface()
         self._nouvelle_equation()
@@ -1148,27 +1158,27 @@ class MathEmoji:
     def _creer_interface(self):
         """Crée l'interface du jeu"""
         # En-tête
-        header_frame = Frame(self.fenetre_jeu, bg="#FF6B6B")
+        header_frame = Frame(self.fenetre_jeu, bg=PALETTE["primaire"])
         header_frame.pack(fill=X, pady=(0, 20))
         
         Label(header_frame, text="🍎 MATH EMOJI 🍌", 
-              font=("Comic Sans MS", 22, "bold"), bg="#FF6B6B", fg="white").pack(pady=15)
+              font=("Comic Sans MS", 22, "bold"), bg=PALETTE["primaire"], fg="white").pack(pady=15)
 
         # Statistiques
-        stats_frame = Frame(self.fenetre_jeu, bg="#F0F4F8")
+        stats_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
         stats_frame.pack(fill=X, padx=20, pady=10)
         
         self.score_label = Label(stats_frame, text=f"🏆 Score: {self.score}",
-                                font=("Arial", 14, "bold"), bg="#F0F4F8", fg="#1E40AF")
+                                font=("Arial", 14, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
         self.score_label.pack(side=LEFT, padx=20)
         
         self.niveau_label = Label(stats_frame, text=f"📊 Niveau: {self.niveau}",
-                                 font=("Arial", 12), bg="#F0F4F8", fg="#64748B")
+                                 font=("Arial", 12), bg=PALETTE["fond_principal"], fg=PALETTE["texte_clair"])
         self.niveau_label.pack(side=LEFT, padx=20)
 
         # Catégorie
         self.categorie_label = Label(stats_frame, text=f"🎨 Catégorie: Fruits",
-                                    font=("Arial", 12), bg="#F0F4F8", fg="#8B5CF6")
+                                    font=("Arial", 12), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
         self.categorie_label.pack(side=RIGHT, padx=20)
 
         # Bouton guide
@@ -1177,30 +1187,30 @@ class MathEmoji:
         guide_button.pack(side=RIGHT, padx=10)
 
         # Équations
-        equations_frame = Frame(self.fenetre_jeu, bg="#F0F4F8")
+        equations_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
         equations_frame.pack(fill=X, padx=30, pady=20)
         
         Label(equations_frame, text="🧮 RÉSOUS CES ÉQUATIONS :", 
-              font=("Arial", 14, "bold"), bg="#F0F4F8").pack(pady=10)
+              font=("Arial", 14, "bold"), bg=PALETTE["fond_principal"]).pack(pady=10)
         
         self.equations_text = Text(equations_frame, height=4, font=("Arial", 16),
-                                  bg="#FFF9C4", fg="#1E293B", wrap=WORD, 
+                                  bg="#FFF9C4", fg=PALETTE["texte_fonce"], wrap=WORD, 
                                   relief="solid", borderwidth=1)
         self.equations_text.pack(fill=X, pady=10)
         self.equations_text.config(state=DISABLED)
 
         # Zone de réponses
-        reponses_frame = Frame(self.fenetre_jeu, bg="#F0F4F8")
+        reponses_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
         reponses_frame.pack(fill=X, padx=30, pady=15)
         
         Label(reponses_frame, text="✏️ TES RÉPONSES :", 
-              font=("Arial", 12, "bold"), bg="#F0F4F8").pack(pady=10)
+              font=("Arial", 12, "bold"), bg=PALETTE["fond_principal"]).pack(pady=10)
         
-        self.reponses_frame = Frame(reponses_frame, bg="#F0F4F8")
+        self.reponses_frame = Frame(reponses_frame, bg=PALETTE["fond_principal"])
         self.reponses_frame.pack(pady=10)
 
         # Boutons
-        buttons_frame = Frame(self.fenetre_jeu, bg="#F0F4F8")
+        buttons_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
         buttons_frame.pack(fill=X, padx=30, pady=20)
         
         ttk.Button(buttons_frame, text="✅ Vérifier les réponses", 
@@ -1214,7 +1224,7 @@ class MathEmoji:
 
         # Feedback
         self.feedback_label = Label(self.fenetre_jeu, text="", 
-                                   font=("Arial", 13), bg="#F0F4F8", wraplength=500)
+                                   font=("Arial", 13), bg=PALETTE["fond_principal"], wraplength=500)
         self.feedback_label.pack(pady=15)
 
         # Style pour le bouton accent
@@ -1317,11 +1327,11 @@ class MathEmoji:
         emojis = list(self.reponses_correctes.keys())
         
         for i, emoji in enumerate(emojis):
-            ligne_frame = Frame(self.reponses_frame, bg="#F0F4F8")
+            ligne_frame = Frame(self.reponses_frame, bg=PALETTE["fond_principal"])
             ligne_frame.grid(row=i, column=0, sticky="w", pady=8)
             
             Label(ligne_frame, text=f"{emoji} = ", 
-                  font=("Arial", 16), bg="#F0F4F8").pack(side=LEFT, padx=(0, 10))
+                  font=("Arial", 16), bg=PALETTE["fond_principal"]).pack(side=LEFT, padx=(0, 10))
             
             entry = Entry(ligne_frame, font=("Arial", 14), width=8, justify="center")
             entry.pack(side=LEFT)
@@ -1371,11 +1381,11 @@ class MathEmoji:
             else:
                 self.feedback_label.config(
                     text="❌ Certaines réponses sont incorrectes. Essaie encore !", 
-                    fg="#DC2626"
+                    fg=PALETTE["erreur"]
                 )
                 
         except Exception as e:
-            self.feedback_label.config(text="❌ Erreur de saisie", fg="#DC2626")
+            self.feedback_label.config(text="❌ Erreur de saisie", fg=PALETTE["erreur"])
 
     def _calculer_points(self):
         """Calcule les points selon la difficulté"""
@@ -1475,8 +1485,3 @@ JEUX_DISPONIBLES = [
         "disponible": False
     }
 ]
-
-# Pour tester directement
-if __name__ == "__main__":
-    fenetre = creer_interface_jeux()
-    fenetre.mainloop()

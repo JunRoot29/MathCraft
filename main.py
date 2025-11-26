@@ -217,7 +217,7 @@ bouton10.pack(pady=10, fill=X, padx=60)
 # === PIED DE PAGE ===
 footer = Label(
     scrollable_frame,
-    text="© 2025 MathsCraft - Développé Par Junior Kossivi, avec passion",
+    text="© 2025 MathsCraft - Développé Par Junior Kossivi",
     font=("Century Gothic", 9),
     fg="#94A3B8",
     bg="#F0F4F8"

@@ -4,38 +4,80 @@ from tkinter import ttk
 import re
 from .historique_manager import historique_manager
 
+# Palette unifiée (même que main.py)
+PALETTE = {
+    "fond_principal": "#F0F4F8",
+    "fond_secondaire": "#FFFFFF",
+    "primaire": "#1E40AF",
+    "secondaire": "#3B82F6",
+    "texte_fonce": "#1E293B",
+    "texte_clair": "#64748B",
+    "succes": "#10B981",
+    "erreur": "#DC2626",
+    "bordure": "#E2E8F0",
+}
 
 def launch_operation(parent=None):
     operation = Toplevel(parent)
     operation.title("Calculatrice de base")
-    operation.geometry("500x550")
-    operation.configure(bg="#F0F4F8")  # Même fond que main.py
-    label3 = Label(operation,font=("Century Gothic",14), bg="#F0F4F8", fg="#1E40AF")
+    operation.geometry("500x750")
+    operation.configure(bg=PALETTE["fond_principal"])
+    operation.resizable(False, False)
+    
+    # Centrer la fenêtre
+    operation.transient(parent)
+    operation.grab_set()
 
     def configurer_style():
         style = ttk.Style()
+        style.theme_use("clam")  # ✅ Ajout du thème clam
+        
+        # Style bouton principal
         style.configure("Custom.TButton",
-                        foreground="#000000",
-                        background="#3B82F6",  # Bleu moderne comme main.py
-                        font=("Century Gothic", 10),
-                        padding=(2, 2))
+                        foreground=PALETTE["fond_secondaire"],
+                        background=PALETTE["primaire"],
+                        font=("Century Gothic", 10, "bold"),
+                        padding=8,
+                        relief="flat",
+                        focuscolor="none")
         
         # Style spécial pour le bouton Quitter
         style.configure("Quit.TButton",
-                        foreground="#000000",
-                        background="#DC2626",  # Rouge
-                        font=("Century Gothic", 10),
-                        padding=(2, 2))
+                        foreground=PALETTE["fond_secondaire"],
+                        background=PALETTE["erreur"],
+                        font=("Century Gothic", 11, "bold"),
+                        padding=10,
+                        relief="flat",
+                        focuscolor="none")
+        
+        # Effets de survol
+        style.map("Custom.TButton",
+                 background=[('active', PALETTE["secondaire"]),
+                            ('pressed', '#1E3A8A')],
+                 foreground=[('active', PALETTE["fond_secondaire"])])
+        
+        style.map("Quit.TButton",
+                 background=[('active', '#B91C1C'),
+                            ('pressed', '#991B1B')],
+                 foreground=[('active', PALETTE["fond_secondaire"])])
+        
         return style
 
     style = configurer_style()
-    label1 = Label(operation, text="Calculatrice de base", bg="#F0F4F8", font=("Century Gothic", 14), fg="#1E40AF")
-    label1.pack(pady=5)
+    
+    # Titre principal
+    label1 = Label(operation, text="🧮 CALCULATRICE DE BASE", 
+                   bg=PALETTE["fond_principal"], font=("Century Gothic", 16, "bold"), fg=PALETTE["primaire"])
+    label1.pack(pady=15)
+
+    # Label pour les messages d'erreur/succès
+    label3 = Label(operation, font=("Century Gothic", 10), bg=PALETTE["fond_principal"], fg=PALETTE["texte_clair"])
+    label3.pack(pady=5)
 
     # Création du champ verrouillé
-    entree = Text(operation, height=2, width=40, font=("Century Gothic", 10), state=DISABLED)
+    entree = Text(operation, height=2, width=40, font=("Century Gothic", 12), 
+                  state=DISABLED, relief="solid", borderwidth=1, bg=PALETTE["fond_secondaire"])
     entree.pack(pady=10)
-    label3.pack(pady=10)
     
     # Blocage total des interactions utilisateur
     def bloquer_interaction(event):
@@ -48,18 +90,18 @@ def launch_operation(parent=None):
     entree.config(insertontime=0)
     
     # Création d'un cadre principal pour tous les boutons
-    main_frame = Frame(operation, bg="#F0F4F8")
-    main_frame.pack(pady=5)
+    main_frame = Frame(operation, bg=PALETTE["fond_principal"])
+    main_frame.pack(pady=10)
 
     # Ligne 1 : Fonctions générales
-    ligne1_frame = Frame(main_frame, bg="#F0F4F8")
-    ligne1_frame.pack(pady=2)
+    ligne1_frame = Frame(main_frame, bg=PALETTE["fond_principal"])
+    ligne1_frame.pack(pady=3)
 
-    btn1 = ttk.Button(ligne1_frame, text="esc", style="Custom.TButton", width=5)
-    btn2 = ttk.Button(ligne1_frame, text="(", style="Custom.TButton", width=5)
-    btn3 = ttk.Button(ligne1_frame, text=")", style="Custom.TButton", width=5)
-    btn4 = ttk.Button(ligne1_frame, text="%", style="Custom.TButton", width=5)
-    btn33 = ttk.Button(ligne1_frame, text="|  |", style="Custom.TButton", width=5)
+    btn1 = ttk.Button(ligne1_frame, text="ESC", style="Custom.TButton", width=6)
+    btn2 = ttk.Button(ligne1_frame, text="(", style="Custom.TButton", width=6)
+    btn3 = ttk.Button(ligne1_frame, text=")", style="Custom.TButton", width=6)
+    btn4 = ttk.Button(ligne1_frame, text="%", style="Custom.TButton", width=6)
+    btn33 = ttk.Button(ligne1_frame, text="|  |", style="Custom.TButton", width=6)
 
     btn1.pack(side="left", padx=2)
     btn2.pack(side="left", padx=2)
@@ -67,15 +109,15 @@ def launch_operation(parent=None):
     btn4.pack(side="left", padx=2)
     btn33.pack(side="left", padx=2)
 
-    # Ligne 2 : Chiffres 7–9 et multiplication
-    ligne2_frame = Frame(main_frame, bg="#F0F4F8")
-    ligne2_frame.pack(pady=2)
+    # Ligne 2 : Fonctions trigonométriques
+    ligne2_frame = Frame(main_frame, bg=PALETTE["fond_principal"])
+    ligne2_frame.pack(pady=3)
 
-    btn5 = ttk.Button(ligne2_frame, text="cos", style="Custom.TButton", width=5)
-    btn6 = ttk.Button(ligne2_frame, text="sin", style="Custom.TButton", width=5)
-    btn7 = ttk.Button(ligne2_frame, text="tan", style="Custom.TButton", width=5)
-    btn8 = ttk.Button(ligne2_frame, text="+/-", style="Custom.TButton", width=5)
-    btn34 = ttk.Button(ligne2_frame, text="Deg°", style="Custom.TButton", width=5)
+    btn5 = ttk.Button(ligne2_frame, text="cos", style="Custom.TButton", width=6)
+    btn6 = ttk.Button(ligne2_frame, text="sin", style="Custom.TButton", width=6)
+    btn7 = ttk.Button(ligne2_frame, text="tan", style="Custom.TButton", width=6)
+    btn8 = ttk.Button(ligne2_frame, text="+/-", style="Custom.TButton", width=6)
+    btn34 = ttk.Button(ligne2_frame, text="Deg°", style="Custom.TButton", width=6)
 
     btn5.pack(side="left", padx=2)
     btn6.pack(side="left", padx=2)
@@ -83,15 +125,15 @@ def launch_operation(parent=None):
     btn8.pack(side="left", padx=2)
     btn34.pack(side="left", padx=2)
 
-    # Ligne 3 : Chiffres 4–6 et addition
-    ligne3_frame = Frame(main_frame, bg="#F0F4F8")
-    ligne3_frame.pack(pady=2)
+    # Ligne 3 : Fonctions mathématiques avancées
+    ligne3_frame = Frame(main_frame, bg=PALETTE["fond_principal"])
+    ligne3_frame.pack(pady=3)
 
-    btn9 = ttk.Button(ligne3_frame, text="√", style="Custom.TButton", width=5)
-    btn10 = ttk.Button(ligne3_frame, text="ln", style="Custom.TButton", width=5)
-    btn11 = ttk.Button(ligne3_frame, text="1/x", style="Custom.TButton", width=5)
-    btn12 = ttk.Button(ligne3_frame, text="π", style="Custom.TButton", width=5)
-    btn35 = ttk.Button(ligne3_frame, text="<-", style="Custom.TButton", width=5)
+    btn9 = ttk.Button(ligne3_frame, text="√", style="Custom.TButton", width=6)
+    btn10 = ttk.Button(ligne3_frame, text="ln", style="Custom.TButton", width=6)
+    btn11 = ttk.Button(ligne3_frame, text="1/x", style="Custom.TButton", width=6)
+    btn12 = ttk.Button(ligne3_frame, text="π", style="Custom.TButton", width=6)
+    btn35 = ttk.Button(ligne3_frame, text="←", style="Custom.TButton", width=6)
 
     btn9.pack(side="left", padx=2)
     btn10.pack(side="left", padx=2)
@@ -99,70 +141,70 @@ def launch_operation(parent=None):
     btn12.pack(side="left", padx=2)
     btn35.pack(side="left", padx=2)
 
-    # Ligne 4 : Chiffres 1–3 et soustraction
-    ligne4_frame = Frame(main_frame, bg="#F0F4F8")
-    ligne4_frame.pack(pady=2)
+    # Ligne 4 : Fonctions spéciales
+    ligne4_frame = Frame(main_frame, bg=PALETTE["fond_principal"])
+    ligne4_frame.pack(pady=3)
 
-    btn13 = ttk.Button(ligne4_frame, text="!", style="Custom.TButton", width=5)
-    btn14 = ttk.Button(ligne4_frame, text="log", style="Custom.TButton", width=5)
-    btn15 = ttk.Button(ligne4_frame, text="x²", style="Custom.TButton", width=5)
-    btn16 = ttk.Button(ligne4_frame, text="x^(n)", style="Custom.TButton", width=5)
+    btn13 = ttk.Button(ligne4_frame, text="!", style="Custom.TButton", width=6)
+    btn14 = ttk.Button(ligne4_frame, text="log", style="Custom.TButton", width=6)
+    btn15 = ttk.Button(ligne4_frame, text="x²", style="Custom.TButton", width=6)
+    btn16 = ttk.Button(ligne4_frame, text="x^(n)", style="Custom.TButton", width=6)
 
     btn13.pack(side="left", padx=2)
     btn14.pack(side="left", padx=2)
     btn15.pack(side="left", padx=2)
     btn16.pack(side="left", padx=2)
 
-    # Ligne 5 : +/- , 0 , . , =
-    ligne5_frame = Frame(main_frame, bg="#F0F4F8")
-    ligne5_frame.pack(pady=2)
+    # Ligne 5 : Chiffres 7-9 et addition
+    ligne5_frame = Frame(main_frame, bg=PALETTE["fond_principal"])
+    ligne5_frame.pack(pady=3)
 
-    btn17 = ttk.Button(ligne5_frame, text="7", style="Custom.TButton", width=5)
-    btn18 = ttk.Button(ligne5_frame, text="8", style="Custom.TButton", width=5)
-    btn19 = ttk.Button(ligne5_frame, text="9", style="Custom.TButton", width=5)
-    btn20 = ttk.Button(ligne5_frame, text="+", style="Custom.TButton", width=5)
+    btn17 = ttk.Button(ligne5_frame, text="7", style="Custom.TButton", width=6)
+    btn18 = ttk.Button(ligne5_frame, text="8", style="Custom.TButton", width=6)
+    btn19 = ttk.Button(ligne5_frame, text="9", style="Custom.TButton", width=6)
+    btn20 = ttk.Button(ligne5_frame, text="+", style="Custom.TButton", width=6)
 
     btn17.pack(side="left", padx=2)
     btn18.pack(side="left", padx=2)
     btn19.pack(side="left", padx=2)
     btn20.pack(side="left", padx=2)
 
-    # Ligne 6 : Fonctions racine et trigonométrie
-    ligne6_frame = Frame(main_frame, bg="#F0F4F8")
-    ligne6_frame.pack(pady=2)
+    # Ligne 6 : Chiffres 4-6 et soustraction
+    ligne6_frame = Frame(main_frame, bg=PALETTE["fond_principal"])
+    ligne6_frame.pack(pady=3)
 
-    btn21 = ttk.Button(ligne6_frame, text="4", style="Custom.TButton", width=5)
-    btn22 = ttk.Button(ligne6_frame, text="5", style="Custom.TButton", width=5)
-    btn23 = ttk.Button(ligne6_frame, text="6", style="Custom.TButton", width=5)
-    btn24 = ttk.Button(ligne6_frame, text="-", style="Custom.TButton", width=5)
+    btn21 = ttk.Button(ligne6_frame, text="4", style="Custom.TButton", width=6)
+    btn22 = ttk.Button(ligne6_frame, text="5", style="Custom.TButton", width=6)
+    btn23 = ttk.Button(ligne6_frame, text="6", style="Custom.TButton", width=6)
+    btn24 = ttk.Button(ligne6_frame, text="-", style="Custom.TButton", width=6)
 
     btn21.pack(side="left", padx=2)
     btn22.pack(side="left", padx=2)
     btn23.pack(side="left", padx=2)
     btn24.pack(side="left", padx=2)
 
-    # Ligne 7 : Fonctions logarithmiques et puissances
-    ligne7_frame = Frame(main_frame, bg="#F0F4F8")
-    ligne7_frame.pack(pady=2)
+    # Ligne 7 : Chiffres 1-3 et division
+    ligne7_frame = Frame(main_frame, bg=PALETTE["fond_principal"])
+    ligne7_frame.pack(pady=3)
 
-    btn25 = ttk.Button(ligne7_frame, text="1", style="Custom.TButton", width=5)
-    btn26 = ttk.Button(ligne7_frame, text="2", style="Custom.TButton", width=5)
-    btn27 = ttk.Button(ligne7_frame, text="3", style="Custom.TButton", width=5)
-    btn28 = ttk.Button(ligne7_frame, text="/", style="Custom.TButton", width=5)
+    btn25 = ttk.Button(ligne7_frame, text="1", style="Custom.TButton", width=6)
+    btn26 = ttk.Button(ligne7_frame, text="2", style="Custom.TButton", width=6)
+    btn27 = ttk.Button(ligne7_frame, text="3", style="Custom.TButton", width=6)
+    btn28 = ttk.Button(ligne7_frame, text="/", style="Custom.TButton", width=6)
 
     btn25.pack(side="left", padx=2)
     btn26.pack(side="left", padx=2)
     btn27.pack(side="left", padx=2)
     btn28.pack(side="left", padx=2)
 
-    # Ligne 8 : Constantes et fonctions inverses
-    ligne8_frame = Frame(main_frame, bg="#F0F4F8")
-    ligne8_frame.pack(pady=2)
+    # Ligne 8 : Chiffres 0, décimal et opérations finales
+    ligne8_frame = Frame(main_frame, bg=PALETTE["fond_principal"])
+    ligne8_frame.pack(pady=3)
 
-    btn29 = ttk.Button(ligne8_frame, text="0", style="Custom.TButton", width=5)
-    btn30 = ttk.Button(ligne8_frame, text=".", style="Custom.TButton", width=5)
-    btn31 = ttk.Button(ligne8_frame, text="X", style="Custom.TButton", width=5)
-    btn32 = ttk.Button(ligne8_frame, text="=", style="Custom.TButton", width=5)
+    btn29 = ttk.Button(ligne8_frame, text="0", style="Custom.TButton", width=6)
+    btn30 = ttk.Button(ligne8_frame, text=".", style="Custom.TButton", width=6)
+    btn31 = ttk.Button(ligne8_frame, text="×", style="Custom.TButton", width=6)
+    btn32 = ttk.Button(ligne8_frame, text="=", style="Custom.TButton", width=6)
 
     btn29.pack(side="left", padx=2)
     btn30.pack(side="left", padx=2)
@@ -194,9 +236,6 @@ def launch_operation(parent=None):
             
         entree.config(state=DISABLED)
 
-
-    import re
-
     def prepare_expression(expr: str) -> str:
         # Nettoyage des espaces
         expr = expr.replace(" ", "")
@@ -216,7 +255,6 @@ def launch_operation(parent=None):
         expr = re.sub(r"(\d)(√)", r"\1*√", expr)
         expr = re.sub(r"(\d)([a-zA-Z])", r"\1*\2", expr)
 
-
         # Remplacements simples
         expr = expr.replace("π", "math.pi")
         expr = expr.replace("√", "math.sqrt")
@@ -234,7 +272,6 @@ def launch_operation(parent=None):
 
         return expr
 
-    
     def equilibrer_parentheses(expr: str) -> str:
         """
         Ajoute des parenthèses fermantes si besoin pour équilibrer l'expression.
@@ -250,8 +287,6 @@ def launch_operation(parent=None):
         expr = equilibrer_parentheses(expr)
         expr = prepare_expression(expr)
         return str(eval(expr, {"__builtins__": None}, {"math": math, "abs": abs}))
-
-
 
     def recherche_du_resultat():
         nonlocal valeur_absolue_ouverte
@@ -279,9 +314,9 @@ def launch_operation(parent=None):
             )
             # ============================
             
-            label3.config(text="", fg="#1E40AF")  # Effacer le message d'erreur
+            label3.config(text="✅ Calcul réussi", fg=PALETTE["succes"])
         except Exception as e:
-            label3.config(text=f"❌ Erreur : {e}", fg="#DC2626")
+            label3.config(text=f"❌ Erreur : {str(e)[:30]}...", fg=PALETTE["erreur"])
             entree.config(state=NORMAL)
             entree.delete("1.0", END)
             entree.config(state=DISABLED)
@@ -292,7 +327,7 @@ def launch_operation(parent=None):
         entree.delete("1.0", END)
         entree.config(state=DISABLED)
         valeur_absolue_ouverte = False
-        label3.config(text="", fg="#1E40AF")
+        label3.config(text="", fg=PALETTE["texte_clair"])
 
     def suppr():
         nonlocal valeur_absolue_ouverte, derniere_position_absolue
@@ -354,10 +389,27 @@ def launch_operation(parent=None):
     btn31.config(command=lambda: inserer_text("*"))
     btn32.config(command=recherche_du_resultat)
 
-    # Ajout du bouton Quitter en bas
-    frame_quitter = Frame(operation, bg="#F0F4F8")
-    frame_quitter.pack(pady=10)
+    # Informations d'utilisation
+    frame_info = Frame(operation, bg=PALETTE["fond_principal"])
+    frame_info.pack(pady=10, padx=20, fill=X)
     
-    btn_quitter = ttk.Button(frame_quitter, text="Quitter", style="Quit.TButton", 
-                           width=20, command=operation.destroy)
+    Label(frame_info, text="💡 Calculatrice scientifique complète",
+          font=("Century Gothic", 10, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack(pady=(0,5))
+    
+    infos = [
+        "• Supporte les fonctions trigonométriques, logarithmiques, etc.",
+        "• Utilisez 'rad()' pour convertir les degrés en radians",
+        "• 'ESC' pour effacer • '←' pour supprimer le dernier caractère"
+    ]
+    
+    for info in infos:
+        Label(frame_info, text=info, font=("Century Gothic", 8),
+              bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"], anchor="w").pack(fill="x", pady=1)
+
+    # Bouton Quitter
+    frame_quitter = Frame(operation, bg=PALETTE["fond_principal"])
+    frame_quitter.pack(pady=15)
+    
+    btn_quitter = ttk.Button(frame_quitter, text="🚪 Quitter", style="Quit.TButton", 
+                           command=operation.destroy)
     btn_quitter.pack()

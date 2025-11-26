@@ -1,55 +1,86 @@
+"""Interface pour Théorie des nombres - Module 2"""
+
 from tkinter import *
 from tkinter import ttk
 from .modules import nbr_distinct, nbr_parfait, nb_premier, catalan, pgcdrec, ppcm
 from .historique_manager import historique_manager
 
+# Palette unifiée (même que main.py)
+PALETTE = {
+    "fond_principal": "#F0F4F8",
+    "fond_secondaire": "#FFFFFF",
+    "primaire": "#1E40AF",
+    "secondaire": "#3B82F6",
+    "texte_fonce": "#1E293B",
+    "texte_clair": "#64748B",
+    "succes": "#10B981",
+    "erreur": "#DC2626",
+    "bordure": "#E2E8F0",
+}
+
 # Définition du style global pour les boutons arrondis
 def configurer_style():
     style = ttk.Style()
+    style.theme_use("clam")  # ✅ Ajout du thème clam
+    
+    # Style bouton principal
     style.configure("Custom.TButton",
-                    foreground="#FFFFFF",
-                    background="#3B82F6",  # Bleu moderne comme main.py
-                    font=("Century Gothic", 14),
-                    padding=(20, 10),
+                    foreground=PALETTE["fond_secondaire"],
+                    background=PALETTE["primaire"],
+                    font=("Century Gothic", 12, "bold"),
+                    padding=15,
                     relief="flat",
-                    width=60)
+                    focuscolor="none")
     
     # Style spécial pour le bouton Quitter
     style.configure("Quit.TButton",
-                    foreground="#FFFFFF",
-                    background="#DC2626",  # Rouge
-                    font=("Century Gothic", 14),
-                    padding=(20, 10),
+                    foreground=PALETTE["fond_secondaire"],
+                    background=PALETTE["erreur"],
+                    font=("Century Gothic", 12, "bold"),
+                    padding=12,
                     relief="flat",
-                    width=60)
+                    focuscolor="none")
+    
+    # Effets de survol
+    style.map("Custom.TButton",
+             background=[('active', PALETTE["secondaire"]),
+                        ('pressed', '#1E3A8A')],
+             foreground=[('active', PALETTE["fond_secondaire"])])
+    
+    style.map("Quit.TButton",
+             background=[('active', '#B91C1C'),
+                        ('pressed', '#991B1B')],
+             foreground=[('active', PALETTE["fond_secondaire"])])
+    
     return style
 
 # Fonction pour ajouter les conseils dans chaque fenêtre
 def ajouter_conseils(fenetre, conseils):
-    frame_conseils = Frame(fenetre, bg="#F0F4F8")
+    frame_conseils = Frame(fenetre, bg=PALETTE["fond_principal"])
     frame_conseils.pack(pady=15, fill=X, padx=20)
     
     Label(frame_conseils, text="💡 Informations :",
-          font=("Century Gothic", 11, "bold"), bg="#F0F4F8", fg="#1E40AF").pack(pady=(0,8))
+          font=("Century Gothic", 11, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack(pady=(0,8))
     
     for conseil in conseils:
         Label(frame_conseils, text=conseil, font=("Century Gothic", 9),
-              bg="#F0F4F8", fg="#1E40AF", anchor="w", justify="left").pack(fill="x", padx=15, pady=1)
+              bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"], anchor="w", justify="left").pack(fill="x", padx=15, pady=1)
 
 # Fonction pour lancer la fenêtre "Nombre parfait"
-def lancer_nombre_parfait():
-    nbr = Toplevel() 
+def lancer_nombre_parfait(parent=None):
+    nbr = Toplevel(parent) 
     nbr.title("Nombre Parfait") 
-    nbr.configure(bg="#F0F4F8")  # Même fond que main.py
+    nbr.configure(bg=PALETTE["fond_principal"])
     nbr.geometry("600x550")
+    nbr.resizable(False, False)
 
-    label = Label(nbr, text="VERIFICATION NOMBRE PARFAIT", font=("Century Gothic", 16), bg="#F0F4F8", fg="#1E40AF")
+    label = Label(nbr, text="VERIFICATION NOMBRE PARFAIT", font=("Century Gothic", 16, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
     label.pack(pady=20)
 
-    label1 = Label(nbr, text="Entrez le nombre à tester", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
+    label1 = Label(nbr, text="Entrez le nombre à tester", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label1.pack(pady=10)
     
-    entre = Text(nbr, height=2, width=40, font=("Century Gothic", 12))
+    entre = Text(nbr, height=2, width=40, font=("Century Gothic", 12), relief="solid", borderwidth=1)
     entre.pack(pady=10)
 
     def test_parfait():
@@ -67,19 +98,19 @@ def lancer_nombre_parfait():
             )
             # ============================
             
-            label2.config(text=f"Résultat : {resultat}")
+            label2.config(text=f"Résultat : {resultat}", fg=PALETTE["primaire"])
         except:
-            label2.config(text="Réessayer : Opération Impossible")
+            label2.config(text="Réessayer : Opération Impossible", fg=PALETTE["erreur"])
 
     def remise_a_blanc():
-        label2.configure(text="Résultat : ")
+        label2.configure(text="Résultat : ", fg=PALETTE["texte_fonce"])
         entre.delete("1.0", "end")
 
     style = configurer_style()
     bouton1 = ttk.Button(nbr, style="Custom.TButton", text="Tester", command=test_parfait)
     bouton1.pack(pady=10) 
     
-    label2 = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
+    label2 = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label2.pack(pady=10)
 
     bouton2 = ttk.Button(nbr, style="Custom.TButton", text="Remise à blanc", command=remise_a_blanc)
@@ -96,19 +127,20 @@ def lancer_nombre_parfait():
     ajouter_conseils(nbr, conseils_parfaits)
 
 # Fonction pour lancer la fenêtre "Nombre distinct"
-def lancer_nombre_distinct():
-    nbr = Toplevel() 
+def lancer_nombre_distinct(parent=None):
+    nbr = Toplevel(parent) 
     nbr.title("Nombre distinct") 
-    nbr.configure(bg="#F0F4F8")  # Même fond que main.py
+    nbr.configure(bg=PALETTE["fond_principal"])
     nbr.geometry("600x550")
+    nbr.resizable(False, False)
     
-    label = Label(nbr, text="VERIFICATION NOMBRE DISTINCT", font=("Century Gothic", 16), bg="#F0F4F8", fg="#1E40AF")
+    label = Label(nbr, text="VERIFICATION NOMBRE DISTINCT", font=("Century Gothic", 16, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
     label.pack(pady=20)
 
-    label1 = Label(nbr, text="Entrez le nombre à tester", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
+    label1 = Label(nbr, text="Entrez le nombre à tester", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label1.pack(pady=10)
     
-    entre = Text(nbr, height=2, width=40, font=("Century Gothic", 12))
+    entre = Text(nbr, height=2, width=40, font=("Century Gothic", 12), relief="solid", borderwidth=1)
     entre.pack(pady=10)
 
     def test_distinct():
@@ -126,19 +158,19 @@ def lancer_nombre_distinct():
             )
             # ============================
             
-            label2.config(text=f"Résultat : {resultat}")
+            label2.config(text=f"Résultat : {resultat}", fg=PALETTE["primaire"])
         except:
-            label2.config(text="Réessayer : Opération Impossible")
+            label2.config(text="Réessayer : Opération Impossible", fg=PALETTE["erreur"])
 
     def remise_a_blanc():
-        label2.configure(text="Résultat : ")
+        label2.configure(text="Résultat : ", fg=PALETTE["texte_fonce"])
         entre.delete("1.0", "end")
 
     style = configurer_style()
     bouton1 = ttk.Button(nbr, style="Custom.TButton", text="Tester", command=test_distinct)
     bouton1.pack(pady=10) 
     
-    label2 = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
+    label2 = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label2.pack(pady=10)
 
     bouton2 = ttk.Button(nbr, style="Custom.TButton", text="Remise à blanc", command=remise_a_blanc)
@@ -155,19 +187,20 @@ def lancer_nombre_distinct():
     ajouter_conseils(nbr, conseils_distincts)
 
 # Fonction pour lancer la fenêtre "Nombre premier"
-def lancer_nombre_premier():
-    nbr = Toplevel() 
+def lancer_nombre_premier(parent=None):
+    nbr = Toplevel(parent) 
     nbr.title("Nombre Premier") 
-    nbr.configure(bg="#F0F4F8")  # Même fond que main.py
-    nbr.geometry("600x700")
+    nbr.configure(bg=PALETTE["fond_principal"])
+    nbr.geometry("600x650")
+    nbr.resizable(False, False)
     
-    label = Label(nbr, text="TEST DE PRIMALITÉ", font=("Century Gothic", 16), bg="#F0F4F8", fg="#1E40AF")
+    label = Label(nbr, text="TEST DE PRIMALITÉ", font=("Century Gothic", 16, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
     label.pack(pady=20)
 
-    label1 = Label(nbr, text="Entrez le nombre à tester", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
+    label1 = Label(nbr, text="Entrez le nombre à tester", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label1.pack(pady=10)
     
-    entre = Text(nbr, height=2, width=40, font=("Century Gothic", 12))
+    entre = Text(nbr, height=2, width=40, font=("Century Gothic", 12), relief="solid", borderwidth=1)
     entre.pack(pady=10)
 
     def test_premier():
@@ -185,19 +218,19 @@ def lancer_nombre_premier():
             )
             # ============================
             
-            label2.config(text=f"Résultat : {resultat}")
+            label2.config(text=f"Résultat : {resultat}", fg=PALETTE["primaire"])
         except:
-            label2.config(text="Réessayer : Opération Impossible")
+            label2.config(text="Réessayer : Opération Impossible", fg=PALETTE["erreur"])
 
     def remise_a_blanc():
-        label2.configure(text="Résultat : ")
+        label2.configure(text="Résultat : ", fg=PALETTE["texte_fonce"])
         entre.delete("1.0", "end")
 
     style = configurer_style()
     bouton1 = ttk.Button(nbr, style="Custom.TButton", text="Tester", command=test_premier)
     bouton1.pack(pady=10) 
     
-    label2 = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
+    label2 = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label2.pack(pady=10)
 
     bouton2 = ttk.Button(nbr, style="Custom.TButton", text="Remise à blanc", command=remise_a_blanc)
@@ -214,35 +247,36 @@ def lancer_nombre_premier():
     ajouter_conseils(nbr, conseils_premiers)
 
 # Fonction pour lancer le PGCD
-def lancer_pgcd():
-    nbr = Toplevel() 
+def lancer_pgcd(parent=None):
+    nbr = Toplevel(parent) 
     nbr.title("PGCD") 
-    nbr.configure(bg="#F0F4F8")  # Même fond que main.py
+    nbr.configure(bg=PALETTE["fond_principal"])
     nbr.geometry("600x600")
+    nbr.resizable(False, False)
 
-    label = Label(nbr, text="CALCUL PGCD", font=("Century Gothic", 16), bg="#F0F4F8", fg="#1E40AF")
+    label = Label(nbr, text="CALCUL PGCD", font=("Century Gothic", 16, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
     label.pack(pady=20)
 
-    label1 = Label(nbr, text="Entrez le premier nombre", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
+    label1 = Label(nbr, text="Entrez le premier nombre", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label1.pack(pady=10)
     
-    entre1 = Text(nbr, height=2, width=40, font=("Century Gothic", 12))
+    entre1 = Text(nbr, height=2, width=40, font=("Century Gothic", 12), relief="solid", borderwidth=1)
     entre1.pack(pady=10)
 
-    label2 = Label(nbr, text="Entrez le deuxième nombre", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
+    label2 = Label(nbr, text="Entrez le deuxième nombre", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label2.pack(pady=10)
     
-    entre2 = Text(nbr, height=2, width=40, font=("Century Gothic", 12))
+    entre2 = Text(nbr, height=2, width=40, font=("Century Gothic", 12), relief="solid", borderwidth=1)
     entre2.pack(pady=10)
 
     def test_pgcd():
         try:
             valeur1 = int(entre1.get("1.0", "end").strip())
-            valeur2 = int(entre1.get("1.0", "end").strip())
-            resultat = pgcdrec(valeur1,valeur2)
+            valeur2 = int(entre2.get("1.0", "end").strip())  # ✅ Correction : entre2 au lieu de entre1
+            resultat = pgcdrec(valeur1, valeur2)
             
             # === SAUVEGARDE DU CALCUL ===
-            entree_data = {"nombre1": valeur1,"nombre2": valeur2}
+            entree_data = {"nombre1": valeur1, "nombre2": valeur2}
             historique_manager.ajouter_calcul(
                 module="Théorie des Nombres",
                 operation="Test pgcd",
@@ -251,12 +285,12 @@ def lancer_pgcd():
             )
             # ============================
             
-            label2.config(text=f"Résultat : {resultat}")
+            label_resultat.config(text=f"Résultat : {resultat}", fg=PALETTE["primaire"])
         except:
-            label2.config(text="Réessayer : Opération Impossible")
+            label_resultat.config(text="Réessayer : Opération Impossible", fg=PALETTE["erreur"])
 
     def remise_a_blanc():
-        label_resultat.configure(text="Résultat : ")
+        label_resultat.configure(text="Résultat : ", fg=PALETTE["texte_fonce"])
         entre1.delete("1.0", "end")
         entre2.delete("1.0", "end")
 
@@ -264,7 +298,7 @@ def lancer_pgcd():
     bouton1 = ttk.Button(nbr, style="Custom.TButton", text="Calculer", command=test_pgcd)
     bouton1.pack(pady=10) 
     
-    label_resultat = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
+    label_resultat = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label_resultat.pack(pady=10)
 
     bouton2 = ttk.Button(nbr, style="Custom.TButton", text="Remise à blanc", command=remise_a_blanc)
@@ -281,35 +315,36 @@ def lancer_pgcd():
     ajouter_conseils(nbr, conseils_pgcd)
 
 # Fonction pour lancer le PPCM
-def lancer_ppcm():
-    nbr = Toplevel() 
+def lancer_ppcm(parent=None):
+    nbr = Toplevel(parent) 
     nbr.title("PPCM") 
-    nbr.configure(bg="#F0F4F8")  # Même fond que main.py
-    nbr.geometry("600x700")
+    nbr.configure(bg=PALETTE["fond_principal"])
+    nbr.geometry("600x650")
+    nbr.resizable(False, False)
 
-    label = Label(nbr, text="CALCUL PPCM", font=("Century Gothic", 16), bg="#F0F4F8", fg="#1E40AF")
+    label = Label(nbr, text="CALCUL PPCM", font=("Century Gothic", 16, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
     label.pack(pady=20)
 
-    label1 = Label(nbr, text="Entrez le premier nombre", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
+    label1 = Label(nbr, text="Entrez le premier nombre", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label1.pack(pady=10)
     
-    entre1 = Text(nbr, height=2, width=40, font=("Century Gothic", 12))
+    entre1 = Text(nbr, height=2, width=40, font=("Century Gothic", 12), relief="solid", borderwidth=1)
     entre1.pack(pady=10)
 
-    label2 = Label(nbr, text="Entrez le deuxième nombre", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
+    label2 = Label(nbr, text="Entrez le deuxième nombre", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label2.pack(pady=10)
     
-    entre2 = Text(nbr, height=2, width=40, font=("Century Gothic", 12))
+    entre2 = Text(nbr, height=2, width=40, font=("Century Gothic", 12), relief="solid", borderwidth=1)
     entre2.pack(pady=10)
 
     def test_ppcm():
         try:
             valeur1 = int(entre1.get("1.0", "end").strip())
-            valeur2 = int(entre1.get("1.0", "end").strip())
-            resultat = ppcm(valeur1,valeur2)
+            valeur2 = int(entre2.get("1.0", "end").strip())  # ✅ Correction : entre2 au lieu de entre1
+            resultat = ppcm(valeur1, valeur2)
             
             # === SAUVEGARDE DU CALCUL ===
-            entree_data = {"nombre1": valeur1,"nombre2": valeur2}
+            entree_data = {"nombre1": valeur1, "nombre2": valeur2}
             historique_manager.ajouter_calcul(
                 module="Théorie des Nombres",
                 operation="Test ppcm",
@@ -318,12 +353,12 @@ def lancer_ppcm():
             )
             # ============================
             
-            label2.config(text=f"Résultat : {resultat}")
+            label_resultat.config(text=f"Résultat : {resultat}", fg=PALETTE["primaire"])
         except:
-            label2.config(text="Réessayer : Opération Impossible")
+            label_resultat.config(text="Réessayer : Opération Impossible", fg=PALETTE["erreur"])
 
     def remise_a_blanc():
-        label_resultat.configure(text="Résultat : ")
+        label_resultat.configure(text="Résultat : ", fg=PALETTE["texte_fonce"])
         entre1.delete("1.0", "end")
         entre2.delete("1.0", "end")
 
@@ -331,7 +366,7 @@ def lancer_ppcm():
     bouton1 = ttk.Button(nbr, style="Custom.TButton", text="Calculer", command=test_ppcm)
     bouton1.pack(pady=10) 
     
-    label_resultat = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
+    label_resultat = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label_resultat.pack(pady=10)
 
     bouton2 = ttk.Button(nbr, style="Custom.TButton", text="Remise à blanc", command=remise_a_blanc)
@@ -348,19 +383,20 @@ def lancer_ppcm():
     ajouter_conseils(nbr, conseils_ppcm)
 
 # Fonction pour lancer la fenêtre "Nombre Catalan"
-def lancer_nombre_catalan():
-    nbr = Toplevel() 
+def lancer_nombre_catalan(parent=None):
+    nbr = Toplevel(parent) 
     nbr.title("Nombres Catalans") 
-    nbr.configure(bg="#F0F4F8")  # Même fond que main.py
+    nbr.configure(bg=PALETTE["fond_principal"])
     nbr.geometry("600x550")
+    nbr.resizable(False, False)
 
-    label = Label(nbr, text="CALCUL DU NOMBRE CATALAN", font=("Century Gothic", 16), bg="#F0F4F8", fg="#1E40AF")
+    label = Label(nbr, text="CALCUL DU NOMBRE CATALAN", font=("Century Gothic", 16, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
     label.pack(pady=20)
 
-    label1 = Label(nbr, text="Entrez le nombre", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
+    label1 = Label(nbr, text="Entrez le nombre", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label1.pack(pady=10)
     
-    entre = Text(nbr, height=2, width=40, font=("Century Gothic", 12))
+    entre = Text(nbr, height=2, width=40, font=("Century Gothic", 12), relief="solid", borderwidth=1)
     entre.pack(pady=10)
 
     def test_catalan():
@@ -378,19 +414,19 @@ def lancer_nombre_catalan():
             )
             # ============================
             
-            label2.config(text=f"Résultat : {resultat}")
+            label2.config(text=f"Résultat : {resultat}", fg=PALETTE["primaire"])
         except:
-            label2.config(text="Réessayer : Opération Impossible")
+            label2.config(text="Réessayer : Opération Impossible", fg=PALETTE["erreur"])
 
     def remise_a_blanc():
-        label2.configure(text="Résultat : ")
+        label2.configure(text="Résultat : ", fg=PALETTE["texte_fonce"])
         entre.delete("1.0", "end")
 
     style = configurer_style()
     bouton1 = ttk.Button(nbr, style="Custom.TButton", text="Calculer", command=test_catalan)
     bouton1.pack(pady=10) 
     
-    label2 = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF")
+    label2 = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label2.pack(pady=10)
 
     bouton2 = ttk.Button(nbr, style="Custom.TButton", text="Remise à blanc", command=remise_a_blanc)
@@ -410,25 +446,30 @@ def lancer_nombre_catalan():
 def lancer_theorie(parent=None):
     th = Toplevel(parent)
     th.title("Théorie des nombres")
-    th.configure(bg="#F0F4F8")  # Même fond que main.py
-    th.geometry("500x900")
+    th.configure(bg=PALETTE["fond_principal"])
+    th.geometry("500x800")
+    th.resizable(False, False)
+
+    # Centrer la fenêtre
+    th.transient(parent)
+    th.grab_set()
 
     # Présentation du module
-    frame_presentation = Frame(th, bg="#F0F4F8")
+    frame_presentation = Frame(th, bg=PALETTE["fond_principal"])
     frame_presentation.pack(pady=20, padx=20, fill=X)
     
     Label(frame_presentation, text="🧮 THÉORIE DES NOMBRES", 
-          font=("Century Gothic", 18, "bold"), bg="#F0F4F8", fg="#1E40AF").pack(pady=10)
+          font=("Century Gothic", 18, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack(pady=10)
     
     Label(frame_presentation, text="Explorez les propriétés fascinantes des nombres", 
-          font=("Century Gothic", 12), bg="#F0F4F8", fg="#1E40AF").pack(pady=5)
+          font=("Century Gothic", 12), bg=PALETTE["fond_principal"], fg=PALETTE["texte_clair"]).pack(pady=5)
 
     # Conseils généraux
-    frame_info = Frame(th, bg="#F0F4F8")
+    frame_info = Frame(th, bg=PALETTE["fond_principal"])
     frame_info.pack(pady=10, padx=20, fill=X)
     
     Label(frame_info, text="📚 Fonctions disponibles :",
-          font=("Century Gothic", 12, "bold"), bg="#F0F4F8", fg="#1E40AF").pack(anchor="w")
+          font=("Century Gothic", 12, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack(anchor="w")
     
     fonctions_info = [
         "• Nombre parfait : somme des diviseurs = nombre",
@@ -441,23 +482,28 @@ def lancer_theorie(parent=None):
     
     for info in fonctions_info:
         Label(frame_info, text=info, font=("Century Gothic", 9),
-              bg="#F0F4F8", fg="#1E40AF", anchor="w").pack(fill="x", padx=10, pady=1)
+              bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"], anchor="w").pack(fill="x", padx=10, pady=1)
 
     # Cadre pour les boutons
-    frame_boutons = Frame(th, bg="#F0F4F8")
+    frame_boutons = Frame(th, bg=PALETTE["fond_principal"])
     frame_boutons.pack(pady=20, padx=20, fill=BOTH, expand=True)
 
     # Boutons pour chaque test
     boutons_config = [
-        ("Nombre parfait", lancer_nombre_parfait),
-        ("Nombre distinct", lancer_nombre_distinct),
-        ("Nombre premier", lancer_nombre_premier),
-        ("PGCD", lancer_pgcd),
-        ("PPCM", lancer_ppcm),
-        ("Nombres Catalans", lancer_nombre_catalan)
+        ("🔢 Nombre parfait", lancer_nombre_parfait),
+        ("🔤 Nombre distinct", lancer_nombre_distinct),
+        ("⭐ Nombre premier", lancer_nombre_premier),
+        ("📐 PGCD", lancer_pgcd),
+        ("📊 PPCM", lancer_ppcm),
+        ("🎯 Nombres Catalans", lancer_nombre_catalan)
     ]
 
     style = configurer_style()
     for texte, commande in boutons_config:
-        bouton = ttk.Button(frame_boutons, text=texte, style="Custom.TButton", command=commande)
-        bouton.pack(pady=8, fill=X, padx=50)
+        bouton = ttk.Button(frame_boutons, text=texte, style="Custom.TButton", 
+                           command=lambda cmd=commande: cmd(th))
+        bouton.pack(pady=8, fill=X)
+
+    # Bouton retour
+    ttk.Button(th, text="🚪 Retour au Menu Principal", style="Quit.TButton",
+              command=th.destroy).pack(pady=20)

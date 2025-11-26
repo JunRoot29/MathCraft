@@ -5,6 +5,18 @@ import math
 from math import factorial
 from . import modules as modu
 
+# Palette unifiée (même que main.py)
+PALETTE = {
+    "fond_principal": "#F0F4F8",
+    "fond_secondaire": "#FFFFFF",
+    "primaire": "#1E40AF",
+    "secondaire": "#3B82F6",
+    "texte_fonce": "#1E293B",
+    "texte_clair": "#64748B",
+    "succes": "#10B981",
+    "erreur": "#DC2626",
+    "bordure": "#E2E8F0",
+}
 
 def prepare_expression(expr: str) -> str:
     """Prépare l'expression mathématique pour évaluation"""
@@ -64,53 +76,74 @@ def lancer_integration_numerique(parent=None):
     
     # Initialisation de la fenêtre secondaire
     fenetre_integration = Toplevel(parent) if parent else Tk()
-    fenetre_integration.configure(bg="#F0F4F8")
+    fenetre_integration.configure(bg=PALETTE["fond_principal"])
     fenetre_integration.geometry("700x900")
     fenetre_integration.title("Intégration Numérique")
+    fenetre_integration.resizable(False, False)
+    
+    # Centrer la fenêtre
+    if parent:
+        fenetre_integration.transient(parent)
+        fenetre_integration.grab_set()
     
     # Configuration du style
     def configurer_style():
         style = ttk.Style()
+        style.theme_use("clam")  # ✅ Ajout du thème clam
+        
         style.configure("Custom.TButton",
-                        foreground="#FFFFFF",
-                        background="#3B82F6",
-                        font=("Century Gothic", 12),
+                        foreground=PALETTE["fond_secondaire"],
+                        background=PALETTE["primaire"],
+                        font=("Century Gothic", 11, "bold"),
                         padding=8,
-                        relief="flat")
+                        relief="flat",
+                        focuscolor="none")
         
         style.configure("Quit.TButton",
-                        foreground="#FFFFFF",
-                        background="#DC2626",
-                        font=("Century Gothic", 12),
+                        foreground=PALETTE["fond_secondaire"],
+                        background=PALETTE["erreur"],
+                        font=("Century Gothic", 11, "bold"),
                         padding=8,
-                        relief="flat")
+                        relief="flat",
+                        focuscolor="none")
+        
+        # Effets de survol
+        style.map("Custom.TButton",
+                 background=[('active', PALETTE["secondaire"]),
+                            ('pressed', '#1E3A8A')],
+                 foreground=[('active', PALETTE["fond_secondaire"])])
+        
+        style.map("Quit.TButton",
+                 background=[('active', '#B91C1C'),
+                            ('pressed', '#991B1B')],
+                 foreground=[('active', PALETTE["fond_secondaire"])])
         
         return style
     
     style = configurer_style()
     
     # Titres fixes en haut
-    header_frame = Frame(fenetre_integration, bg="#F0F4F8")
-    header_frame.pack(fill="x", pady=10)
+    header_frame = Frame(fenetre_integration, bg=PALETTE["fond_principal"])
+    header_frame.pack(fill="x", pady=20)
     
-    Label(header_frame, text="Intégration Numérique 📈",
-          font=("Century Gothic", 24, "bold"), fg="#1E40AF", bg="#F0F4F8").pack()
-    Label(header_frame, text="Choisissez une méthode d'intégration 😊",
-          font=("Century Gothic", 14), fg="#1E40AF", bg="#F0F4F8").pack()
+    Label(header_frame, text="📈 INTÉGRATION NUMÉRIQUE",
+          font=("Century Gothic", 20, "bold"), fg=PALETTE["primaire"], bg=PALETTE["fond_principal"]).pack()
+    Label(header_frame, text="Choisissez une méthode d'intégration",
+          font=("Century Gothic", 12), fg=PALETTE["texte_clair"], bg=PALETTE["fond_principal"]).pack(pady=5)
     
     # Menu déroulant pour choisir la méthode d'intégration
-    combo = ttk.Combobox(header_frame, font=("Century Gothic", 14),
+    combo = ttk.Combobox(header_frame, font=("Century Gothic", 12),
                          values=donnees, state="readonly", width=30)
     combo.pack(pady=10)
     combo.set("=== Sélectionnez une méthode ===")
     
     # Cadre principal avec scrollbar
-    main_frame = Frame(fenetre_integration, bg="#F0F4F8")
+    main_frame = Frame(fenetre_integration, bg=PALETTE["fond_principal"])
     main_frame.pack(fill=BOTH, expand=True, padx=20, pady=10)
     
-    canvas = Canvas(main_frame, bg="#F0F4F8", highlightthickness=0)
+    canvas = Canvas(main_frame, bg=PALETTE["fond_principal"], highlightthickness=0)
     scrollbar = ttk.Scrollbar(main_frame, orient="vertical", command=canvas.yview)
-    scrollable_frame = Frame(canvas, bg="#F0F4F8")
+    scrollable_frame = Frame(canvas, bg=PALETTE["fond_principal"])
     
     scrollable_frame.bind(
         "<Configure>",
@@ -132,51 +165,52 @@ def lancer_integration_numerique(parent=None):
     
     # Section fonction
     Label(frame_contenu, text="Fonction à intégrer (ex: x**2, sin(x), cos(x)*x)",
-          font=("Century Gothic", 14), bg="#F0F4F8", fg="#1E40AF").pack(pady=5)
+          font=("Century Gothic", 12, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"]).pack(pady=10)
     
-    entree_f = Entry(frame_contenu, font=("Century Gothic", 14), textvariable=var_f, width=40)
+    entree_f = Entry(frame_contenu, font=("Century Gothic", 12), textvariable=var_f, width=40, 
+                    relief="solid", borderwidth=1)
     entree_f.pack(padx=20, pady=5)
     
     # Section paramètres
-    frame_params = Frame(frame_contenu, bg="#F0F4F8")
-    frame_params.pack(pady=10)
+    frame_params = Frame(frame_contenu, bg=PALETTE["fond_principal"])
+    frame_params.pack(pady=15)
     
     # Paramètre a
-    frame_a = Frame(frame_params, bg="#F0F4F8")
-    frame_a.pack(pady=5)
-    Label(frame_a, text="Borne inférieure (a) :", font=("Century Gothic", 12), bg="#F0F4F8", fg="#1E40AF").pack(side="left")
-    entree_a = Entry(frame_a, font=("Century Gothic", 12), textvariable=var_a, width=15)
+    frame_a = Frame(frame_params, bg=PALETTE["fond_principal"])
+    frame_a.pack(pady=8)
+    Label(frame_a, text="Borne inférieure (a) :", font=("Century Gothic", 11), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"]).pack(side="left")
+    entree_a = Entry(frame_a, font=("Century Gothic", 11), textvariable=var_a, width=15, relief="solid", borderwidth=1)
     entree_a.pack(side="left", padx=10)
     
     # Paramètre b
-    frame_b = Frame(frame_params, bg="#F0F4F8")
-    frame_b.pack(pady=5)
-    Label(frame_b, text="Borne supérieure (b) :", font=("Century Gothic", 12), bg="#F0F4F8", fg="#1E40AF").pack(side="left")
-    entree_b = Entry(frame_b, font=("Century Gothic", 12), textvariable=var_b, width=15)
+    frame_b = Frame(frame_params, bg=PALETTE["fond_principal"])
+    frame_b.pack(pady=8)
+    Label(frame_b, text="Borne supérieure (b) :", font=("Century Gothic", 11), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"]).pack(side="left")
+    entree_b = Entry(frame_b, font=("Century Gothic", 11), textvariable=var_b, width=15, relief="solid", borderwidth=1)
     entree_b.pack(side="left", padx=10)
     
     # Paramètre n
-    frame_n = Frame(frame_params, bg="#F0F4F8")
-    frame_n.pack(pady=5)
-    Label(frame_n, text="Subdivisions (n) :", font=("Century Gothic", 12), bg="#F0F4F8", fg="#1E40AF").pack(side="left")
-    entree_n = Entry(frame_n, font=("Century Gothic", 12), textvariable=var_n, width=15)
+    frame_n = Frame(frame_params, bg=PALETTE["fond_principal"])
+    frame_n.pack(pady=8)
+    Label(frame_n, text="Subdivisions (n) :", font=("Century Gothic", 11), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"]).pack(side="left")
+    entree_n = Entry(frame_n, font=("Century Gothic", 11), textvariable=var_n, width=15, relief="solid", borderwidth=1)
     entree_n.pack(side="left", padx=10)
     
     # Boutons d'aide mathématique
     Label(frame_contenu, text="Raccourcis pour fonctions mathématiques",
-          font=("Century Gothic", 12, "bold"), bg="#F0F4F8", fg="#1E40AF").pack(pady=(20, 5))
+          font=("Century Gothic", 12, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack(pady=(20, 10))
     
-    frame_boutons = Frame(frame_contenu, bg="#F0F4F8")
+    frame_boutons = Frame(frame_contenu, bg=PALETTE["fond_principal"])
     frame_boutons.pack(pady=10)
     
     # Ligne 1
-    ligne1 = Frame(frame_boutons, bg="#F0F4F8")
-    ligne1.pack(pady=2)
+    ligne1 = Frame(frame_boutons, bg=PALETTE["fond_principal"])
+    ligne1.pack(pady=3)
     
     boutons_ligne1 = [
-        ("x**2", "x**2"),
-        ("x**n", "x**"),
-        ("sqrt(x)", "sqrt(x)"),
+        ("x²", "x**2"),
+        ("xⁿ", "x**"),
+        ("√x", "sqrt(x)"),
         ("(", "("),
         (")", ")")
     ]
@@ -187,8 +221,8 @@ def lancer_integration_numerique(parent=None):
         btn.pack(side="left", padx=2)
     
     # Ligne 2
-    ligne2 = Frame(frame_boutons, bg="#F0F4F8")
-    ligne2.pack(pady=2)
+    ligne2 = Frame(frame_boutons, bg=PALETTE["fond_principal"])
+    ligne2.pack(pady=3)
     
     boutons_ligne2 = [
         ("sin(x)", "sin(x)"),
@@ -204,15 +238,15 @@ def lancer_integration_numerique(parent=None):
         btn.pack(side="left", padx=2)
     
     # Ligne 3
-    ligne3 = Frame(frame_boutons, bg="#F0F4F8")
-    ligne3.pack(pady=2)
+    ligne3 = Frame(frame_boutons, bg=PALETTE["fond_principal"])
+    ligne3.pack(pady=3)
     
     boutons_ligne3 = [
         ("log(x)", "log(x)"),
         ("exp(x)", "exp(x)"),
         ("|x|", "|x|"),
-        ("Effacer", "clear"),
-        ("←", "backspace")
+        ("🧹 Effacer", "clear"),
+        ("← Retour", "backspace")
     ]
     
     for text, action in boutons_ligne3:
@@ -228,11 +262,11 @@ def lancer_integration_numerique(parent=None):
         btn.pack(side="left", padx=2)
     
     # Zone de résultat
-    frame_resultat = Frame(frame_contenu, bg="#F0F4F8")
-    frame_resultat.pack(pady=20)
+    frame_resultat = Frame(frame_contenu, bg=PALETTE["fond_principal"])
+    frame_resultat.pack(pady=25)
     
     resultat_label = Label(frame_resultat, text="Résultat apparaîtra ici",
-                          font=("Century Gothic", 14, "bold"), fg="#1E40AF", bg="#F0F4F8")
+                          font=("Century Gothic", 14, "bold"), fg=PALETTE["texte_clair"], bg=PALETTE["fond_principal"])
     resultat_label.pack()
     
     # Fonctions utilitaires
@@ -325,7 +359,7 @@ def lancer_integration_numerique(parent=None):
             choix = combo.get()
             
             if choix == "=== Sélectionnez une méthode ===":
-                resultat_label.config(text="❌ Veuillez sélectionner une méthode", fg="#DC2626")
+                resultat_label.config(text="❌ Veuillez sélectionner une méthode", fg=PALETTE["erreur"])
                 return
             
             # CORRECTION : Récupération directe des valeurs
@@ -350,45 +384,45 @@ def lancer_integration_numerique(parent=None):
                 fonction_propre(b)
                 fonction_propre((a + b) / 2)
             except Exception as e:
-                resultat_label.config(text=f"❌ Erreur dans la fonction : {str(e)}", fg="#DC2626")
+                resultat_label.config(text=f"❌ Erreur dans la fonction : {str(e)}", fg=PALETTE["erreur"])
                 return
             
             # Calcul
             resultat = executer_methode(choix, a, b, n, fonction_propre)
-            resultat_label.config(text=f"✅ Résultat : {resultat:.8f}", fg="#1E40AF")
+            resultat_label.config(text=f"✅ Résultat : {resultat:.8f}", fg=PALETTE["succes"])
             
         except ValueError as e:
-            resultat_label.config(text=f"❌ {str(e)}", fg="#DC2626")
+            resultat_label.config(text=f"❌ {str(e)}", fg=PALETTE["erreur"])
         except Exception as e:
-            resultat_label.config(text=f"❌ Erreur de calcul : {str(e)}", fg="#DC2626")
+            resultat_label.config(text=f"❌ Erreur de calcul : {str(e)}", fg=PALETTE["erreur"])
     
     # Boutons finaux
-    frame_boutons_finaux = Frame(frame_contenu, bg="#F0F4F8")
-    frame_boutons_finaux.pack(pady=20)
+    frame_boutons_finaux = Frame(frame_contenu, bg=PALETTE["fond_principal"])
+    frame_boutons_finaux.pack(pady=25)
     
-    bouton_calculer = ttk.Button(frame_boutons_finaux, text="🧮 Calculer",
+    bouton_calculer = ttk.Button(frame_boutons_finaux, text="🧮 Calculer l'Intégrale",
                                 style="Custom.TButton", command=calculer)
     bouton_calculer.pack(side="left", padx=10)
     
-    bouton_exit = ttk.Button(frame_boutons_finaux, text="❌ Fermer",
+    bouton_exit = ttk.Button(frame_boutons_finaux, text="🚪 Fermer",
                            style="Quit.TButton", command=fenetre_integration.destroy)
     bouton_exit.pack(side="left", padx=10)
     
     # Exemples
-    frame_exemples = Frame(frame_contenu, bg="#F0F4F8")
-    frame_exemples.pack(pady=10)
+    frame_exemples = Frame(frame_contenu, bg=PALETTE["fond_principal"])
+    frame_exemples.pack(pady=15)
     
     Label(frame_exemples, text="💡 Exemples de fonctions :",
-          font=("Century Gothic", 12, "bold"), bg="#F0F4F8", fg="#1E40AF").pack()
+          font=("Century Gothic", 11, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack()
     Label(frame_exemples, text="x**2 + 3*x + 1    |    sin(x)    |    cos(x)*exp(x)    |    sqrt(x)",
-          font=("Century Gothic", 10), fg="#1E40AF", bg="#F0F4F8").pack()
+          font=("Century Gothic", 10), fg=PALETTE["texte_fonce"], bg=PALETTE["fond_principal"]).pack(pady=5)
     
     # Informations supplémentaires
-    frame_info = Frame(frame_contenu, bg="#F0F4F8")
+    frame_info = Frame(frame_contenu, bg=PALETTE["fond_principal"])
     frame_info.pack(pady=20)
     
     Label(frame_info, text="ℹ️ Informations sur les méthodes :",
-          font=("Century Gothic", 12, "bold"), bg="#F0F4F8", fg="#1E40AF").pack()
+          font=("Century Gothic", 12, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack(pady=(0,10))
     
     methodes_info = [
         "• Rectangle Rétrograde : Utilise le côté gauche de chaque intervalle",
@@ -402,14 +436,14 @@ def lancer_integration_numerique(parent=None):
     
     for info in methodes_info:
         Label(frame_info, text=info, font=("Century Gothic", 10), 
-              bg="#F0F4F8", fg="#1E40AF", anchor="w").pack(fill="x", padx=20, pady=2)
+              bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"], anchor="w").pack(fill="x", padx=20, pady=2)
     
     # Conseils d'utilisation
-    frame_conseils = Frame(frame_contenu, bg="#F0F4F8")
+    frame_conseils = Frame(frame_contenu, bg=PALETTE["fond_principal"])
     frame_conseils.pack(pady=20)
     
     Label(frame_conseils, text="💡 Conseils d'utilisation :",
-          font=("Century Gothic", 12, "bold"), bg="#F0F4F8", fg="#1E40AF").pack()
+          font=("Century Gothic", 12, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack(pady=(0,10))
     
     conseils = [
         "• Augmentez n pour plus de précision",
@@ -421,14 +455,9 @@ def lancer_integration_numerique(parent=None):
     
     for conseil in conseils:
         Label(frame_conseils, text=conseil, font=("Century Gothic", 10),
-              bg="#F0F4F8", fg="#1E40AF", anchor="w").pack(fill="x", padx=20, pady=2)
+              bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"], anchor="w").pack(fill="x", padx=20, pady=2)
     
     # Espaceur final pour le défilement
-    Label(frame_contenu, text="", bg="#F0F4F8", height=3).pack()
+    Label(frame_contenu, text="", bg=PALETTE["fond_principal"], height=3).pack()
 
     return fenetre_integration
-
-# Pour tester directement ce fichier
-if __name__ == "__main__":
-    fenetre = lancer_integration_numerique()
-    fenetre.mainloop()

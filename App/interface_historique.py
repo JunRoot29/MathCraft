@@ -6,6 +6,16 @@ from tkinter import ttk, messagebox, filedialog
 import json
 from .historique_manager import historique_manager
 
+# Palette unifiée (identique aux autres fichiers)
+PALETTE = {
+    "fond_principal": "#F0F4F8",
+    "primaire": "#1E40AF",
+    "secondaire": "#3B82F6", 
+    "erreur": "#DC2626",
+    "texte_fonce": "#1E40AF",
+    "texte_clair": "#1E40AF"
+}
+
 class InterfaceHistorique:
     def __init__(self, parent=None):
         self.parent = parent
@@ -20,7 +30,7 @@ class InterfaceHistorique:
         self.fenetre = tk.Toplevel(self.parent)
         self.fenetre.title("📊 Historique des Calculs - MathCraft")
         self.fenetre.geometry("1000x700")
-        self.fenetre.configure(bg="#F0F4F8")
+        self.fenetre.configure(bg=PALETTE["fond_principal"])
         self.fenetre.minsize(800, 600)
         
         # Style
@@ -42,7 +52,7 @@ class InterfaceHistorique:
         header_frame.pack(fill=tk.X, pady=(0, 20))
         
         tk.Label(header_frame, text="📊 Historique des Calculs", 
-                font=("Century Gothic", 18, "bold"), bg="#F0F4F8", fg="#1E40AF").pack(side=tk.LEFT)
+                font=("Century Gothic", 18, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack(side=tk.LEFT)
         
         # Barre d'outils
         toolbar_frame = ttk.Frame(main_frame)
@@ -53,7 +63,7 @@ class InterfaceHistorique:
         search_frame.pack(side=tk.LEFT, fill=tk.X, expand=True)
         
         tk.Label(search_frame, text="Rechercher:", font=("Century Gothic", 10), 
-                bg="#F0F4F8").pack(side=tk.LEFT, padx=(0, 5))
+                bg=PALETTE["fond_principal"]).pack(side=tk.LEFT, padx=(0, 5))
         
         self.recherche_var = tk.StringVar()
         recherche_entry = ttk.Entry(search_frame, textvariable=self.recherche_var, width=30)
@@ -65,7 +75,7 @@ class InterfaceHistorique:
         filter_frame.pack(side=tk.RIGHT)
         
         tk.Label(filter_frame, text="Module:", font=("Century Gothic", 10), 
-                bg="#F0F4F8").pack(side=tk.LEFT, padx=(0, 5))
+                bg=PALETTE["fond_principal"]).pack(side=tk.LEFT, padx=(0, 5))
         
         self.filtre_module = ttk.Combobox(filter_frame, values=[
             "Tous", "Opérations de Base", "Théorie des Nombres", "Conversion", 
@@ -144,7 +154,7 @@ class InterfaceHistorique:
         
         # Statistiques
         self.stats_label = tk.Label(main_frame, text="", font=("Century Gothic", 9), 
-                                   bg="#F0F4F8", fg="#64748B")
+                                   bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
         self.stats_label.pack(pady=(10, 0))
     
     def _actualiser_affichage(self):
