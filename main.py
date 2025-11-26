@@ -8,7 +8,43 @@ from App import chaine_de_caractere as ch
 from App import integration_numerique as int_num
 from App.interface_historique import InterfaceHistorique  
 from App import explorateur_concepts as exp_concepts
+from App.soutient_manager import afficher_soutien
 
+# Fonctions pour le menu Aide
+def afficher_guides():
+    """Afficher les guides d'utilisation"""
+    from tkinter import messagebox
+    messagebox.showinfo(
+        "Guides d'utilisation", 
+        "📚 Guides MathsCraft\n\n"
+        "1. Opérations de base : Addition, soustraction, multiplication, division\n"
+        "2. Théorie des nombres : PGCD, PPCM, nombres premiers\n"
+        "3. Conversion : Bases numériques, unités de mesure\n"
+        "4. Explorateur de Concepts : Jeu éducatif mathématique\n"
+        "5. Polynômes : Résolution d'équations polynomiales\n"
+        "6. Chaînes de caractères : Manipulation de texte\n"
+        "7. Intégration numérique : Calculs d'intégrales\n\n"
+        "Chaque module contient des instructions détaillées !"
+    )
+
+def afficher_a_propos():
+    """Afficher la boîte À propos"""
+    from tkinter import messagebox
+    messagebox.showinfo(
+        "À propos de MathsCraft", 
+        "🧮 MathsCraft v1.0\n\n"
+        "Un espace malin pour calculer et s'amuser avec les maths.\n\n"
+        "Développé par Junior Kossivi\n"
+        "© 2025 - Tous droits réservés\n\n"
+        "Modules disponibles :\n"
+        "- Opérations de base\n"
+        "- Théorie des nombres\n" 
+        "- Conversion\n"
+        "- Explorateur de concepts\n"
+        "- Polynômes & équations\n"
+        "- Chaînes de caractères\n"
+        "- Intégration numérique"
+    )
 
 # Initialiser l'interface historique
 historique_interface = InterfaceHistorique(parent=None)  
@@ -16,17 +52,66 @@ historique_interface = InterfaceHistorique(parent=None)
 # Fenetre principal
 fenetre = Tk()
 fenetre.title("MathsCraft")
-fenetre.geometry("900x700")  # Taille ajustée pour mieux s'adapter à l'écran
-fenetre.configure(bg="#F0F4F8")  # Couleur de fond moderne
+fenetre.geometry("900x700")
+fenetre.configure(bg="#F0F4F8")
+
+# === MENU BURGER SIMPLIFIÉ ET FONCTIONNEL ===
+def creer_menu_burger():
+    """Crée un menu burger simple et fonctionnel"""
+    # Cadre pour le header
+    header_frame = Frame(fenetre, bg="#F0F4F8", height=60)
+    header_frame.pack(fill=X, padx=20, pady=10)
+    header_frame.pack_propagate(False)
+    
+    # Bouton menu burger à gauche
+    burger_btn = Menubutton(
+        header_frame,
+        text="☰",
+        font=("Arial", 16, "bold"),
+        fg="#1E40AF",
+        bg="#F0F4F8",
+        relief="flat",
+        bd=0,
+        cursor="hand2",
+        width=3
+    )
+    burger_btn.pack(side=LEFT, padx=(0, 15))
+    
+    # Titre à côté du bouton burger
+    title_label = Label(
+        header_frame,
+        text="MathCrafts",
+        font=("Century Gothic", 20, "bold"),
+        fg="#1E40AF",
+        bg="#F0F4F8"
+    )
+    title_label.pack(side=LEFT)
+    
+    # Créer le menu déroulant
+    menu = Menu(burger_btn, tearoff=0, bg="white", fg="#1E293B", font=("Century Gothic", 10))
+    
+    # Ajouter les options au menu
+    menu.add_command(label="📚 Guides", command=afficher_guides)
+    menu.add_command(label="❤️ Soutenir", command=lambda: afficher_soutien(fenetre))
+    menu.add_separator()
+    menu.add_command(label="ℹ️ À propos", command=afficher_a_propos)
+    
+    # Associer le menu au bouton burger
+    burger_btn.config(menu=menu)
+    
+    return header_frame
+
+# Créer le menu burger
+creer_menu_burger()
 
 # Configuration du style pour les boutons
 style = ttk.Style(fenetre)
-style.theme_use('clam')  # Thème moderne
+style.theme_use('clam')
 
 # Style pour les boutons principaux
 style.configure("Custom.TButton",
                 foreground="#FFFFFF",
-                background="#3B82F6",  # Bleu moderne
+                background="#3B82F6",
                 font=("Century Gothic", 13, "bold"),
                 padding=18,
                 relief="flat",
@@ -34,10 +119,10 @@ style.configure("Custom.TButton",
                 width=40)
 
 style.configure("Quit.TButton",
-                foreground="#FFFFFF",  # Texte blanc
-                background="#DC2626",  # Rouge
+                foreground="#FFFFFF",
+                background="#DC2626",
                 font=("Century Gothic", 14),
-                    relief="flat")
+                relief="flat")
 
 style.map("Custom.TButton",
           background=[('active', '#2563EB'), ('pressed', '#1D4ED8')],
@@ -46,7 +131,7 @@ style.map("Custom.TButton",
 # Style pour le bouton Quitter
 style.configure("Quit.TButton",
                 foreground="#FFFFFF",
-                background="#DC2626",  # Rouge distinct
+                background="#DC2626",
                 font=("Century Gothic", 13, "bold"),
                 padding=18,
                 relief="flat",
@@ -83,17 +168,7 @@ def _on_mouse_wheel(event):
 
 canvas.bind_all("<MouseWheel>", _on_mouse_wheel)
 
-# === EN-TÊTE ===
-# Phrase de bienvenue
-label1 = Label(
-    scrollable_frame,
-    text="MathCrafts",
-    font=("Century Gothic", 32, "bold"),
-    fg="#1E40AF",
-    bg="#F0F4F8"
-)
-label1.pack(pady=(20, 5))
-
+# === CONTENU PRINCIPAL ===
 labels = Label(
     scrollable_frame,
     text="🧮 ✨ Un espace malin, Calculer et s'amuser avec les maths.",
@@ -108,7 +183,6 @@ separator1 = ttk.Separator(scrollable_frame, orient='horizontal')
 separator1.pack(fill='x', padx=50, pady=15)
 
 # === SECTION BOUTONS ===
-# Instruction
 label2 = Label(
     scrollable_frame,
     text="Choisis ton opération !",
@@ -144,13 +218,12 @@ bouton3 = ttk.Button(
     command=conv.launch_conversion
 )
 
-
 bouton4 = ttk.Button(
     scrollable_frame,
     text="Module 4 : Explorateur de Concepts (Jeu) 🎯",
     style="Custom.TButton", 
     compound=LEFT,
-    command=exp_concepts.lancer_explorateur_concepts  # ← Maintenant ça marche !
+    command=exp_concepts.lancer_explorateur_concepts
 )
 
 bouton6 = ttk.Button(
@@ -176,21 +249,15 @@ bouton9 = ttk.Button(
     command=int_num.lancer_integration_numerique
 )
 
-
 bouton_historique = ttk.Button(
     scrollable_frame,
     text="📊 Historique des Calculs", 
     style="Custom.TButton",
     compound=LEFT,
-    command=lambda: historique_interface.afficher_historique()  # ← CORRIGÉ
+    command=lambda: historique_interface.afficher_historique()
 )
 
-
-
-# Place-le dans la liste des boutons (après bouton9)
-bouton_historique.pack(pady=8, fill=X, padx=60)
-
-# Placement des boutons avec un espacement uniforme
+# Placement des boutons
 bouton1.pack(pady=8, fill=X, padx=60)
 bouton2.pack(pady=8, fill=X, padx=60)
 bouton3.pack(pady=8, fill=X, padx=60)
