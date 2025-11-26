@@ -1,53 +1,86 @@
 # 🧮 MathCraft
-> *Un espace malin pour calculer et s'amuser avec les maths. 🧠✨*
 
+> *Un espace malin pour calculer, apprendre et s’amuser avec les maths. 🧠✨*
+
+---
 
 ## 📝 Description
-MathCraft est une application éducative interactive développée en Python avec Tkinter, offrant une plateforme complète pour explorer et pratiquer différents concepts mathématiques de manière ludique et intuitive. L'application propose 7 modules couvrant un large éventail de domaines mathématiques.
 
+**MathCraft** est une application éducative interactive développée en Python (Tkinter).
+Elle offre une plateforme moderne et intuitive pour explorer et pratiquer des concepts mathématiques à travers **7 modules**, allant des opérations de base à l’intégration numérique.
+
+L’objectif est simple : rendre les mathématiques **accessibles, visuelles et amusantes**.
+
+---
 
 ## ✨ Fonctionnalités
 
-### 📊 Module 1 : Opérations de Base
-- Calculatrice scientifique avec opérations arithmétiques, trigonométrie, logarithmes, puissances, racines, constantes (π, e), conversion degré/radian
+### 📊 1. Opérations de Base
 
-### 🔢 Module 2 : Théorie des Nombres
-- Test de primalité, nombres parfaits, PGCD, PPCM, nombres Catalans, chiffres distincts
+* Calculatrice scientifique complète
+* Trigonométrie, logarithmes, puissances, racines
+* Constantes (π, e)
+* Conversion degrés ↔ radians
 
-### 🔄 Module 3 : Conversion
-- Longueur, température, masse, vitesse, angles
+### 🔢 2. Théorie des Nombres
 
-### 📐 Module 5 : Polynômes & Équations
-- Résolution d'équations du 1er et 2ème degré (réelles et complexes)
+* Test de primalité
+* Nombres parfaits
+* PGCD / PPCM
+* Nombres de Catalan
+* Vérification de chiffres distincts
 
-### 📝 Module 6 : Chaînes de Caractères
-- Comptage de voyelles, lettres, mots, test de palindrome
+### 🔄 3. Conversion d’Unités
 
-### ∫ Module 7 : Intégration Numérique
-- Méthodes : rectangles (gauche/droite/centre), trapèzes (simple/composite), Simpson (simple/composite)
+* Longueur
+* Température
+* Masse
+* Vitesse
+* Angles
+
+### 📐 4. Polynômes & Équations
+
+* Équations du 1er degré
+* Équations du 2ème degré (réelles & complexes)
+
+### 📝 5. Chaînes de Caractères
+
+* Compter voyelles, consonnes, mots
+* Test de palindrome
+
+### ∫ 6. Intégration Numérique
+
+* Méthodes : Rectangles (G/C/D), Trapèzes, Simpson
+* Versions simples et composites
+
+### 🎮 7. Jeux & Concepts *(en développement)*
+
+* Explorateur de concepts mathématiques
+* Mini-jeux logiques
+
+---
 
 ## 🛠️ Technologies utilisées
-- Python 3.x
-- Tkinter / ttk
-- NumPy
-- Matplotlib
-- Modules standards : math, re
+
+* **Python 3.x**
+* **Tkinter / ttk**
+* **NumPy**
+* **Matplotlib**
+* Modules standards : `math`, `re`
+
+---
 
 ## 📋 Prérequis
+
 ```bash
 pip install numpy matplotlib
-python -m tkinter  # pour tester l'installation
+python -m tkinter   # Vérifier l’installation de Tkinter
 ```
+
+---
 
 ## ⚡ Démarrage rapide
-```bash
-# Cloner et lancer en 3 commandes
-git clone https://github.com/JunRoot29/MathCraft.git
-cd MathCraft && pip install -r requirements.txt
-python main.py
-```
 
-## 🚀 Installation
 ```bash
 git clone https://github.com/JunRoot29/MathCraft.git
 cd MathCraft
@@ -55,7 +88,10 @@ pip install -r requirements.txt
 python main.py
 ```
 
+---
+
 ## 📂 Structure du projet
+
 ```
 MathCraft/
 ├── main.py
@@ -68,175 +104,238 @@ MathCraft/
 │   ├── conversion.py
 │   ├── polynome.py
 │   ├── chaine_de_caractere.py
-│   └── integration_numerique.py
+│   ├── integration_numerique.py
+│   ├── jeux_math.py
+│   └── explorateur_concepts.py
 └── Image/
+    ├── icon.png
     └── screenshot.png
 ```
 
-## 💡 Exemples d'utilisation
-
-### Calculer un PGCD
-1. Lancez l'application
-2. Sélectionnez "Théorie des Nombres"
-3. Entrez deux nombres
-4. Cliquez sur "PGCD"
-
-### Résoudre une équation du 2nd degré
-Module Polynômes → ax² + bx + c = 0 → Solutions réelles/complexes
-
-### Intégration numérique
-Module Intégration → Choisir la méthode → Entrer la fonction et les bornes → Résultat instantané
+---
 
 ## 🎨 Interface
-- Design moderne : `#F5F0E6` / `#2C3E50`
-- Police : Century Gothic
-- Navigation fluide, boutons uniformes, feedback visuel clair
 
-## 🔬 Bibliothèque `modules.py`
-- Fonctions : arithmétique, trigonométrie, tableaux, matrices, équations, intégration
-- Méthodes : dichotomie, Newton, point fixe, Fibonacci, Catalans, PGCD, PPCM
+* Palette : `#F5F0E6` (clair) & `#2C3E50` (foncé)
+* Police : **Century Gothic**
+* Boutons harmonisés
+* Navigation fluide
+* Feedback dynamique pour l’utilisateur
+
+---
+
+## 💡 Exemples d’utilisation
+
+### ➤ Calculer un PGCD
+
+1. Ouvrir *Théorie des nombres*
+2. Entrer deux nombres
+3. Cliquer sur **PGCD**
+
+### ➤ Résoudre une équation du 2nd degré
+
+1. Ouvrir *Polynômes*
+2. Entrer `a`, `b`, `c`
+3. Obtenir les solutions réelles/complexes
+
+### ➤ Faire une intégration numérique
+
+1. Aller dans *Intégration*
+2. Choisir la méthode (ex : Simpson)
+3. Entrer fonction + bornes
+4. Résultat instantané
+
+---
+
+## 🔬 Bibliothèque interne : `modules.py`
+
+Contient :
+
+* Fonctions avancées d’arithmétique
+* Trigonométrie
+* Analyse numérique
+* Polynômes
+* Méthodes : dichotomie, Newton, point fixe
+* Fibonacci, Catalan, PGCD, PPCM
+
+---
 
 ## 🗺️ Feuille de route
 
-- [x] Modules 1-3, 5-7
-- [ ] Module 4 : Explorateur de Concepts
-- [ ] Graphiques interactifs (Matplotlib)
-- [ ] Export PDF/CSV des résultats
-- [ ] Mode sombre
-- [ ] Tests unitaires
-- [ ] Version mobile
+* [x] Modules 1–3, 5–7
+* [ ] Module 4 : Explorateur de Concepts
+* [ ] Graphiques interactifs
+* [ ] Export PDF / CSV
+* [ ] Mode sombre
+* [ ] Tests unitaires
+* [ ] Version mobile
+
+---
 
 ## 🤝 Contribution
+
 ```bash
 git checkout -b feature/NouvelleFonction
-git commit -m "Ajout d'une nouvelle fonctionnalité"
+git commit -m "Ajout d'une fonctionnalité"
 git push origin feature/NouvelleFonction
 ```
 
-**Guidelines :**
-- Commentez votre code en français
-- Respectez le style de code existant
-- Testez vos modifications avant de soumettre
-- Ouvrez une Pull Request avec une description détaillée
+### Guidelines :
+
+* Commentaires en **français**
+* Garder le style de code
+* Tester avant envoi
+* PR avec description claire
+
+---
 
 ## ❓ FAQ
 
-**Q : L'application ne se lance pas ?**  
-R : Vérifiez que Python 3.x et tkinter sont installés : `python -m tkinter`
+**L’application ne démarre pas ?**
+→ Vérifiez Tkinter : `python -m tkinter`
 
-**Q : Puis-je ajouter mes propres formules ?**  
-R : Oui ! Consultez `modules.py` et suivez le guide de contribution
+**Puis-je ajouter mes propres formules ?**
+→ Oui, via `modules.py`
 
-**Q : Quels OS sont supportés ?**  
-R : Windows, Linux, macOS (avec Python 3.x et tkinter)
+**OS supportés ?**
+→ Windows / Linux / macOS
 
-**Q : Comment signaler un bug ?**  
-R : Ouvrez une issue sur GitHub avec les détails et captures d'écran
+---
 
 ## 🐛 Signaler un bug
-1. Vérifiez que toutes les dépendances sont installées
-2. Ouvrez une issue sur GitHub avec :
-   - Description du problème
-   - Étapes pour reproduire
-   - Captures d'écran si possible
-   - Version de Python utilisée
+
+1. Vérifier les dépendances
+2. Ouvrir une *issue* GitHub avec :
+
+   * description
+   * étapes
+   * captures d’écran
+   * version Python
+
+---
 
 ## 📝 Crédits
-- **Développeur** : Junior Kossivi
-- **Date** : Mai 2024
-- **Lieu** : Port-Bouët, Abidjan, Côte d'Ivoire
-- **Institution** : Université Félix Houphouët-Boigny
 
-## 🙏 Remerciements
-Merci à l'Université Félix Houphouët-Boigny pour son soutien académique.  
-Projet inspiré par la passion de rendre les mathématiques accessibles à tous.
+* **Auteur** : Junior Kossivi
+* **Lieu** : Abidjan, Côte d'Ivoire
+* **Institution** : Université Félix Houphouët-Boigny
+* **Année** : 2025
+
+---
 
 ## 📄 Licence
+
 **Projet éducatif open source**
 
-- ✅ Usage éducatif et non commercial autorisé
-- ✅ Modifications autorisées avec attribution
-- ✅ Partage encouragé dans un cadre pédagogique
-- ❌ Usage commercial interdit sans permission explicite
+* ✔️ Utilisation éducative
+* ✔️ Modifications avec attribution
+* ✔️ Partage autorisé
+* ❌ Usage commercial interdit sans autorisation
 
-Pour toute utilisation commerciale, veuillez contacter l'auteur.
-
-## 📦 Fichier `requirements`
-
-
-
-```txt
-numpy>=1.20.0
-matplotlib>=3.3.0
-```
-
+---
 
 ## 📧 Contact
-📧 **Email** : junioragbenonzan31@gmail.com  
+
+📨 **Email** : [junioragbenonzan31@gmail.com](mailto:junioragbenonzan31@gmail.com)
 🐙 **GitHub** : [@JunRoot29](https://github.com/JunRoot29)
 
 ---
 
 <div align="center">
-Fait avec ❤️ et ☕ à Abidjan | © 2025 Junior Kossivi
+
+Fait avec ❤️ et ☕ à Abidjan
+© 2025 **Junior Kossivi**
+
 </div>
 
----
-
-<div align="center">
 ====================================================================================================================
 
 ====================================================================================================================
 </div>
 
 # 🧮 MathCraft
-> *A smart space to calculate and enjoy math. 🧠✨*
+
+> *A smart space to calculate, learn, and have fun with math. 🧠✨*
+
+---
 
 ## 📝 Description
-MathCraft is an interactive educational application built with Python and Tkinter. It offers a complete platform to explore and practice various mathematical concepts in a fun and intuitive way. The app includes 7 modules covering a wide range of mathematical topics.
+
+**MathCraft** is an interactive educational application developed in Python (Tkinter).
+It provides a modern, intuitive platform to explore and practice mathematical concepts through **7 modules**, ranging from basic operations to numerical integration.
+
+The goal is simple: make mathematics **accessible, visual, and fun**.
+
+---
 
 ## ✨ Features
 
-### 📊 Module 1: Basic Operations
-- Scientific calculator with arithmetic operations, trigonometry, logarithms, powers, roots, constants (π, e), degree/radian conversion
+### 📊 1. Basic Operations
 
-### 🔢 Module 2: Number Theory
-- Primality test, perfect numbers, GCD, LCM, Catalan numbers, digit uniqueness
+* Full scientific calculator
+* Trigonometry, logarithms, powers, roots
+* Constants (π, e)
+* Degrees ↔ Radians conversion
 
-### 🔄 Module 3: Unit Conversion
-- Length, temperature, mass, speed, angles
+### 🔢 2. Number Theory
 
-### 📐 Module 5: Polynomials & Equations
-- Solve first and second-degree equations (real and complex solutions)
+* Primality test
+* Perfect numbers
+* GCD / LCM
+* Catalan numbers
+* Distinct digit check
 
-### 📝 Module 6: String Operations
-- Count vowels, letters, words, palindrome check
+### 🔄 3. Unit Conversion
 
-### ∫ Module 7: Numerical Integration
-- Methods: rectangles (left/right/midpoint), trapezoids (simple/composite), Simpson (simple/composite)
+* Length
+* Temperature
+* Mass
+* Speed
+* Angles
+
+### 📐 4. Polynomials & Equations
+
+* Linear equations
+* Quadratic equations (real & complex)
+
+### 📝 5. Strings
+
+* Count vowels, consonants, words
+* Palindrome check
+
+### ∫ 6. Numerical Integration
+
+* Methods: Rectangles (Left/Center/Right), Trapezoids, Simpson
+* Simple and composite versions
+
+### 🎮 7. Games & Concepts *(in development)*
+
+* Math concepts explorer
+* Mini logic games
+
+---
 
 ## 🛠️ Technologies Used
-- Python 3.x
-- Tkinter / ttk
-- NumPy
-- Matplotlib
-- Standard libraries: math, re
 
-## 📋 Requirements
+* **Python 3.x**
+* **Tkinter / ttk**
+* **NumPy**
+* **Matplotlib**
+* Standard modules: `math`, `re`
+
+---
+
+## 📋 Prerequisites
+
 ```bash
 pip install numpy matplotlib
-python -m tkinter  # to test Tkinter installation
+python -m tkinter   # Verify Tkinter installation
 ```
+
+---
 
 ## ⚡ Quick Start
-```bash
-# Clone and launch in 3 commands
-git clone https://github.com/JunRoot29/MathCraft.git
-cd MathCraft && pip install -r requirements.txt
-python main.py
-```
 
-## 🚀 Installation
 ```bash
 git clone https://github.com/JunRoot29/MathCraft.git
 cd MathCraft
@@ -244,7 +343,10 @@ pip install -r requirements.txt
 python main.py
 ```
 
+---
+
 ## 📂 Project Structure
+
 ```
 MathCraft/
 ├── main.py
@@ -252,119 +354,151 @@ MathCraft/
 ├── requirements.txt
 ├── App/
 │   ├── modules.py
-│   ├── operation_de_base.py
-│   ├── theorie_des_nombres.py
+│   ├── basic_operations.py
+│   ├── number_theory.py
 │   ├── conversion.py
-│   ├── polynome.py
-│   ├── chaine_de_caractere.py
-│   └── integration_numerique.py
+│   ├── polynomials.py
+│   ├── strings.py
+│   ├── numerical_integration.py
+│   ├── math_games.py
+│   └── concepts_explorer.py
 └── Image/
+    ├── icon.png
     └── screenshot.png
 ```
 
-## 💡 Usage Examples
-
-### Calculate GCD
-1. Launch the app
-2. Select "Number Theory"
-3. Enter two numbers
-4. Click "GCD"
-
-### Solve a quadratic equation
-Polynomials Module → ax² + bx + c = 0 → Real/complex solutions
-
-### Numerical integration
-Integration Module → Choose method → Enter function and bounds → Instant result
+---
 
 ## 🎨 Interface
-- Modern design: `#F5F0E6` / `#2C3E50`
-- Font: Century Gothic
-- Smooth navigation, uniform buttons, clear visual feedback
 
-## 🔬 `modules.py` Library
-- Functions: arithmetic, trigonometry, arrays, matrices, equations, integration
-- Methods: bisection, Newton, fixed-point, Fibonacci, Catalan, GCD, LCM
+* Palette: `#F5F0E6` (light) & `#2C3E50` (dark)
+* Font: **Century Gothic**
+* Harmonized buttons
+* Smooth navigation
+* Dynamic user feedback
+
+---
+
+## 💡 Usage Examples
+
+### ➤ Compute GCD
+
+1. Open *Number Theory*
+2. Enter two numbers
+3. Click **GCD**
+
+### ➤ Solve a Quadratic Equation
+
+1. Open *Polynomials*
+2. Enter `a`, `b`, `c`
+3. Get real/complex solutions
+
+### ➤ Perform Numerical Integration
+
+1. Go to *Integration*
+2. Choose a method (e.g., Simpson)
+3. Enter function + bounds
+4. Instant result
+
+---
+
+## 🔬 Internal Library: `modules.py`
+
+Includes:
+
+* Advanced arithmetic functions
+* Trigonometry
+* Numerical analysis
+* Polynomials
+* Methods: bisection, Newton, fixed point
+* Fibonacci, Catalan, GCD, LCM
+
+---
 
 ## 🗺️ Roadmap
 
-- [x] Modules 1–3, 5–7
-- [ ] Module 4: Concept Explorer
-- [ ] Interactive graphs (Matplotlib)
-- [ ] Export results to PDF/CSV
-- [ ] Dark mode
-- [ ] Unit tests
-- [ ] Mobile version
+* [x] Modules 1–3, 5–7
+* [ ] Module 4: Concepts Explorer
+* [ ] Interactive plots
+* [ ] PDF / CSV export
+* [ ] Dark mode
+* [ ] Unit tests
+* [ ] Mobile version
 
-## 🤝 Contributing
+---
+
+## 🤝 Contribution
+
 ```bash
 git checkout -b feature/NewFeature
-git commit -m "Add a new feature"
+git commit -m "Add a feature"
 git push origin feature/NewFeature
 ```
 
-**Guidelines:**
-- Comment your code in French
-- Follow existing code style
-- Test your changes before submitting
-- Open a Pull Request with a detailed description
+### Guidelines:
+
+* Comments in **French**
+* Maintain coding style
+* Test before submitting
+* PR with clear description
+
+---
 
 ## ❓ FAQ
 
-**Q: The app won’t launch?**  
-A: Make sure Python 3.x and Tkinter are installed: `python -m tkinter`
+**The app doesn’t start?**
+→ Check Tkinter: `python -m tkinter`
 
-**Q: Can I add my own formulas?**  
-A: Yes! Check `modules.py` and follow the contribution guide
+**Can I add my own formulas?**
+→ Yes, via `modules.py`
 
-**Q: Which OS are supported?**  
-A: Windows, Linux, macOS (with Python 3.x and Tkinter)
+**Supported OS?**
+→ Windows / Linux / macOS
 
-**Q: How do I report a bug?**  
-A: Open a GitHub issue with details and screenshots
+---
 
-## 🐛 Bug Reporting
-1. Ensure all dependencies are installed
-2. Open a GitHub issue with:
-   - Problem description
-   - Steps to reproduce
-   - Screenshots if possible
-   - Python version used
+## 🐛 Reporting Bugs
+
+1. Verify dependencies
+2. Open a GitHub *issue* with:
+
+   * Description
+   * Steps to reproduce
+   * Screenshots
+   * Python version
+
+---
 
 ## 📝 Credits
-- **Developer**: Junior Kossivi
-- **Date**: May 2024
-- **Location**: Port-Bouët, Abidjan, Côte d'Ivoire
-- **Institution**: Université Félix Houphouët-Boigny
 
-## 🙏 Acknowledgments
-Thanks to Université Félix Houphouët-Boigny for academic support.  
-This project is inspired by the passion to make mathematics accessible to all.
+* **Author**: Junior Kossivi
+* **Location**: Abidjan, Côte d'Ivoire
+* **Institution**: Université Félix Houphouët-Boigny
+* **Year**: 2025
+
+---
 
 ## 📄 License
+
 **Open-source educational project**
 
-- ✅ Educational and non-commercial use allowed
-- ✅ Modifications allowed with attribution
-- ✅ Sharing encouraged in academic settings
-- ❌ Commercial use prohibited without explicit permission
+* ✔️ Educational use
+* ✔️ Modifications with attribution
+* ✔️ Sharing allowed
+* ❌ Commercial use prohibited without permission
 
-For commercial use, please contact the author.
-
-## 📦 `requirements.txt`
-```txt
-numpy>=1.20.0
-matplotlib>=3.3.0
-```
+---
 
 ## 📧 Contact
-📧 **Email**: junioragbenonzan31@gmail.com  
+
+📨 **Email**: [junioragbenonzan31@gmail.com](mailto:junioragbenonzan31@gmail.com)
 🐙 **GitHub**: [@JunRoot29](https://github.com/JunRoot29)
 
 ---
 
 <div align="center">
-Made with ❤️ and ☕ in Abidjan | © 2025 Junior Kossivi
-</div>
-```
 
----
+Made with ❤️ and ☕ in Abidjan
+© 2025 **Junior Kossivi**
+
+</div>
