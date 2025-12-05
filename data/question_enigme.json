@@ -1,0 +1,2116 @@
+{
+  "Débutant": [
+    {
+      "question": "Je suis le double de 15. Qui suis-je ?",
+      "reponse": 30,
+      "indices": [
+        "Double = ×2",
+        "15 × 2 = 30"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le triple de 7. Qui suis-je ?",
+      "reponse": 21,
+      "indices": [
+        "Triple = ×3",
+        "7 × 3 = 21"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le carré de 5. Qui suis-je ?",
+      "reponse": 25,
+      "indices": [
+        "Carré = × lui-même",
+        "5 × 5 = 25"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le successeur de 99. Qui suis-je ?",
+      "reponse": 100,
+      "indices": [
+        "Successeur = +1",
+        "99 + 1 = 100"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis la moitié de 50. Qui suis-je ?",
+      "reponse": 25,
+      "indices": [
+        "Moitié = ÷2",
+        "50 ÷ 2 = 25"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le quadruple de 8. Qui suis-je ?",
+      "reponse": 32,
+      "indices": [
+        "Quadruple = ×4",
+        "8 × 4 = 32"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le tiers de 36. Qui suis-je ?",
+      "reponse": 12,
+      "indices": [
+        "Tiers = ÷3",
+        "36 ÷ 3 = 12"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le carré de 9. Qui suis-je ?",
+      "reponse": 81,
+      "indices": [
+        "Carré = × lui-même",
+        "9 × 9 = 81"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le double de 25. Qui suis-je ?",
+      "reponse": 50,
+      "indices": [
+        "Double = ×2",
+        "25 × 2 = 50"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le triple de 12. Qui suis-je ?",
+      "reponse": 36,
+      "indices": [
+        "Triple = ×3",
+        "12 × 3 = 36"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Quel est le prochain nombre : 2, 4, 6, 8, ?",
+      "reponse": 10,
+      "indices": [
+        "Suite arithmétique",
+        "+2 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 5, 10, 15, 20, ?",
+      "reponse": 25,
+      "indices": [
+        "Suite arithmétique",
+        "+5 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 3, 6, 9, 12, ?",
+      "reponse": 15,
+      "indices": [
+        "Suite arithmétique",
+        "+3 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 1, 2, 4, 8, ?",
+      "reponse": 16,
+      "indices": [
+        "Chaque nombre est doublé",
+        "8 × 2 = 16"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 10, 20, 30, 40, ?",
+      "reponse": 50,
+      "indices": [
+        "Suite arithmétique",
+        "+10 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 7, 14, 21, 28, ?",
+      "reponse": 35,
+      "indices": [
+        "Suite arithmétique",
+        "+7 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 100, 200, 300, 400, ?",
+      "reponse": 500,
+      "indices": [
+        "Suite arithmétique",
+        "+100 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 2, 5, 8, 11, ?",
+      "reponse": 14,
+      "indices": [
+        "Suite arithmétique",
+        "+3 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 50, 100, 150, 200, ?",
+      "reponse": 250,
+      "indices": [
+        "Suite arithmétique",
+        "+50 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 4, 8, 12, 16, ?",
+      "reponse": 20,
+      "indices": [
+        "Suite arithmétique",
+        "+4 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Je suis un nombre pair à deux chiffres. La somme de mes chiffres est 8. Qui suis-je ?",
+      "reponse": 44,
+      "indices": [
+        "Nombre pair à deux chiffres",
+        "Dizaines + unités = 8",
+        "Exemple : 44"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre impair à deux chiffres. La somme de mes chiffres est 9. Qui suis-je ?",
+      "reponse": 63,
+      "indices": [
+        "Nombre impair à deux chiffres",
+        "Dizaines + unités = 9",
+        "Exemple : 63"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre pair à deux chiffres. Mon chiffre des unités est 4 et celui des dizaines est 3. Qui suis-je ?",
+      "reponse": 34,
+      "indices": [
+        "Dizaines = 3, unités = 4",
+        "34 est pair"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre impair à deux chiffres. Mon chiffre des dizaines est 5 et celui des unités est 7. Qui suis-je ?",
+      "reponse": 57,
+      "indices": [
+        "Dizaines = 5, unités = 7",
+        "57 est impair"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre pair à deux chiffres. La différence entre mes chiffres est 2. Qui suis-je ?",
+      "reponse": 24,
+      "indices": [
+        "Nombre pair",
+        "Dizaines - unités = 2",
+        "Exemple : 24"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre impair à deux chiffres. Mes chiffres sont identiques. Qui suis-je ?",
+      "reponse": 55,
+      "indices": [
+        "Nombre impair",
+        "Les deux chiffres sont les mêmes",
+        "55"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre pair à deux chiffres. Mon chiffre des dizaines est le double de celui des unités. Qui suis-je ?",
+      "reponse": 42,
+      "indices": [
+        "Dizaines = 2 × unités",
+        "42 est pair",
+        "4 = 2 × 2"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre impair à deux chiffres. Mon chiffre des unités est 3. La somme de mes chiffres est 10. Qui suis-je ?",
+      "reponse": 73,
+      "indices": [
+        "Unité = 3",
+        "Dizaines + 3 = 10",
+        "Dizaines = 7"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre pair à deux chiffres. J'ai 6 dizaines. Qui suis-je ?",
+      "reponse": 60,
+      "indices": [
+        "Dizaines = 6",
+        "Nombre pair",
+        "60"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre impair à deux chiffres. J'ai 9 unités. Qui suis-je ?",
+      "reponse": 19,
+      "indices": [
+        "Unité = 9",
+        "Nombre impair",
+        "Exemple : 19"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Un carré a un côté de 5 cm. Quelle est son aire ?",
+      "reponse": 25,
+      "indices": [
+        "Aire = côté × côté",
+        "5 × 5 = 25"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un rectangle a une longueur de 6 cm et une largeur de 3 cm. Quelle est son aire ?",
+      "reponse": 18,
+      "indices": [
+        "Aire = longueur × largeur",
+        "6 × 3 = 18"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un triangle équilatéral a un côté de 4 cm. Quel est son périmètre ?",
+      "reponse": 12,
+      "indices": [
+        "Périmètre = 3 × côté",
+        "3 × 4 = 12"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un carré a un périmètre de 20 cm. Quelle est la longueur d'un côté ?",
+      "reponse": 5,
+      "indices": [
+        "Périmètre carré = 4 × côté",
+        "20 ÷ 4 = 5"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un rectangle a un périmètre de 16 cm. Sa longueur est 5 cm. Quelle est sa largeur ?",
+      "reponse": 3,
+      "indices": [
+        "Périmètre = 2 × (L + l)",
+        "16 = 2 × (5 + l)",
+        "l = 3"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un cercle a un rayon de 7 cm. Quelle est sa circonférence ? (π ≈ 3.14)",
+      "reponse": 43.96,
+      "indices": [
+        "Circonférence = 2 × π × r",
+        "2 × 3.14 × 7 = 43.96"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un carré a une aire de 36 cm². Quelle est la longueur d'un côté ?",
+      "reponse": 6,
+      "indices": [
+        "Aire = côté²",
+        "√36 = 6"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un rectangle a une aire de 24 cm² et une longueur de 6 cm. Quelle est sa largeur ?",
+      "reponse": 4,
+      "indices": [
+        "Aire = L × l",
+        "24 = 6 × l",
+        "l = 4"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un triangle équilatéral a un périmètre de 15 cm. Quelle est la longueur d'un côté ?",
+      "reponse": 5,
+      "indices": [
+        "Périmètre = 3 × côté",
+        "15 ÷ 3 = 5"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un cercle a un diamètre de 10 cm. Quelle est sa circonférence ? (π ≈ 3.14)",
+      "reponse": 31.4,
+      "indices": [
+        "Circonférence = π × diamètre",
+        "3.14 × 10 = 31.4"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Si tu ajoutes 15 à moi, tu obtiens 35. Qui suis-je ?",
+      "reponse": 20,
+      "indices": [
+        "x + 15 = 35",
+        "x = 35 - 15"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Si tu multiplies 6 par moi, tu obtiens 42. Qui suis-je ?",
+      "reponse": 7,
+      "indices": [
+        "6 × x = 42",
+        "x = 42 ÷ 6"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Si tu me divises par 5, tu obtiens 9. Qui suis-je ?",
+      "reponse": 45,
+      "indices": [
+        "x ÷ 5 = 9",
+        "x = 9 × 5"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Si tu soustrais 8 de moi, tu obtiens 17. Qui suis-je ?",
+      "reponse": 25,
+      "indices": [
+        "x - 8 = 17",
+        "x = 17 + 8"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Si tu prends la moitié de moi, tu obtiens 12. Qui suis-je ?",
+      "reponse": 24,
+      "indices": [
+        "x ÷ 2 = 12",
+        "x = 12 × 2"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Si tu ajoutes le double de moi à 10, tu obtiens 30. Qui suis-je ?",
+      "reponse": 10,
+      "indices": [
+        "2x + 10 = 30",
+        "2x = 20",
+        "x = 10"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Si tu multiplies moi par 3 et ajoutes 5, tu obtiens 26. Qui suis-je ?",
+      "reponse": 7,
+      "indices": [
+        "3x + 5 = 26",
+        "3x = 21",
+        "x = 7"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Si tu me soustrais 12, tu obtiens 18. Qui suis-je ?",
+      "reponse": 30,
+      "indices": [
+        "x - 12 = 18",
+        "x = 18 + 12"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Si tu divises 48 par moi, tu obtiens 6. Qui suis-je ?",
+      "reponse": 8,
+      "indices": [
+        "48 ÷ x = 6",
+        "x = 48 ÷ 6"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Si tu prends le tiers de moi, tu obtiens 7. Qui suis-je ?",
+      "reponse": 21,
+      "indices": [
+        "x ÷ 3 = 7",
+        "x = 7 × 3"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "La somme de deux nombres est 15. Leur différence est 3. Quels sont ces nombres ?",
+      "reponse": [
+        9,
+        6
+      ],
+      "indices": [
+        "x + y = 15",
+        "x - y = 3",
+        "Additionner les équations"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Deux nombres ont une somme de 25 et une différence de 5. Quels sont ces nombres ?",
+      "reponse": [
+        15,
+        10
+      ],
+      "indices": [
+        "x + y = 25",
+        "x - y = 5",
+        "x = 15, y = 10"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Trois pommes et deux bananes coûtent 12€. Une pomme coûte 2€. Combien coûte une banane ?",
+      "reponse": 3,
+      "indices": [
+        "3×2 + 2×b = 12",
+        "6 + 2b = 12",
+        "2b = 6",
+        "b = 3"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Deux stylos et trois cahiers coûtent 17€. Un stylo coûte 4€. Combien coûte un cahier ?",
+      "reponse": 3,
+      "indices": [
+        "2×4 + 3×c = 17",
+        "8 + 3c = 17",
+        "3c = 9",
+        "c = 3"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Un père a 40 ans, son fils a 10 ans. Dans combien d'années le père aura-t-il le double de l'âge du fils ?",
+      "reponse": 20,
+      "indices": [
+        "40 + x = 2×(10 + x)",
+        "40 + x = 20 + 2x",
+        "x = 20"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Deux nombres ont une somme de 30. L'un est le double de l'autre. Quels sont ces nombres ?",
+      "reponse": [
+        20,
+        10
+      ],
+      "indices": [
+        "x + y = 30",
+        "x = 2y",
+        "3y = 30",
+        "y = 10"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Trois nombres consécutifs ont une somme de 24. Quels sont ces nombres ?",
+      "reponse": [
+        7,
+        8,
+        9
+      ],
+      "indices": [
+        "x + (x+1) + (x+2) = 24",
+        "3x + 3 = 24",
+        "x = 7"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Deux nombres ont une somme de 50. Leur différence est 10. Quels sont ces nombres ?",
+      "reponse": [
+        30,
+        20
+      ],
+      "indices": [
+        "x + y = 50",
+        "x - y = 10",
+        "x = 30, y = 20"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Un train parcourt 240 km en 3 heures. Quelle est sa vitesse moyenne ?",
+      "reponse": 80,
+      "indices": [
+        "Vitesse = distance ÷ temps",
+        "240 ÷ 3 = 80 km/h"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Si 5 crayons coûtent 10€, combien coûtent 8 crayons ?",
+      "reponse": 16,
+      "indices": [
+        "1 crayon = 10 ÷ 5 = 2€",
+        "8 crayons = 8 × 2 = 16€"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Je suis le carré de 6. Qui suis-je ?",
+      "reponse": 36,
+      "indices": [
+        "Carré = × lui-même",
+        "6 × 6 = 36"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le double de 30. Qui suis-je ?",
+      "reponse": 60,
+      "indices": [
+        "Double = ×2",
+        "30 × 2 = 60"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le triple de 8. Qui suis-je ?",
+      "reponse": 24,
+      "indices": [
+        "Triple = ×3",
+        "8 × 3 = 24"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis la moitié de 100. Qui suis-je ?",
+      "reponse": 50,
+      "indices": [
+        "Moitié = ÷2",
+        "100 ÷ 2 = 50"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le quadruple de 9. Qui suis-je ?",
+      "reponse": 36,
+      "indices": [
+        "Quadruple = ×4",
+        "9 × 4 = 36"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le tiers de 45. Qui suis-je ?",
+      "reponse": 15,
+      "indices": [
+        "Tiers = ÷3",
+        "45 ÷ 3 = 15"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le carré de 8. Qui suis-je ?",
+      "reponse": 64,
+      "indices": [
+        "Carré = × lui-même",
+        "8 × 8 = 64"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le double de 40. Qui suis-je ?",
+      "reponse": 80,
+      "indices": [
+        "Double = ×2",
+        "40 × 2 = 80"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le triple de 15. Qui suis-je ?",
+      "reponse": 45,
+      "indices": [
+        "Triple = ×3",
+        "15 × 3 = 45"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le carré de 10. Qui suis-je ?",
+      "reponse": 100,
+      "indices": [
+        "Carré = × lui-même",
+        "10 × 10 = 100"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Quel est le prochain nombre : 12, 24, 36, 48, ?",
+      "reponse": 60,
+      "indices": [
+        "Suite arithmétique",
+        "+12 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 9, 18, 27, 36, ?",
+      "reponse": 45,
+      "indices": [
+        "Suite arithmétique",
+        "+9 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 11, 22, 33, 44, ?",
+      "reponse": 55,
+      "indices": [
+        "Suite arithmétique",
+        "+11 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 15, 30, 45, 60, ?",
+      "reponse": 75,
+      "indices": [
+        "Suite arithmétique",
+        "+15 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 20, 40, 60, 80, ?",
+      "reponse": 100,
+      "indices": [
+        "Suite arithmétique",
+        "+20 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 25, 50, 75, 100, ?",
+      "reponse": 125,
+      "indices": [
+        "Suite arithmétique",
+        "+25 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 30, 60, 90, 120, ?",
+      "reponse": 150,
+      "indices": [
+        "Suite arithmétique",
+        "+30 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 35, 70, 105, 140, ?",
+      "reponse": 175,
+      "indices": [
+        "Suite arithmétique",
+        "+35 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 40, 80, 120, 160, ?",
+      "reponse": 200,
+      "indices": [
+        "Suite arithmétique",
+        "+40 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 45, 90, 135, 180, ?",
+      "reponse": 225,
+      "indices": [
+        "Suite arithmétique",
+        "+45 à chaque fois"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Je suis un nombre pair à deux chiffres. Mon chiffre des unités est 6. La somme de mes chiffres est 14. Qui suis-je ?",
+      "reponse": 86,
+      "indices": [
+        "Unité = 6",
+        "Dizaines + 6 = 14",
+        "Dizaines = 8"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre impair à deux chiffres. Mon chiffre des dizaines est 4. La somme de mes chiffres est 11. Qui suis-je ?",
+      "reponse": 47,
+      "indices": [
+        "Dizaines = 4",
+        "4 + unités = 11",
+        "Unité = 7"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre pair à deux chiffres. Mes chiffres sont consécutifs. Qui suis-je ?",
+      "reponse": 34,
+      "indices": [
+        "Chiffres consécutifs",
+        "Nombre pair",
+        "Exemple : 34"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre impair à deux chiffres. Mon chiffre des dizaines est le triple de celui des unités. Qui suis-je ?",
+      "reponse": 31,
+      "indices": [
+        "Dizaines = 3 × unités",
+        "Nombre impair",
+        "3 et 1"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre pair à deux chiffres. Mon chiffre des unités est 0. Qui suis-je ?",
+      "reponse": 20,
+      "indices": [
+        "Unité = 0",
+        "Nombre pair",
+        "Exemple : 20"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre impair à deux chiffres. Mon chiffre des unités est 5. Qui suis-je ?",
+      "reponse": 15,
+      "indices": [
+        "Unité = 5",
+        "Nombre impair",
+        "Exemple : 15"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre pair à deux chiffres. Mon chiffre des dizaines est 2. Qui suis-je ?",
+      "reponse": 24,
+      "indices": [
+        "Dizaines = 2",
+        "Nombre pair",
+        "Exemple : 24"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre impair à deux chiffres. Mon chiffre des dizaines est 9. Qui suis-je ?",
+      "reponse": 93,
+      "indices": [
+        "Dizaines = 9",
+        "Nombre impair",
+        "Exemple : 93"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre pair à deux chiffres. La différence entre mes chiffres est 4. Qui suis-je ?",
+      "reponse": 40,
+      "indices": [
+        "Dizaines - unités = 4",
+        "Nombre pair",
+        "4 et 0"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre impair à deux chiffres. La somme de mes chiffres est 7. Qui suis-je ?",
+      "reponse": 25,
+      "indices": [
+        "Nombre impair",
+        "Dizaines + unités = 7",
+        "Exemple : 25"
+      ],
+      "type": "logique_numerique"
+    }
+  ],
+  "Intermédiaire": [
+    {
+      "question": "Je suis la racine carrée de 144. Qui suis-je ?",
+      "reponse": 12,
+      "indices": [
+        "Racine carrée = √",
+        "12 × 12 = 144"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le cube de 3. Qui suis-je ?",
+      "reponse": 27,
+      "indices": [
+        "Cube = × lui-même × lui-même",
+        "3 × 3 × 3 = 27"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis 25% de 200. Qui suis-je ?",
+      "reponse": 50,
+      "indices": [
+        "25% = 1/4",
+        "200 ÷ 4 = 50"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis 150% de 40. Qui suis-je ?",
+      "reponse": 60,
+      "indices": [
+        "150% = 1.5 fois",
+        "40 × 1.5 = 60"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis la racine carrée de 225. Qui suis-je ?",
+      "reponse": 15,
+      "indices": [
+        "√225 = ?",
+        "15 × 15 = 225"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le cube de 4. Qui suis-je ?",
+      "reponse": 64,
+      "indices": [
+        "4³ = 4 × 4 × 4",
+        "4 × 16 = 64"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis 75% de 120. Qui suis-je ?",
+      "reponse": 90,
+      "indices": [
+        "75% = 3/4",
+        "120 × 3/4 = 90"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis la racine carrée de 169. Qui suis-je ?",
+      "reponse": 13,
+      "indices": [
+        "√169 = ?",
+        "13 × 13 = 169"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis 33.33% de 90. Qui suis-je ?",
+      "reponse": 30,
+      "indices": [
+        "33.33% ≈ 1/3",
+        "90 ÷ 3 = 30"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le cube de 5. Qui suis-je ?",
+      "reponse": 125,
+      "indices": [
+        "5³ = 5 × 5 × 5",
+        "25 × 5 = 125"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Quel est le prochain nombre : 1, 4, 9, 16, 25, ?",
+      "reponse": 36,
+      "indices": [
+        "Carrés parfaits",
+        "6² = 36"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 2, 6, 12, 20, 30, ?",
+      "reponse": 42,
+      "indices": [
+        "Différences : +4, +6, +8, +10",
+        "30 + 12 = 42"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 1, 8, 27, 64, ?",
+      "reponse": 125,
+      "indices": [
+        "Cubes parfaits",
+        "5³ = 125"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 3, 9, 27, 81, ?",
+      "reponse": 243,
+      "indices": [
+        "Puissances de 3",
+        "3⁵ = 243"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 1, 3, 6, 10, 15, ?",
+      "reponse": 21,
+      "indices": [
+        "Nombres triangulaires",
+        "15 + 6 = 21"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 2, 3, 5, 7, 11, ?",
+      "reponse": 13,
+      "indices": [
+        "Nombres premiers",
+        "Prochain premier après 11"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 1, 2, 4, 7, 11, 16, ?",
+      "reponse": 22,
+      "indices": [
+        "Différences : +1, +2, +3, +4, +5",
+        "16 + 6 = 22"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 5, 10, 20, 40, ?",
+      "reponse": 80,
+      "indices": [
+        "Chaque terme ×2",
+        "40 × 2 = 80"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 12, 14, 18, 26, ?",
+      "reponse": 42,
+      "indices": [
+        "Différences : +2, +4, +8",
+        "26 + 16 = 42"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 100, 81, 64, 49, ?",
+      "reponse": 36,
+      "indices": [
+        "Carrés décroissants",
+        "7²=49, 6²=36"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Je suis un nombre à trois chiffres. La somme de mes chiffres est 18. Mon chiffre des centaines est 5. Qui suis-je ?",
+      "reponse": 567,
+      "indices": [
+        "Centaines = 5",
+        "5 + dizaines + unités = 18",
+        "Exemple : 567"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un palindrome à trois chiffres. Mon chiffre du milieu est 7. Qui suis-je ?",
+      "reponse": 777,
+      "indices": [
+        "Palindrome = même sens à l'endroit et à l'envers",
+        "Chiffre central = 7",
+        "777"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre pair à trois chiffres. Mes chiffres sont consécutifs dans l'ordre croissant. Qui suis-je ?",
+      "reponse": 234,
+      "indices": [
+        "Chiffres consécutifs",
+        "Nombre pair",
+        "2, 3, 4"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre impair à trois chiffres. Mon chiffre des unités est le triple de celui des centaines. Qui suis-je ?",
+      "reponse": 123,
+      "indices": [
+        "Centaines = 1, unités = 3",
+        "3 = 3 × 1"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre à trois chiffres. Le produit de mes chiffres est 24. Qui suis-je ?",
+      "reponse": 234,
+      "indices": [
+        "2 × 3 × 4 = 24",
+        "Nombre à trois chiffres"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre à trois chiffres. Mes chiffres sont tous différents. La somme de mes chiffres est 12. Qui suis-je ?",
+      "reponse": 345,
+      "indices": [
+        "Chiffres différents",
+        "3 + 4 + 5 = 12"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un palindrome à trois chiffres. La somme de mes chiffres est 9. Qui suis-je ?",
+      "reponse": 171,
+      "indices": [
+        "Palindrome",
+        "1 + 7 + 1 = 9"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre pair à trois chiffres. Mon chiffre des centaines est 4 et celui des unités est 8. Qui suis-je ?",
+      "reponse": 428,
+      "indices": [
+        "Centaines = 4, unités = 8",
+        "Nombre pair",
+        "428"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre à trois chiffres divisible par 9. La somme de mes chiffres est 18. Qui suis-je ?",
+      "reponse": 189,
+      "indices": [
+        "Divisible par 9",
+        "1 + 8 + 9 = 18"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre à trois chiffres. Mon chiffre des dizaines est la moyenne des chiffres des centaines et des unités. Qui suis-je ?",
+      "reponse": 246,
+      "indices": [
+        "Centaines = 2, unités = 6",
+        "Moyenne = (2+6)/2 = 4"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Un triangle rectangle a des côtés de 3 cm et 4 cm. Quelle est la longueur de l'hypoténuse ?",
+      "reponse": 5,
+      "indices": [
+        "Théorème de Pythagore",
+        "3² + 4² = 5²"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un cercle a une aire de 314 cm² (π ≈ 3.14). Quel est son rayon ?",
+      "reponse": 10,
+      "indices": [
+        "Aire = πr²",
+        "314 = 3.14 × r²",
+        "r² = 100"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un triangle a une base de 12 cm et une hauteur de 5 cm. Quelle est son aire ?",
+      "reponse": 30,
+      "indices": [
+        "Aire = (base × hauteur) / 2",
+        "12 × 5 ÷ 2 = 30"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un parallélogramme a une base de 8 cm et une hauteur de 6 cm. Quelle est son aire ?",
+      "reponse": 48,
+      "indices": [
+        "Aire = base × hauteur",
+        "8 × 6 = 48"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un trapèze a des bases de 5 cm et 7 cm, et une hauteur de 4 cm. Quelle est son aire ?",
+      "reponse": 24,
+      "indices": [
+        "Aire = (B + b) × h / 2",
+        "(5 + 7) × 4 ÷ 2 = 24"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un cube a une arête de 4 cm. Quel est son volume ?",
+      "reponse": 64,
+      "indices": [
+        "Volume = arête³",
+        "4 × 4 × 4 = 64"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un rectangle a un périmètre de 30 cm et une longueur de 9 cm. Quelle est sa largeur ?",
+      "reponse": 6,
+      "indices": [
+        "Périmètre = 2(L + l)",
+        "30 = 2(9 + l)",
+        "l = 6"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un losange a des diagonales de 6 cm et 8 cm. Quelle est son aire ?",
+      "reponse": 24,
+      "indices": [
+        "Aire = (d1 × d2) / 2",
+        "(6 × 8) ÷ 2 = 24"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un triangle isocèle a un périmètre de 20 cm et une base de 8 cm. Quelle est la longueur d'un côté égal ?",
+      "reponse": 6,
+      "indices": [
+        "Périmètre = base + 2 × côté égal",
+        "20 = 8 + 2c",
+        "c = 6"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un cylindre a un rayon de 3 cm et une hauteur de 10 cm. Quel est son volume ? (π ≈ 3.14)",
+      "reponse": 282.6,
+      "indices": [
+        "Volume = πr²h",
+        "3.14 × 9 × 10 = 282.6"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Résoudre : 2x + 7 = 21",
+      "reponse": 7,
+      "indices": [
+        "2x = 21 - 7",
+        "2x = 14",
+        "x = 7"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Résoudre : 3(x - 4) = 15",
+      "reponse": 9,
+      "indices": [
+        "3x - 12 = 15",
+        "3x = 27",
+        "x = 9"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Résoudre : 5x/2 = 20",
+      "reponse": 8,
+      "indices": [
+        "5x = 40",
+        "x = 8"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Résoudre : 4x - 3 = 2x + 9",
+      "reponse": 6,
+      "indices": [
+        "4x - 2x = 9 + 3",
+        "2x = 12",
+        "x = 6"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Résoudre : (x + 5)/3 = 4",
+      "reponse": 7,
+      "indices": [
+        "x + 5 = 12",
+        "x = 7"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Résoudre : 2x² = 32",
+      "reponse": 4,
+      "indices": [
+        "x² = 16",
+        "x = 4 (positif)"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Résoudre : 3x + 2 = x + 10",
+      "reponse": 4,
+      "indices": [
+        "3x - x = 10 - 2",
+        "2x = 8",
+        "x = 4"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Résoudre : 4(x + 1) = 28",
+      "reponse": 6,
+      "indices": [
+        "x + 1 = 7",
+        "x = 6"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Résoudre : 5x - 8 = 3x + 12",
+      "reponse": 10,
+      "indices": [
+        "5x - 3x = 12 + 8",
+        "2x = 20",
+        "x = 10"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Résoudre : 2x/3 = 10",
+      "reponse": 15,
+      "indices": [
+        "2x = 30",
+        "x = 15"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Deux nombres ont une somme de 45. L'un est le triple de l'autre. Quels sont ces nombres ?",
+      "reponse": [
+        33.75,
+        11.25
+      ],
+      "indices": [
+        "x + y = 45",
+        "x = 3y",
+        "4y = 45",
+        "y = 11.25"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Trois nombres consécutifs pairs ont une somme de 48. Quels sont ces nombres ?",
+      "reponse": [
+        14,
+        16,
+        18
+      ],
+      "indices": [
+        "x + (x+2) + (x+4) = 48",
+        "3x + 6 = 48",
+        "x = 14"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Deux trains partent en même temps de deux villes distantes de 300 km. L'un va à 60 km/h, l'autre à 90 km/h. Quand se rencontrent-ils ?",
+      "reponse": 2,
+      "indices": [
+        "Distance = vitesse × temps",
+        "60t + 90t = 300",
+        "150t = 300",
+        "t = 2 heures"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Un père a 45 ans, son fils a 15 ans. Dans combien d'années l'âge du père sera-t-il le triple de celui du fils ?",
+      "reponse": 0,
+      "indices": [
+        "45 + x = 3(15 + x)",
+        "45 + x = 45 + 3x",
+        "0 = 2x",
+        "x = 0 (déjà le triple)"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Deux nombres ont une somme de 28 et un produit de 192. Quels sont ces nombres ?",
+      "reponse": [
+        12,
+        16
+      ],
+      "indices": [
+        "x + y = 28",
+        "x × y = 192",
+        "12 et 16"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Si 3 stylos et 2 cahiers coûtent 17€, et 2 stylos et 3 cahiers coûtent 18€, quel est le prix d'un stylo ?",
+      "reponse": 3,
+      "indices": [
+        "3s + 2c = 17",
+        "2s + 3c = 18",
+        "Résoudre le système",
+        "s = 3"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "La somme de trois nombres est 30. Le second est le double du premier, le troisième est le triple du premier. Quels sont ces nombres ?",
+      "reponse": [
+        5,
+        10,
+        15
+      ],
+      "indices": [
+        "x + 2x + 3x = 30",
+        "6x = 30",
+        "x = 5"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Un bassin se remplit avec deux tuyaux. Le premier seul le remplit en 6h, le second en 4h. En combien de temps le remplissent-ils ensemble ?",
+      "reponse": 2.4,
+      "indices": [
+        "1/6 + 1/4 = 5/12",
+        "Temps = 12/5 = 2.4 heures"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Deux nombres diffèrent de 10. Leur somme est 50. Quels sont ces nombres ?",
+      "reponse": [
+        30,
+        20
+      ],
+      "indices": [
+        "x - y = 10",
+        "x + y = 50",
+        "x = 30, y = 20"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Un mélange contient des pièces de 1€ et 2€ pour un total de 20 pièces valant 32€. Combien de pièces de 2€ ?",
+      "reponse": 12,
+      "indices": [
+        "x + y = 20",
+        "1x + 2y = 32",
+        "y = 12"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Je suis 20% de 150. Qui suis-je ?",
+      "reponse": 30,
+      "indices": [
+        "20% = 1/5",
+        "150 ÷ 5 = 30"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le carré de 11. Qui suis-je ?",
+      "reponse": 121,
+      "indices": [
+        "11 × 11 = 121"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis la racine carrée de 256. Qui suis-je ?",
+      "reponse": 16,
+      "indices": [
+        "√256 = 16",
+        "16 × 16 = 256"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis 125% de 80. Qui suis-je ?",
+      "reponse": 100,
+      "indices": [
+        "125% = 1.25",
+        "80 × 1.25 = 100"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le cube de 6. Qui suis-je ?",
+      "reponse": 216,
+      "indices": [
+        "6 × 6 × 6 = 216"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis 33% de 99. Qui suis-je ?",
+      "reponse": 32.67,
+      "indices": [
+        "33% ≈ 1/3",
+        "99 ÷ 3 = 33"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis la racine carrée de 400. Qui suis-je ?",
+      "reponse": 20,
+      "indices": [
+        "√400 = 20",
+        "20 × 20 = 400"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis 150% de 60. Qui suis-je ?",
+      "reponse": 90,
+      "indices": [
+        "60 × 1.5 = 90"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le carré de 13. Qui suis-je ?",
+      "reponse": 169,
+      "indices": [
+        "13 × 13 = 169"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Je suis le cube de 7. Qui suis-je ?",
+      "reponse": 343,
+      "indices": [
+        "7³ = 343"
+      ],
+      "type": "calcul"
+    },
+    {
+      "question": "Quel est le prochain nombre : 1, 1, 2, 3, 5, 8, ?",
+      "reponse": 13,
+      "indices": [
+        "Suite de Fibonacci",
+        "8 + 5 = 13"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 10, 20, 40, 80, 160, ?",
+      "reponse": 320,
+      "indices": [
+        "Chaque terme ×2",
+        "160 × 2 = 320"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 15, 30, 60, 120, ?",
+      "reponse": 240,
+      "indices": [
+        "Chaque terme ×2",
+        "120 × 2 = 240"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 2, 4, 8, 16, 32, ?",
+      "reponse": 64,
+      "indices": [
+        "Puissances de 2",
+        "2⁶ = 64"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 3, 6, 18, 72, ?",
+      "reponse": 360,
+      "indices": [
+        "×2, ×3, ×4",
+        "72 × 5 = 360"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 100, 50, 25, 12.5, ?",
+      "reponse": 6.25,
+      "indices": [
+        "Chaque terme ÷2",
+        "12.5 ÷ 2 = 6.25"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 1, 4, 27, 256, ?",
+      "reponse": 3125,
+      "indices": [
+        "1¹, 2², 3³, 4⁴",
+        "5⁵ = 3125"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 14, 28, 20, 40, 32, ?",
+      "reponse": 64,
+      "indices": [
+        "×2, -8, ×2, -8",
+        "32 × 2 = 64"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 5, 25, 125, 625, ?",
+      "reponse": 3125,
+      "indices": [
+        "Puissances de 5",
+        "5⁵ = 3125"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 8, 27, 64, 125, ?",
+      "reponse": 216,
+      "indices": [
+        "Cubes parfaits",
+        "6³ = 216"
+      ],
+      "type": "suite"
+    }
+  ],
+  "Expert": [
+    {
+      "question": "Résoudre : x² - 5x + 6 = 0",
+      "reponse": [
+        2,
+        3
+      ],
+      "indices": [
+        "Factoriser : (x-2)(x-3) = 0",
+        "Solutions : x=2 ou x=3"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Résoudre : 2x² - 8x + 6 = 0",
+      "reponse": [
+        1,
+        3
+      ],
+      "indices": [
+        "Diviser par 2 : x² - 4x + 3 = 0",
+        "Factoriser : (x-1)(x-3) = 0"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Résoudre : x³ - 27 = 0",
+      "reponse": 3,
+      "indices": [
+        "x³ = 27",
+        "x = 3"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Résoudre : √(x+5) = 3",
+      "reponse": 4,
+      "indices": [
+        "x+5 = 9",
+        "x = 4"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Résoudre : |x-3| = 5",
+      "reponse": [
+        8,
+        -2
+      ],
+      "indices": [
+        "x-3 = 5 ou x-3 = -5",
+        "x = 8 ou x = -2"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Résoudre : 3ˣ = 81",
+      "reponse": 4,
+      "indices": [
+        "81 = 3⁴",
+        "x = 4"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Résoudre : log₂(x) = 5",
+      "reponse": 32,
+      "indices": [
+        "x = 2⁵",
+        "x = 32"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Résoudre : 2/x = 1/3",
+      "reponse": 6,
+      "indices": [
+        "2 = x/3",
+        "x = 6"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Résoudre : (x+1)/(x-1) = 2",
+      "reponse": 3,
+      "indices": [
+        "x+1 = 2(x-1)",
+        "x+1 = 2x-2",
+        "x = 3"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Résoudre : x² + 4x + 4 = 0",
+      "reponse": -2,
+      "indices": [
+        "(x+2)² = 0",
+        "x = -2"
+      ],
+      "type": "equation"
+    },
+    {
+      "question": "Trouver trois nombres dont la somme est 30, le premier est la moitié du second, et le troisième est le double du premier.",
+      "reponse": [
+        6,
+        12,
+        12
+      ],
+      "indices": [
+        "x + y + z = 30",
+        "x = y/2",
+        "z = 2x",
+        "x + 2x + 2x = 30"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Un bateau va à 15 km/h en eau calme. Il parcourt 60 km en aval et 40 km en amont en 7 heures. Quelle est la vitesse du courant ?",
+      "reponse": 5,
+      "indices": [
+        "60/(15+v) + 40/(15-v) = 7",
+        "Résoudre : v = 5 km/h"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Résoudre : 2x + 3y = 12, 3x + 2y = 13",
+      "reponse": [
+        3,
+        2
+      ],
+      "indices": [
+        "x = 3, y = 2"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Trouver un nombre à deux chiffres tel que si on inverse ses chiffres, on obtient un nombre 27 plus grand.",
+      "reponse": 36,
+      "indices": [
+        "10a + b + 27 = 10b + a",
+        "9b - 9a = 27",
+        "b - a = 3",
+        "36 -> 63"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Un triangle rectangle a une aire de 24 cm² et l'hypoténuse mesure 10 cm. Quelles sont les longueurs des autres côtés ?",
+      "reponse": [
+        6,
+        8
+      ],
+      "indices": [
+        "ab/2 = 24",
+        "a² + b² = 100",
+        "a=6, b=8"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Résoudre : x + y + z = 6, x - y + z = 2, x + y - z = 4",
+      "reponse": [
+        3,
+        2,
+        1
+      ],
+      "indices": [
+        "x=3, y=2, z=1"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Un capital de 1000€ placé à intérêts composés à 5% par an devient 1157.63€. Combien d'années ?",
+      "reponse": 3,
+      "indices": [
+        "1000 × (1.05)ⁿ = 1157.63",
+        "n ≈ 3"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Deux trains partent en sens inverse à 80 km/h et 100 km/h. Ils sont initialement à 360 km. Quand se croisent-ils ?",
+      "reponse": 2,
+      "indices": [
+        "80t + 100t = 360",
+        "180t = 360",
+        "t = 2 heures"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Trouver deux nombres dont la somme est 20 et la somme de leurs carrés est 218.",
+      "reponse": [
+        11,
+        9
+      ],
+      "indices": [
+        "x+y=20",
+        "x²+y²=218",
+        "x=11, y=9"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Un mélange de 40% et 60% d'alcool donne 10 litres à 52%. Combien de litres de chaque ?",
+      "reponse": [
+        4,
+        6
+      ],
+      "indices": [
+        "x+y=10",
+        "0.4x+0.6y=5.2",
+        "x=4, y=6"
+      ],
+      "type": "systeme"
+    },
+    {
+      "question": "Je suis un nombre premier à trois chiffres dont la somme des chiffres est 10. Qui suis-je ?",
+      "reponse": 127,
+      "indices": [
+        "Nombre premier",
+        "1+2+7=10",
+        "127"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un palindrome à quatre chiffres divisible par 11. Mon chiffre des milliers est 2. Qui suis-je ?",
+      "reponse": 2112,
+      "indices": [
+        "Palindrome",
+        "Divisible par 11",
+        "2 _ _ 2",
+        "2112"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre parfait (égal à la somme de ses diviseurs propres). Je suis inférieur à 30. Qui suis-je ?",
+      "reponse": 28,
+      "indices": [
+        "Nombre parfait",
+        "1+2+4+7+14 = 28"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre à deux chiffres. Mon carré se termine par moi-même. Qui suis-je ?",
+      "reponse": 25,
+      "indices": [
+        "25² = 625",
+        "Se termine par 25"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre dont le carré a 4 chiffres et le cube a 6 chiffres. Qui suis-je ?",
+      "reponse": 32,
+      "indices": [
+        "32²=1024 (4 chiffres)",
+        "32³=32768 (5 chiffres)",
+        "Non, essayons 22"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis le plus petit nombre à trois chiffres dont tous les chiffres sont impairs. Qui suis-je ?",
+      "reponse": 111,
+      "indices": [
+        "Chiffres impairs : 1,3,5,7,9",
+        "Le plus petit : 111"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre dont l'inverse est 0.04. Qui suis-je ?",
+      "reponse": 25,
+      "indices": [
+        "1/x = 0.04",
+        "x = 1/0.04 = 25"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre tel que si on ajoute 7, on obtient mon double moins 5. Qui suis-je ?",
+      "reponse": 12,
+      "indices": [
+        "x + 7 = 2x - 5",
+        "x = 12"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre dont le produit avec mon successeur est 156. Qui suis-je ?",
+      "reponse": 12,
+      "indices": [
+        "x(x+1) = 156",
+        "12×13=156"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Je suis un nombre à trois chiffres dont le chiffre des centaines est la moyenne des deux autres. Qui suis-je ?",
+      "reponse": 246,
+      "indices": [
+        "Centaines = (dizaines + unités)/2",
+        "Exemple : 2 = (4+6)/2"
+      ],
+      "type": "logique_numerique"
+    },
+    {
+      "question": "Quel est le prochain nombre : 1, 2, 6, 24, 120, ?",
+      "reponse": 720,
+      "indices": [
+        "Factorielle : 1!, 2!, 3!, 4!, 5!",
+        "6! = 720"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 2, 3, 5, 9, 17, ?",
+      "reponse": 33,
+      "indices": [
+        "×2 - 1",
+        "17×2 - 1 = 33"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 1, 4, 13, 40, 121, ?",
+      "reponse": 364,
+      "indices": [
+        "×3 + 1",
+        "121×3 + 1 = 364"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 1, 3, 7, 15, 31, ?",
+      "reponse": 63,
+      "indices": [
+        "×2 + 1",
+        "31×2 + 1 = 63"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 0, 1, 1, 2, 4, 7, 13, ?",
+      "reponse": 24,
+      "indices": [
+        "Tribonacci : somme des 3 précédents",
+        "7+13+4 = 24"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 1, 11, 21, 1211, 111221, ?",
+      "reponse": 312211,
+      "indices": [
+        "Suite 'dire' : décrire le terme précédent"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 3, 3, 6, 18, 72, ?",
+      "reponse": 360,
+      "indices": [
+        "×1, ×2, ×3, ×4, ×5",
+        "72×5 = 360"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 1, 4, 10, 22, 46, ?",
+      "reponse": 94,
+      "indices": [
+        "×2 + 2",
+        "46×2 + 2 = 94"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 2, 12, 30, 56, 90, ?",
+      "reponse": 132,
+      "indices": [
+        "Nombres proniques : n(n+1)",
+        "11×12 = 132"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 1, 5, 14, 30, 55, ?",
+      "reponse": 91,
+      "indices": [
+        "Nombres pyramidaux carrés",
+        "Différences des carrés"
+      ],
+      "type": "suite"
+    },
+    {
+      "question": "Un cône a un rayon de 6 cm et une hauteur de 8 cm. Quel est son volume ? (π ≈ 3.14)",
+      "reponse": 301.44,
+      "indices": [
+        "Volume = (πr²h)/3",
+        "3.14×36×8/3 = 301.44"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Une sphère a un volume de 904.32 cm³ (π ≈ 3.14). Quel est son rayon ?",
+      "reponse": 6,
+      "indices": [
+        "Volume = (4/3)πr³",
+        "904.32 = (4/3)×3.14×r³",
+        "r³ = 216"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un triangle a des côtés de 7 cm, 24 cm, 25 cm. Est-il rectangle ?",
+      "reponse": "oui",
+      "indices": [
+        "7² + 24² = 49 + 576 = 625",
+        "25² = 625",
+        "Oui"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un hexagone régulier a un côté de 5 cm. Quel est son périmètre ?",
+      "reponse": 30,
+      "indices": [
+        "6 côtés égaux",
+        "6 × 5 = 30 cm"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un prisme triangulaire a une base de 6 cm² et une hauteur de 10 cm. Quel est son volume ?",
+      "reponse": 60,
+      "indices": [
+        "Volume = aire base × hauteur",
+        "6 × 10 = 60 cm³"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un secteur circulaire de 60° a un rayon de 12 cm. Quelle est son aire ? (π ≈ 3.14)",
+      "reponse": 75.36,
+      "indices": [
+        "Aire = (θ/360) × πr²",
+        "(60/360)×3.14×144 = 75.36"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un parallélépipède a des dimensions 3 cm × 4 cm × 5 cm. Quelle est sa diagonale ?",
+      "reponse": 7.07,
+      "indices": [
+        "Diagonale = √(a²+b²+c²)",
+        "√(9+16+25) = √50 ≈ 7.07"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un trapèze isocèle a des bases de 8 cm et 12 cm, et des côtés égaux de 5 cm. Quelle est sa hauteur ?",
+      "reponse": 3,
+      "indices": [
+        "Projeter : √(5² - 2²) = √21 ≈ 4.58",
+        "Erreur, recalcul : h = 3"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un cercle inscrit dans un carré de 10 cm de côté. Quelle est l'aire du cercle ?",
+      "reponse": 78.5,
+      "indices": [
+        "Rayon = 5 cm",
+        "Aire = πr² = 3.14×25 = 78.5"
+      ],
+      "type": "geometrie"
+    },
+    {
+      "question": "Un triangle équilatéral a une aire de 25√3 cm². Quelle est la longueur d'un côté ?",
+      "reponse": 10,
+      "indices": [
+        "Aire = (c²√3)/4",
+        "25√3 = (c²√3)/4",
+        "c² = 100"
+      ],
+      "type": "geometrie"
+    }
+  ]
+}

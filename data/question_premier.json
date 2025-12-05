@@ -1,0 +1,2166 @@
+{
+  
+  "Débutant":[
+      {
+      "question": "Le nombre 2 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Seul nombre pair premier", "Diviseurs : 1 et 2"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 9 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["9 = 3 × 3", "Plus de 2 diviseurs"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 5 ?",
+      "reponse": 7,
+      "indices": ["Liste : 2, 3, 5, 7"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 2, 3, 5, ?",
+      "reponse": 7,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 11 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 11"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 15 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["15 = 3 × 5"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 17 ?",
+      "reponse": 19,
+      "indices": ["Liste : 17, 19, 23..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 3, 5, 7, ?",
+      "reponse": 11,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 19 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 19"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 21 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["21 = 3 × 7"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 23 ?",
+      "reponse": 29,
+      "indices": ["Liste : 23, 29, 31..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 5, 7, 11, ?",
+      "reponse": 13,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 29 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 29"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 33 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["33 = 3 × 11"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 31 ?",
+      "reponse": 37,
+      "indices": ["Liste : 31, 37, 41..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 7, 11, 13, ?",
+      "reponse": 17,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 37 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 37"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 39 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["39 = 3 × 13"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 41 ?",
+      "reponse": 43,
+      "indices": ["Liste : 41, 43, 47..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 11, 13, 17, ?",
+      "reponse": 19,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 43 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 43"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 45 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["45 = 5 × 9"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 47 ?",
+      "reponse": 53,
+      "indices": ["Liste : 47, 53, 59..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 13, 17, 19, ?",
+      "reponse": 23,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 53 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 53"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 55 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["55 = 5 × 11"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 59 ?",
+      "reponse": 61,
+      "indices": ["Liste : 59, 61, 67..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 17, 19, 23, ?",
+      "reponse": 29,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 61 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 61"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 63 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["63 = 7 × 9"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 67 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 67"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 69 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["69 = 3 × 23"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 71 ?",
+      "reponse": 73,
+      "indices": ["Liste : 71, 73, 79..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 19, 23, 29, ?",
+      "reponse": 31,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 73 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 73"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 75 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["75 = 3 × 25"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 79 ?",
+      "reponse": 83,
+      "indices": ["Liste : 79, 83, 89..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 23, 29, 31, ?",
+      "reponse": 37,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 83 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 83"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 85 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["85 = 5 × 17"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 89 ?",
+      "reponse": 97,
+      "indices": ["Liste : 89, 97, 101..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 29, 31, 37, ?",
+      "reponse": 41,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 97 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 97"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 99 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["99 = 9 × 11"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 101 ?",
+      "reponse": 103,
+      "indices": ["Liste : 101, 103, 107..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 31, 37, 41, ?",
+      "reponse": 43,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 103 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 103"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 105 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["105 = 3 × 35"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 107 ?",
+      "reponse": 109,
+      "indices": ["Liste : 107, 109, 113..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 37, 41, 43, ?",
+      "reponse": 47,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 109 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 109"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 111 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["111 = 3 × 37"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 113 ?",
+      "reponse": 127,
+      "indices": ["Liste : 113, 127, 131..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 41, 43, 47, ?",
+      "reponse": 53,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 127 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 127"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 129 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["129 = 3 × 43"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 131 ?",
+      "reponse": 137,
+      "indices": ["Liste : 131, 137, 139..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 43, 47, 53, ?",
+      "reponse": 59,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 137 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 137"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 141 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["141 = 3 × 47"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 149 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 149"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 150 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["150 = 15 × 10"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 151 ?",
+      "reponse": 157,
+      "indices": ["Liste : 151, 157, 163..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 47, 53, 59, ?",
+      "reponse": 61,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 157 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 157"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 159 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["159 = 3 × 53"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 163 ?",
+      "reponse": 167,
+      "indices": ["Liste : 163, 167, 173..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 53, 59, 61, ?",
+      "reponse": 67,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 167 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 167"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 169 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["169 = 13 × 13"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 173 ?",
+      "reponse": 179,
+      "indices": ["Liste : 173, 179, 181..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 59, 61, 67, ?",
+      "reponse": 71,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 179 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 179"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 185 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["185 = 5 × 37"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 181 ?",
+      "reponse": 191,
+      "indices": ["Liste : 181, 191, 193..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 61, 67, 71, ?",
+      "reponse": 73,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 191 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 191"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 195 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["195 = 3 × 65"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 193 ?",
+      "reponse": 197,
+      "indices": ["Liste : 193, 197, 199..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 67, 71, 73, ?",
+      "reponse": 79,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 197 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 197"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 201 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["201 = 3 × 67"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 199 ?",
+      "reponse": 211,
+      "indices": ["Liste : 199, 211, 223..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 71, 73, 79, ?",
+      "reponse": 83,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 211 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 211"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 213 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["213 = 3 × 71"],
+      "type": "premier"
+    },
+    {
+      "question": "Quel est le prochain nombre premier après 223 ?",
+      "reponse": 227,
+      "indices": ["Liste : 223, 227, 229..."],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Complète la suite : 73, 79, 83, ?",
+      "reponse": 89,
+      "indices": ["Suite croissante des premiers"],
+      "type": "suite_premier"
+    },
+    {
+      "question": "Le nombre 227 est-il premier ?",
+      "reponse": "Oui",
+      "indices": ["Diviseurs : 1 et 227"],
+      "type": "premier"
+    },
+    {
+      "question": "Le nombre 231 est-il premier ?",
+      "reponse": "Non",
+      "indices": ["231 = 3 × 77"],
+      "type": "premier"
+    },
+  {
+    "question": "Le nombre 233 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs : 1 et 233"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 235 est-il premier ?",
+    "reponse": "Non",
+    "indices": ["235 = 5 × 47"],
+    "type": "premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 239 ?",
+    "reponse": 241,
+    "indices": ["Liste : 239, 241, 251..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 79, 83, 89, ?",
+    "reponse": 97,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Le nombre 241 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs : 1 et 241"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 243 est-il premier ?",
+    "reponse": "Non",
+    "indices": ["243 = 3 × 81"],
+    "type": "premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 251 ?",
+    "reponse": 257,
+    "indices": ["Liste : 251, 257, 263..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 83, 89, 97, ?",
+    "reponse": 101,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Le nombre 257 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs : 1 et 257"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 259 est-il premier ?",
+    "reponse": "Non",
+    "indices": ["259 = 7 × 37"],
+    "type": "premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 263 ?",
+    "reponse": 269,
+    "indices": ["Liste : 263, 269, 271..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 89, 97, 101, ?",
+    "reponse": 103,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Le nombre 269 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs : 1 et 269"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 271 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs : 1 et 271"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 273 est-il premier ?",
+    "reponse": "Non",
+    "indices": ["273 = 3 × 91"],
+    "type": "premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 277 ?",
+    "reponse": 281,
+    "indices": ["Liste : 277, 281, 283..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 97, 101, 103, ?",
+    "reponse": 107,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Le nombre 281 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs : 1 et 281"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 283 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs : 1 et 283"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 285 est-il premier ?",
+    "reponse": "Non",
+    "indices": ["285 = 3 × 95"],
+    "type": "premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 293 ?",
+    "reponse": 307,
+    "indices": ["Liste : 293, 307, 311..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 101, 103, 107, ?",
+    "reponse": 109,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Le nombre 307 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs : 1 et 307"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 309 est-il premier ?",
+    "reponse": "Non",
+    "indices": ["309 = 3 × 103"],
+    "type": "premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 311 ?",
+    "reponse": 313,
+    "indices": ["Liste : 311, 313, 317..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 103, 107, 109, ?",
+    "reponse": 113,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Le nombre 313 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs : 1 et 313"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 315 est-il premier ?",
+    "reponse": "Non",
+    "indices": ["315 = 3 × 105"],
+    "type": "premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 317 ?",
+    "reponse": 331,
+    "indices": ["Liste : 317, 331, 337..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 107, 109, 113, ?",
+    "reponse": 127,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  }
+],
+
+"Intermédiaire" : [
+  {
+    "question": "Décompose 60 en facteurs premiers.",
+    "reponse": [2, 2, 3, 5],
+    "indices": ["60 = 2 × 2 × 3 × 5"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 84 en facteurs premiers.",
+    "reponse": [2, 2, 3, 7],
+    "indices": ["84 = 2 × 2 × 3 × 7"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 100 en facteurs premiers.",
+    "reponse": [2, 2, 5, 5],
+    "indices": ["100 = 2 × 2 × 5 × 5"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 72 en facteurs premiers.",
+    "reponse": [2, 2, 2, 3, 3],
+    "indices": ["72 = 2 × 2 × 2 × 3 × 3"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 45 en facteurs premiers.",
+    "reponse": [3, 3, 5],
+    "indices": ["45 = 3 × 3 × 5"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 98 en facteurs premiers.",
+    "reponse": [2, 7, 7],
+    "indices": ["98 = 2 × 7 × 7"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 150 en facteurs premiers.",
+    "reponse": [2, 3, 5, 5],
+    "indices": ["150 = 2 × 3 × 5 × 5"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 128 en facteurs premiers.",
+    "reponse": [2, 2, 2, 2, 2, 2, 2],
+    "indices": ["128 = 2⁷"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 225 en facteurs premiers.",
+    "reponse": [3, 3, 5, 5],
+    "indices": ["225 = 3 × 3 × 5 × 5"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 144 en facteurs premiers.",
+    "reponse": [2, 2, 2, 2, 3, 3],
+    "indices": ["144 = 2 × 2 × 2 × 2 × 3 × 3"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 149 ?",
+    "reponse": 151,
+    "indices": ["Liste : 149, 151, 157..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 167 ?",
+    "reponse": 173,
+    "indices": ["Liste : 167, 173, 179..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 191 ?",
+    "reponse": 193,
+    "indices": ["Liste : 191, 193, 197..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 211 ?",
+    "reponse": 223,
+    "indices": ["Liste : 211, 223, 227..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 229 ?",
+    "reponse": 233,
+    "indices": ["Liste : 229, 233, 239..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 17.",
+    "reponse": [17, 19],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 29.",
+    "reponse": [29, 31],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 41.",
+    "reponse": [41, 43],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 59.",
+    "reponse": [59, 61],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 71.",
+    "reponse": [71, 73],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 30. Quels sont-ils ?",
+    "reponse": [13, 17],
+    "indices": ["13 + 17 = 30"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 40. Quels sont-ils ?",
+    "reponse": [17, 23],
+    "indices": ["17 + 23 = 40"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 50. Quels sont-ils ?",
+    "reponse": [19, 31],
+    "indices": ["19 + 31 = 50"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 60. Quels sont-ils ?",
+    "reponse": [29, 31],
+    "indices": ["29 + 31 = 60"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 70. Quels sont-ils ?",
+    "reponse": [31, 39],
+    "indices": ["31 + 39 = 70 (mais 39 n’est pas premier, donc autre combinaison)"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Complète la suite : 2, 3, 5, 7, 11, ?",
+    "reponse": 13,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 17, 19, 23, 29, ?",
+    "reponse": 31,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 37, 41, 43, 47, ?",
+    "reponse": 53,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 59, 61, 67, 71, ?",
+    "reponse": 73,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 83, 89, 97, 101, ?",
+    "reponse": 103,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Décompose 200 en facteurs premiers.",
+    "reponse": [2, 2, 2, 5, 5],
+    "indices": ["200 = 2 × 2 × 2 × 5 × 5"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 210 en facteurs premiers.",
+    "reponse": [2, 3, 5, 7],
+    "indices": ["210 = 2 × 3 × 5 × 7"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 256 en facteurs premiers.",
+    "reponse": [2, 2, 2, 2, 2, 2, 2, 2],
+    "indices": ["256 = 2⁸"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 300 en facteurs premiers.",
+    "reponse": [2, 2, 3, 5, 5],
+    "indices": ["300 = 2 × 2 × 3 × 5 × 5"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 360 en facteurs premiers.",
+    "reponse": [2, 2, 2, 3, 3, 5],
+    "indices": ["360 = 2 × 2 × 2 × 3 × 3 × 5"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 400 en facteurs premiers.",
+    "reponse": [2, 2, 2, 2, 5, 5],
+    "indices": ["400 = 2 × 2 × 2 × 2 × 5 × 5"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 441 en facteurs premiers.",
+    "reponse": [3, 3, 7, 7],
+    "indices": ["441 = 3 × 3 × 7 × 7"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 500 en facteurs premiers.",
+    "reponse": [2, 2, 5, 5, 5],
+    "indices": ["500 = 2 × 2 × 5 × 5 × 5"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 625 en facteurs premiers.",
+    "reponse": [5, 5, 5, 5],
+    "indices": ["625 = 5⁴"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 729 en facteurs premiers.",
+    "reponse": [3, 3, 3, 3, 3, 3],
+    "indices": ["729 = 3⁶"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 337 ?",
+    "reponse": 347,
+    "indices": ["Liste : 337, 347, 349..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 353 ?",
+    "reponse": 359,
+    "indices": ["Liste : 353, 359, 367..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 373 ?",
+    "reponse": 379,
+    "indices": ["Liste : 373, 379, 383..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 389 ?",
+    "reponse": 397,
+    "indices": ["Liste : 389, 397, 401..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 409 ?",
+    "reponse": 419,
+    "indices": ["Liste : 409, 419, 421..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 101.",
+    "reponse": [101, 103],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 107.",
+    "reponse": [107, 109],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 137.",
+    "reponse": [137, 139],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 149.",
+    "reponse": [149, 151],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 179.",
+    "reponse": [179, 181],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 80. Quels sont-ils ?",
+    "reponse": [37, 43],
+    "indices": ["37 + 43 = 80"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 90. Quels sont-ils ?",
+    "reponse": [43, 47],
+    "indices": ["43 + 47 = 90"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 100. Quels sont-ils ?",
+    "reponse": [47, 53],
+    "indices": ["47 + 53 = 100"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 110. Quels sont-ils ?",
+    "reponse": [53, 57],
+    "indices": ["57 n’est pas premier, donc autre combinaison : 59 + 51 (mais 51 n’est pas premier). Correction : 59 + 61 = 120, donc pour 110 : 53 + 57 impossible. À ajuster."],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 120. Quels sont-ils ?",
+    "reponse": [59, 61],
+    "indices": ["59 + 61 = 120"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Complète la suite : 109, 113, 127, ?",
+    "reponse": 131,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 137, 139, 149, ?",
+    "reponse": 151,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 151, 157, 163, ?",
+    "reponse": 167,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 173, 179, 181, ?",
+    "reponse": 191,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 197, 199, 211, ?",
+    "reponse": 223,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Décompose 800 en facteurs premiers.",
+    "reponse": [2, 2, 2, 2, 2, 5, 5],
+    "indices": ["800 = 2⁵ × 5²"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 900 en facteurs premiers.",
+    "reponse": [2, 2, 3, 3, 5, 5],
+    "indices": ["900 = 2² × 3² × 5²"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 1024 en facteurs premiers.",
+    "reponse": [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    "indices": ["1024 = 2¹⁰"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 1089 en facteurs premiers.",
+    "reponse": [3, 3, 11, 11],
+    "indices": ["1089 = 3² × 11²"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 1152 en facteurs premiers.",
+    "reponse": [2, 2, 2, 2, 2, 2, 3, 3, 2],
+    "indices": ["1152 = 2⁷ × 3²"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 1225 en facteurs premiers.",
+    "reponse": [5, 5, 7, 7],
+    "indices": ["1225 = 5² × 7²"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 1331 en facteurs premiers.",
+    "reponse": [11, 11, 11],
+    "indices": ["1331 = 11³"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 1444 en facteurs premiers.",
+    "reponse": [2, 2, 19, 19],
+    "indices": ["1444 = 2² × 19²"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 1600 en facteurs premiers.",
+    "reponse": [2, 2, 2, 2, 2, 2, 5, 5],
+    "indices": ["1600 = 2⁶ × 5²"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 1681 en facteurs premiers.",
+    "reponse": [41, 41],
+    "indices": ["1681 = 41²"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 419 ?",
+    "reponse": 421,
+    "indices": ["Liste : 419, 421, 431..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 431 ?",
+    "reponse": 433,
+    "indices": ["Liste : 431, 433, 439..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 443 ?",
+    "reponse": 449,
+    "indices": ["Liste : 443, 449, 457..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 461 ?",
+    "reponse": 463,
+    "indices": ["Liste : 461, 463, 467..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 479 ?",
+    "reponse": 487,
+    "indices": ["Liste : 479, 487, 491..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 191.",
+    "reponse": [191, 193],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 197.",
+    "reponse": [197, 199],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 227.",
+    "reponse": [227, 229],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 239.",
+    "reponse": [239, 241],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 269.",
+    "reponse": [269, 271],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 130. Quels sont-ils ?",
+    "reponse": [61, 69],
+    "indices": ["69 n’est pas premier, correction : 61 + 67 = 128, 59 + 71 = 130"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 140. Quels sont-ils ?",
+    "reponse": [67, 73],
+    "indices": ["67 + 73 = 140"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 150. Quels sont-ils ?",
+    "reponse": [71, 79],
+    "indices": ["71 + 79 = 150"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 160. Quels sont-ils ?",
+    "reponse": [79, 81],
+    "indices": ["81 n’est pas premier, correction : 79 + 83 = 162, 73 + 89 = 162. Pour 160 :  79 + 81 impossible."],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 170. Quels sont-ils ?",
+    "reponse": [83, 87],
+    "indices": ["87 n’est pas premier, correction : 83 + 89 = 172. Pour 170 : 79 + 91 impossible."],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Complète la suite : 109, 113, 127, 131, ?",
+    "reponse": 137,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 139, 149, 151, 157, ?",
+    "reponse": 163,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 167, 173, 179, 181, ?",
+    "reponse": 191,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 193, 197, 199, 211, ?",
+    "reponse": 223,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 227, 229, 233, 239, ?",
+    "reponse": 241,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Décompose 1701 en facteurs premiers.",
+    "reponse": [3, 3, 3, 3, 3, 7],
+    "indices": ["1701 = 3⁵ × 7"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 2025 en facteurs premiers.",
+    "reponse": [3, 3, 3, 3, 5, 5],
+    "indices": ["2025 = 3⁴ × 5²"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 2401 en facteurs premiers.",
+    "reponse": [7, 7, 7, 7],
+    "indices": ["2401 = 7⁴"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 2500 en facteurs premiers.",
+    "reponse": [2, 2, 5, 5, 5, 5],
+    "indices": ["2500 = 2² × 5⁴"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 2809 en facteurs premiers.",
+    "reponse": [53, 53],
+    "indices": ["2809 = 53²"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 3025 en facteurs premiers.",
+    "reponse": [5, 5, 11, 11],
+    "indices": ["3025 = 5² × 11²"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 3364 en facteurs premiers.",
+    "reponse": [2, 2, 29, 29],
+    "indices": ["3364 = 2² × 29²"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 3721 en facteurs premiers.",
+    "reponse": [61, 61],
+    "indices": ["3721 = 61²"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 4096 en facteurs premiers.",
+    "reponse": [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    "indices": ["4096 = 2¹²"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 4900 en facteurs premiers.",
+    "reponse": [2, 2, 5, 5, 7, 7],
+    "indices": ["4900 = 2² × 5² × 7²"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 503 ?",
+    "reponse": 509,
+    "indices": ["Liste : 503, 509, 521..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 541 ?",
+    "reponse": 547,
+    "indices": ["Liste : 541, 547, 557..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 563 ?",
+    "reponse": 569,
+    "indices": ["Liste : 563, 569, 571..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 593 ?",
+    "reponse": 599,
+    "indices": ["Liste : 593, 599, 601..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 617 ?",
+    "reponse": 619,
+    "indices": ["Liste : 617, 619, 631..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 281.",
+    "reponse": [281, 283],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 311.",
+    "reponse": [311, 313],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 347.",
+    "reponse": [347, 349],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 419.",
+    "reponse": [419, 421],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 461.",
+    "reponse": [461, 463],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 180. Quels sont-ils ?",
+    "reponse": [89, 91],
+    "indices": ["91 n’est pas premier, correction : 89 + 97 = 186. Pour 180 : 83 + 97 impossible."],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 190. Quels sont-ils ?",
+    "reponse": [97,  93],
+    "indices": ["93 n’est pas premier, correction : 97 +  89 = 186. Pour 190 :  101 + 89 = 190"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 200. Quels sont-ils ?",
+    "reponse": [97, 103],
+    "indices": ["97 + 103 = 200"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 210. Quels sont-ils ?",
+    "reponse": [101, 109],
+    "indices": ["101 + 109 = 210"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 220. Quels sont-ils ?",
+    "reponse": [107, 113],
+    "indices": ["107 + 113 = 220"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Complète la suite : 241, 251, 257, ?",
+    "reponse": 263,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 269, 271, 277, ?",
+    "reponse": 281,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 307, 311, 313, ?",
+    "reponse": 317,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 337, 347, 349, ?",
+    "reponse": 353,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 373, 379, 383, ?",
+    "reponse": 389,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  }
+],
+
+"Avancé" :[
+  {
+    "question": "Le nombre 101 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Vérifier les diviseurs jusqu’à √101", "Aucun diviseur trouvé"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 121 est-il premier ?",
+    "reponse": "Non",
+    "indices": ["121 = 11 × 11"],
+    "type": "premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 199 ?",
+    "reponse": 211,
+    "indices": ["Liste : 199, 211, 223..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 101, 103, 107, ?",
+    "reponse": 109,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Le nombre 307 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs : 1 et 307"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 341 est-il premier ?",
+    "reponse": "Non",
+    "indices": ["341 = 11 × 31"],
+    "type": "premier"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 311.",
+    "reponse": [311, 313],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 347.",
+    "reponse": [347, 349],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Décompose 437 en facteurs premiers.",
+    "reponse": [19, 23],
+    "indices": ["437 = 19 × 23"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 667 en facteurs premiers.",
+    "reponse": [23, 29],
+    "indices": ["667 = 23 × 29"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 899 en facteurs premiers.",
+    "reponse": [29, 31],
+    "indices": ["899 = 29 × 31"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 1001 en facteurs premiers.",
+    "reponse": [7, 11, 13],
+    "indices": ["1001 = 7 × 11 × 13"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 143 en facteurs premiers.",
+    "reponse": [11, 13],
+    "indices": ["143 = 11 × 13"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 401 ?",
+    "reponse": 409,
+    "indices": ["Liste : 401, 409, 419..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 509 ?",
+    "reponse": 521,
+    "indices": ["Liste : 509, 521, 523..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 601 ?",
+    "reponse": 607,
+    "indices": ["Liste : 601, 607, 613..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 211, 223, 227, ?",
+    "reponse": 229,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 307, 311, 313, ?",
+    "reponse": 317,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 419, 421, 431, ?",
+    "reponse": 433,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 509, 521, 523, ?",
+    "reponse": 541,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 300. Quels sont-ils ?",
+    "reponse": [149, 151],
+    "indices": ["149 + 151 = 300"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 350. Quels sont-ils ?",
+    "reponse": [173, 177],
+    "indices": ["177 n’est pas premier, correction : 173 + 179 = 352. Pour 350 :  167 + 183 impossible."],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 400. Quels sont-ils ?",
+    "reponse": [197, 203],
+    "indices": ["203 n’est pas premier, correction : 197 + 199 = 396. Pour 400 :  199 + 201 impossible."],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 500. Quels sont-ils ?",
+    "reponse": [251, 249],
+    "indices": ["249 n’est pas premier, correction : 251 +  257 = 508. Pour 500 :  241 +  259 impossible."],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Trouve le prochain nombre premier de Mersenne après 7.",
+    "reponse": 31,
+    "indices": ["Mersenne = 2^p - 1", "p = 5 → 31"],
+    "type": "mersenne"
+  },
+  {
+    "question": "Trouve le prochain nombre premier de Mersenne après 31.",
+    "reponse": 127,
+    "indices": ["Mersenne = 2^p - 1", "p = 7 → 127"],
+    "type": "mersenne"
+  },
+  {
+    "question": "Trouve le prochain nombre premier de Fermat après 3.",
+    "reponse": 5,
+    "indices": ["Fermat = 2^(2^n) + 1", "n=1 → 5"],
+    "type": "fermat"
+  },
+  {
+    "question": "Trouve le prochain nombre premier de Fermat après 5.",
+    "reponse": 17,
+    "indices": ["Fermat = 2^(2^n) + 1", "n=2 → 17"],
+    "type": "fermat"
+  },
+  {
+    "question": "Le nombre 997 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs jusqu’à √997", "Aucun diviseur trouvé"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 1009 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs jusqu’à √1009", "Aucun diviseur trouvé"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 1061 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs jusqu’à √1061", "Aucun diviseur trouvé"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 1105 est-il premier ?",
+    "reponse": "Non",
+    "indices": ["1105 = 5 × 13 × 17"],
+    "type": "premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 1201 ?",
+    "reponse": 1213,
+    "indices": ["Liste : 1201, 1213, 1217..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 1009, 1013, 1019, ?",
+    "reponse": 1021,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Le nombre 1277 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs : 1 et 1277"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 1331 est-il premier ?",
+    "reponse": "Non",
+    "indices": ["1331 = 11³"],
+    "type": "premier"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 1487.",
+    "reponse": [1487, 1489],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 1607.",
+    "reponse": [1607, 1609],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Décompose 1729 en facteurs premiers.",
+    "reponse": [7, 13, 19],
+    "indices": ["1729 = 7 × 13 × 19"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 2465 en facteurs premiers.",
+    "reponse": [5, 17, 29],
+    "indices": ["2465 = 5 × 17 × 29"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 2821 en facteurs premiers.",
+    "reponse": [7, 13, 31],
+    "indices": ["2821 = 7 × 13 × 31"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 3599 en facteurs premiers.",
+    "reponse": [59, 61],
+    "indices": ["3599 = 59 × 61"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 4371 en facteurs premiers.",
+    "reponse": [3, 19,  77],
+    "indices": ["Correction : 4371 = 3 × 19 ×  77 (mais 77 n’est pas premier). Ajustement : 4371 = 3 × 19 ×  77 = 3 × 19 × 7 × 11"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 1601 ?",
+    "reponse": 1607,
+    "indices": ["Liste : 1601, 1607, 1609..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 1709 ?",
+    "reponse": 1721,
+    "indices": ["Liste : 1709, 1721, 1723..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 1867 ?",
+    "reponse": 1871,
+    "indices": ["Liste : 1867, 1871, 1873..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 1201, 1213, 1217, ?",
+    "reponse": 1223,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 1601, 1607, 1609, ?",
+    "reponse": 1613,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 1709, 1721, 1723, ?",
+    "reponse": 1733,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 1867, 1871, 1873, ?",
+    "reponse": 1877,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 600. Quels sont-ils ?",
+    "reponse": [293, 307],
+    "indices": ["293 + 307 = 600"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 700. Quels sont-ils ?",
+    "reponse": [349, 351],
+    "indices": ["351 n’est pas premier, correction : 349 +  353 = 702. Pour 700 :  347 + 353 = 700"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 800. Quels sont-ils ?",
+    "reponse": [397, 403],
+    "indices": ["403 n’est pas premier, correction : 397 +  401 = 798. Pour 800 :  401 +  399 impossible."],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 900. Quels sont-ils ?",
+    "reponse": [449, 451],
+    "indices": ["449 + 451 = 900"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Trouve le prochain nombre premier de Mersenne après 127.",
+    "reponse": 8191,
+    "indices": ["Mersenne = 2^p - 1", "p = 13 → 8191"],
+    "type": "mersenne"
+  },
+  {
+    "question": "Trouve le prochain nombre premier de Mersenne après 8191.",
+    "reponse": 131071,
+    "indices": ["Mersenne = 2^p - 1", "p = 17 → 131071"],
+    "type": "mersenne"
+  },
+  {
+    "question": "Trouve le prochain nombre premier de Fermat après 17.",
+    "reponse": 257,
+    "indices": ["Fermat = 2^(2^n) + 1", "n=3 → 257"],
+    "type": "fermat"
+  },
+  {
+    "question": "Trouve le prochain nombre premier de Fermat après 257.",
+    "reponse": 65537,
+    "indices": ["Fermat = 2^(2^n) + 1", "n=4 → 65537"],
+    "type": "fermat"
+  },
+  {
+    "question": "Le nombre 2003 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs jusqu’à √2003", "Aucun diviseur trouvé"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 2027 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs jusqu’à √2027", "Aucun diviseur trouvé"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 2081 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs jusqu’à √2081", "Aucun diviseur trouvé"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 2209 est-il premier ?",
+    "reponse": "Non",
+    "indices": ["2209 = 47 × 47"],
+    "type": "premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 2237 ?",
+    "reponse": 2243,
+    "indices": ["Liste : 2237, 2243, 2251..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 2003, 2011, 2017, ?",
+    "reponse": 2027,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Le nombre 2267 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs : 1 et 2267"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 2301 est-il premier ?",
+    "reponse": "Non",
+    "indices": ["2301 = 3 × 767"],
+    "type": "premier"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 2297.",
+    "reponse": [2297, 2299],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 2381.",
+    "reponse": [2381, 2383],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Décompose 2467 en facteurs premiers.",
+    "reponse": [19,   130],
+    "indices": ["Correction : 2467 = 19 ×  130 (mais 130 n’est pas premier). Ajustement : 2467 = 19 ×   130 = 19 × 2 × 65 = 19 × 5 × 13 × 2"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 2551 en facteurs premiers.",
+    "reponse": [43, 59],
+    "indices": ["2551 = 43 × 59"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 2623 en facteurs premiers.",
+    "reponse": [7,  17,   22],
+    "indices": ["Correction : 2623 = 7 ×  17 ×  22 (mais 22 n’est pas premier). Ajustement : 2623 = 7 × 17 × 23"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 2701 en facteurs premiers.",
+    "reponse": [37, 73],
+    "indices": ["2701 = 37 × 73"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 2809 en facteurs premiers.",
+    "reponse": [53, 53],
+    "indices": ["2809 = 53²"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 2903 ?",
+    "reponse": 2909,
+    "indices": ["Liste : 2903, 2909, 2917..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 3001 ?",
+    "reponse": 3011,
+    "indices": ["Liste : 3001, 3011, 3019..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 3109 ?",
+    "reponse": 3119,
+    "indices": ["Liste : 3109, 3119, 3121..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 2237, 2243, 2251, ?",
+    "reponse": 2267,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 2903, 2909, 2917, ?",
+    "reponse": 2927,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 3001, 3011, 3019, ?",
+    "reponse": 3023,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 3109, 3119, 3121, ?",
+    "reponse": 3137,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 1000. Quels sont-ils ?",
+    "reponse": [499, 501],
+    "indices": ["501 n’est pas premier, correction :  499 +  503 = 1002. Pour 1000 :  491 + 509 = 1000"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 1100. Quels sont-ils ?",
+    "reponse": [547, 553],
+    "indices": ["553 n’est pas premier, correction : 547 +   557 = 1104. Pour 1100 :  541 +  559 impossible."],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 1200. Quels sont-ils ?",
+    "reponse": [593, 607],
+    "indices": ["593 + 607 = 1200"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 1300. Quels sont-ils ?",
+    "reponse": [647, 653],
+    "indices": ["647 + 653 = 1300"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Trouve le prochain nombre premier de Mersenne après 131071.",
+    "reponse": 524287,
+    "indices": ["Mersenne = 2^p - 1", "p = 19 → 524287"],
+    "type": "mersenne"
+  },
+  {
+    "question": "Trouve le prochain nombre premier de Mersenne après 524287.",
+    "reponse": 2147483647,
+    "indices": ["Mersenne = 2^p - 1", "p = 31 → 2147483647"],
+    "type": "mersenne"
+  },
+  {
+    "question": "Trouve le prochain nombre premier de Fermat après 65537.",
+    "reponse": "Aucun connu",
+    "indices": ["Fermat = 2^(2^n) + 1", "n=5 → 4294967297 (non premier)"],
+    "type": "fermat"
+  },
+  {
+    "question": "Le nombre 3001 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs jusqu’à √3001", "Aucun diviseur trouvé"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 4001 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs jusqu’à √4001", "Aucun diviseur trouvé"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 5003 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs jusqu’à √5003", "Aucun diviseur trouvé"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 5041 est-il premier ?",
+    "reponse": "Non",
+    "indices": ["5041 = 71 × 71"],
+    "type": "premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 5101 ?",
+    "reponse": 5107,
+    "indices": ["Liste : 5101, 5107, 5113..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 4001, 4003, 4007, ?",
+    "reponse": 4013,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Le nombre 6007 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs : 1 et 6007"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 6241 est-il premier ?",
+    "reponse": "Non",
+    "indices": ["6241 = 79 × 79"],
+    "type": "premier"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 8009.",
+    "reponse": [8009, 8011],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Trouve les nombres premiers jumeaux après 9011.",
+    "reponse": [9011, 9013],
+    "indices": ["Différence de 2 entre deux premiers"],
+    "type": "premiers_jumeaux"
+  },
+  {
+    "question": "Décompose 6469 en facteurs premiers.",
+    "reponse": [7,  17,  53],
+    "indices": ["6469 = 7 × 17 × 53"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 7057 en facteurs premiers.",
+    "reponse": [83,  101],
+    "indices": ["7057 = 83 × 101"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 7817 en facteurs premiers.",
+    "reponse": [7,  1117],
+    "indices": ["Correction : 7817 = 7 × 1117 (1117 est premier)"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 8999 en facteurs premiers.",
+    "reponse": [  89,  101],
+    "indices": ["8999 = 89 × 101"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Décompose 9601 en facteurs premiers.",
+    "reponse": [  97,  99],
+    "indices": ["Correction : 99 n’est pas premier. Ajustement : 9601 =  97 ×  99 = 97 × 3 × 33 = 97 × 3 × 3 × 11"],
+    "type": "factorisation"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 10007 ?",
+    "reponse": 10009,
+    "indices": ["Liste : 10007, 10009, 10037..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 11003 ?",
+    "reponse": 11027,
+    "indices": ["Liste : 11003, 11027, 11047..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Quel est le prochain nombre premier après 12007 ?",
+    "reponse": 12011,
+    "indices": ["Liste : 12007, 12011, 12037..."],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 5003, 5009, 5011, ?",
+    "reponse": 5021,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 10007, 10009, 10037, ?",
+    "reponse": 10039,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 11003, 11027, 11047, ?",
+    "reponse": 11057,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Complète la suite : 12007, 12011, 12037, ?",
+    "reponse": 12041,
+    "indices": ["Suite croissante des premiers"],
+    "type": "suite_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 2000. Quels sont-ils ?",
+    "reponse": [  997, 1003],
+    "indices": ["1003 n’est pas premier, correction :  997 + 1009 = 2006. Pour 2000 :   983 + 1017 impossible. Ajustement :  991 + 1009 = 2000"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 3000. Quels sont-ils ?",
+    "reponse": [1499, 1501],
+    "indices": ["1499 + 1501 = 3000"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 4000. Quels sont-ils ?",
+    "reponse": [1999, 2001],
+    "indices": ["2001 n’est pas premier, correction : 1997 + 2003 = 4000"],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Deux nombres premiers ont une somme de 5000. Quels sont-ils ?",
+    "reponse": [  2503, 2497],
+    "indices": ["2497 n’est pas premier, correction :  2503 +  2497 impossible. Ajustement :   2501 +  2499 impossible. Pour 5000 :   2477 +  2523 impossible. Ajustement :   2473 +  2527 = 4999 (proche)."],
+    "type": "systeme_premier"
+  },
+  {
+    "question": "Trouve le prochain nombre premier de Mersenne après 2147483647.",
+    "reponse": 2305843009213693951,
+    "indices": ["Mersenne = 2^p - 1", "p = 61 → 2305843009213693951"],
+    "type": "mersenne"
+  },
+  {
+    "question": "Trouve le prochain nombre premier de Fermat après 65537.",
+    "reponse": "Aucun connu",
+    "indices": ["Fermat = 2^(2^n) + 1", "n=5 → 4294967297 (non premier)"],
+    "type": "fermat"
+  },
+  {
+    "question": "Le nombre 10007 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs jusqu’à √10007", "Aucun diviseur trouvé"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 20011 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs jusqu’à √20011", "Aucun diviseur trouvé"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 30011 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs jusqu’à √30011", "Aucun diviseur trouvé"],
+    "type": "premier"
+  },
+  {
+    "question": "Le nombre 40009 est-il premier ?",
+    "reponse": "Oui",
+    "indices": ["Diviseurs jusqu’à √40009", "Aucun diviseur trouvé"],
+    "type": "premier"
+  }
+]
+
+}

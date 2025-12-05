@@ -8,6 +8,7 @@ from tkinter import *
 from tkinter import ttk, messagebox
 import json
 import os
+from enum import Enum
 
 # Palette unifiée (identique aux autres fichiers)
 PALETTE = {
@@ -342,6 +343,191 @@ GUIDES_JEUX = {
             "⚠️ **Attention :**",
             "Tous les résultats sont réduits à un chiffre de 1 à 9",
             "comme dans le Sudoku traditionnel !"
+        ]
+    }, 
+    "mystere_math": {
+        "titre": "🕵️ Guide du Mystère Mathématique",
+        "contenu": [
+            "🎯 **Concept du jeu :**",
+            "Jeu d'énigmes mathématiques mystérieuses !",
+            "Résous des problèmes logiques, des casse-têtes et des mystères numériques.",
+            "",
+            "📝 **Comment jouer :**",
+            "• Une énigme mathématique s'affiche",
+            "• Tu as 5 essais pour trouver la réponse",
+            "• Tu peux acheter des indices avec tes points",
+            "• Plus tu résous vite, plus tu gagnes de points",
+            "• Un journal garde trace de ta progression",
+            "",
+            "🎮 **Types d'énigmes :**",
+            "• Logique numérique : nombres mystères",
+            "• Proportions : problèmes de comparaison",
+            "• Suites : trouver le motif",
+            "• Systèmes d'équations : problèmes à plusieurs inconnues",
+            "• Géométrie : calculs de formes",
+            "• Probabilités : chances et statistiques",
+            "• Équations complexes : transformations multiples",
+            "",
+            "🏅 **Système de points :**",
+            "• Points de base : 50 points × multiplicateur niveau",
+            "• Bonus essais : +5 points par essai restant",
+            "• Malus indices : -10 points par indice utilisé",
+            "• Pénalité solution : -50 points pour voir la solution",
+            "• Pénalité échec : -20 points si énigme échouée",
+            "• Multiplicateurs : Facile×1, Moyen×2, Difficile×3",
+            "",
+            "💡 **Stratégies gagnantes :**",
+            "• Prends le temps de bien comprendre l'énigme",
+            "• Écris les informations importantes",
+            "• Utilise le journal pour noter tes réflexions",
+            "• Achète des indices stratégiquement",
+            "• Vérifie tes calculs avant de soumettre"
+        ],
+        "exemples": [
+            "🧩 **Exemples d'énigmes :**",
+            "",
+            "Facile :",
+            "« Je suis un nombre pair à deux chiffres. La somme de mes chiffres est 10. Mon chiffre des dizaines est le double de mon chiffre des unités. Qui suis-je ? »",
+            "→ Réponse : 82 (8+2=10, 8=2×4)",
+            "",
+            "Moyen :", 
+            "« Un train de 150m traverse un tunnel de 450m en 30s. Quelle est sa vitesse en km/h ? »",
+            "→ Distance totale = 600m, temps = 30s → 20 m/s → 72 km/h",
+            "",
+            "Difficile :",
+            "« Trouvez tous les nombres entiers x tels que x² + 3x - 10 < 0 »",
+            "→ Factoriser : (x+5)(x-2) < 0 → -5 < x < 2 → x = -4,-3,-2,-1,0,1",
+            "",
+            "⚡ **Conseils de résolution :**",
+            "1. Identifie le type d'énigme",
+            "2. Écris toutes les données",
+            "3. Cherche des relations entre les éléments",
+            "4. Teste des valeurs si besoin",
+            "5. Vérifie ta réponse avant de soumettre",
+            "",
+            "📊 **Statistiques idéales :**",
+            "• Utiliser 0-1 indice par énigme",
+            "• Résoudre en 2-3 essais maximum",
+            "• Garder 2-3 essais en réserve",
+            "• Avoir une précision > 70%"
+        ]
+    },"chasse_premiers": {
+        "titre": "🔢 Guide de la Chasse aux Nombres Premiers",
+        "contenu": [
+            "🎯 **Objectif du jeu :**",
+            "• Déterminer si le nombre affiché est PREMIER ou COMPOSITE",
+            "• Un nombre premier n'a que 2 diviseurs : 1 et lui-même",
+            "• Un nombre composite a plus de 2 diviseurs",
+            "",
+            "🎮 **Comment jouer :**",
+            "• Vous avez 3 essais par nombre mystère",
+            "• Cliquez sur '✅ OUI' si vous pensez que c'est un nombre PREMIER",
+            "• Cliquez sur '❌ NON' si vous pensez que c'est un nombre COMPOSITE",
+            "• Gagnez des points pour chaque bonne réponse",
+            "",
+            "📊 **Niveaux de difficulté :**",
+            "• **Débutant** : Nombres entre 2 et 30",
+            "• **Intermédiaire** : Nombres entre 30 et 200",
+            "• **Avancé** : Nombres entre 200 et 1000",
+            "• Le niveau augmente automatiquement avec votre score",
+            "",
+            "💰 **Système de points :**",
+            "• **Points de base** : 20 points × multiplicateur de niveau",
+            "• **Multiplicateurs** : Débutant×1, Intermédiaire×2, Avancé×3",
+            "• **Bonus d'essais** : +5 points par essai restant",
+            "• **Malus d'indices** : -5 points par indice utilisé",
+            "• **Bonus streak** : +20 points après 5 réponses correctes consécutives",
+            "",
+            "💡 **Système d'indices :**",
+            "• Chaque indice révélé coûte 5 points",
+            "• Les indices deviennent plus précis à chaque utilisation",
+            "• Le dernier indice donne souvent la réponse",
+            "• Utilisez les indices stratégiquement pour économiser des points",
+            "",
+            "🔥 **Système de streak :**",
+            "• Maintenez un enchaînement de bonnes réponses",
+            "• Après 5 bonnes réponses d'affilée : bonus de 20 points",
+            "• Le streak se réinitialise après une mauvaise réponse",
+            "• Le meilleur streak est enregistré dans vos statistiques",
+            "",
+            "📈 **Statistiques suivies :**",
+            "• Score total et streak actuel",
+            "• Parties gagnées / parties jouées",
+            "• Taux de réussite global",
+            "• Nombres premiers identifiés",
+            "• Nombres composites identifiés",
+            "• Bonus streak cumulés",
+            "",
+            "🔍 **Stratégies de jeu :**",
+            "1. **Vérifiez d'abord les critères évidents :**",
+            "   - Si n < 2 → COMPOSITE",
+            "   - Si n = 2 → PREMIER (seul premier pair)",
+            "   - Si n est pair et > 2 → COMPOSITE",
+            "",
+            "2. **Testez les petits diviseurs :**",
+            "   - Testez la divisibilité par 2, 3, 5, 7, 11",
+            "   - Pour les grands nombres, testez jusqu'à √n",
+            "",
+            "3. **Astuces de reconnaissance :**",
+            "   - Les nombres terminés par 0, 2, 4, 5, 6, 8 sont composites (sauf 2 et 5)",
+            "   - Si la somme des chiffres est divisible par 3 → COMPOSITE",
+            "   - Carrés parfaits sont toujours composites (sauf 1 qui n'est pas premier)",
+            "",
+            "❓ **Exemples de réflexion :**",
+            "• 17 → Impair, pas divisible par 3, 5, 7 → PREMIER",
+            "• 21 → Impair, mais 21 ÷ 3 = 7 → COMPOSITE",
+            "• 29 → Impair, pas divisible par 3, 5, 7 → PREMIER (car √29≈5.4)",
+            "",
+            "⚠️ **Erreurs courantes à éviter :**",
+            "• 1 n'est PAS un nombre premier (trop peu de diviseurs)",
+            "• 2 EST un nombre premier (le seul pair)",
+            "• Un nombre peut être impair mais composite (ex: 9, 15, 21)",
+            "• Ne pas oublier de tester tous les diviseurs jusqu'à √n",
+            "",
+            "🎲 **Conseils avancés :**",
+            "• Mémorisez les 25 premiers nombres premiers (jusqu'à 97)",
+            "• Connaissez les critères de divisibilité (par 2, 3, 5, 7, 11)",
+            "• Pour les grands nombres, cherchez un petit diviseur d'abord",
+            "• Utilisez le bouton 'Explication' seulement en cas d'échec (pénalité: 10 points)"
+        ],
+        "exemples": [
+            "🔢 **Exemples de nombres :**",
+            "",
+            "**NOMBRES PREMIERS (réponse : OUI)** :",
+            "• 7 → OUI (diviseurs: 1, 7)",
+            "• 13 → OUI (diviseurs: 1, 13)",
+            "• 29 → OUI (pas divisible par 2, 3, 5, 7)",
+            "• 97 → OUI (dernier premier à 2 chiffres)",
+            "",
+            "**NOMBRES COMPOSITES (réponse : NON)** :",
+            "• 4 → NON (diviseurs: 1, 2, 4)",
+            "• 15 → NON (divisible par 3 et 5)",
+            "• 21 → NON (21 ÷ 3 = 7)",
+            "• 49 → NON (7 × 7 = 49)",
+            "",
+            "**CAS PARTICULIERS :**",
+            "• 1 → NON (n'est pas premier)",
+            "• 2 → OUI (seul nombre premier pair)",
+            "• 9 → NON (3 × 3 = 9)",
+            "• 57 → NON (divisible par 3 et 19)"
+        ],
+        "astuces": [
+            "⚡ **Astuces rapides :**",
+            "• Tous les nombres pairs > 2 sont composites",
+            "• Tous les nombres terminés par 5 > 5 sont composites",
+            "• Si la somme des chiffres est 3, 6, ou 9 → divisible par 3",
+            "• Carrés de nombres premiers sont composites (ex: 25 = 5²)",
+            "",
+            "🎯 **Pour les grands nombres :**",
+            "• Vérifiez d'abord les petits nombres premiers (2, 3, 5, 7, 11)",
+            "• Calculez √n pour savoir jusqu'où tester",
+            "• Un nombre impair n'est pas forcément premier !",
+            "",
+            "🏆 **Objectifs à atteindre :**",
+            "• Bronze : Score de 100 points",
+            "• Argent : Score de 300 points avec streak de 5",
+            "• Or : Score de 500 points avec 80% de réussite",
+            "• Diamant : Score de 1000 points et identification de 50 nombres"
         ]
     }
 }
@@ -3763,6 +3949,1580 @@ class DessineMoiUneFonction:
             self.score_label.config(text=f"🏆 Score: {self.score}")
         if hasattr(self, 'resultats_label'):
             self.resultats_label.config(text=f"🎯 Précision: {self.manches_gagnees}/{self.manches_totales}")
+
+
+# =============================================================================
+# MYSTÈRE MATHÉMATIQUE
+# =============================================================================
+
+"""Classe Repertoriant les difficulté"""
+class Difficulty(Enum):
+    DEBUTANT = "Débutant"
+    INTERMEDIAIRE = "Intermédiaire"
+    EXPERT = "Expert"
+
+class EnigmeManager:
+    def __init__(self, json_file_path):
+        self.json_file_path = json_file_path
+        self.enigmes_data = self._load_enigmes()
+    
+    def _load_enigmes(self):
+        try:
+            with open(self.json_file_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except FileNotFoundError:
+            print(f"Erreur : Fichier {self.json_file_path} non trouvé.")
+            return {}
+        except json.JSONDecodeError:
+            print(f"Erreur : Fichier {self.json_file_path} mal formaté.")
+            return {}
+    
+    def get_enigmes_by_difficulty(self, difficulty):
+        if difficulty.value in self.enigmes_data:
+            return self.enigmes_data[difficulty.value]
+        return []
+    
+    def get_random_enigme(self, difficulty=None):
+        if difficulty:
+            enigmes = self.get_enigmes_by_difficulty(difficulty)
+        else:
+            enigmes = []
+            for diff in self.enigmes_data.values():
+                enigmes.extend(diff)
+        
+        if not enigmes:
+            return None
+        
+        return random.choice(enigmes)
+    
+    def get_enigmes_by_type(self, difficulty, enigme_type):
+        enigmes = self.get_enigmes_by_difficulty(difficulty)
+        return [enigme for enigme in enigmes if enigme.get('type') == enigme_type]
+    
+    def add_enigme(self, difficulty, question, reponse, indices, enigme_type):
+        if difficulty.value not in self.enigmes_data:
+            self.enigmes_data[difficulty.value] = []
+        
+        new_enigme = {
+            "question": question,
+            "reponse": reponse,
+            "indices": indices,
+            "type": enigme_type
+        }
+        
+        self.enigmes_data[difficulty.value].append(new_enigme)
+        self._save_enigmes()
+    
+    def _save_enigmes(self):
+        try:
+            with open(self.json_file_path, 'w', encoding='utf-8') as f:
+                json.dump(self.enigmes_data, f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            print(f"Erreur lors de la sauvegarde : {e}")
+    
+    def get_all_enigmes_count(self):
+        total = 0
+        for difficulty, enigmes in self.enigmes_data.items():
+            total += len(enigmes)
+        return total
+    
+    def get_difficulty_stats(self):
+        stats = {}
+        for difficulty, enigmes in self.enigmes_data.items():
+            stats[difficulty] = len(enigmes)
+        return stats
+
+
+import os
+
+class MystereMathematique:
+    def __init__(self, parent, json_file_path=None):
+        self.parent = parent
+        self.score = 0
+        self.niveau = Difficulty.DEBUTANT
+        self.mystere_actuel = None
+        self.indices_decouverts = 0
+        self.essais_restants = 5
+        self.parties_gagnees = 0
+        self.parties_jouees = 0
+        
+        # Utiliser EnigmeManager pour charger les énigmes
+        if json_file_path is None:
+            # Chercher dans le dossier data
+            if os.path.exists("data/question_enigme.json"):
+                json_file_path = "data/question_enigme.json"
+            elif os.path.exists("../data/question_enigme.json"):
+                json_file_path = "../data/question_enigme.json"
+            else:
+                # Créer le chemin si le dossier existe
+                if os.path.exists("data"):
+                    json_file_path = "data/question_enigme.json"
+                else:
+                    json_file_path = "question_enigme.json"
+        
+        self.enigme_manager = EnigmeManager(json_file_path)
+        
+        # Palette de couleurs par défaut
+        self.PALETTE = {
+            "fond_principal": "#FFFFFF",
+            "primaire": "#2563EB",
+            "secondaire": "#7C3AED",
+            "succes": "#10B981",
+            "erreur": "#EF4444",
+            "avertissement": "#F59E0B",
+            "texte_fonce": "#1F2937",
+            "texte_clair": "#6B7280",
+            "fond_clair": "#F3F4F6"
+        }
+    
+    def lancer_jeu(self):
+        """Lance le Mystère Mathématique"""
+        self.fenetre_jeu = Toplevel(self.parent)
+        self.fenetre_jeu.title("🕵️ Mystère Mathématique")
+        self.fenetre_jeu.geometry("800x700")
+        self.fenetre_jeu.configure(bg=self.PALETTE["fond_principal"])
+        
+        self._creer_interface()
+        self._nouvelle_enigme()
+
+    def _creer_interface(self):
+        """Crée l'interface du jeu"""
+        # En-tête
+        header_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["primaire"])
+        header_frame.pack(fill=X, pady=(0, 15))
+        
+        Label(header_frame, text="🕵️ MYSTÈRE MATHÉMATIQUE", 
+              font=("Century Gothic", 18, "bold"), bg=self.PALETTE["primaire"], fg="white").pack(pady=12)
+
+        # Statistiques
+        stats_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_principal"])
+        stats_frame.pack(fill=X, padx=20, pady=10)
+        
+        # Score et niveau
+        left_stats = Frame(stats_frame, bg=self.PALETTE["fond_principal"])
+        left_stats.pack(side=LEFT)
+        
+        self.score_label = Label(left_stats, text=f"🏆 Score: {self.score}",
+                                font=("Century Gothic", 12, "bold"), bg=self.PALETTE["fond_principal"], fg=self.PALETTE["primaire"])
+        self.score_label.pack(anchor=W)
+        
+        self.niveau_label = Label(left_stats, text=f"📊 Niveau: {self.niveau.value}",
+                                 font=("Century Gothic", 10), bg=self.PALETTE["fond_principal"], fg=self.PALETTE["texte_clair"])
+        self.niveau_label.pack(anchor=W)
+        
+        # Essais restants
+        center_stats = Frame(stats_frame, bg=self.PALETTE["fond_principal"])
+        center_stats.pack(side=LEFT, expand=True)
+        
+        self.essais_label = Label(center_stats, text=f"🎯 Essais restants: {self.essais_restants}",
+                                 font=("Century Gothic", 11, "bold"), bg=self.PALETTE["fond_principal"], fg=self.PALETTE["primaire"])
+        self.essais_label.pack()
+        
+        self.resultats_label = Label(center_stats, text=f"📈 Parties: {self.parties_gagnees}/{self.parties_jouees}",
+                                    font=("Century Gothic", 10), bg=self.PALETTE["fond_principal"], fg=self.PALETTE["texte_clair"])
+        self.resultats_label.pack()
+
+        # Type d'énigme
+        right_stats = Frame(stats_frame, bg=self.PALETTE["fond_principal"])
+        right_stats.pack(side=RIGHT)
+        
+        self.type_label = Label(right_stats, text=f"🔍 Type: ?",
+                              font=("Century Gothic", 10), bg=self.PALETTE["fond_principal"], fg=self.PALETTE["texte_clair"])
+        self.type_label.pack(anchor=E)
+
+        # Cadre principal
+        main_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_principal"])
+        main_frame.pack(fill=BOTH, expand=True, padx=20, pady=10)
+
+        # Énigme
+        enigme_frame = Frame(main_frame, bg="#FEF3C7", relief="solid", borderwidth=2)
+        enigme_frame.pack(fill=X, pady=15, padx=10)
+        
+        Label(enigme_frame, text="🧩 ÉNIGME MYSTÈRE :", 
+              font=("Century Gothic", 12, "bold"), bg="#FEF3C7", fg="#92400E").pack(pady=10)
+        
+        self.enigme_text = Text(enigme_frame, height=6, font=("Century Gothic", 11),
+                               bg="#FEF3C7", fg="#92400E", wrap=WORD, relief="flat")
+        self.enigme_text.pack(fill=X, padx=15, pady=10)
+        self.enigme_text.config(state=DISABLED)
+
+        # Indices
+        indices_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
+        indices_frame.pack(fill=X, pady=15)
+        
+        Label(indices_frame, text="💡 INDICES DISPONIBLES :", 
+              font=("Century Gothic", 11, "bold"), bg=self.PALETTE["fond_principal"]).pack(pady=5)
+        
+        self.indices_frame = Frame(indices_frame, bg=self.PALETTE["fond_principal"])
+        self.indices_frame.pack(pady=10)
+
+        # Saisie de réponse
+        reponse_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
+        reponse_frame.pack(fill=X, pady=15)
+        
+        Label(reponse_frame, text="✏️ TA RÉPONSE :", 
+              font=("Century Gothic", 11, "bold"), bg=self.PALETTE["fond_principal"]).pack(pady=5)
+        
+        self.reponse_entry = Entry(reponse_frame, font=("Century Gothic", 14), 
+                                  width=30, justify="center")
+        self.reponse_entry.pack(pady=10)
+        self.reponse_entry.bind("<Return>", lambda e: self._verifier_reponse())
+        
+        Label(reponse_frame, text="(Tu peux entrer plusieurs réponses séparées par des virgules si besoin)", 
+              font=("Century Gothic", 9), bg=self.PALETTE["fond_principal"], fg=self.PALETTE["texte_clair"]).pack()
+
+        # Boutons
+        boutons_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
+        boutons_frame.pack(fill=X, pady=15)
+        
+        ttk.Button(boutons_frame, text="🔍 Obtenir un indice", 
+                  command=self._obtenir_indice).pack(side=LEFT, padx=5)
+        
+        ttk.Button(boutons_frame, text="✅ Vérifier la réponse", 
+                  command=self._verifier_reponse).pack(side=LEFT, padx=5)
+        
+        ttk.Button(boutons_frame, text="🔄 Nouvelle énigme", 
+                  command=self._nouvelle_enigme).pack(side=LEFT, padx=5)
+        
+        ttk.Button(boutons_frame, text="💡 Solution complète", 
+                  command=self._afficher_solution).pack(side=RIGHT, padx=5)
+
+        # Feedback
+        self.feedback_label = Label(main_frame, text="", 
+                                   font=("Century Gothic", 12), bg=self.PALETTE["fond_principal"], wraplength=600)
+        self.feedback_label.pack(pady=10)
+
+        # Zone de log
+        log_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
+        log_frame.pack(fill=BOTH, expand=True, pady=10)
+        
+        Label(log_frame, text="📝 JOURNAL DE RÉSOLUTION :", 
+              font=("Century Gothic", 10, "bold"), bg=self.PALETTE["fond_principal"]).pack(anchor=W)
+        
+        self.log_text = Text(log_frame, height=6, font=("Century Gothic", 9),
+                            bg="#F8FAFC", fg=self.PALETTE["texte_fonce"], wrap=WORD)
+        scrollbar = Scrollbar(log_frame, command=self.log_text.yview)
+        self.log_text.config(yscrollcommand=scrollbar.set)
+        self.log_text.pack(side=LEFT, fill=BOTH, expand=True)
+        scrollbar.pack(side=RIGHT, fill=Y)
+        self.log_text.config(state=DISABLED)
+
+    def _nouvelle_enigme(self):
+        """Prépare une nouvelle énigme"""
+        # Mettre à jour le niveau selon le score
+        if self.score < 200:
+            self.niveau = Difficulty.DEBUTANT
+        elif self.score < 500:
+            self.niveau = Difficulty.INTERMEDIAIRE
+        else:
+            self.niveau = Difficulty.EXPERT
+        
+        # Obtenir une énigme aléatoire
+        self.mystere_actuel = self.enigme_manager.get_random_enigme(self.niveau)
+        
+        if not self.mystere_actuel:
+            self.feedback_label.config(text="❌ Aucune énigme disponible pour ce niveau", fg=self.PALETTE["erreur"])
+            return
+        
+        # Réinitialiser les compteurs
+        self.indices_decouverts = 0
+        self.essais_restants = 5
+        
+        # Mettre à jour l'interface
+        self._afficher_enigme()
+        self._afficher_indices()
+        self.reponse_entry.delete(0, END)
+        self.feedback_label.config(text="🎯 Résous le mystère ! Tu as 5 essais.", fg=self.PALETTE["primaire"])
+        self._effacer_log()
+        self._ajouter_log("🕵️ Nouvelle énigme chargée !")
+        
+        # Mettre à jour les labels
+        self.niveau_label.config(text=f"📊 Niveau: {self.niveau.value}")
+        self.type_label.config(text=f"🔍 Type: {self.mystere_actuel.get('type', 'Inconnu')}")
+        
+        self._mettre_a_jour_affichage()
+
+    def _afficher_enigme(self):
+        """Affiche l'énigme dans la zone de texte"""
+        self.enigme_text.config(state=NORMAL)
+        self.enigme_text.delete(1.0, END)
+        self.enigme_text.insert(END, self.mystere_actuel["question"])
+        self.enigme_text.config(state=DISABLED)
+
+    def _afficher_indices(self):
+        """Affiche les indices disponibles"""
+        # Nettoyer le frame
+        for widget in self.indices_frame.winfo_children():
+            widget.destroy()
+        
+        indices = self.mystere_actuel.get("indices", [])
+        
+        # Afficher les indices déjà découverts
+        for i in range(len(indices)):
+            if i < self.indices_decouverts:
+                # Indice révélé
+                Label(self.indices_frame, text=f"💡 {indices[i]}", 
+                      font=("Century Gothic", 10), bg=self.PALETTE["fond_principal"], fg="#10B981", 
+                      wraplength=600, justify="left").pack(anchor=W, pady=2)
+            else:
+                # Indice caché
+                Label(self.indices_frame, text=f"🔒 Indice {i+1} (coût: 10 points)", 
+                      font=("Century Gothic", 9), bg=self.PALETTE["fond_principal"], fg=self.PALETTE["texte_clair"], 
+                      wraplength=600, justify="left").pack(anchor=W, pady=2)
+
+    def _obtenir_indice(self):
+        """Donne un indice au joueur"""
+        indices = self.mystere_actuel.get("indices", [])
+        
+        if self.indices_decouverts >= len(indices):
+            self.feedback_label.config(text="❌ Plus d'indices disponibles", fg=self.PALETTE["erreur"])
+            return
+        
+        # Pénalité de points
+        penalite = 10
+        if self.score >= penalite:
+            self.score -= penalite
+            self.indices_decouverts += 1
+            
+            self._ajouter_log(f"📉 Achat d'indice: -{penalite} points")
+            self.feedback_label.config(text=f"💡 Indice {self.indices_decouverts} révélé ! (-{penalite} points)", 
+                                     fg="#F59E0B")
+            
+            self._afficher_indices()
+            self._mettre_a_jour_affichage()
+        else:
+            self.feedback_label.config(text="❌ Pas assez de points pour un indice", fg=self.PALETTE["erreur"])
+
+    def _verifier_reponse(self):
+        """Vérifie la réponse du joueur"""
+        reponse_joueur = self.reponse_entry.get().strip()
+        
+        if not reponse_joueur:
+            self.feedback_label.config(text="❌ Entre une réponse", fg=self.PALETTE["erreur"])
+            return
+        
+        self.essais_restants -= 1
+        self.essais_label.config(text=f"🎯 Essais restants: {self.essais_restants}")
+        self.parties_jouees += 1
+        
+        reponse_correcte = self.mystere_actuel.get("reponse")
+        
+        # Gestion des réponses multiples (listes)
+        if isinstance(reponse_correcte, list):
+            # Convertir la réponse du joueur en liste
+            try:
+                reponses_joueur = [self._convertir_reponse(r.strip()) for r in reponse_joueur.split(',')]
+                reponses_joueur.sort()
+                reponses_correctes = sorted(reponse_correcte)
+                
+                if reponses_joueur == reponses_correctes:
+                    self._reussite_enigme()
+                else:
+                    self._echec_essai(reponse_joueur)
+            except:
+                self._echec_essai(reponse_joueur)
+        else:
+            # Réponse unique
+            try:
+                reponse_joueur_num = self._convertir_reponse(reponse_joueur)
+                reponse_correcte_num = self._convertir_reponse(reponse_correcte)
+                
+                if reponse_joueur_num == reponse_correcte_num:
+                    self._reussite_enigme()
+                else:
+                    self._echec_essai(reponse_joueur)
+            except ValueError:
+                # Vérification textuelle
+                if str(reponse_joueur).lower() == str(reponse_correcte).lower():
+                    self._reussite_enigme()
+                else:
+                    self._echec_essai(reponse_joueur)
+        
+        # Vérifier si plus d'essais
+        if self.essais_restants <= 0:
+            self._enigme_echouee()
+
+    def _convertir_reponse(self, reponse):
+        """Convertit une réponse en nombre si possible"""
+        try:
+            # Essayer de convertir en float
+            return float(reponse)
+        except ValueError:
+            try:
+                # Essayer de convertir en int
+                return int(reponse)
+            except ValueError:
+                # Retourner la réponse telle quelle
+                return reponse
+
+    def _reussite_enigme(self):
+        """Quand l'énigme est résolue"""
+        points = self._calculer_points()
+        self.score += points
+        self.parties_gagnees += 1
+        
+        reponse = self.mystere_actuel.get("reponse")
+        reponse_text = str(reponse)
+        if isinstance(reponse, list):
+            reponse_text = ", ".join(str(x) for x in reponse)
+        
+        self.feedback_label.config(
+            text=f"🎉 BRAVO ! Réponse correcte : {reponse_text} (+{points} points)", 
+            fg="#10B981"
+        )
+        
+        self._ajouter_log(f"✅ ENIGME RÉSOLUE ! +{points} points")
+        self._mettre_a_jour_affichage()
+        
+        # Nouvelle énigme après délai
+        self.fenetre_jeu.after(3000, self._nouvelle_enigme)
+
+    def _echec_essai(self, reponse_joueur):
+        """Quand un essai échoue"""
+        self.feedback_label.config(
+            text=f"❌ Réponse incorrecte : {reponse_joueur}", 
+            fg=self.PALETTE["erreur"]
+        )
+        
+        self._ajouter_log(f"❌ Essai incorrect: {reponse_joueur}")
+        
+        if self.essais_restants > 0:
+            self.feedback_label.config(
+                text=f"❌ Réponse incorrecte. Il te reste {self.essais_restants} essai{'s' if self.essais_restants > 1 else ''}.", 
+                fg=self.PALETTE["erreur"]
+            )
+
+    def _enigme_echouee(self):
+        """Quand l'énigme n'est pas résolue à temps"""
+        reponse = self.mystere_actuel.get("reponse")
+        reponse_text = str(reponse)
+        if isinstance(reponse, list):
+            reponse_text = ", ".join(str(x) for x in reponse)
+        
+        self.feedback_label.config(
+            text=f"💥 Énigme échouée ! La réponse était : {reponse_text}", 
+            fg=self.PALETTE["erreur"]
+        )
+        
+        self._ajouter_log(f"💥 ÉCHEC - Réponse: {reponse_text}")
+        
+        # Pénalité pour échec
+        penalite = 20
+        self.score = max(0, self.score - penalite)
+        
+        self._ajouter_log(f"📉 Pénalité d'échec: -{penalite} points")
+        self._mettre_a_jour_affichage()
+        
+        # Nouvelle énigme après délai
+        self.fenetre_jeu.after(4000, self._nouvelle_enigme)
+
+    def _calculer_points(self):
+        """Calcule les points gagnés pour une énigme résolue"""
+        points_base = 50
+        niveau_multiplier = {
+            Difficulty.DEBUTANT: 1, 
+            Difficulty.INTERMEDIAIRE: 2, 
+            Difficulty.EXPERT: 3
+        }
+        
+        # Bonus pour rapidité (beaucoup d'essais restants)
+        bonus_essais = self.essais_restants * 5
+        
+        # Malus pour indices utilisés
+        malus_indices = self.indices_decouverts * 10
+        
+        points = (points_base + bonus_essais - malus_indices) * niveau_multiplier.get(self.niveau, 1)
+        
+        # Minimum de 10 points
+        return max(10, points)
+
+    def _afficher_solution(self):
+        """Affiche la solution complète"""
+        # Pénalité importante
+        penalite = 50
+        self.score = max(0, self.score - penalite)
+        
+        solution_window = Toplevel(self.fenetre_jeu)
+        solution_window.title("💡 Solution Complète")
+        solution_window.geometry("600x400")
+        solution_window.configure(bg=self.PALETTE["fond_principal"])
+        
+        Label(solution_window, text="💡 SOLUTION COMPLÈTE", 
+              font=("Century Gothic", 16, "bold"), bg=self.PALETTE["fond_principal"], fg=self.PALETTE["primaire"]).pack(pady=20)
+        
+        # Énigme
+        Label(solution_window, text="Énigme:", 
+              font=("Century Gothic", 12, "bold"), bg=self.PALETTE["fond_principal"]).pack(pady=5)
+        
+        Label(solution_window, text=self.mystere_actuel.get("question", ""), 
+              font=("Century Gothic", 11), bg=self.PALETTE["fond_principal"], fg=self.PALETTE["texte_fonce"], 
+              wraplength=500, justify="center").pack(pady=5)
+        
+        # Réponse
+        Label(solution_window, text="\nRéponse:", 
+              font=("Century Gothic", 12, "bold"), bg=self.PALETTE["fond_principal"]).pack(pady=5)
+        
+        reponse = self.mystere_actuel.get("reponse")
+        reponse_text = str(reponse)
+        if isinstance(reponse, list):
+            reponse_text = ", ".join(str(x) for x in reponse)
+        
+        Label(solution_window, text=reponse_text, 
+              font=("Century Gothic", 14, "bold"), bg=self.PALETTE["fond_principal"], fg="#10B981").pack(pady=5)
+        
+        # Explication
+        Label(solution_window, text="\nExplication:", 
+              font=("Century Gothic", 12, "bold"), bg=self.PALETTE["fond_principal"]).pack(pady=5)
+        
+        indices = self.mystere_actuel.get("indices", [])
+        explication_text = "\n".join(indices)
+        Label(solution_window, text=explication_text, 
+              font=("Century Gothic", 10), bg=self.PALETTE["fond_principal"], fg=self.PALETTE["texte_clair"], 
+              wraplength=500, justify="left").pack(pady=5)
+        
+        Label(solution_window, text=f"\n(–{penalite} points)", 
+              font=("Century Gothic", 11, "bold"), bg=self.PALETTE["fond_principal"], fg=self.PALETTE["erreur"]).pack(pady=10)
+        
+        ttk.Button(solution_window, text="Fermer", 
+                  command=solution_window.destroy).pack(pady=10)
+        
+        self._ajouter_log(f"📉 Solution achetée: -{penalite} points")
+        self._mettre_a_jour_affichage()
+
+    def _ajouter_log(self, message):
+        """Ajoute un message au journal"""
+        self.log_text.config(state=NORMAL)
+        from datetime import datetime
+        timestamp = datetime.now().strftime("%H:%M:%S")
+        self.log_text.insert(END, f"[{timestamp}] {message}\n")
+        self.log_text.see(END)
+        self.log_text.config(state=DISABLED)
+
+    def _effacer_log(self):
+        """Efface le journal"""
+        self.log_text.config(state=NORMAL)
+        self.log_text.delete(1.0, END)
+        self.log_text.config(state=DISABLED)
+
+    def _mettre_a_jour_affichage(self):
+        """Met à jour tous les affichages"""
+        self.score_label.config(text=f"🏆 Score: {self.score}")
+        self.resultats_label.config(text=f"📈 Parties: {self.parties_gagnees}/{self.parties_jouees}")
+        self.essais_label.config(text=f"🎯 Essais restants: {self.essais_restants}")
+
+
+# =============================================================================
+# CHASSE AUX NOMBRES PREMIERS
+# =============================================================================
+class Difficulty(Enum):
+    DEBUTANT = "Débutant"
+    INTERMEDIAIRE = "Intermédiaire"
+    AVANCE = "Avancé"
+
+class ChasseNombresPremiers:
+    def __init__(self, parent, json_file_path="data/question_premier.json"):
+        self.parent = parent
+        self.score = 0
+        self.niveau = Difficulty.DEBUTANT
+        self.question_actuelle = None
+        self.indices_decouverts = 0
+        self.essais_restants = 3
+        self.parties_gagnees = 0
+        self.parties_jouees = 0
+        self.streak = 0
+        self.bonus_streak = 0
+        self.meilleur_streak = 0
+        self.verification_en_cours = False
+        
+        # Palette de couleurs
+        self.PALETTE = {
+            "fond_principal": "#FFFFFF",
+            "primaire": "#2563EB",
+            "secondaire": "#7C3AED",
+            "succes": "#10B981",
+            "erreur": "#EF4444",
+            "avertissement": "#F59E0B",
+            "info": "#3B82F6",
+            "texte_fonce": "#1F2937",
+            "texte_clair": "#6B7280",
+            "fond_clair": "#F3F4F6",
+            "fond_carte": "#F8FAFC"
+        }
+        
+        # Charger les questions depuis le JSON
+        self.questions_data = self._charger_questions(json_file_path)
+        
+        # Statistiques
+        self.nombres_premiers_trouves = []
+        self.nombres_composites_trouves = []
+        
+        # Types de questions supportés
+        self.types_questions = {
+            "premier": "Est-ce premier ? (Oui/Non)",
+            "decomposition": "Décomposition en facteurs premiers",
+            "diviseurs": "Liste des diviseurs",
+            "nombre_mystere": "Trouver le nombre",
+            "vrai_faux": "Vrai ou Faux",
+            "multiple": "Choix multiple"
+        }
+
+    def _charger_questions(self, json_path):
+        """Charge les questions depuis le fichier JSON"""
+        try:
+            # Vérifier si le fichier existe
+            if not os.path.exists(json_path):
+                # Créer un fichier par défaut si inexistant
+                default_data = {
+                    "Débutant": [],
+                    "Intermédiaire": [],
+                    "Avancé": []
+                }
+                os.makedirs(os.path.dirname(json_path), exist_ok=True)
+                with open(json_path, 'w', encoding='utf-8') as f:
+                    json.dump(default_data, f, ensure_ascii=False, indent=2)
+                return default_data
+            
+            with open(json_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"Erreur chargement questions: {e}")
+            return {"Débutant": [], "Intermédiaire": [], "Avancé": []}
+    
+    def lancer_jeu(self):
+        """Lance la fenêtre du jeu"""
+        self.fenetre_jeu = Toplevel(self.parent)
+        self.fenetre_jeu.title("🔢 Chasse aux Nombres Premiers")
+        self.fenetre_jeu.geometry("900x800")
+        self.fenetre_jeu.configure(bg=self.PALETTE["fond_principal"])
+        
+        self._creer_interface()
+        self._nouvelle_question()
+        
+        # Centrer la fenêtre
+        self.fenetre_jeu.update_idletasks()
+        width = self.fenetre_jeu.winfo_width()
+        height = self.fenetre_jeu.winfo_height()
+        x = (self.fenetre_jeu.winfo_screenwidth() // 2) - (width // 2)
+        y = (self.fenetre_jeu.winfo_screenheight() // 2) - (height // 2)
+        self.fenetre_jeu.geometry(f'{width}x{height}+{x}+{y}')
+    
+    def _creer_interface(self):
+        """Crée l'interface graphique du jeu"""
+        # En-tête
+        header_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["primaire"])
+        header_frame.pack(fill=X, pady=(0, 10))
+        
+        Label(header_frame, text="🔢 CHASSE AUX NOMBRES PREMIERS", 
+              font=("Century Gothic", 20, "bold"), bg=self.PALETTE["primaire"], fg="white").pack(pady=15)
+        
+        Label(header_frame, text="Testez vos connaissances sur les nombres premiers !", 
+              font=("Century Gothic", 11), bg=self.PALETTE["primaire"], fg="white", 
+              wraplength=700).pack(pady=(0, 10))
+        
+        # Statistiques principales
+        stats_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_clair"], relief="solid", borderwidth=1)
+        stats_frame.pack(fill=X, padx=20, pady=10)
+        
+        # Première ligne de stats
+        stats_line1 = Frame(stats_frame, bg=self.PALETTE["fond_clair"])
+        stats_line1.pack(fill=X, padx=15, pady=10)
+        
+        # Score
+        self.score_label = Label(stats_line1, text=f"🏆 SCORE: {self.score}", 
+                                font=("Century Gothic", 13, "bold"), bg=self.PALETTE["fond_clair"], 
+                                fg=self.PALETTE["primaire"])
+        self.score_label.pack(side=LEFT, padx=20)
+        
+        # Streak
+        self.streak_label = Label(stats_line1, text=f"🔥 STREAK: {self.streak}", 
+                                 font=("Century Gothic", 13, "bold"), bg=self.PALETTE["fond_clair"], 
+                                 fg=self.PALETTE["avertissement"])
+        self.streak_label.pack(side=LEFT, padx=20)
+        
+        # Niveau
+        self.niveau_label = Label(stats_line1, text=f"📊 NIVEAU: {self.niveau.value}", 
+                                 font=("Century Gothic", 13, "bold"), bg=self.PALETTE["fond_clair"], 
+                                 fg=self.PALETTE["secondaire"])
+        self.niveau_label.pack(side=LEFT, padx=20)
+        
+        # Deuxième ligne de stats
+        stats_line2 = Frame(stats_frame, bg=self.PALETTE["fond_clair"])
+        stats_line2.pack(fill=X, padx=15, pady=(0, 10))
+        
+        # Essais
+        self.essais_label = Label(stats_line2, text=f"🎯 ESSAIS RESTANTS: {self.essais_restants}", 
+                                 font=("Century Gothic", 11), bg=self.PALETTE["fond_clair"], 
+                                 fg=self.PALETTE["texte_fonce"])
+        self.essais_label.pack(side=LEFT, padx=20)
+        
+        # Partie
+        self.parties_label = Label(stats_line2, text=f"📈 PARTIES: {self.parties_gagnees}/{self.parties_jouees}", 
+                                  font=("Century Gothic", 11), bg=self.PALETTE["fond_clair"], 
+                                  fg=self.PALETTE["texte_fonce"])
+        self.parties_label.pack(side=LEFT, padx=20)
+        
+        # Cadre principal
+        main_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_principal"])
+        main_frame.pack(fill=BOTH, expand=True, padx=20, pady=10)
+        
+        # Carte de la question
+        self.question_frame = Frame(main_frame, bg=self.PALETTE["fond_carte"], 
+                                   relief="solid", borderwidth=2)
+        self.question_frame.pack(fill=BOTH, expand=True, pady=10)
+        
+        # Zone de type de question
+        self.type_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
+        self.type_frame.pack(fill=X, pady=5)
+        
+        self.type_label = Label(self.type_frame, text="", 
+                               font=("Century Gothic", 10, "bold"), bg=self.PALETTE["fond_principal"], 
+                               fg=self.PALETTE["secondaire"])
+        self.type_label.pack()
+        
+        # Zone de réponse - Frame dynamique qui change selon le type
+        self.reponse_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
+        self.reponse_frame.pack(fill=X, pady=15)
+        
+        Label(self.reponse_frame, text="🎯 TA RÉPONSE :", 
+              font=("Century Gothic", 12, "bold"), bg=self.PALETTE["fond_principal"]).pack(pady=5)
+        
+        # Frame pour les contrôles de réponse (sera rempli dynamiquement)
+        self.controles_reponse_frame = Frame(self.reponse_frame, bg=self.PALETTE["fond_principal"])
+        self.controles_reponse_frame.pack(pady=10)
+        
+        # Indices
+        indices_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
+        indices_frame.pack(fill=X, pady=10)
+        
+        Label(indices_frame, text="💡 INDICES DISPONIBLES :", 
+              font=("Century Gothic", 12, "bold"), bg=self.PALETTE["fond_principal"]).pack(pady=5)
+        
+        self.indices_frame = Frame(indices_frame, bg=self.PALETTE["fond_principal"])
+        self.indices_frame.pack(pady=10)
+        
+        # Zone de feedback
+        self.feedback_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
+        self.feedback_frame.pack(fill=X, pady=15)
+        
+        self.feedback_label = Label(self.feedback_frame, text="", 
+                                   font=("Century Gothic", 12), bg=self.PALETTE["fond_principal"], 
+                                   wraplength=700)
+        self.feedback_label.pack()
+        
+        # Boutons d'action
+        boutons_action_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
+        boutons_action_frame.pack(fill=X, pady=10)
+        
+        ttk.Button(boutons_action_frame, text="🔍 Obtenir un indice", 
+                  command=self._obtenir_indice).pack(side=LEFT, padx=5)
+        
+        ttk.Button(boutons_action_frame, text="🔄 Question suivante", 
+                  command=self._nouvelle_question).pack(side=LEFT, padx=5)
+        
+        ttk.Button(boutons_action_frame, text="📊 Statistiques", 
+                  command=self._afficher_statistiques).pack(side=RIGHT, padx=5)
+        
+        ttk.Button(boutons_action_frame, text="❓ Explication complète", 
+                  command=self._afficher_explication).pack(side=RIGHT, padx=5)
+        
+        ttk.Button(boutons_action_frame, text="📚 Guide", 
+                  command=lambda: afficher_guide_jeu("chasse_premiers", self.fenetre_jeu)).pack(side=RIGHT, padx=5)
+        
+        # Zone de log
+        log_frame = Frame(main_frame, bg=self.PALETTE["fond_clair"], relief="solid", borderwidth=1)
+        log_frame.pack(fill=BOTH, expand=True, pady=10)
+        
+        Label(log_frame, text="📝 HISTORIQUE DES QUESTIONS :", 
+              font=("Century Gothic", 10, "bold"), bg=self.PALETTE["fond_clair"]).pack(anchor=W, padx=10, pady=5)
+        
+        self.log_text = Text(log_frame, height=5, font=("Century Gothic", 9),
+                            bg=self.PALETTE["fond_clair"], fg=self.PALETTE["texte_fonce"], wrap=WORD)
+        scrollbar = Scrollbar(log_frame, command=self.log_text.yview)
+        self.log_text.config(yscrollcommand=scrollbar.set)
+        self.log_text.pack(side=LEFT, fill=BOTH, expand=True, padx=10, pady=5)
+        scrollbar.pack(side=RIGHT, fill=Y)
+        self.log_text.config(state=DISABLED)
+
+    def _nouvelle_question(self):
+        """Prépare une nouvelle question"""
+        self.verification_en_cours = False
+        
+        # Mettre à jour le niveau selon le score
+        if self.score < 100:
+            self.niveau = Difficulty.DEBUTANT
+        elif self.score < 300:
+            self.niveau = Difficulty.INTERMEDIAIRE
+        else:
+            self.niveau = Difficulty.AVANCE
+        
+        # Récupérer une question aléatoire du niveau
+        questions_niveau = self.questions_data.get(self.niveau.value, [])
+        if not questions_niveau:
+            self._creer_question_auto()
+        else:
+            self.question_actuelle = random.choice(questions_niveau)
+        
+        # Réinitialiser les compteurs
+        self.indices_decouverts = 0
+        self.essais_restants = 3
+        
+        # Mettre à jour l'interface
+        self._afficher_question()
+        self._creer_controles_reponse()  # Créer les contrôles appropriés
+        self._afficher_indices()
+        self._effacer_feedback()
+        
+        # Mettre à jour les labels
+        self.niveau_label.config(text=f"📊 NIVEAU: {self.niveau.value}")
+        self.essais_label.config(text=f"🎯 ESSAIS RESTANTS: {self.essais_restants}")
+        
+        # Afficher le type de question
+        type_question = self.question_actuelle.get("type", "premier")
+        type_desc = self.types_questions.get(type_question, "Question sur les nombres premiers")
+        self.type_label.config(text=f"🔍 TYPE: {type_desc}")
+        
+        self._ajouter_log(f"🔢 Nouvelle question: {type_desc}")
+        self._mettre_a_jour_stats()
+
+    def _creer_question_auto(self):
+        """Crée une question automatiquement si le fichier est vide"""
+        # Définir les plages selon le niveau
+        if self.niveau == Difficulty.DEBUTANT:
+            # Mélanger nombres premiers et composites
+            nombres_possibles = list(range(2, 31))
+        elif self.niveau == Difficulty.INTERMEDIAIRE:
+            nombres_possibles = list(range(30, 201))
+        else:  # Avancé
+            nombres_possibles = list(range(200, 1001))
+        
+        # Éviter les nombres trop évidents pour les niveaux supérieurs
+        if self.niveau != Difficulty.DEBUTANT:
+            nombres_possibles = [n for n in nombres_possibles if n not in [4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 25, 26, 27, 28]]
+        
+        nombre = random.choice(nombres_possibles)
+        
+        # Déterminer si le nombre est premier
+        est_premier = self._est_premier(nombre)
+        
+        # Créer la question
+        self.question_actuelle = {
+            "question": f"Le nombre {nombre} est-il premier ?",
+            "reponse": "Oui" if est_premier else "Non",
+            "indices": self._generer_indices(nombre, est_premier),
+            "type": "premier"
+        }
+
+    def _est_premier(self, n):
+        """Vérifie si un nombre est premier"""
+        if n < 2:
+            return False
+        if n == 2:
+            return True
+        if n % 2 == 0:
+            return False
+        for i in range(3, int(n**0.5) + 1, 2):
+            if n % i == 0:
+                return False
+        return True
+    
+    def _generer_indices(self, nombre, est_premier):
+        """Génère des indices pour un nombre"""
+        indices = []
+        
+        # Indice 1 : Critères basiques
+        if nombre < 2:
+            indices.append(f"❌ {nombre} < 2, donc il n'est PAS premier")
+        elif nombre == 2:
+            indices.append("✅ 2 est le SEUL nombre premier pair")
+        elif nombre % 2 == 0:
+            indices.append(f"❌ {nombre} est pair (sauf 2), donc il est COMPOSITE")
+        else:
+            indices.append(f"ℹ️  {nombre} est impair, vérifions ses diviseurs...")
+        
+        # Indice 2 : Diviseurs évidents
+        if nombre > 2:
+            if nombre % 3 == 0:
+                indices.append(f"❌ {nombre} ÷ 3 = {nombre // 3} → divisible par 3")
+            elif nombre % 5 == 0:
+                indices.append(f"❌ {nombre} ÷ 5 = {nombre // 5} → divisible par 5")
+            elif nombre % 7 == 0:
+                indices.append(f"❌ {nombre} ÷ 7 = {nombre // 7} → divisible par 7")
+            elif nombre > 10 and nombre % 11 == 0:
+                indices.append(f"❌ {nombre} ÷ 11 = {nombre // 11} → divisible par 11")
+            else:
+                indices.append(f"ℹ️  Pas divisible par 2, 3, 5, 7, 11...")
+        
+        # Indice 3 : Limite de test
+        if nombre > 2 and nombre % 2 != 0:
+            limite = int(nombre**0.5)
+            indices.append(f"ℹ️  Testez les diviseurs jusqu'à √{nombre} ≈ {limite}")
+            
+            # Chercher un diviseur si composite
+            if not est_premier and nombre > 10:
+                diviseur = None
+                for i in range(3, limite + 1, 2):
+                    if nombre % i == 0:
+                        diviseur = i
+                        break
+                if diviseur:
+                    indices.append(f"❌ {nombre} ÷ {diviseur} = {nombre // diviseur}")
+        
+        # Indice 4 : Conclusion
+        if est_premier:
+            indices.append(f"✅ Aucun diviseur trouvé → {nombre} est PREMIER !")
+        else:
+            indices.append(f"❌ Trouvé un diviseur → {nombre} est COMPOSITE")
+        
+        return indices
+
+    def _afficher_question(self):
+        """Affiche la question actuelle"""
+        # Nettoyer le frame
+        for widget in self.question_frame.winfo_children():
+            widget.destroy()
+        
+        # Afficher le nombre mystère
+        Label(self.question_frame, text="🎲 QUESTION :", 
+              font=("Century Gothic", 14, "bold"), bg=self.PALETTE["fond_carte"], 
+              fg=self.PALETTE["primaire"]).pack(pady=20)
+        
+        # Extraire le nombre de la question
+        question_text = self.question_actuelle["question"]
+        Label(self.question_frame, text=question_text, 
+              font=("Century Gothic", 18, "bold"), bg=self.PALETTE["fond_carte"], 
+              fg=self.PALETTE["texte_fonce"], wraplength=700).pack(pady=10, padx=20)
+        
+        # Afficher l'instruction selon le type
+        type_question = self.question_actuelle.get("type", "premier")
+        instruction = ""
+        
+        if type_question == "premier":
+            instruction = "Est-ce un nombre premier ?"
+        elif type_question == "decomposition":
+            instruction = "Donnez la décomposition en facteurs premiers"
+        elif type_question == "diviseurs":
+            instruction = "Listez tous les diviseurs"
+        elif type_question == "vrai_faux":
+            instruction = "Cette affirmation est-elle vraie ou fausse ?"
+        elif type_question == "nombre_mystere":
+            instruction = "Quel est ce nombre ?"
+        
+        if instruction:
+            Label(self.question_frame, text=instruction, 
+                  font=("Century Gothic", 14), bg=self.PALETTE["fond_carte"], 
+                  fg=self.PALETTE["texte_clair"]).pack(pady=10)
+
+    def _creer_controles_reponse(self):
+        """Crée les contrôles de réponse adaptés au type de question"""
+        # Nettoyer le frame
+        for widget in self.controles_reponse_frame.winfo_children():
+            widget.destroy()
+        
+        type_question = self.question_actuelle.get("type", "premier")
+        
+        if type_question == "premier":
+            # Boutons Oui/Non pour les questions "est-ce premier ?"
+            boutons_frame = Frame(self.controles_reponse_frame, bg=self.PALETTE["fond_principal"])
+            boutons_frame.pack()
+            
+            self.btn_oui = ttk.Button(boutons_frame, text="✅ OUI, c'est PREMIER", 
+                                     command=lambda: self._verifier_reponse("Oui"), width=20)
+            self.btn_oui.pack(side=LEFT, padx=10)
+            
+            self.btn_non = ttk.Button(boutons_frame, text="❌ NON, c'est COMPOSITE", 
+                                     command=lambda: self._verifier_reponse("Non"), width=20)
+            self.btn_non.pack(side=LEFT, padx=10)
+            
+        elif type_question == "vrai_faux":
+            # Boutons Vrai/Faux
+            boutons_frame = Frame(self.controles_reponse_frame, bg=self.PALETTE["fond_principal"])
+            boutons_frame.pack()
+            
+            self.btn_vrai = ttk.Button(boutons_frame, text="✅ VRAI", 
+                                      command=lambda: self._verifier_reponse("Vrai"), width=15)
+            self.btn_vrai.pack(side=LEFT, padx=10)
+            
+            self.btn_faux = ttk.Button(boutons_frame, text="❌ FAUX", 
+                                      command=lambda: self._verifier_reponse("Faux"), width=15)
+            self.btn_faux.pack(side=LEFT, padx=10)
+            
+        elif type_question in ["decomposition", "diviseurs", "nombre_mystere"]:
+            # Champ de saisie pour les réponses textuelles
+            saisie_frame = Frame(self.controles_reponse_frame, bg=self.PALETTE["fond_principal"])
+            saisie_frame.pack()
+            
+            Label(saisie_frame, text="Entrez votre réponse :", 
+                  font=("Century Gothic", 11), bg=self.PALETTE["fond_principal"]).pack(pady=5)
+            
+            self.reponse_entry = Entry(saisie_frame, font=("Century Gothic", 14), 
+                                      width=30, justify="center")
+            self.reponse_entry.pack(pady=5)
+            self.reponse_entry.bind("<Return>", lambda e: self._verifier_reponse_texte())
+            
+            # Exemples de format selon le type
+            exemples = {
+                "decomposition": "Ex: 2×2×3×5 ou 2²×3×5",
+                "diviseurs": "Ex: 1,2,3,6 (séparés par des virgules)",
+                "nombre_mystere": "Ex: 42"
+            }
+            
+            if type_question in exemples:
+                Label(saisie_frame, text=exemples[type_question], 
+                      font=("Century Gothic", 9), bg=self.PALETTE["fond_principal"], 
+                      fg=self.PALETTE["texte_clair"]).pack(pady=2)
+            
+            ttk.Button(saisie_frame, text="✅ Valider la réponse", 
+                      command=self._verifier_reponse_texte).pack(pady=10)
+        
+        else:
+            # Par défaut, champ de saisie générique
+            saisie_frame = Frame(self.controles_reponse_frame, bg=self.PALETTE["fond_principal"])
+            saisie_frame.pack()
+            
+            self.reponse_entry = Entry(saisie_frame, font=("Century Gothic", 14), 
+                                      width=30, justify="center")
+            self.reponse_entry.pack(pady=5)
+            self.reponse_entry.bind("<Return>", lambda e: self._verifier_reponse_texte())
+            
+            ttk.Button(saisie_frame, text="✅ Valider", 
+                      command=self._verifier_reponse_texte).pack(pady=5)
+
+    def _verifier_reponse(self, reponse_joueur):
+        """Vérifie la réponse pour les questions à choix (Oui/Non, Vrai/Faux)"""
+        if self.verification_en_cours:
+            return
+            
+        if self.essais_restants <= 0:
+            return
+        
+        # Désactiver les contrôles
+        self._desactiver_controles()
+        self.verification_en_cours = True
+        
+        self.parties_jouees += 1
+        self.essais_restants -= 1
+        self.essais_label.config(text=f"🎯 ESSAIS RESTANTS: {self.essais_restants}")
+        
+        reponse_correcte = self.question_actuelle["reponse"]
+        
+        # Normaliser les réponses
+        reponse_joueur_norm = reponse_joueur.strip().lower()
+        reponse_correcte_norm = str(reponse_correcte).strip().lower()
+        
+        if reponse_joueur_norm == reponse_correcte_norm:
+            self._reussite_question()
+        else:
+            self._echec_essai()
+        
+        if self.essais_restants <= 0:
+            self.fenetre_jeu.after(1000, self._question_echouee)
+
+    def _verifier_reponse_texte(self):
+        """Vérifie la réponse pour les questions à saisie textuelle"""
+        if self.verification_en_cours:
+            return
+            
+        if self.essais_restants <= 0:
+            return
+        
+        # Récupérer la réponse
+        try:
+            reponse_joueur = self.reponse_entry.get().strip()
+        except:
+            # Si pas de champ entry (boutons uniquement)
+            self._afficher_feedback("❌ Veuillez entrer une réponse", self.PALETTE["erreur"])
+            return
+        
+        if not reponse_joueur:
+            self._afficher_feedback("❌ Veuillez entrer une réponse", self.PALETTE["erreur"])
+            return
+        
+        # Désactiver les contrôles
+        self._desactiver_controles()
+        self.verification_en_cours = True
+        
+        self.parties_jouees += 1
+        self.essais_restants -= 1
+        self.essais_label.config(text=f"🎯 ESSAIS RESTANTS: {self.essais_restants}")
+        
+        reponse_correcte = self.question_actuelle["reponse"]
+        type_question = self.question_actuelle.get("type", "premier")
+        
+        # Vérification selon le type de question
+        if self._valider_reponse_texte(reponse_joueur, reponse_correcte, type_question):
+            self._reussite_question()
+        else:
+            self._echec_essai()
+        
+        if self.essais_restants <= 0:
+            self.fenetre_jeu.after(1000, self._question_echouee)
+
+    def _valider_reponse_texte(self, reponse_joueur, reponse_correcte, type_question):
+        """Valide une réponse textuelle selon le type de question"""
+        try:
+            if type_question == "decomposition":
+                # Validation de la décomposition en facteurs premiers
+                return self._valider_decomposition(reponse_joueur, reponse_correcte)
+            
+            elif type_question == "diviseurs":
+                # Validation de la liste de diviseurs
+                return self._valider_diviseurs(reponse_joueur, reponse_correcte)
+            
+            elif type_question == "nombre_mystere":
+                # Validation d'un nombre
+                return self._valider_nombre(reponse_joueur, reponse_correcte)
+            
+            else:
+                # Validation textuelle simple
+                return str(reponse_joueur).strip().lower() == str(reponse_correcte).strip().lower()
+                
+        except:
+            return False
+
+    def _valider_decomposition(self, reponse_joueur, reponse_correcte):
+        """Valide une décomposition en facteurs premiers"""
+        # Nettoyer les espaces
+        reponse_joueur = reponse_joueur.replace(" ", "").lower()
+        reponse_correcte = str(reponse_correcte).replace(" ", "").lower()
+        
+        # Formater la réponse correcte si c'est une liste
+        if isinstance(reponse_correcte, list):
+            reponse_correcte = "×".join(str(x) for x in reponse_correcte)
+        
+        # Supprimer les × en trop
+        reponse_joueur = reponse_joueur.strip("×")
+        reponse_correcte = reponse_correcte.strip("×")
+        
+        # Trier les facteurs pour comparer
+        def trier_facteurs(expression):
+            facteurs = expression.split("×")
+            facteurs_tries = sorted(facteurs, key=lambda x: int(''.join(filter(str.isdigit, x))) if any(c.isdigit() for c in x) else 0)
+            return "×".join(facteurs_tries)
+        
+        try:
+            return trier_facteurs(reponse_joueur) == trier_facteurs(reponse_correcte)
+        except:
+            return reponse_joueur == reponse_correcte
+
+    def _valider_diviseurs(self, reponse_joueur, reponse_correcte):
+        """Valide une liste de diviseurs"""
+        # Nettoyer et trier
+        try:
+            # Extraire les nombres de la réponse du joueur
+            nombres_joueur = [int(x.strip()) for x in reponse_joueur.replace(",", " ").split()]
+            nombres_joueur.sort()
+            
+            # Formater la réponse correcte
+            if isinstance(reponse_correcte, list):
+                nombres_corrects = sorted(reponse_correcte)
+            else:
+                nombres_corrects = sorted([int(x.strip()) for x in str(reponse_correcte).replace(",", " ").split()])
+            
+            return nombres_joueur == nombres_corrects
+        except:
+            return False
+
+    def _valider_nombre(self, reponse_joueur, reponse_correcte):
+        """Valide un nombre"""
+        try:
+            return int(reponse_joueur) == int(reponse_correcte)
+        except:
+            return reponse_joueur == str(reponse_correcte)
+
+    def _afficher_indices(self):
+        """Affiche les indices disponibles"""
+        # Nettoyer le frame
+        for widget in self.indices_frame.winfo_children():
+            widget.destroy()
+        
+        indices = self.question_actuelle.get("indices", [])
+        
+        if not indices:
+            Label(self.indices_frame, text="Aucun indice disponible", 
+                  font=("Century Gothic", 10), bg=self.PALETTE["fond_principal"], 
+                  fg=self.PALETTE["texte_clair"]).pack(pady=5)
+            return
+        
+        # Afficher les indices déjà découverts
+        for i in range(len(indices)):
+            if i < self.indices_decouverts:
+                # Indice révélé
+                Label(self.indices_frame, text=f"💡 {indices[i]}", 
+                      font=("Century Gothic", 10), bg=self.PALETTE["fond_principal"], 
+                      fg="#10B981", wraplength=700, justify="left").pack(anchor=W, pady=3)
+            else:
+                # Indice caché
+                Label(self.indices_frame, text=f"🔒 Indice {i+1} (coût: 5 points)", 
+                      font=("Century Gothic", 9), bg=self.PALETTE["fond_principal"], 
+                      fg=self.PALETTE["texte_clair"], wraplength=700, 
+                      justify="left").pack(anchor=W, pady=3)
+
+    def _obtenir_indice(self):
+        """Donne un indice au joueur"""
+        indices = self.question_actuelle.get("indices", [])
+        
+        if not indices:
+            self._afficher_feedback("❌ Aucun indice disponible pour cette question", self.PALETTE["erreur"])
+            return
+        
+        if self.indices_decouverts >= len(indices):
+            self._afficher_feedback("❌ Plus d'indices disponibles !", self.PALETTE["erreur"])
+            return
+        
+        # Pénalité de points
+        penalite = 5
+        if self.score >= penalite:
+            self.score -= penalite
+            self.indices_decouverts += 1
+            
+            self._ajouter_log(f"📉 Indice acheté: -{penalite} points")
+            self._afficher_feedback(f"💡 Indice {self.indices_decouverts} révélé ! (-{penalite} points)", 
+                                  "#F59E0B")
+            
+            self._afficher_indices()
+            self._mettre_a_jour_stats()
+        else:
+            self._afficher_feedback("❌ Pas assez de points pour un indice !", self.PALETTE["erreur"])
+
+    def _desactiver_controles(self):
+        """Désactive tous les contrôles de réponse"""
+        for widget in self.controles_reponse_frame.winfo_children():
+            if isinstance(widget, ttk.Button):
+                widget.config(state="disabled")
+            elif isinstance(widget, Frame):
+                for child in widget.winfo_children():
+                    if isinstance(child, ttk.Button):
+                        child.config(state="disabled")
+                    elif isinstance(child, Entry):
+                        child.config(state="disabled")
+
+    def _reactiver_controles(self):
+        """Réactive les contrôles de réponse"""
+        type_question = self.question_actuelle.get("type", "premier")
+        
+        if type_question in ["premier", "vrai_faux"]:
+            # Réactiver les boutons
+            for widget in self.controles_reponse_frame.winfo_children():
+                if isinstance(widget, ttk.Button):
+                    widget.config(state="normal")
+                elif isinstance(widget, Frame):
+                    for child in widget.winfo_children():
+                        if isinstance(child, ttk.Button):
+                            child.config(state="normal")
+        else:
+            # Réactiver le champ de saisie
+            for widget in self.controles_reponse_frame.winfo_children():
+                if isinstance(widget, Entry):
+                    widget.config(state="normal")
+                elif isinstance(widget, Frame):
+                    for child in widget.winfo_children():
+                        if isinstance(child, Entry):
+                            child.config(state="normal")
+                        elif isinstance(child, ttk.Button):
+                            child.config(state="normal")
+
+    def _reussite_question(self):
+        """Quand la question est résolue correctement"""
+        try:
+            points = self._calculer_points()
+            self.score += points
+            self.streak += 1
+            self.parties_gagnees += 1
+            
+            if self.streak > self.meilleur_streak:
+                self.meilleur_streak = self.streak
+            
+            # Bonus de streak
+            bonus_streak = 0
+            if self.streak >= 5:
+                bonus_streak = 20
+                self.score += bonus_streak
+                self.bonus_streak += bonus_streak
+            
+            # Extraire des infos pour le feedback
+            question_text = self.question_actuelle["question"]
+            nombre = self._extraire_nombre(question_text) if "nombre" in question_text.lower() else ""
+            
+            message = f"✅ CORRECT ! (+{points} points"
+            if nombre:
+                message += f" pour {nombre}"
+            if bonus_streak:
+                message += f" + {bonus_streak} bonus streak"
+            message += ")"
+            
+            self._afficher_feedback(message, self.PALETTE["succes"])
+            self._ajouter_log(f"✅ Réponse correcte ! +{points} points")
+            self._mettre_a_jour_stats()
+            
+            # Nouvelle question après délai
+            self.fenetre_jeu.after(2500, self._nouvelle_question)
+            
+        except Exception as e:
+            print(f"Erreur dans _reussite_question: {e}")
+            self._afficher_feedback(f"❌ Erreur: {str(e)}", self.PALETTE["erreur"])
+            self.verification_en_cours = False
+
+    def _echec_essai(self):
+        """Quand un essai échoue"""
+        try:
+            self.streak = 0
+            self.bonus_streak = 0
+            
+            if self.essais_restants > 0:
+                # Réactiver les contrôles pour un nouvel essai
+                self._reactiver_controles()
+                self.verification_en_cours = False
+                
+                self._afficher_feedback(f"❌ Réponse incorrecte. Il te reste {self.essais_restants} essai{'s' if self.essais_restants > 1 else ''}.", 
+                                      self.PALETTE["erreur"])
+            else:
+                self._afficher_feedback(f"❌ Réponse incorrecte.", self.PALETTE["erreur"])
+            
+            self._ajouter_log(f"❌ Essai incorrect")
+            self._mettre_a_jour_stats()
+            
+        except Exception as e:
+            print(f"Erreur dans _echec_essai: {e}")
+            self.verification_en_cours = False
+
+    def _question_echouee(self):
+        """Quand la question n'est pas résolue à temps"""
+        try:
+            self.streak = 0
+            self.bonus_streak = 0
+            
+            # Extraire le nombre
+            question_text = self.question_actuelle["question"]
+            reponse = self.question_actuelle["reponse"]
+            
+            # Pénalité
+            penalite = 15
+            self.score = max(0, self.score - penalite)
+            
+            self._afficher_feedback(f"💥 ÉCHEC ! La réponse était: {reponse} (-{penalite} points)", 
+                                  self.PALETTE["erreur"])
+            
+            self._ajouter_log(f"💥 ÉCHEC - Réponse: {reponse}. -{penalite} points")
+            self._mettre_a_jour_stats()
+            
+            # Nouvelle question après délai
+            self.fenetre_jeu.after(3000, self._nouvelle_question)
+            
+        except Exception as e:
+            print(f"Erreur dans _question_echouee: {e}")
+            # Passer à la question suivante même en cas d'erreur
+            self.fenetre_jeu.after(1000, self._nouvelle_question)
+
+    def _calculer_points(self):
+        """Calcule les points gagnés"""
+        points_base = 20
+        niveau_multiplier = {
+            Difficulty.DEBUTANT: 1,
+            Difficulty.INTERMEDIAIRE: 2,
+            Difficulty.AVANCE: 3
+        }
+        
+        # Bonus pour rapidité (beaucoup d'essais restants)
+        bonus_essais = self.essais_restants * 5
+        
+        # Malus pour indices utilisés
+        malus_indices = self.indices_decouverts * 5
+        
+        # Vérifier que le niveau existe dans le dictionnaire
+        multiplicateur = niveau_multiplier.get(self.niveau, 1)
+        
+        points = (points_base + bonus_essais - malus_indices) * multiplicateur
+        
+        # Minimum de 10 points
+        return max(10, points)
+
+    def _extraire_nombre(self, question):
+        """Extrait le nombre d'une question"""
+        import re
+        nombres = re.findall(r'\d+', question)
+        return int(nombres[0]) if nombres else 0
+    
+    def _afficher_feedback(self, message, couleur):
+        """Affiche un message de feedback"""
+        self.feedback_label.config(text=message, fg=couleur)
+    
+    def _effacer_feedback(self):
+        """Efface le feedback"""
+        self.feedback_label.config(text="")
+    
+    def _ajouter_log(self, message):
+        """Ajoute un message au log"""
+        self.log_text.config(state=NORMAL)
+        from datetime import datetime
+        timestamp = datetime.now().strftime("%H:%M:%S")
+        self.log_text.insert(END, f"[{timestamp}] {message}\n")
+        self.log_text.see(END)
+        self.log_text.config(state=DISABLED)
+    
+    def _mettre_a_jour_stats(self):
+        """Met à jour toutes les statistiques"""
+        self.score_label.config(text=f"🏆 SCORE: {self.score}")
+        self.streak_label.config(text=f"🔥 STREAK: {self.streak}")
+        self.parties_label.config(text=f"📈 PARTIES: {self.parties_gagnees}/{self.parties_jouees}")
+        
+        # Mettre à jour le niveau affiché
+        if self.score < 100:
+            niveau_text = "Débutant"
+        elif self.score < 300:
+            niveau_text = "Intermédiaire"
+        else:
+            niveau_text = "Avancé"
+        self.niveau_label.config(text=f"📊 NIVEAU: {niveau_text}")
+
+    def _afficher_statistiques(self):
+        """Affiche une fenêtre de statistiques"""
+        stats_window = Toplevel(self.fenetre_jeu)
+        stats_window.title("📊 Statistiques Détaillées")
+        stats_window.geometry("500x500")
+        stats_window.configure(bg=self.PALETTE["fond_principal"])
+        
+        # Titre
+        Label(stats_window, text="📊 STATISTIQUES DÉTAILLÉES", 
+              font=("Century Gothic", 16, "bold"), bg=self.PALETTE["fond_principal"], 
+              fg=self.PALETTE["primaire"]).pack(pady=20)
+        
+        # Cadre des stats avec scrollbar
+        stats_container = Frame(stats_window, bg=self.PALETTE["fond_principal"])
+        stats_container.pack(fill=BOTH, expand=True, padx=20, pady=10)
+        
+        canvas = Canvas(stats_container, bg=self.PALETTE["fond_clair"])
+        scrollbar = Scrollbar(stats_container, orient="vertical", command=canvas.yview)
+        scrollable_frame = Frame(canvas, bg=self.PALETTE["fond_clair"])
+        
+        scrollable_frame.bind(
+            "<Configure>",
+            lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+        )
+        
+        canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+        canvas.configure(yscrollcommand=scrollbar.set)
+        
+        stats_content = [
+            ("🎯 Score total", f"{self.score} points"),
+            ("🔥 Streak actuel", f"{self.streak} réponses consécutives"),
+            ("⭐ Meilleur streak", f"{self.meilleur_streak} réponses"),
+            ("✅ Réponses correctes", f"{self.parties_gagnees}"),
+            ("📊 Parties jouées", f"{self.parties_jouees}"),
+            ("📈 Taux de réussite", f"{(self.parties_gagnees/self.parties_jouees*100 if self.parties_jouees > 0 else 0):.1f}%"),
+            ("🔢 Nombres premiers", f"{len(self.nombres_premiers_trouves)}"),
+            ("🔣 Nombres composites", f"{len(self.nombres_composites_trouves)}"),
+            ("🔍 Indices utilisés", f"{self.indices_decouverts}"),
+            ("💰 Coût indices", f"{self.indices_decouverts * 5} points"),
+            ("⭐ Bonus streak", f"{self.bonus_streak} points"),
+            ("📊 Niveau actuel", f"{self.niveau.value}")
+        ]
+        
+        for label, value in stats_content:
+            line_frame = Frame(scrollable_frame, bg=self.PALETTE["fond_clair"])
+            line_frame.pack(fill=X, padx=15, pady=8)
+            
+            Label(line_frame, text=label, font=("Century Gothic", 11), 
+                  bg=self.PALETTE["fond_clair"], fg=self.PALETTE["texte_fonce"]).pack(side=LEFT)
+            
+            Label(line_frame, text=value, font=("Century Gothic", 11, "bold"), 
+                  bg=self.PALETTE["fond_clair"], fg=self.PALETTE["primaire"]).pack(side=RIGHT)
+        
+        # Listes des nombres trouvés (si disponibles)
+        if self.nombres_premiers_trouves or self.nombres_composites_trouves:
+            separator = Frame(scrollable_frame, bg=self.PALETTE["fond_clair"], height=2, relief="sunken")
+            separator.pack(fill=X, padx=15, pady=10)
+            
+            premiers_text = ", ".join(str(n) for n in sorted(self.nombres_premiers_trouves[-10:]))  # 10 derniers
+            composites_text = ", ".join(str(n) for n in sorted(self.nombres_composites_trouves[-10:]))
+            
+            Label(scrollable_frame, text="📋 10 derniers nombres premiers:", 
+                  font=("Century Gothic", 11, "bold"), bg=self.PALETTE["fond_clair"]).pack(anchor=W, padx=15, pady=5)
+            Label(scrollable_frame, text=premiers_text if premiers_text else "Aucun", 
+                  font=("Century Gothic", 10), bg=self.PALETTE["fond_clair"], 
+                  fg=self.PALETTE["succes"], wraplength=400).pack(anchor=W, padx=15, pady=2)
+            
+            Label(scrollable_frame, text="📋 10 derniers nombres composites:", 
+                  font=("Century Gothic", 11, "bold"), bg=self.PALETTE["fond_clair"]).pack(anchor=W, padx=15, pady=5)
+            Label(scrollable_frame, text=composites_text if composites_text else "Aucun", 
+                  font=("Century Gothic", 10), bg=self.PALETTE["fond_clair"], 
+                  fg=self.PALETTE["erreur"], wraplength=400).pack(anchor=W, padx=15, pady=2)
+        
+        canvas.pack(side=LEFT, fill=BOTH, expand=True)
+        scrollbar.pack(side=RIGHT, fill=Y)
+        
+        # Bouton fermer
+        btn_frame = Frame(stats_window, bg=self.PALETTE["fond_principal"])
+        btn_frame.pack(pady=15)
+        ttk.Button(btn_frame, text="Fermer", command=stats_window.destroy).pack()
+    
+    def _afficher_explication(self):
+        """Affiche l'explication complète"""
+        # Pénalité pour voir la solution
+        penalite = 10
+        self.score = max(0, self.score - penalite)
+        
+        explication_window = Toplevel(self.fenetre_jeu)
+        explication_window.title("📚 Explication Complète")
+        explication_window.geometry("600x500")
+        explication_window.configure(bg=self.PALETTE["fond_principal"])
+        
+        # Titre
+        Label(explication_window, text="📚 EXPLICATION COMPLÈTE", 
+              font=("Century Gothic", 16, "bold"), bg=self.PALETTE["fond_principal"], 
+              fg=self.PALETTE["primaire"]).pack(pady=20)
+        
+        # Question
+        Label(explication_window, text="Question:", 
+              font=("Century Gothic", 12, "bold"), bg=self.PALETTE["fond_principal"]).pack(pady=5)
+        
+        Label(explication_window, text=self.question_actuelle["question"], 
+              font=("Century Gothic", 14), bg=self.PALETTE["fond_principal"], 
+              fg=self.PALETTE["texte_fonce"], wraplength=500).pack(pady=5)
+        
+        # Réponse
+        Label(explication_window, text="Réponse:", 
+              font=("Century Gothic", 12, "bold"), bg=self.PALETTE["fond_principal"]).pack(pady=10)
+        
+        reponse = self.question_actuelle["reponse"]
+        couleur = self.PALETTE["succes"] if reponse == "Oui" or reponse == "Vrai" else self.PALETTE["erreur"]
+        
+        Label(explication_window, text=reponse, 
+              font=("Century Gothic", 18, "bold"), bg=self.PALETTE["fond_principal"], 
+              fg=couleur).pack(pady=5)
+        
+        # Explication détaillée
+        Label(explication_window, text="Explication détaillée:", 
+              font=("Century Gothic", 12, "bold"), bg=self.PALETTE["fond_principal"]).pack(pady=10)
+        
+        explication_text = Text(explication_window, height=12, font=("Century Gothic", 10),
+                               bg=self.PALETTE["fond_clair"], fg=self.PALETTE["texte_fonce"], 
+                               wrap=WORD)
+        scrollbar = Scrollbar(explication_window, command=explication_text.yview)
+        explication_text.config(yscrollcommand=scrollbar.set)
+        
+        # Ajouter tous les indices
+        indices = self.question_actuelle.get("indices", [])
+        if indices:
+            for indice in indices:
+                explication_text.insert(END, f"• {indice}\n\n")
+        else:
+            explication_text.insert(END, "Aucune explication disponible.\n")
+        
+        explication_text.pack(side=LEFT, fill=BOTH, expand=True, padx=20, pady=5)
+        scrollbar.pack(side=RIGHT, fill=Y)
+        explication_text.config(state=DISABLED)
+        
+        # Pénalité
+        Label(explication_window, text=f"(-{penalite} points pour voir l'explication)", 
+              font=("Century Gothic", 10), bg=self.PALETTE["fond_principal"], 
+              fg=self.PALETTE["texte_clair"]).pack(pady=10)
+        
+        # Bouton fermer
+        ttk.Button(explication_window, text="Fermer", 
+                  command=explication_window.destroy).pack(pady=10)
+        
+        self._ajouter_log(f"📚 Explication achetée: -{penalite} points")
+        self._mettre_a_jour_stats()
 # =============================================================================
 # FONCTIONS D'ACCÈS UNIFIÉES
 # =============================================================================
@@ -3801,6 +5561,18 @@ def lancer_dessine_fonction(parent=None):
     """Lance Dessine-moi une Fonction"""
     jeu = DessineMoiUneFonction(parent)
     jeu.lancer_jeu()
+
+def lancer_mystere_math(parent=None):
+    """Lance le Mystère Mathématique"""
+    jeu = MystereMathematique(parent)
+    jeu.lancer_jeu()
+
+def lancer_chasse_premiers(parent=None):
+    """Lancer le Jeu Chasse aux Nombres Premiers"""
+    jeu = ChasseNombresPremiers(parent)
+    jeu.lancer_jeu()
+
+
 
 # =============================================================================
 # LISTE DES JEUX DISPONIBLES (pour l'interface)
@@ -3868,5 +5640,18 @@ JEUX_DISPONIBLES = [
         "fonction": lancer_jeu_des_24,
         "disponible": True,
         "guide": lambda parent: afficher_guide_jeu("jeu_des_24", parent)
+    },{
+        "nom": "🕵️ Mystère Mathématique",
+        "description": "Énigmes et casse-têtes mathématiques\n• Développe la pensée critique\n• Système d'indices stratégiques\n• Journal de résolution",
+        "fonction": lancer_mystere_math,
+        "disponible": True,
+        "guide": lambda parent: afficher_guide_jeu("mystere_math", parent)
+    },
+    {
+    "nom": "🔢 Chasse aux Nombres Premiers",
+    "description": "Testez votre instinct mathématique !\n• Identifiez les nombres premiers vs composites\n• 3 niveaux de difficulté progressive\n• Système de streak et bonus de performance\n• Indices stratégiques et explications détaillées",
+    "fonction": lancer_chasse_premiers,
+    "disponible": True,
+    "guide": lambda parent: afficher_guide_jeu("chasse_premiers", parent)
     }
 ]
