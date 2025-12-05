@@ -9,6 +9,8 @@ from App import integration_numerique as int_num
 from App.interface_historique import InterfaceHistorique  
 from App import explorateur_concepts as exp_concepts
 from App.soutient_manager import afficher_soutien
+from App import interpolation_lineaire as int_lin
+from App import equation_numerique as eq_num
 
 # Fonctions pour le menu Aide
 def afficher_guides():
@@ -171,7 +173,7 @@ canvas.bind_all("<MouseWheel>", _on_mouse_wheel)
 # === CONTENU PRINCIPAL ===
 labels = Label(
     scrollable_frame,
-    text="🧮 ✨ Un espace malin, Calculer et s'amuser avec les maths.",
+    text="🧮 ✨ Un espace malin pour Calculer, Apprendre et s'amuser avec les maths.",
     font=("Century Gothic", 13),
     fg="#64748B",
     bg="#F0F4F8"
@@ -249,6 +251,22 @@ bouton9 = ttk.Button(
     command=int_num.lancer_integration_numerique
 )
 
+bouton_equation_num = ttk.Button(
+    scrollable_frame,
+    text="Module 8 : Resolution (Numérique) d'équation 🟰",
+    style="Custom.TButton",
+    compound=LEFT,
+    command=eq_num.lancer_equation_Numerique
+)
+
+bouton_interpolation_lineaire = ttk.Button(
+    scrollable_frame,
+    text="Module 9 : interpolation_linéaire 📈",
+    style="Custom.TButton",
+    compound=LEFT,
+    command=int_lin.lancer_interpolation_Numerique
+)
+
 bouton_historique = ttk.Button(
     scrollable_frame,
     text="📊 Historique des Calculs", 
@@ -265,6 +283,8 @@ bouton4.pack(pady=8, fill=X, padx=60)
 bouton6.pack(pady=8, fill=X, padx=60)
 bouton8.pack(pady=8, fill=X, padx=60)
 bouton9.pack(pady=8, fill=X, padx=60)
+bouton_equation_num.pack(pady=8, fill=X, padx=60)
+bouton_interpolation_lineaire.pack(pady=8, fill=X, padx=60)
 bouton_historique.pack(pady=8, fill=X, padx=60)
 
 # Séparateur avant le bouton Quitter

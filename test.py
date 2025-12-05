@@ -10,7 +10,7 @@ import os
 # Ajouter le chemin pour importer les modules
 sys.path.append(os.path.dirname(__file__))
 
-from modules import (
+from App.modules import (
     # Arithmétique
     factorec, factoiter, nb_premier, pgcdrec, ppcm, nbr_parfait, nbr_distinct,
     puissance, puissanceRapide, catalan, combinaison, fibo, fibo2,
@@ -35,7 +35,7 @@ from modules import (
     racineDichotomie, racineNewton
 )
 
-from conversion import (
+from App.conversion import (
     convertir_longueur, convertir_temperature, convertir_masse_et_poids,
     convertir_vitesse, convertir_angles
 )
