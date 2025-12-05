@@ -6,7 +6,7 @@ import time
 import math
 from tkinter import *
 from tkinter import ttk, messagebox
-import json
+import json, time
 import os
 from enum import Enum
 
@@ -529,13 +529,90 @@ GUIDES_JEUX = {
             "• Or : Score de 500 points avec 80% de réussite",
             "• Diamant : Score de 1000 points et identification de 50 nombres"
         ]
-    }
+    },"math_battle": {
+    "titre": "⚔️ Math Battle – Ultimate Challenge",
+    "contenu": [
+        "📝 **Comment jouer :**",
+        "• Choisissez votre niveau (Débutant, Intermédiaire, Expert)",
+        "• Répondez aux énigmes mathématiques avant la fin du chrono",
+        "• Plus vous répondez vite, plus vous gagnez de points bonus",
+        "• Les énigmes deviennent plus difficiles au fur et à mesure",
+        "",
+        "🎮 **Types de questions :**",
+        "• Arithmétique : additions, soustractions, multiplications, divisions",
+        "• Algèbre : équations simples, systèmes, polynômes",
+        "• Géométrie : aires, périmètres, théorème de Pythagore",
+        "• Suites et logique : arithmétiques, géométriques, Fibonacci, look-and-say",
+        "• Racines et puissances : √, ², ³, puissances entières",
+        "• Nombres spéciaux : premiers, parfaits, palindromes",
+        "",
+        "🏆 **Système de points :**",
+        "• Débutant : 10 points par énigme",
+        "• Intermédiaire : 20 points par énigme",
+        "• Expert : 30 points par énigme",
+        "• Bonus rapidité : +2 à +10 points selon le temps restant",
+        "",
+        "💡 **Conseils stratégiques :**",
+        "• Entraînez-vous sur les tables de multiplication et les carrés parfaits",
+        "• Mémorisez les valeurs trigonométriques des angles courants (30°, 45°, 60°, 90°)",
+        "• Gérez votre temps – ne restez pas bloqué sur une énigme",
+        "• Utilisez la logique pour éliminer les mauvaises réponses"
+    ],
+    "exemples": [
+        "🧮 **Exemples d’énigmes :**",
+        "Débutant : 12 ÷ 3 = ? → 4",
+        "Intermédiaire : √225 = ? → 15",
+        "Expert : log₂(32) = ? → 5"
+    ],
+    "interface": [
+        "📊 **Affichage :**",
+        "• Barre de progression du chrono",
+        "• Score en temps réel",
+        "• Niveau actuel et nombre d’énigmes restantes",
+        "",
+        "🎨 **Design :**",
+        "• Couleurs dynamiques selon le niveau (Vert = Débutant, Orange = Intermédiaire, Rouge = Expert)",
+        "• Effets visuels quand une réponse est correcte (+ points)",
+        "• Animation spéciale quand un niveau est terminé"
+    ]
+},"defis_fibonacci": {
+    "titre": "🌟 Guide du Défi Fibonacci",
+    "contenu": [
+        "📝 **Comment jouer :**",
+        "• Complétez les suites de Fibonacci ou résolvez des énigmes liées",
+        "• Plus vous répondez vite, plus vous gagnez de points bonus",
+        "• Les suites deviennent plus longues et complexes avec votre score",
+        "",
+        "🎮 **Types de questions :**",
+        "• Suites simples : trouver le prochain terme",
+        "• Positions : identifier Fn pour un n donné",
+        "• Calculs : sommes, différences, produits de termes",
+        "• Logique : retrouver des termes manquants",
+        "• Théorie : propriétés avancées (nombre d’or, formule de Binet)",
+        "",
+        "🏆 **Système de points :**",
+        "• Débutant : 10 points par question",
+        "• Intermédiaire : 20 points par question",
+        "• Expert : 30 points par question",
+        "• Bonus rapidité : +2 à +10 points selon le temps restant",
+        "",
+        "💡 **Conseils stratégiques :**",
+        "• Mémorisez les premiers termes de la suite (jusqu’à F20)",
+        "• Comprenez la relation Fn+2 = Fn+1 + Fn",
+        "• Utilisez la formule de Binet pour les grands n",
+        "• Gérez votre temps - ne restez pas bloqué sur une énigme"
+    ],
+    "exemples": [
+        "🧮 **Exemples de questions :**",
+        "Débutant : 0, 1, 1, 2, 3, ? → 5",
+        "Intermédiaire : Fn = 34, trouver n → 9",
+        "Expert : Limite Fn+1/Fn quand n → ∞ → φ ≈ 1.618"
+    ]
 }
 
-def lancer_jeu_des_24(parent=None):
-    """Lance le Jeu des 24"""
-    jeu = JeuDes24(parent)
-    jeu.lancer_jeu()
+}
+
+
 
 # =============================================================================
 # FONCTIONS POUR AFFICHER LES GUIDES
@@ -5523,9 +5600,2072 @@ class ChasseNombresPremiers:
         
         self._ajouter_log(f"📚 Explication achetée: -{penalite} points")
         self._mettre_a_jour_stats()
+
+# =============================================================================
+# MATH BATTLE
+# =============================================================================
+
+class MathBattle:
+    def __init__(self, parent, json_file_path="data/math_battle.json"):
+        self.parent = parent
+        self.score_joueur = 0
+        self.score_ordi = 0
+        self.manche_actuelle = 1
+        self.questions_jouees = 0
+        self.questions_total = 10
+        self.temps_restant = 30
+        self.timer_actif = False
+        self.question_actuelle = None
+        self.derniere_reponse = None
+        self.gagnant_manche = None
+        self.streak = 0
+        self.bonus_streak = 0
+        
+        # Palette de couleurs
+        self.PALETTE = {
+            "fond_principal": "#FFFFFF",
+            "primaire": "#2563EB",
+            "secondaire": "#7C3AED",
+            "succes": "#10B981",
+            "erreur": "#EF4444",
+            "avertissement": "#F59E0B",
+            "info": "#3B82F6",
+            "texte_fonce": "#1F2937",
+            "texte_clair": "#6B7280",
+            "fond_clair": "#F3F4F6",
+            "fond_carte": "#F8FAFC",
+            "joueur": "#3B82F6",  # Bleu pour le joueur
+            "ordi": "#EF4444"     # Rouge pour l'ordinateur
+        }
+        
+        # Charger les questions depuis le JSON
+        self.questions_data = self._charger_questions(json_file_path)
+        
+        # Types d'opérations disponibles
+        self.operations = ["addition", "soustraction", "multiplication", "division", "mélange"]
+        
+        # Difficulté progressive
+        self.difficulte = "facile"
+        
+        # Historique des manches
+        self.historique_manches = []
+    
+    def _charger_questions(self, json_path):
+        """Charge les questions depuis le fichier JSON"""
+        try:
+            # Vérifier si le fichier existe
+            if not os.path.exists(json_path):
+                # Créer un fichier par défaut si inexistant
+                default_data = {
+                    "facile": [],
+                    "moyen": [],
+                    "difficile": []
+                }
+                os.makedirs(os.path.dirname(json_path), exist_ok=True)
+                with open(json_path, 'w', encoding='utf-8') as f:
+                    json.dump(default_data, f, ensure_ascii=False, indent=2)
+                return default_data
+            
+            with open(json_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"Erreur chargement questions Math Battle: {e}")
+            return {"facile": [], "moyen": [], "difficile": []}
+    
+    def lancer_jeu(self):
+        """Lance la fenêtre du jeu"""
+        self.fenetre_jeu = Toplevel(self.parent)
+        self.fenetre_jeu.title("⚔️ Math Battle")
+        self.fenetre_jeu.geometry("1000x800")
+        self.fenetre_jeu.configure(bg=self.PALETTE["fond_principal"])
+        
+        # Empêcher la fermeture accidentelle
+        self.fenetre_jeu.protocol("WM_DELETE_WINDOW", self._quitter_jeu)
+        
+        self._creer_interface()
+        self._nouvelle_manche()
+        
+        # Centrer la fenêtre
+        self.fenetre_jeu.update_idletasks()
+        width = self.fenetre_jeu.winfo_width()
+        height = self.fenetre_jeu.winfo_height()
+        x = (self.fenetre_jeu.winfo_screenwidth() // 2) - (width // 2)
+        y = (self.fenetre_jeu.winfo_screenheight() // 2) - (height // 2)
+        self.fenetre_jeu.geometry(f'{width}x{height}+{x}+{y}')
+    
+    def _quitter_jeu(self):
+        """Demande confirmation avant de quitter"""
+        if messagebox.askyesno("Quitter", "Voulez-vous vraiment quitter le Math Battle ?\nVotre progression sera perdue."):
+            self.fenetre_jeu.destroy()
+    
+    def _creer_interface(self):
+        """Crée l'interface graphique du jeu"""
+        # En-tête
+        header_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["primaire"])
+        header_frame.pack(fill=X, pady=(0, 10))
+        
+        Label(header_frame, text="⚔️ MATH BATTLE", 
+              font=("Century Gothic", 22, "bold"), bg=self.PALETTE["primaire"], fg="white").pack(pady=15)
+        
+        Label(header_frame, text="Affrontez l'ordinateur en calcul mental rapide !", 
+              font=("Century Gothic", 12), bg=self.PALETTE["primaire"], fg="white", 
+              wraplength=800).pack(pady=(0, 10))
+        
+        # Score et manches
+        score_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_clair"], relief="solid", borderwidth=2)
+        score_frame.pack(fill=X, padx=20, pady=10)
+        
+        # Score du joueur (à gauche)
+        joueur_frame = Frame(score_frame, bg=self.PALETTE["joueur"])
+        joueur_frame.pack(side=LEFT, fill=BOTH, expand=True, padx=2, pady=2)
+        
+        Label(joueur_frame, text="🧑 VOUS", 
+              font=("Century Gothic", 14, "bold"), bg=self.PALETTE["joueur"], fg="white").pack(pady=5)
+        
+        self.score_joueur_label = Label(joueur_frame, text=f"{self.score_joueur}", 
+                                        font=("Century Gothic", 28, "bold"), bg=self.PALETTE["joueur"], fg="white")
+        self.score_joueur_label.pack(pady=10)
+        
+        # Informations centrales
+        centre_frame = Frame(score_frame, bg=self.PALETTE["fond_clair"])
+        centre_frame.pack(side=LEFT, fill=BOTH, expand=True, padx=10)
+        
+        # Manche
+        self.manche_label = Label(centre_frame, text=f"MANCHE {self.manche_actuelle}/{self.questions_total}", 
+                                 font=("Century Gothic", 16, "bold"), bg=self.PALETTE["fond_clair"], 
+                                 fg=self.PALETTE["primaire"])
+        self.manche_label.pack(pady=10)
+        
+        # Difficulté
+        self.difficulte_label = Label(centre_frame, text=f"📊 Difficulté: {self.difficulte.capitalize()}", 
+                                     font=("Century Gothic", 12), bg=self.PALETTE["fond_clair"], 
+                                     fg=self.PALETTE["texte_fonce"])
+        self.difficulte_label.pack(pady=5)
+        
+        # Timer
+        self.timer_frame = Frame(centre_frame, bg=self.PALETTE["fond_clair"])
+        self.timer_frame.pack(pady=10)
+        
+        Label(self.timer_frame, text="⏱️ TEMPS RESTANT:", 
+              font=("Century Gothic", 12), bg=self.PALETTE["fond_clair"]).pack()
+        
+        self.timer_label = Label(self.timer_frame, text=f"{self.temps_restant}s", 
+                                font=("Century Gothic", 24, "bold"), bg=self.PALETTE["fond_clair"], 
+                                fg=self.PALETTE["avertissement"])
+        self.timer_label.pack()
+        
+        # Score de l'ordinateur (à droite)
+        ordi_frame = Frame(score_frame, bg=self.PALETTE["ordi"])
+        ordi_frame.pack(side=LEFT, fill=BOTH, expand=True, padx=2, pady=2)
+        
+        Label(ordi_frame, text="🤖 ORDINATEUR", 
+              font=("Century Gothic", 14, "bold"), bg=self.PALETTE["ordi"], fg="white").pack(pady=5)
+        
+        self.score_ordi_label = Label(ordi_frame, text=f"{self.score_ordi}", 
+                                      font=("Century Gothic", 28, "bold"), bg=self.PALETTE["ordi"], fg="white")
+        self.score_ordi_label.pack(pady=10)
+        
+        # Cadre principal
+        main_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_principal"])
+        main_frame.pack(fill=BOTH, expand=True, padx=20, pady=10)
+        
+        # Carte de la question
+        self.question_frame = Frame(main_frame, bg=self.PALETTE["fond_carte"], 
+                                   relief="solid", borderwidth=2)
+        self.question_frame.pack(fill=BOTH, expand=True, pady=10)
+        
+        # Zone de réponse
+        reponse_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
+        reponse_frame.pack(fill=X, pady=15)
+        
+        Label(reponse_frame, text="🎯 VOTRE RÉPONSE :", 
+              font=("Century Gothic", 14, "bold"), bg=self.PALETTE["fond_principal"]).pack(pady=5)
+        
+        # Saisie de réponse avec vérification en temps réel
+        self.reponse_var = StringVar()
+        self.reponse_var.trace("w", self._verifier_saisie)
+        
+        self.reponse_entry = Entry(reponse_frame, textvariable=self.reponse_var, 
+                                  font=("Century Gothic", 18), width=20, justify="center")
+        self.reponse_entry.pack(pady=10)
+        self.reponse_entry.focus_set()
+        
+        # Boutons numériques pour aide à la saisie
+        self._creer_clavier_numerique(reponse_frame)
+        
+        # Boutons d'action
+        boutons_frame = Frame(reponse_frame, bg=self.PALETTE["fond_principal"])
+        boutons_frame.pack(pady=15)
+        
+        self.btn_valider = ttk.Button(boutons_frame, text="✅ VALIDER (ENTRER)", 
+                                     command=self._valider_reponse, width=20)
+        self.btn_valider.pack(side=LEFT, padx=5)
+        
+        self.btn_passer = ttk.Button(boutons_frame, text="⏭️ PASSER", 
+                                    command=self._passer_question, width=15)
+        self.btn_passer.pack(side=LEFT, padx=5)
+        
+        ttk.Button(boutons_frame, text="📚 Guide", 
+                  command=lambda: afficher_guide_jeu("math_battle", self.fenetre_jeu)).pack(side=RIGHT, padx=5)
+        
+        # Zone de résultat de la manche
+        self.resultat_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
+        self.resultat_frame.pack(fill=X, pady=10)
+        
+        self.resultat_label = Label(self.resultat_frame, text="", 
+                                   font=("Century Gothic", 14), bg=self.PALETTE["fond_principal"], 
+                                   wraplength=800)
+        self.resultat_label.pack()
+        
+        # Zone d'historique des manches
+        historique_frame = Frame(main_frame, bg=self.PALETTE["fond_clair"], relief="solid", borderwidth=1)
+        historique_frame.pack(fill=BOTH, expand=True, pady=10)
+        
+        Label(historique_frame, text="📝 HISTORIQUE DES MANCHES :", 
+              font=("Century Gothic", 11, "bold"), bg=self.PALETTE["fond_clair"]).pack(anchor=W, padx=10, pady=5)
+        
+        self.historique_text = Text(historique_frame, height=6, font=("Century Gothic", 9),
+                                   bg=self.PALETTE["fond_clair"], fg=self.PALETTE["texte_fonce"], wrap=WORD)
+        scrollbar = Scrollbar(historique_frame, command=self.historique_text.yview)
+        self.historique_text.config(yscrollcommand=scrollbar.set)
+        self.historique_text.pack(side=LEFT, fill=BOTH, expand=True, padx=10, pady=5)
+        scrollbar.pack(side=RIGHT, fill=Y)
+        self.historique_text.config(state=DISABLED)
+        
+        # Boutons de fin
+        boutons_fin_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
+        boutons_fin_frame.pack(fill=X, pady=5)
+        
+        ttk.Button(boutons_fin_frame, text="📊 Statistiques", 
+                  command=self._afficher_statistiques).pack(side=LEFT, padx=5)
+        
+        ttk.Button(boutons_fin_frame, text="🔄 Recommencer", 
+                  command=self._recommencer_jeu).pack(side=LEFT, padx=5)
+        
+        ttk.Button(boutons_fin_frame, text="🏆 Classement", 
+                  command=self._afficher_classement).pack(side=RIGHT, padx=5)
+        
+        ttk.Button(boutons_fin_frame, text="❌ Quitter", 
+                  command=self._quitter_jeu).pack(side=RIGHT, padx=5)
+
+    def _creer_clavier_numerique(self, parent):
+        """Crée un clavier numérique pour aider à la saisie"""
+        clavier_frame = Frame(parent, bg=self.PALETTE["fond_principal"])
+        clavier_frame.pack(pady=10)
+        
+        # Configuration des boutons
+        boutons = [
+            ['7', '8', '9'],
+            ['4', '5', '6'],
+            ['1', '2', '3'],
+            ['0', '.', '⌫']
+        ]
+        
+        for ligne in boutons:
+            ligne_frame = Frame(clavier_frame, bg=self.PALETTE["fond_principal"])
+            ligne_frame.pack()
+            
+            for texte in ligne:
+                if texte == '⌫':
+                    commande = self._effacer_caractere
+                    width = 8
+                else:
+                    commande = lambda t=texte: self._ajouter_caractere(t)
+                    width = 5
+                
+                btn = ttk.Button(ligne_frame, text=texte, command=commande, width=width)
+                btn.pack(side=LEFT, padx=2, pady=2)
+
+    def _ajouter_caractere(self, caractere):
+        """Ajoute un caractère à la réponse"""
+        current = self.reponse_var.get()
+        self.reponse_var.set(current + caractere)
+        self.reponse_entry.focus_set()
+
+    def _effacer_caractere(self):
+        """Efface le dernier caractère"""
+        current = self.reponse_var.get()
+        if current:
+            self.reponse_var.set(current[:-1])
+        self.reponse_entry.focus_set()
+
+    def _verifier_saisie(self, *args):
+        """Vérifie la saisie en temps réel"""
+        saisie = self.reponse_var.get()
+        # Nettoyer la saisie (uniquement chiffres, point, signe moins)
+        nettoyee = ''.join(c for c in saisie if c.isdigit() or c in '.-')
+        if nettoyee != saisie:
+            self.reponse_var.set(nettoyee)
+        
+        # Mettre à jour le curseur
+        self.reponse_entry.icursor(END)
+
+    def _nouvelle_manche(self):
+        """Prépare une nouvelle manche"""
+        self.questions_jouees += 1
+        
+        # Mettre à jour la difficulté
+        if self.questions_jouees <= 3:
+            self.difficulte = "facile"
+        elif self.questions_jouees <= 7:
+            self.difficulte = "moyen"
+        else:
+            self.difficulte = "difficile"
+        
+        # Générer une question
+        self.question_actuelle = self._generer_question()
+        
+        # Réinitialiser l'interface
+        self._afficher_question()
+        self.reponse_var.set("")
+        self.resultat_label.config(text="")
+        self.derniere_reponse = None
+        self.gagnant_manche = None
+        
+        # Mettre à jour les labels
+        self.manche_label.config(text=f"MANCHE {self.questions_jouees}/{self.questions_total}")
+        self.difficulte_label.config(text=f"📊 Difficulté: {self.difficulte.capitalize()}")
+        
+        # Réinitialiser le timer
+        self.temps_restant = 30
+        self.timer_label.config(text=f"{self.temps_restant}s", fg=self.PALETTE["avertissement"])
+        
+        # Activer les boutons
+        self.btn_valider.config(state="normal")
+        self.btn_passer.config(state="normal")
+        self.reponse_entry.config(state="normal")
+        self.reponse_entry.focus_set()
+        
+        # Démarrer le timer
+        self.timer_actif = True
+        self._demarrer_timer()
+        
+        # Ajouter à l'historique
+        self._ajouter_historique(f"🔔 Manche {self.questions_jouees} - {self.difficulte.capitalize()}")
+
+    def _generer_question(self):
+        """Génère une question mathématique aléatoire"""
+        if self.difficulte == "facile":
+            operation = random.choice(["addition", "soustraction", "multiplication"])
+            
+            if operation == "addition":
+                a = random.randint(1, 50)
+                b = random.randint(1, 50)
+                question = f"{a} + {b}"
+                reponse = a + b
+                
+            elif operation == "soustraction":
+                a = random.randint(1, 100)
+                b = random.randint(1, a)
+                question = f"{a} - {b}"
+                reponse = a - b
+                
+            else:  # multiplication
+                a = random.randint(1, 12)
+                b = random.randint(1, 10)
+                question = f"{a} × {b}"
+                reponse = a * b
+                
+        elif self.difficulte == "moyen":
+            operation = random.choice(["addition", "soustraction", "multiplication", "division"])
+            
+            if operation == "addition":
+                a = random.randint(10, 200)
+                b = random.randint(10, 200)
+                question = f"{a} + {b}"
+                reponse = a + b
+                
+            elif operation == "soustraction":
+                a = random.randint(50, 300)
+                b = random.randint(10, a-10)
+                question = f"{a} - {b}"
+                reponse = a - b
+                
+            elif operation == "multiplication":
+                a = random.randint(2, 15)
+                b = random.randint(2, 15)
+                question = f"{a} × {b}"
+                reponse = a * b
+                
+            else:  # division
+                b = random.randint(2, 12)
+                reponse = random.randint(2, 12)
+                a = b * reponse
+                question = f"{a} ÷ {b}"
+                
+        else:  # difficile
+            operation = random.choice(["addition", "soustraction", "multiplication", "division", "mélange"])
+            
+            if operation == "addition":
+                a = random.randint(100, 500)
+                b = random.randint(100, 500)
+                question = f"{a} + {b}"
+                reponse = a + b
+                
+            elif operation == "soustraction":
+                a = random.randint(200, 1000)
+                b = random.randint(100, a-100)
+                question = f"{a} - {b}"
+                reponse = a - b
+                
+            elif operation == "multiplication":
+                a = random.randint(10, 25)
+                b = random.randint(5, 20)
+                question = f"{a} × {b}"
+                reponse = a * b
+                
+            elif operation == "division":
+                b = random.randint(3, 15)
+                reponse = random.randint(5, 20)
+                a = b * reponse
+                question = f"{a} ÷ {b}"
+                
+            else:  # mélange
+                # Opération à trois termes
+                op1 = random.choice(["+", "-", "×"])
+                op2 = random.choice(["+", "-", "×"])
+                
+                if op1 == "×" or op2 == "×":
+                    # Éviter les nombres trop grands
+                    nums = [random.randint(1, 12) for _ in range(3)]
+                else:
+                    nums = [random.randint(10, 100) for _ in range(3)]
+                
+                question = f"{nums[0]} {op1} {nums[1]} {op2} {nums[2]}"
+                
+                # Calculer la réponse
+                if op1 == "×":
+                    temp = nums[0] * nums[1]
+                elif op1 == "+":
+                    temp = nums[0] + nums[1]
+                else:  # "-"
+                    temp = nums[0] - nums[1]
+                
+                if op2 == "×":
+                    reponse = temp * nums[2]
+                elif op2 == "+":
+                    reponse = temp + nums[2]
+                else:  # "-"
+                    reponse = temp - nums[2]
+        
+        return {
+            "question": question,
+            "reponse": reponse,
+            "operation": operation,
+            "difficulte": self.difficulte
+        }
+
+    def _afficher_question(self):
+        """Affiche la question actuelle"""
+        # Nettoyer le frame
+        for widget in self.question_frame.winfo_children():
+            widget.destroy()
+        
+        # Afficher la question
+        Label(self.question_frame, text="🧮 QUESTION :", 
+              font=("Century Gothic", 16, "bold"), bg=self.PALETTE["fond_carte"], 
+              fg=self.PALETTE["primaire"]).pack(pady=20)
+        
+        question_text = self.question_actuelle["question"]
+        Label(self.question_frame, text=question_text, 
+              font=("Century Gothic", 36, "bold"), bg=self.PALETTE["fond_carte"], 
+              fg=self.PALETTE["texte_fonce"]).pack(pady=10)
+        
+        # Afficher l'opération
+        operation = self.question_actuelle["operation"]
+        operation_text = {
+            "addition": "Addition",
+            "soustraction": "Soustraction", 
+            "multiplication": "Multiplication",
+            "division": "Division",
+            "mélange": "Opération mixte"
+        }.get(operation, "Calcul")
+        
+        Label(self.question_frame, text=f"📝 {operation_text.capitalize()}", 
+              font=("Century Gothic", 14), bg=self.PALETTE["fond_carte"], 
+              fg=self.PALETTE["texte_clair"]).pack(pady=10)
+        
+        # Barre de progression du temps
+        self.progress_frame = Frame(self.question_frame, bg=self.PALETTE["fond_carte"])
+        self.progress_frame.pack(pady=20)
+        
+        self.progress_bar = ttk.Progressbar(self.progress_frame, length=300, mode='determinate')
+        self.progress_bar.pack()
+        self.progress_bar['value'] = 100  # Commence à 100%
+
+    def _demarrer_timer(self):
+        """Démarre le compte à rebours"""
+        if not self.timer_actif:
+            return
+        
+        if self.temps_restant > 0:
+            self.temps_restant -= 1
+            self.timer_label.config(text=f"{self.temps_restant}s")
+            
+            # Mettre à jour la barre de progression
+            progression = (self.temps_restant / 30) * 100
+            self.progress_bar['value'] = progression
+            
+            # Changer la couleur selon le temps restant
+            if self.temps_restant <= 10:
+                self.timer_label.config(fg=self.PALETTE["erreur"])
+                self.progress_bar.configure(style="red.Horizontal.TProgressbar")
+            elif self.temps_restant <= 20:
+                self.timer_label.config(fg=self.PALETTE["avertissement"])
+                self.progress_bar.configure(style="orange.Horizontal.TProgressbar")
+            
+            # Appeler à nouveau après 1 seconde
+            self.fenetre_jeu.after(1000, self._demarrer_timer)
+        else:
+            # Temps écoulé
+            self._temps_ecoule()
+
+    def _temps_ecoule(self):
+        """Quand le temps est écoulé"""
+        self.timer_actif = False
+        self._verifier_manche(gagnant="ordi", raison="temps écoulé")
+
+    def _valider_reponse(self):
+        """Valide la réponse du joueur"""
+        if not self.timer_actif:
+            return
+        
+        reponse_joueur = self.reponse_var.get().strip()
+        
+        if not reponse_joueur:
+            self.resultat_label.config(text="❌ Veuillez entrer une réponse !", fg=self.PALETTE["erreur"])
+            return
+        
+        try:
+            # Convertir en float pour la comparaison
+            reponse_joueur_num = float(reponse_joueur)
+            reponse_correcte = float(self.question_actuelle["reponse"])
+            
+            # Tolérance pour les calculs flottants
+            if abs(reponse_joueur_num - reponse_correcte) < 0.001:
+                self._verifier_manche(gagnant="joueur", raison="bonne réponse")
+            else:
+                self._verifier_manche(gagnant="ordi", raison="mauvaise réponse")
+                
+        except ValueError:
+            self.resultat_label.config(text="❌ Réponse invalide ! Entrez un nombre.", fg=self.PALETTE["erreur"])
+
+    def _passer_question(self):
+        """Passe la question actuelle"""
+        if not self.timer_actif:
+            return
+        
+        self._verifier_manche(gagnant="ordi", raison="question passée")
+
+    def _verifier_manche(self, gagnant, raison):
+        """Vérifie le résultat de la manche"""
+        if not self.timer_actif and gagnant != "temps écoulé":
+            return
+        
+        self.timer_actif = False
+        
+        # Enregistrer la réponse du joueur
+        reponse_joueur = self.reponse_var.get()
+        self.derniere_reponse = reponse_joueur
+        self.gagnant_manche = gagnant
+        
+        # Mettre à jour les scores
+        if gagnant == "joueur":
+            self.score_joueur += 1
+            self.streak += 1
+            
+            # Bonus de streak
+            if self.streak >= 3:
+                bonus = min(5, self.streak - 2)  # +1 point par streak au-delà de 3
+                self.bonus_streak += bonus
+                message = f"✅ BONNE RÉPONSE ! (+1 point"
+                if bonus > 0:
+                    message += f" +{bonus} bonus streak"
+                message += ")"
+            else:
+                message = "✅ BONNE RÉPONSE ! (+1 point)"
+                
+            couleur = self.PALETTE["succes"]
+            
+        else:  # ordi gagne
+            self.score_ordi += 1
+            self.streak = 0
+            
+            if raison == "temps écoulé":
+                message = "⏱️ TEMPS ÉCOULÉ ! L'ordinateur marque 1 point."
+            elif raison == "mauvaise réponse":
+                reponse_correcte = self.question_actuelle["reponse"]
+                message = f"❌ MAUVAISE RÉPONSE ! La réponse était: {reponse_correcte}"
+            else:  # question passée
+                message = "⏭️ QUESTION PASSÉE ! L'ordinateur marque 1 point."
+            
+            couleur = self.PALETTE["erreur"]
+        
+        # Afficher le résultat
+        self.resultat_label.config(text=message, fg=couleur)
+        
+        # Désactiver les boutons
+        self.btn_valider.config(state="disabled")
+        self.btn_passer.config(state="disabled")
+        self.reponse_entry.config(state="disabled")
+        
+        # Mettre à jour les scores affichés
+        self.score_joueur_label.config(text=f"{self.score_joueur}")
+        self.score_ordi_label.config(text=f"{self.score_ordi}")
+        
+        # Ajouter à l'historique
+        historique_msg = f"Manche {self.questions_jouees}: "
+        if gagnant == "joueur":
+            historique_msg += f"✅ Vous gagnez ({raison})"
+        else:
+            historique_msg += f"❌ Ordinateur gagne ({raison})"
+        
+        self._ajouter_historique(historique_msg)
+        
+        # Passer à la suite
+        if self.questions_jouees < self.questions_total:
+            self.fenetre_jeu.after(2500, self._nouvelle_manche)
+        else:
+            self.fenetre_jeu.after(3000, self._afficher_resultat_final)
+
+    def _ajouter_historique(self, message):
+        """Ajoute un message à l'historique"""
+        self.historique_text.config(state=NORMAL)
+        from datetime import datetime
+        timestamp = datetime.now().strftime("%H:%M:%S")
+        self.historique_text.insert(END, f"[{timestamp}] {message}\n")
+        self.historique_text.see(END)
+        self.historique_text.config(state=DISABLED)
+        
+        # Ajouter à la liste d'historique
+        self.historique_manches.append({
+            "temps": timestamp,
+            "message": message,
+            "manche": self.questions_jouees,
+            "score_joueur": self.score_joueur,
+            "score_ordi": self.score_ordi
+        })
+
+    def _afficher_resultat_final(self):
+        """Affiche le résultat final du match"""
+        resultat_window = Toplevel(self.fenetre_jeu)
+        resultat_window.title("🏆 RÉSULTAT FINAL")
+        resultat_window.geometry("600x500")
+        resultat_window.configure(bg=self.PALETTE["fond_principal"])
+        
+        # Empêcher la fermeture
+        resultat_window.transient(self.fenetre_jeu)
+        resultat_window.grab_set()
+        
+        # Déterminer le gagnant
+        if self.score_joueur > self.score_ordi:
+            titre = "🎉 VICTOIRE !"
+            message = f"Vous avez battu l'ordinateur {self.score_joueur} à {self.score_ordi} !"
+            couleur_titre = self.PALETTE["succes"]
+            emoji = "🏆"
+        elif self.score_joueur < self.score_ordi:
+            titre = "💥 DÉFAITE !"
+            message = f"L'ordinateur vous a battu {self.score_ordi} à {self.score_joueur} !"
+            couleur_titre = self.PALETTE["erreur"]
+            emoji = "😢"
+        else:
+            titre = "🤝 MATCH NUL !"
+            message = f"Égalité parfaite {self.score_joueur} à {self.score_ordi} !"
+            couleur_titre = self.PALETTE["avertissement"]
+            emoji = "⚖️"
+        
+        # Titre
+        Label(resultat_window, text=emoji, 
+              font=("Century Gothic", 48), bg=self.PALETTE["fond_principal"], 
+              fg=couleur_titre).pack(pady=20)
+        
+        Label(resultat_window, text=titre, 
+              font=("Century Gothic", 24, "bold"), bg=self.PALETTE["fond_principal"], 
+              fg=couleur_titre).pack(pady=10)
+        
+        # Score final
+        score_frame = Frame(resultat_window, bg=self.PALETTE["fond_clair"], relief="solid", borderwidth=2)
+        score_frame.pack(pady=20, padx=50, fill=X)
+        
+        Label(score_frame, text="SCORE FINAL", 
+              font=("Century Gothic", 16, "bold"), bg=self.PALETTE["fond_clair"]).pack(pady=10)
+        
+        scores_frame = Frame(score_frame, bg=self.PALETTE["fond_clair"])
+        scores_frame.pack(pady=10)
+        
+        Label(scores_frame, text="VOUS", font=("Century Gothic", 14), 
+              bg=self.PALETTE["fond_clair"], fg=self.PALETTE["joueur"]).pack(side=LEFT, padx=30)
+        
+        Label(scores_frame, text=f"{self.score_joueur} - {self.score_ordi}", 
+              font=("Century Gothic", 24, "bold"), bg=self.PALETTE["fond_clair"]).pack(side=LEFT, padx=20)
+        
+        Label(scores_frame, text="ORDI", font=("Century Gothic", 14), 
+              bg=self.PALETTE["fond_clair"], fg=self.PALETTE["ordi"]).pack(side=LEFT, padx=30)
+        
+        # Détails
+        details_frame = Frame(resultat_window, bg=self.PALETTE["fond_principal"])
+        details_frame.pack(pady=20, padx=30, fill=X)
+        
+        details = [
+            ("📊 Manches jouées", f"{self.questions_total}"),
+            ("🔥 Meilleur streak", f"{self.streak} manches"),
+            ("⭐ Bonus streak total", f"{self.bonus_streak} points"),
+            ("🎯 Taux de réussite", f"{(self.score_joueur/self.questions_total*100):.1f}%"),
+            ("⚡ Temps moyen par question", f"{(30 - self.temps_restant/self.questions_total):.1f}s")
+        ]
+        
+        for label, value in details:
+            line_frame = Frame(details_frame, bg=self.PALETTE["fond_principal"])
+            line_frame.pack(fill=X, pady=5)
+            
+            Label(line_frame, text=label, font=("Century Gothic", 11), 
+                  bg=self.PALETTE["fond_principal"], fg=self.PALETTE["texte_fonce"]).pack(side=LEFT)
+            
+            Label(line_frame, text=value, font=("Century Gothic", 11, "bold"), 
+                  bg=self.PALETTE["fond_principal"], fg=self.PALETTE["primaire"]).pack(side=RIGHT)
+        
+        # Boutons
+        boutons_frame = Frame(resultat_window, bg=self.PALETTE["fond_principal"])
+        boutons_frame.pack(pady=30)
+        
+        ttk.Button(boutons_frame, text="🔄 Rejouer", 
+                  command=lambda: [resultat_window.destroy(), self._recommencer_jeu()]).pack(side=LEFT, padx=10)
+        
+        ttk.Button(boutons_frame, text="📊 Statistiques détaillées", 
+                  command=lambda: [resultat_window.destroy(), self._afficher_statistiques()]).pack(side=LEFT, padx=10)
+        
+        ttk.Button(boutons_frame, text="❌ Quitter", 
+                  command=lambda: [resultat_window.destroy(), self.fenetre_jeu.destroy()]).pack(side=RIGHT, padx=10)
+
+    def _afficher_statistiques(self):
+        """Affiche les statistiques détaillées"""
+        stats_window = Toplevel(self.fenetre_jeu)
+        stats_window.title("📊 Statistiques Détaillées")
+        stats_window.geometry("700x600")
+        stats_window.configure(bg=self.PALETTE["fond_principal"])
+        
+        # Titre
+        Label(stats_window, text="📊 STATISTIQUES DÉTAILLÉES", 
+              font=("Century Gothic", 20, "bold"), bg=self.PALETTE["fond_principal"], 
+              fg=self.PALETTE["primaire"]).pack(pady=20)
+        
+        # Cadre avec scrollbar
+        stats_container = Frame(stats_window, bg=self.PALETTE["fond_principal"])
+        stats_container.pack(fill=BOTH, expand=True, padx=20, pady=10)
+        
+        canvas = Canvas(stats_container, bg=self.PALETTE["fond_clair"])
+        scrollbar = Scrollbar(stats_container, orient="vertical", command=canvas.yview)
+        scrollable_frame = Frame(canvas, bg=self.PALETTE["fond_clair"])
+        
+        scrollable_frame.bind(
+            "<Configure>",
+            lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+        )
+        
+        canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+        canvas.configure(yscrollcommand=scrollbar.set)
+        
+        # Statistiques générales
+        Label(scrollable_frame, text="📈 PERFORMANCE GÉNÉRALE", 
+              font=("Century Gothic", 16, "bold"), bg=self.PALETTE["fond_clair"]).pack(pady=15)
+        
+        stats_generales = [
+            ("🎯 Score final", f"{self.score_joueur} - {self.score_ordi}"),
+            ("📊 Manches totales", f"{self.questions_total}"),
+            ("✅ Manches gagnées", f"{self.score_joueur}"),
+            ("❌ Manches perdues", f"{self.score_ordi}"),
+            ("⚖️ Matchs nuls", f"{self.questions_total - self.score_joueur - self.score_ordi}"),
+            ("📈 Taux de victoire", f"{(self.score_joueur/self.questions_total*100):.1f}%"),
+            ("🔥 Meilleur streak", f"{self.streak} manches"),
+            ("⭐ Bonus streak", f"{self.bonus_streak} points"),
+            ("⚡ Temps moyen/réponse", f"{(30 - self.temps_restant/self.questions_total):.1f}s"),
+            ("🎮 Difficulté maximale", f"{self.difficulte.capitalize()}")
+        ]
+        
+        for label, value in stats_generales:
+            line_frame = Frame(scrollable_frame, bg=self.PALETTE["fond_clair"])
+            line_frame.pack(fill=X, padx=20, pady=8)
+            
+            Label(line_frame, text=label, font=("Century Gothic", 11), 
+                  bg=self.PALETTE["fond_clair"], fg=self.PALETTE["texte_fonce"]).pack(side=LEFT)
+            
+            Label(line_frame, text=value, font=("Century Gothic", 11, "bold"), 
+                  bg=self.PALETTE["fond_clair"], fg=self.PALETTE["primaire"]).pack(side=RIGHT)
+        
+        # Historique détaillé
+        if self.historique_manches:
+            Label(scrollable_frame, text="📝 HISTORIQUE DES MANCHES", 
+                  font=("Century Gothic", 16, "bold"), bg=self.PALETTE["fond_clair"]).pack(pady=20)
+            
+            for manche in self.historique_manches[-10:]:  # 10 dernières manches
+                manche_frame = Frame(scrollable_frame, bg=self.PALETTE["fond_clair"])
+                manche_frame.pack(fill=X, padx=20, pady=5)
+                
+                Label(manche_frame, text=f"[{manche['temps']}] {manche['message']}", 
+                      font=("Century Gothic", 9), bg=self.PALETTE["fond_clair"], 
+                      fg=self.PALETTE["texte_clair"], wraplength=600, justify="left").pack(anchor=W)
+        
+        canvas.pack(side=LEFT, fill=BOTH, expand=True)
+        scrollbar.pack(side=RIGHT, fill=Y)
+        
+        # Bouton fermer
+        btn_frame = Frame(stats_window, bg=self.PALETTE["fond_principal"])
+        btn_frame.pack(pady=15)
+        ttk.Button(btn_frame, text="Fermer", command=stats_window.destroy).pack()
+
+    def _afficher_classement(self):
+        """Affiche le classement (simulé pour l'instant)"""
+        classement_window = Toplevel(self.fenetre_jeu)
+        classement_window.title("🏆 CLASSEMENT")
+        classement_window.geometry("500x400")
+        classement_window.configure(bg=self.PALETTE["fond_principal"])
+        
+        # Titre
+        Label(classement_window, text="🏆 CLASSEMENT MATH BATTLE", 
+              font=("Century Gothic", 18, "bold"), bg=self.PALETTE["fond_principal"], 
+              fg=self.PALETTE["primaire"]).pack(pady=20)
+        
+        # Message d'information
+        info_frame = Frame(classement_window, bg=self.PALETTE["fond_clair"], relief="solid", borderwidth=1)
+        info_frame.pack(fill=X, padx=30, pady=10)
+        
+        Label(info_frame, text="📢 Le classement en ligne sera disponible\nprochainement avec la version 2.0 !", 
+              font=("Century Gothic", 11), bg=self.PALETTE["fond_clair"], 
+              fg=self.PALETTE["texte_fonce"], justify="center").pack(pady=15)
+        
+        # Classement simulé
+        classement_frame = Frame(classement_window, bg=self.PALETTE["fond_principal"])
+        classement_frame.pack(pady=20, padx=30, fill=X)
+        
+        Label(classement_frame, text="🏅 MEILLEURS SCORES LOCAUX", 
+              font=("Century Gothic", 14, "bold"), bg=self.PALETTE["fond_principal"]).pack(pady=10)
+        
+        # Scores locaux simulés (à remplacer par un vrai système de sauvegarde)
+        scores_locaux = [
+            ("🥇 Vous", f"{self.score_joueur} points"),
+            ("🥈 MathMaster42", "18 points"),
+            ("🥉 CalculPro", "15 points"),
+            ("4. Numero1", "12 points"),
+            ("5. Einstein Jr", "10 points")
+        ]
+        
+        for rang, (nom, score) in enumerate(scores_locaux, 1):
+            score_frame = Frame(classement_frame, bg=self.PALETTE["fond_clair"])
+            score_frame.pack(fill=X, pady=5)
+            
+            Label(score_frame, text=nom, font=("Century Gothic", 11), 
+                  bg=self.PALETTE["fond_clair"], fg=self.PALETTE["texte_fonce"]).pack(side=LEFT, padx=10)
+            
+            Label(score_frame, text=score, font=("Century Gothic", 11, "bold"), 
+                  bg=self.PALETTE["fond_clair"], fg=self.PALETTE["primaire"]).pack(side=RIGHT, padx=10)
+        
+        # Bouton
+        btn_frame = Frame(classement_window, bg=self.PALETTE["fond_principal"])
+        btn_frame.pack(pady=20)
+        ttk.Button(btn_frame, text="Fermer", command=classement_window.destroy).pack()
+
+    def _recommencer_jeu(self):
+        """Recommence le jeu depuis le début"""
+        # Réinitialiser toutes les variables
+        self.score_joueur = 0
+        self.score_ordi = 0
+        self.manche_actuelle = 1
+        self.questions_jouees = 0
+        self.temps_restant = 30
+        self.timer_actif = False
+        self.question_actuelle = None
+        self.derniere_reponse = None
+        self.gagnant_manche = None
+        self.streak = 0
+        self.bonus_streak = 0
+        self.difficulte = "facile"
+        self.historique_manches = []
+        
+        # Réinitialiser l'historique
+        self.historique_text.config(state=NORMAL)
+        self.historique_text.delete(1.0, END)
+        self.historique_text.config(state=DISABLED)
+        
+        # Recommencer
+        self._nouvelle_manche()
+
+
+# =============================================================================
+# DEFI FIBONACCI
+# =============================================================================
+class DefisFibonacci:
+    def __init__(self, parent, json_file_path="data/defis_fibonacci.json"):
+        self.parent = parent
+        self.score = 0
+        self.niveau = Difficulty.DEBUTANT
+        self.defi_actuel = None
+        self.indices_decouverts = 0
+        self.essais_restants = 3
+        self.defis_reussis = 0
+        self.defis_joues = 0
+        self.streak = 0
+        self.bonus_streak = 0
+        self.meilleur_streak = 0
+        self.verification_en_cours = False
+        
+        # Suite de Fibonacci pré-calculée
+        self.fibonacci_sequence = self._generer_fibonacci(100)  # 100 premiers termes
+        
+        # Palette de couleurs
+        self.PALETTE = {
+            "fond_principal": "#FFFFFF",
+            "primaire": "#8B5CF6",  # Violet Fibonacci
+            "secondaire": "#7C3AED",
+            "succes": "#10B981",
+            "erreur": "#EF4444",
+            "avertissement": "#F59E0B",
+            "info": "#3B82F6",
+            "texte_fonce": "#1F2937",
+            "texte_clair": "#6B7280",
+            "fond_clair": "#F3F4F6",
+            "fond_carte": "#F8FAFC",
+            "fibonacci": "#8B5CF6",  # Couleur spécifique Fibonacci
+            "spirale": "#F472B6"      # Rose pour la spirale
+        }
+        
+        # Charger les défis depuis le JSON
+        self.defis_data = self._charger_defis(json_file_path)
+        
+        # Types de défis disponibles
+        self.types_defis = {
+            "terme_manquant": "Trouver le terme manquant",
+            "suite_fibonacci": "Continuer la suite",
+            "est_fibonacci": "Vérifier si un nombre est Fibonacci",
+            "position_fibonacci": "Trouver la position d'un nombre",
+            "somme_fibonacci": "Calculer une somme de Fibonacci",
+            "ratio_fibonacci": "Calculer le ratio d'or",
+            "spirale_fibonacci": "Dessiner la spirale",
+            "nature_fibonacci": "Découvrir dans la nature"
+        }
+        
+        # Historique des réponses
+        self.historique_reponses = []
+    
+    def _generer_fibonacci(self, n):
+        """Génère les n premiers nombres de Fibonacci"""
+        fib = [0, 1]
+        for i in range(2, n):
+            fib.append(fib[i-1] + fib[i-2])
+        return fib
+    
+    def _charger_defis(self, json_path):
+        """Charge les défis depuis le fichier JSON"""
+        try:
+            # Vérifier si le fichier existe
+            if not os.path.exists(json_path):
+                # Créer un fichier par défaut si inexistant
+                default_data = {
+                    "Débutant": [],
+                    "Intermédiaire": [],
+                    "Avancé": []
+                }
+                os.makedirs(os.path.dirname(json_path), exist_ok=True)
+                with open(json_path, 'w', encoding='utf-8') as f:
+                    json.dump(default_data, f, ensure_ascii=False, indent=2)
+                return default_data
+            
+            with open(json_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"Erreur chargement défis Fibonacci: {e}")
+            return {"Débutant": [], "Intermédiaire": [], "Avancé": []}
+    
+    def lancer_jeu(self):
+        """Lance la fenêtre du jeu"""
+        self.fenetre_jeu = Toplevel(self.parent)
+        self.fenetre_jeu.title("🌟 Défis Fibonacci")
+        self.fenetre_jeu.geometry("950x850")
+        self.fenetre_jeu.configure(bg=self.PALETTE["fond_principal"])
+        
+        self._creer_interface()
+        self._nouveau_defi()
+        
+        # Centrer la fenêtre
+        self.fenetre_jeu.update_idletasks()
+        width = self.fenetre_jeu.winfo_width()
+        height = self.fenetre_jeu.winfo_height()
+        x = (self.fenetre_jeu.winfo_screenwidth() // 2) - (width // 2)
+        y = (self.fenetre_jeu.winfo_screenheight() // 2) - (height // 2)
+        self.fenetre_jeu.geometry(f'{width}x{height}+{x}+{y}')
+    
+    def _creer_interface(self):
+        """Crée l'interface graphique du jeu"""
+        # En-tête avec motif Fibonacci
+        header_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["primaire"])
+        header_frame.pack(fill=X, pady=(0, 10))
+        
+        # Titre avec emojis Fibonacci
+        title_frame = Frame(header_frame, bg=self.PALETTE["primaire"])
+        title_frame.pack(pady=15)
+        
+        Label(title_frame, text="🌟 ", 
+              font=("Century Gothic", 28), bg=self.PALETTE["primaire"], fg="white").pack(side=LEFT)
+        Label(title_frame, text="DÉFIS FIBONACCI", 
+              font=("Century Gothic", 22, "bold"), bg=self.PALETTE["primaire"], fg="white").pack(side=LEFT)
+        Label(title_frame, text=" 🌟", 
+              font=("Century Gothic", 28), bg=self.PALETTE["primaire"], fg="white").pack(side=LEFT)
+        
+        Label(header_frame, text="Découvrez la magie de la suite de Fibonacci !", 
+              font=("Century Gothic", 12), bg=self.PALETTE["primaire"], fg="white", 
+              wraplength=800).pack(pady=(0, 10))
+        
+        # Statistiques principales
+        stats_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_clair"], relief="solid", borderwidth=1)
+        stats_frame.pack(fill=X, padx=20, pady=10)
+        
+        # Première ligne de stats
+        stats_line1 = Frame(stats_frame, bg=self.PALETTE["fond_clair"])
+        stats_line1.pack(fill=X, padx=15, pady=10)
+        
+        # Score
+        self.score_label = Label(stats_line1, text=f"🏆 SCORE: {self.score}", 
+                                font=("Century Gothic", 13, "bold"), bg=self.PALETTE["fond_clair"], 
+                                fg=self.PALETTE["primaire"])
+        self.score_label.pack(side=LEFT, padx=20)
+        
+        # Streak
+        self.streak_label = Label(stats_line1, text=f"🔥 STREAK: {self.streak}", 
+                                 font=("Century Gothic", 13, "bold"), bg=self.PALETTE["fond_clair"], 
+                                 fg=self.PALETTE["avertissement"])
+        self.streak_label.pack(side=LEFT, padx=20)
+        
+        # Niveau
+        self.niveau_label = Label(stats_line1, text=f"📊 NIVEAU: {self.niveau.value}", 
+                                 font=("Century Gothic", 13, "bold"), bg=self.PALETTE["fond_clair"], 
+                                 fg=self.PALETTE["secondaire"])
+        self.niveau_label.pack(side=LEFT, padx=20)
+        
+        # Deuxième ligne de stats
+        stats_line2 = Frame(stats_frame, bg=self.PALETTE["fond_clair"])
+        stats_line2.pack(fill=X, padx=15, pady=(0, 10))
+        
+        # Essais
+        self.essais_label = Label(stats_line2, text=f"🎯 ESSAIS RESTANTS: {self.essais_restants}", 
+                                 font=("Century Gothic", 11), bg=self.PALETTE["fond_clair"], 
+                                 fg=self.PALETTE["texte_fonce"])
+        self.essais_label.pack(side=LEFT, padx=20)
+        
+        # Défis
+        self.defis_label = Label(stats_line2, text=f"✅ DÉFIS: {self.defis_reussis}/{self.defis_joues}", 
+                                font=("Century Gothic", 11), bg=self.PALETTE["fond_clair"], 
+                                fg=self.PALETTE["texte_fonce"])
+        self.defis_label.pack(side=LEFT, padx=20)
+        
+        # Type de défi
+        self.type_label = Label(stats_line2, text=f"🔍 TYPE: ?", 
+                               font=("Century Gothic", 11), bg=self.PALETTE["fond_clair"], 
+                               fg=self.PALETTE["texte_clair"])
+        self.type_label.pack(side=RIGHT, padx=20)
+        
+        # Cadre principal
+        main_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_principal"])
+        main_frame.pack(fill=BOTH, expand=True, padx=20, pady=10)
+        
+        # Section supérieure : Défi et spirale
+        top_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
+        top_frame.pack(fill=BOTH, expand=True, pady=10)
+        
+        # Carte du défi (gauche)
+        self.defi_frame = Frame(top_frame, bg=self.PALETTE["fond_carte"], 
+                               relief="solid", borderwidth=2)
+        self.defi_frame.pack(side=LEFT, fill=BOTH, expand=True, padx=(0, 10))
+        
+        # Spirale Fibonacci (droite) - CORRECTION ICI : width dans Frame, pas dans pack()
+        self.spirale_frame = Frame(top_frame, bg="#FFFFFF", relief="solid", borderwidth=1, width=250)
+        self.spirale_frame.pack(side=RIGHT, fill=BOTH, expand=False)
+        self.spirale_frame.pack_propagate(False)  # Empêche le frame de changer de taille
+        
+        Label(self.spirale_frame, text="🌀 SPIRALE FIBONACCI", 
+              font=("Century Gothic", 10, "bold"), bg="#FFFFFF", 
+              fg=self.PALETTE["spirale"]).pack(pady=10)
+        
+        # CORRECTION ICI : width dans Canvas, pas dans pack()
+        self.spirale_canvas = Canvas(self.spirale_frame, bg="#FFFFFF", height=200, width=230)
+        self.spirale_canvas.pack(pady=5, padx=10)
+        
+        # Zone de réponse
+        reponse_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
+        reponse_frame.pack(fill=X, pady=15)
+        
+        Label(reponse_frame, text="🎯 VOTRE RÉPONSE :", 
+              font=("Century Gothic", 14, "bold"), bg=self.PALETTE["fond_principal"]).pack(pady=5)
+        
+        # Frame pour les contrôles de réponse
+        self.controles_reponse_frame = Frame(reponse_frame, bg=self.PALETTE["fond_principal"])
+        self.controles_reponse_frame.pack(pady=10)
+        
+        # Indices
+        indices_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
+        indices_frame.pack(fill=X, pady=10)
+        
+        Label(indices_frame, text="💡 INDICES DISPONIBLES :", 
+              font=("Century Gothic", 12, "bold"), bg=self.PALETTE["fond_principal"]).pack(pady=5)
+        
+        self.indices_frame = Frame(indices_frame, bg=self.PALETTE["fond_principal"])
+        self.indices_frame.pack(pady=10)
+        
+        # Zone de feedback
+        self.feedback_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
+        self.feedback_frame.pack(fill=X, pady=15)
+        
+        self.feedback_label = Label(self.feedback_frame, text="", 
+                                   font=("Century Gothic", 12), bg=self.PALETTE["fond_principal"], 
+                                   wraplength=800)
+        self.feedback_label.pack()
+        
+        # Boutons d'action
+        boutons_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
+        boutons_frame.pack(fill=X, pady=10)
+        
+        ttk.Button(boutons_frame, text="🔍 Obtenir un indice", 
+                  command=self._obtenir_indice).pack(side=LEFT, padx=5)
+        
+        ttk.Button(boutons_frame, text="✅ Valider", 
+                  command=self._valider_reponse).pack(side=LEFT, padx=5)
+        
+        ttk.Button(boutons_frame, text="🔄 Nouveau défi", 
+                  command=self._nouveau_defi).pack(side=LEFT, padx=5)
+        
+        ttk.Button(boutons_frame, text="📊 Statistiques", 
+                  command=self._afficher_statistiques).pack(side=RIGHT, padx=5)
+        
+        ttk.Button(boutons_frame, text="❓ Explication", 
+                  command=self._afficher_explication).pack(side=RIGHT, padx=5)
+        
+        ttk.Button(boutons_frame, text="📚 Guide", 
+                  command=lambda: afficher_guide_jeu("defis_fibonacci", self.fenetre_jeu)).pack(side=RIGHT, padx=5)
+        
+        # Zone d'historique et faits Fibonacci
+        historique_frame = Frame(main_frame, bg=self.PALETTE["fond_clair"], relief="solid", borderwidth=1)
+        historique_frame.pack(fill=BOTH, expand=True, pady=10)
+        
+        # Notebook pour séparer historique et faits
+        self.notebook = ttk.Notebook(historique_frame)
+        self.notebook.pack(fill=BOTH, expand=True, padx=5, pady=5)
+        
+        # Onglet Historique
+        historique_tab = Frame(self.notebook, bg=self.PALETTE["fond_clair"])
+        self.notebook.add(historique_tab, text="📝 Historique")
+        
+        Label(historique_tab, text="HISTORIQUE DES DÉFIS :", 
+              font=("Century Gothic", 10, "bold"), bg=self.PALETTE["fond_clair"]).pack(anchor=W, padx=10, pady=5)
+        
+        self.historique_text = Text(historique_tab, height=6, font=("Century Gothic", 9),
+                                   bg=self.PALETTE["fond_clair"], fg=self.PALETTE["texte_fonce"], wrap=WORD)
+        scrollbar = Scrollbar(historique_tab, command=self.historique_text.yview)
+        self.historique_text.config(yscrollcommand=scrollbar.set)
+        self.historique_text.pack(side=LEFT, fill=BOTH, expand=True, padx=10, pady=5)
+        scrollbar.pack(side=RIGHT, fill=Y)
+        self.historique_text.config(state=DISABLED)
+        
+        # Onglet Faits Fibonacci
+        faits_tab = Frame(self.notebook, bg=self.PALETTE["fond_clair"])
+        self.notebook.add(faits_tab, text="✨ Faits Fibonacci")
+        
+        faits_content = """
+🌟 FAITS SUR LA SUITE DE FIBONACCI :
+
+🌀 LA SPIRALE D'OR
+• Chaque carré a pour côté un nombre de Fibonacci
+• Le rapport entre termes consécutifs tend vers Φ ≈ 1.618
+• C'est le nombre d'or !
+
+🌿 DANS LA NATURE
+• Pétales de fleurs (3, 5, 8, 13, 21...)
+• Pomme de pin (spirales dans 2 sens)
+• Ananas (écailles en spirales)
+• Coquillages (nautilus)
+
+🎨 DANS L'ART
+• Utilisée par Léonard de Vinci
+• Architecture grecque (Parthénon)
+• Peintures de la Renaissance
+
+📐 EN MATHÉMATIQUES
+• F(n) = F(n-1) + F(n-2)
+• F(0) = 0, F(1) = 1
+• Liée au triangle de Pascal
+"""
+        
+        faits_text = Text(faits_tab, height=8, font=("Century Gothic", 9),
+                         bg=self.PALETTE["fond_clair"], fg=self.PALETTE["texte_fonce"], wrap=WORD)
+        faits_text.insert(1.0, faits_content)
+        faits_text.config(state=DISABLED)
+        faits_text.pack(fill=BOTH, expand=True, padx=10, pady=5)
+
+    def _nouveau_defi(self):
+        """Prépare un nouveau défi Fibonacci"""
+        self.verification_en_cours = False
+        
+        # Mettre à jour le niveau selon le score
+        if self.score < 150:
+            self.niveau = Difficulty.DEBUTANT
+        elif self.score < 400:
+            self.niveau = Difficulty.INTERMEDIAIRE
+        else:
+            self.niveau = Difficulty.AVANCE
+        
+        # Récupérer un défi aléatoire du niveau
+        defis_niveau = self.defis_data.get(self.niveau.value, [])
+        if not defis_niveau:
+            self._creer_defi_auto()
+        else:
+            self.defi_actuel = random.choice(defis_niveau)
+        
+        # Réinitialiser les compteurs
+        self.indices_decouverts = 0
+        self.essais_restants = 3
+        
+        # Mettre à jour l'interface
+        self._afficher_defi()
+        self._creer_controles_reponse()
+        self._afficher_indices()
+        self._effacer_feedback()
+        self._dessiner_spirale()
+        
+        # Mettre à jour les labels
+        self.niveau_label.config(text=f"📊 NIVEAU: {self.niveau.value}")
+        self.essais_label.config(text=f"🎯 ESSAIS RESTANTS: {self.essais_restants}")
+        
+        # Afficher le type de défi
+        type_defi = self.defi_actuel.get("type", "terme_manquant")
+        type_desc = self.types_defis.get(type_defi, "Défi Fibonacci")
+        self.type_label.config(text=f"🔍 TYPE: {type_desc}")
+        
+        self._ajouter_historique(f"🌟 Nouveau défi: {type_desc}")
+        self._mettre_a_jour_stats()
+        
+        # Incrémenter le compteur de défis joués
+        self.defis_joues += 1
+        self.defis_label.config(text=f"✅ DÉFIS: {self.defis_reussis}/{self.defis_joues}")
+
+    def _creer_defi_auto(self):
+        """Crée un défi automatiquement si le fichier est vide"""
+        type_defi = random.choice(list(self.types_defis.keys()))
+        
+        if type_defi == "terme_manquant":
+            defi = self._creer_defi_terme_manquant()
+        elif type_defi == "suite_fibonacci":
+            defi = self._creer_defi_suite()
+        elif type_defi == "est_fibonacci":
+            defi = self._creer_defi_est_fibonacci()
+        elif type_defi == "position_fibonacci":
+            defi = self._creer_defi_position()
+        elif type_defi == "somme_fibonacci":
+            defi = self._creer_defi_somme()
+        elif type_defi == "ratio_fibonacci":
+            defi = self._creer_defi_ratio()
+        else:
+            defi = self._creer_defi_terme_manquant()  # Par défaut
+        
+        self.defi_actuel = defi
+
+    def _creer_defi_terme_manquant(self):
+        """Crée un défi 'trouver le terme manquant'"""
+        # Choisir une position dans la suite
+        if self.niveau == Difficulty.DEBUTANT:
+            position = random.randint(2, 8)
+        elif self.niveau == Difficulty.INTERMEDIAIRE:
+            position = random.randint(5, 15)
+        else:
+            position = random.randint(10, 25)
+        
+        # Créer la suite avec un trou
+        suite = []
+        for i in range(max(0, position-3), position+4):
+            if 0 <= i < len(self.fibonacci_sequence):
+                if i == position:
+                    suite.append("?")
+                else:
+                    suite.append(str(self.fibonacci_sequence[i]))
+        
+        question = f"Trouvez le terme manquant dans la suite:\n{', '.join(suite)}"
+        reponse = self.fibonacci_sequence[position]
+        
+        indices = [
+            "La suite de Fibonacci commence par 0, 1, 1, 2, 3, 5, 8...",
+            "Chaque terme est la somme des deux précédents: F(n) = F(n-1) + F(n-2)",
+            f"Le terme avant '?' est {self.fibonacci_sequence[position-1]}",
+            f"Le terme après '?' est {self.fibonacci_sequence[position+1]}",
+            f"Donc ? = {self.fibonacci_sequence[position-1]} + {self.fibonacci_sequence[position-2]} = {reponse}"
+        ]
+        
+        return {
+            "question": question,
+            "reponse": reponse,
+            "indices": indices,
+            "type": "terme_manquant",
+            "difficulte": self.niveau.value
+        }
+
+    def _creer_defi_suite(self):
+        """Crée un défi 'continuer la suite'"""
+        if self.niveau == Difficulty.DEBUTANT:
+            debut = random.randint(0, 5)
+            longueur = 4
+        elif self.niveau == Difficulty.INTERMEDIAIRE:
+            debut = random.randint(5, 10)
+            longueur = 5
+        else:
+            debut = random.randint(10, 20)
+            longueur = 6
+        
+        # Afficher les premiers termes
+        termes = [str(self.fibonacci_sequence[i]) for i in range(debut, debut + longueur)]
+        question = f"Continuez la suite de Fibonacci:\n{', '.join(termes)}, ..."
+        
+        # Demander les 3 termes suivants
+        reponse = [
+            self.fibonacci_sequence[debut + longueur],
+            self.fibonacci_sequence[debut + longueur + 1],
+            self.fibonacci_sequence[debut + longueur + 2]
+        ]
+        
+        indices = [
+            "Rappel: F(n) = F(n-1) + F(n-2)",
+            f"Les deux derniers termes sont: {termes[-2]} et {termes[-1]}",
+            f"Le prochain terme est: {termes[-2]} + {termes[-1]} = {reponse[0]}",
+            f"Puis: {termes[-1]} + {reponse[0]} = {reponse[1]}",
+            f"Ensuite: {reponse[0]} + {reponse[1]} = {reponse[2]}"
+        ]
+        
+        return {
+            "question": question,
+            "reponse": reponse,
+            "indices": indices,
+            "type": "suite_fibonacci",
+            "difficulte": self.niveau.value
+        }
+
+    def _creer_defi_est_fibonacci(self):
+        """Crée un défi 'vérifier si un nombre est Fibonacci'"""
+        # 50% de chance que ce soit un nombre Fibonacci
+        if random.random() < 0.5:
+            nombre = random.choice(self.fibonacci_sequence[5:20])  # Éviter les trop petits
+            est_fibonacci = True
+        else:
+            # Choisir un nombre non-Fibonacci
+            while True:
+                nombre = random.randint(10, 200)
+                if nombre not in self.fibonacci_sequence:
+                    est_fibonacci = False
+                    break
+        
+        question = f"Le nombre {nombre} fait-il partie de la suite de Fibonacci ?"
+        reponse = "Oui" if est_fibonacci else "Non"
+        
+        if est_fibonacci:
+            position = self.fibonacci_sequence.index(nombre)
+            indices = [
+                "Un nombre est Fibonacci s'il vérifie: 5n² ± 4 est un carré parfait",
+                f"Les nombres Fibonacci autour de {nombre}: ...",
+                f"On vérifie: 5×{nombre}² + 4 = {5*nombre*nombre + 4}",
+                f"Ou: 5×{nombre}² - 4 = {5*nombre*nombre - 4}",
+                f"{nombre} est le F({position}) de la suite"
+            ]
+        else:
+            # Trouver les Fibonacci les plus proches
+            plus_petit = max([f for f in self.fibonacci_sequence if f < nombre])
+            plus_grand = min([f for f in self.fibonacci_sequence if f > nombre])
+            indices = [
+                f"Les nombres Fibonacci proches: {plus_petit} et {plus_grand}",
+                f"Pour être Fibonacci, {nombre} devrait être entre F(k) et F(k+1)",
+                f"Mais {nombre} n'est pas égal à {plus_petit} + {self.fibonacci_sequence[self.fibonacci_sequence.index(plus_petit)-1]}",
+                f"Donc {nombre} n'est pas un nombre Fibonacci"
+            ]
+        
+        return {
+            "question": question,
+            "reponse": reponse,
+            "indices": indices,
+            "type": "est_fibonacci",
+            "difficulte": self.niveau.value
+        }
+
+    def _creer_defi_position(self):
+        """Crée un défi 'trouver la position d'un nombre Fibonacci'"""
+        if self.niveau == Difficulty.DEBUTANT:
+            position = random.randint(3, 10)
+        elif self.niveau == Difficulty.INTERMEDIAIRE:
+            position = random.randint(8, 20)
+        else:
+            position = random.randint(15, 30)
+        
+        nombre = self.fibonacci_sequence[position]
+        question = f"À quelle position se trouve le nombre {nombre} dans la suite de Fibonacci ?\n(Rappel: F(0)=0, F(1)=1)"
+        
+        indices = [
+            "Les premiers termes: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89...",
+            f"Cherchez où se trouve {nombre} dans cette liste",
+            f"Le terme F({position-1}) = {self.fibonacci_sequence[position-1]}",
+            f"Le terme F({position+1}) = {self.fibonacci_sequence[position+1]}",
+            f"Donc {nombre} est le F({position})"
+        ]
+        
+        return {
+            "question": question,
+            "reponse": position,
+            "indices": indices,
+            "type": "position_fibonacci",
+            "difficulte": self.niveau.value
+        }
+
+    def _creer_defi_somme(self):
+        """Crée un défi 'calculer une somme de Fibonacci'"""
+        if self.niveau == Difficulty.DEBUTANT:
+            n = random.randint(3, 6)
+            question = f"Calculez la somme des {n} premiers nombres de Fibonacci (F(0) à F({n-1}))"
+            reponse = sum(self.fibonacci_sequence[:n])
+            
+        elif self.niveau == Difficulty.INTERMEDIAIRE:
+            a = random.randint(2, 8)
+            b = random.randint(a+1, a+5)
+            question = f"Calculez F({a}) + F({a+1}) + ... + F({b})"
+            reponse = sum(self.fibonacci_sequence[a:b+1])
+            
+        else:  # Avancé
+            # Somme des carrés ou autre propriété
+            n = random.randint(4, 8)
+            question = f"Calculez F(1)² + F(2)² + ... + F({n})²"
+            reponse = sum([f*f for f in self.fibonacci_sequence[1:n+1]])
+        
+        indices = [
+            "Propriété: F(0)+F(1)+...+F(n) = F(n+2) - 1",
+            "Pour les sommes partielles: F(a)+...+F(b) = F(b+2) - F(a+1)",
+            "Pour les carrés: F(1)²+...+F(n)² = F(n)×F(n+1)",
+            "Calculez terme par terme si nécessaire"
+        ]
+        
+        return {
+            "question": question,
+            "reponse": reponse,
+            "indices": indices,
+            "type": "somme_fibonacci",
+            "difficulte": self.niveau.value
+        }
+
+    def _creer_defi_ratio(self):
+        """Crée un défi sur le ratio d'or"""
+        if self.niveau == Difficulty.DEBUTANT:
+            n = random.randint(5, 10)
+            question = f"Calculez F({n+1}) / F({n}) (arrondi à 3 décimales)"
+            reponse = round(self.fibonacci_sequence[n+1] / self.fibonacci_sequence[n], 3)
+            
+        elif self.niveau == Difficulty.INTERMEDIAIRE:
+            question = "Quelle est la valeur du nombre d'or Φ (phi) ?\n(arrondi à 5 décimales)"
+            reponse = 1.61803
+            
+        else:  # Avancé
+            question = "Résolvez: Φ² = Φ + 1\nQuelle est la valeur positive de Φ ?"
+            reponse = (1 + math.sqrt(5)) / 2
+        
+        indices = [
+            "Le ratio F(n+1)/F(n) tend vers Φ quand n→∞",
+            "Φ ≈ 1.618033988749895...",
+            "Φ est solution de Φ² = Φ + 1",
+            "Formule: Φ = (1 + √5) / 2",
+            "Pour n grand, le ratio est très proche de Φ"
+        ]
+        
+        return {
+            "question": question,
+            "reponse": reponse,
+            "indices": indices,
+            "type": "ratio_fibonacci",
+            "difficulte": self.niveau.value
+        }
+
+    def _afficher_defi(self):
+        """Affiche le défi actuel"""
+        # Nettoyer le frame
+        for widget in self.defi_frame.winfo_children():
+            widget.destroy()
+        
+        # Afficher le défi
+        Label(self.defi_frame, text="🧩 DÉFI FIBONACCI", 
+              font=("Century Gothic", 16, "bold"), bg=self.PALETTE["fond_carte"], 
+              fg=self.PALETTE["primaire"]).pack(pady=20)
+        
+        question_text = self.defi_actuel["question"]
+        Label(self.defi_frame, text=question_text, 
+              font=("Century Gothic", 14), bg=self.PALETTE["fond_carte"], 
+              fg=self.PALETTE["texte_fonce"], wraplength=550, justify="center").pack(pady=10, padx=20)
+        
+        # Afficher des informations sur Fibonacci selon le niveau
+        info_frame = Frame(self.defi_frame, bg=self.PALETTE["fond_carte"])
+        info_frame.pack(pady=20)
+        
+        if self.niveau == Difficulty.DEBUTANT:
+            info_text = "Rappel: F(0)=0, F(1)=1, F(n)=F(n-1)+F(n-2)"
+        elif self.niveau == Difficulty.INTERMEDIAIRE:
+            info_text = "Suite: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144..."
+        else:
+            info_text = "Φ ≈ 1.618 | F(n) ≈ Φⁿ/√5"
+        
+        Label(info_frame, text=info_text, 
+              font=("Century Gothic", 11, "italic"), bg=self.PALETTE["fond_carte"], 
+              fg=self.PALETTE["texte_clair"]).pack()
+
+    def _dessiner_spirale(self):
+        """Dessine une spirale de Fibonacci"""
+        self.spirale_canvas.delete("all")
+        
+        # Dimensions
+        width = 230
+        height = 200
+        x_center = width // 2
+        y_center = height // 2
+        
+        # Taille des carrés (adaptée à l'espace)
+        taille_base = 10
+        if self.niveau == Difficulty.DEBUTANT:
+            n_carres = 6
+        elif self.niveau == Difficulty.INTERMEDIAIRE:
+            n_carres = 7
+        else:
+            n_carres = 8
+        
+        # Calculer les tailles des carrés
+        tailles = [taille_base * self.fibonacci_sequence[i] for i in range(1, n_carres+1)]
+        
+        # Position initiale
+        x, y = x_center, y_center
+        angle = 0
+        
+        # Couleurs alternées
+        couleurs = ["#FEE2E2", "#FEF3C7", "#D1FAE5", "#DBEAFE", "#EDE9FE"]
+        
+        for i in range(n_carres):
+            taille = tailles[i]
+            couleur = couleurs[i % len(couleurs)]
+            
+            # Dessiner le carré
+            self.spirale_canvas.create_rectangle(
+                x, y, x + taille, y + taille,
+                fill=couleur, outline=self.PALETTE["spirale"], width=1
+            )
+            
+            # Dessiner le quart de cercle pour la spirale
+            start_angle = angle
+            end_angle = angle + 90
+            
+            if i % 4 == 0:  # En bas à droite
+                self.spirale_canvas.create_arc(
+                    x, y, x + 2*taille, y + 2*taille,
+                    start=start_angle, extent=90,
+                    outline=self.PALETTE["spirale"], width=2, style="arc"
+                )
+                x += taille
+            elif i % 4 == 1:  # En haut à droite
+                self.spirale_canvas.create_arc(
+                    x - taille, y, x + taille, y + 2*taille,
+                    start=start_angle, extent=90,
+                    outline=self.PALETTE["spirale"], width=2, style="arc"
+                )
+                y -= taille
+            elif i % 4 == 2:  # En haut à gauche
+                self.spirale_canvas.create_arc(
+                    x - 2*taille, y - taille, x, y + taille,
+                    start=start_angle, extent=90,
+                    outline=self.PALETTE["spirale"], width=2, style="arc"
+                )
+                x -= taille
+            else:  # En bas à gauche
+                self.spirale_canvas.create_arc(
+                    x, y - 2*taille, x + 2*taille, y,
+                    start=start_angle, extent=90,
+                    outline=self.PALETTE["spirale"], width=2, style="arc"
+                )
+                y += taille
+            
+            angle = (angle + 90) % 360
+        
+        # Ajouter le texte "Spirale d'or"
+        self.spirale_canvas.create_text(
+            width // 2, height - 15,
+            text="Spirale d'or 🌟",
+            font=("Century Gothic", 8, "bold"),
+            fill=self.PALETTE["spirale"]
+        )
+
+    def _creer_controles_reponse(self):
+        """Crée les contrôles de réponse adaptés au type de défi"""
+        # Nettoyer le frame
+        for widget in self.controles_reponse_frame.winfo_children():
+            widget.destroy()
+        
+        type_defi = self.defi_actuel.get("type", "terme_manquant")
+        
+        if type_defi in ["est_fibonacci"]:
+            # Boutons Oui/Non
+            boutons_frame = Frame(self.controles_reponse_frame, bg=self.PALETTE["fond_principal"])
+            boutons_frame.pack()
+            
+            self.btn_oui = ttk.Button(boutons_frame, text="✅ OUI", 
+                                     command=lambda: self._valider_reponse_choix("Oui"), width=15)
+            self.btn_oui.pack(side=LEFT, padx=10)
+            
+            self.btn_non = ttk.Button(boutons_frame, text="❌ NON", 
+                                     command=lambda: self._valider_reponse_choix("Non"), width=15)
+            self.btn_non.pack(side=LEFT, padx=10)
+            
+        elif type_defi in ["suite_fibonacci"]:
+            # Plusieurs champs pour une suite
+            saisie_frame = Frame(self.controles_reponse_frame, bg=self.PALETTE["fond_principal"])
+            saisie_frame.pack()
+            
+            Label(saisie_frame, text="Prochains termes (séparés par des virgules):", 
+                  font=("Century Gothic", 11), bg=self.PALETTE["fond_principal"]).pack(pady=5)
+            
+            self.reponse_entry = Entry(saisie_frame, font=("Century Gothic", 14), 
+                                      width=30, justify="center")  # width dans Entry, pas dans pack
+            self.reponse_entry.pack(pady=5)
+            self.reponse_entry.bind("<Return>", lambda e: self._valider_reponse())
+            
+            Label(saisie_frame, text="Ex: 13, 21, 34", 
+                  font=("Century Gothic", 9), bg=self.PALETTE["fond_principal"], 
+                  fg=self.PALETTE["texte_clair"]).pack(pady=2)
+            
+            ttk.Button(saisie_frame, text="✅ Valider", 
+                      command=self._valider_reponse).pack(pady=10)
+            
+        else:
+            # Champ de saisie unique
+            saisie_frame = Frame(self.controles_reponse_frame, bg=self.PALETTE["fond_principal"])
+            saisie_frame.pack()
+            
+            Label(saisie_frame, text="Entrez votre réponse :", 
+                  font=("Century Gothic", 11), bg=self.PALETTE["fond_principal"]).pack(pady=5)
+            
+            self.reponse_entry = Entry(saisie_frame, font=("Century Gothic", 14), 
+                                      width=20, justify="center")  # width dans Entry, pas dans pack
+            self.reponse_entry.pack(pady=5)
+            self.reponse_entry.bind("<Return>", lambda e: self._valider_reponse())
+            
+            # Indication selon le type
+            if type_defi == "ratio_fibonacci":
+                Label(saisie_frame, text="(nombre décimal si nécessaire)", 
+                      font=("Century Gothic", 9), bg=self.PALETTE["fond_principal"], 
+                      fg=self.PALETTE["texte_clair"]).pack(pady=2)
+            
+            ttk.Button(saisie_frame, text="✅ Valider", 
+                      command=self._valider_reponse).pack(pady=10)
+    
+    def _valider_reponse(self):
+        """Méthode principale de validation qui redirige vers la bonne méthode"""
+        type_defi = self.defi_actuel.get("type", "terme_manquant")
+        
+        if type_defi in ["est_fibonacci"]:
+            # Pour ce type, les boutons Oui/Non appellent directement _valider_reponse_choix
+            # Cette méthode ne devrait pas être appelée directement pour ce type
+            return
+        else:
+            # Pour les autres types, appeler la méthode de validation textuelle
+            self._valider_reponse_texte()
+
+    def _valider_reponse_choix(self, reponse_joueur):
+        """Valide une réponse à choix (Oui/Non)"""
+        if self.verification_en_cours:
+            return
+            
+        if self.essais_restants <= 0:
+            return
+        
+        # Désactiver les contrôles
+        self._desactiver_controles()
+        self.verification_en_cours = True
+        
+        self.essais_restants -= 1
+        self.essais_label.config(text=f"🎯 ESSAIS RESTANTS: {self.essais_restants}")
+        
+        reponse_correcte = self.defi_actuel["reponse"]
+        
+        if reponse_joueur == reponse_correcte:
+            self._reussite_defi()
+        else:
+            self._echec_essai()
+        
+        if self.essais_restants <= 0:
+            self.fenetre_jeu.after(1000, self._defi_echoue)
+
+    def _valider_reponse_texte(self):
+        """Valide une réponse textuelle"""
+        if self.verification_en_cours:
+            return
+            
+        if self.essais_restants <= 0:
+            return
+        
+        # Récupérer la réponse
+        try:
+            reponse_joueur = self.reponse_entry.get().strip()
+        except:
+            self._afficher_feedback("❌ Veuillez entrer une réponse", self.PALETTE["erreur"])
+            return
+        
+        if not reponse_joueur:
+            self._afficher_feedback("❌ Veuillez entrer une réponse", self.PALETTE["erreur"])
+            return
+        
+        # Désactiver les contrôles
+        self._desactiver_controles()
+        self.verification_en_cours = True
+        
+        self.essais_restants -= 1
+        self.essais_label.config(text=f"🎯 ESSAIS RESTANTS: {self.essais_restants}")
+        
+        reponse_correcte = self.defi_actuel["reponse"]
+        type_defi = self.defi_actuel.get("type", "terme_manquant")
+        
+        # Vérification selon le type
+        if self._valider_reponse_selon_type(reponse_joueur, reponse_correcte, type_defi):
+            self._reussite_defi()
+        else:
+            self._echec_essai()
+        
+        if self.essais_restants <= 0:
+            self.fenetre_jeu.after(1000, self._defi_echoue)
+
+    def _valider_reponse_selon_type(self, reponse_joueur, reponse_correcte, type_defi):
+        """Valide une réponse selon le type de défi"""
+        try:
+            if type_defi == "suite_fibonacci":
+                # Valider une liste de nombres
+                nombres_joueur = [int(x.strip()) for x in reponse_joueur.replace(",", " ").split()]
+                if isinstance(reponse_correcte, list):
+                    return nombres_joueur == reponse_correcte
+                else:
+                    return False
+                
+            elif type_defi == "ratio_fibonacci":
+                # Valider un nombre décimal avec tolérance
+                try:
+                    val_joueur = float(reponse_joueur)
+                    val_correcte = float(reponse_correcte)
+                    return abs(val_joueur - val_correcte) < 0.001
+                except:
+                    return False
+                
+            else:
+                # Validation numérique simple
+                try:
+                    return int(reponse_joueur) == int(reponse_correcte)
+                except:
+                    return reponse_joueur == str(reponse_correcte)
+                    
+        except:
+            return False
+
+    def _afficher_indices(self):
+        """Affiche les indices disponibles"""
+        # Nettoyer le frame
+        for widget in self.indices_frame.winfo_children():
+            widget.destroy()
+        
+        indices = self.defi_actuel.get("indices", [])
+        
+        if not indices:
+            Label(self.indices_frame, text="Aucun indice disponible", 
+                  font=("Century Gothic", 10), bg=self.PALETTE["fond_principal"], 
+                  fg=self.PALETTE["texte_clair"]).pack(pady=5)
+            return
+        
+        for i in range(len(indices)):
+            if i < self.indices_decouverts:
+                Label(self.indices_frame, text=f"💡 {indices[i]}", 
+                      font=("Century Gothic", 10), bg=self.PALETTE["fond_principal"], 
+                      fg="#10B981", wraplength=700, justify="left").pack(anchor=W, pady=3)
+            else:
+                Label(self.indices_frame, text=f"🔒 Indice {i+1} (coût: 5 points)", 
+                      font=("Century Gothic", 9), bg=self.PALETTE["fond_principal"], 
+                      fg=self.PALETTE["texte_clair"], wraplength=700, 
+                      justify="left").pack(anchor=W, pady=3)
+
+    def _obtenir_indice(self):
+        """Donne un indice au joueur"""
+        indices = self.defi_actuel.get("indices", [])
+        
+        if not indices:
+            self._afficher_feedback("❌ Aucun indice disponible", self.PALETTE["erreur"])
+            return
+        
+        if self.indices_decouverts >= len(indices):
+            self._afficher_feedback("❌ Plus d'indices disponibles !", self.PALETTE["erreur"])
+            return
+        
+        penalite = 5
+        if self.score >= penalite:
+            self.score -= penalite
+            self.indices_decouverts += 1
+            
+            self._ajouter_historique(f"📉 Indice acheté: -{penalite} points")
+            self._afficher_feedback(f"💡 Indice {self.indices_decouverts} révélé ! (-{penalite} points)", 
+                                  "#F59E0B")
+            
+            self._afficher_indices()
+            self._mettre_a_jour_stats()
+        else:
+            self._afficher_feedback("❌ Pas assez de points pour un indice !", self.PALETTE["erreur"])
+
+    def _desactiver_controles(self):
+        """Désactive tous les contrôles de réponse"""
+        for widget in self.controles_reponse_frame.winfo_children():
+            if isinstance(widget, ttk.Button):
+                widget.config(state="disabled")
+            elif isinstance(widget, Frame):
+                for child in widget.winfo_children():
+                    if isinstance(child, ttk.Button):
+                        child.config(state="disabled")
+                    elif isinstance(child, Entry):
+                        child.config(state="disabled")
+
+    def _reactiver_controles(self):
+        """Réactive les contrôles de réponse"""
+        type_defi = self.defi_actuel.get("type", "terme_manquant")
+        
+        if type_defi in ["est_fibonacci"]:
+            for widget in self.controles_reponse_frame.winfo_children():
+                if isinstance(widget, ttk.Button):
+                    widget.config(state="normal")
+                elif isinstance(widget, Frame):
+                    for child in widget.winfo_children():
+                        if isinstance(child, ttk.Button):
+                            child.config(state="normal")
+        else:
+            for widget in self.controles_reponse_frame.winfo_children():
+                if isinstance(widget, Entry):
+                    widget.config(state="normal")
+                elif isinstance(widget, Frame):
+                    for child in widget.winfo_children():
+                        if isinstance(child, Entry):
+                            child.config(state="normal")
+                        elif isinstance(child, ttk.Button):
+                            child.config(state="normal")
+
+    def _reussite_defi(self):
+        """Quand le défi est réussi"""
+        try:
+            points = self._calculer_points()
+            self.score += points
+            self.streak += 1
+            self.defis_reussis += 1
+            
+            if self.streak > self.meilleur_streak:
+                self.meilleur_streak = self.streak
+            
+            # Bonus de streak
+            bonus_streak = 0
+            if self.streak >= 3:
+                bonus_streak = min(10, self.streak * 2)
+                self.score += bonus_streak
+                self.bonus_streak += bonus_streak
+            
+            reponse_correcte = self.defi_actuel["reponse"]
+            message = f"✅ DÉFI RÉUSSI ! (+{points} points"
+            if bonus_streak:
+                message += f" +{bonus_streak} bonus streak"
+            message += f")\nRéponse: {reponse_correcte}"
+            
+            self._afficher_feedback(message, self.PALETTE["succes"])
+            self._ajouter_historique(f"✅ Défi réussi ! +{points} points")
+            self._mettre_a_jour_stats()
+            
+            # Nouveau défi après délai
+            self.fenetre_jeu.after(3000, self._nouveau_defi)
+            
+        except Exception as e:
+            print(f"Erreur dans _reussite_defi: {e}")
+            self._afficher_feedback(f"❌ Erreur: {str(e)}", self.PALETTE["erreur"])
+            self.verification_en_cours = False
+
+    def _echec_essai(self):
+        """Quand un essai échoue"""
+        try:
+            if self.essais_restants > 0:
+                self._reactiver_controles()
+                self.verification_en_cours = False
+                
+                self._afficher_feedback(f"❌ Réponse incorrecte. Essais restants: {self.essais_restants}", 
+                                      self.PALETTE["erreur"])
+            else:
+                self._afficher_feedback("❌ Réponse incorrecte.", self.PALETTE["erreur"])
+            
+            self._ajouter_historique(f"❌ Essai incorrect")
+            self._mettre_a_jour_stats()
+            
+        except Exception as e:
+            print(f"Erreur dans _echec_essai: {e}")
+            self.verification_en_cours = False
+
+    def _defi_echoue(self):
+        """Quand le défi échoue"""
+        try:
+            self.streak = 0
+            self.bonus_streak = 0
+            
+            reponse_correcte = self.defi_actuel["reponse"]
+            penalite = 10
+            self.score = max(0, self.score - penalite)
+            
+            self._afficher_feedback(f"💥 DÉFI ÉCHOUÉ ! Réponse: {reponse_correcte} (-{penalite} points)", 
+                                  self.PALETTE["erreur"])
+            
+            self._ajouter_historique(f"💥 Défi échoué. -{penalite} points")
+            self._mettre_a_jour_stats()
+            
+            self.fenetre_jeu.after(3000, self._nouveau_defi)
+            
+        except Exception as e:
+            print(f"Erreur dans _defi_echoue: {e}")
+            self.fenetre_jeu.after(1000, self._nouveau_defi)
+
+    def _calculer_points(self):
+        """Calcule les points gagnés"""
+        points_base = 25
+        niveau_multiplier = {
+            Difficulty.DEBUTANT: 1,
+            Difficulty.INTERMEDIAIRE: 1.5,
+            Difficulty.AVANCE: 2
+        }
+        
+        bonus_essais = self.essais_restants * 3
+        malus_indices = self.indices_decouverts * 3
+        
+        multiplicateur = niveau_multiplier.get(self.niveau, 1)
+        points = (points_base + bonus_essais - malus_indices) * multiplicateur
+        
+        return max(15, round(points))
+
+    def _ajouter_historique(self, message):
+        """Ajoute un message à l'historique"""
+        self.historique_text.config(state=NORMAL)
+        from datetime import datetime
+        timestamp = datetime.now().strftime("%H:%M:%S")
+        self.historique_text.insert(END, f"[{timestamp}] {message}\n")
+        self.historique_text.see(END)
+        self.historique_text.config(state=DISABLED)
+        
+        self.historique_reponses.append({
+            "temps": timestamp,
+            "message": message,
+            "defi": self.defis_joues,
+            "score": self.score
+        })
+
+    def _effacer_feedback(self):
+        """Efface le feedback"""
+        self.feedback_label.config(text="")
+
+    def _afficher_feedback(self, message, couleur):
+        """Affiche un message de feedback"""
+        self.feedback_label.config(text=message, fg=couleur)
+
+    def _mettre_a_jour_stats(self):
+        """Met à jour toutes les statistiques"""
+        self.score_label.config(text=f"🏆 SCORE: {self.score}")
+        self.streak_label.config(text=f"🔥 STREAK: {self.streak}")
+        self.defis_label.config(text=f"✅ DÉFIS: {self.defis_reussis}/{self.defis_joues}")
+        
+        if self.score < 150:
+            niveau_text = "Débutant"
+        elif self.score < 400:
+            niveau_text = "Intermédiaire"
+        else:
+            niveau_text = "Avancé"
+        self.niveau_label.config(text=f"📊 NIVEAU: {niveau_text}")
+
+    def _afficher_statistiques(self):
+        """Affiche les statistiques détaillées"""
+        stats_window = Toplevel(self.fenetre_jeu)
+        stats_window.title("📊 Statistiques Fibonacci")
+        stats_window.geometry("600x500")
+        stats_window.configure(bg=self.PALETTE["fond_principal"])
+        
+        Label(stats_window, text="📊 STATISTIQUES FIBONACCI", 
+              font=("Century Gothic", 18, "bold"), bg=self.PALETTE["fond_principal"], 
+              fg=self.PALETTE["primaire"]).pack(pady=20)
+        
+        stats_content = [
+            ("🌟 Score total", f"{self.score} points"),
+            ("🔥 Meilleur streak", f"{self.meilleur_streak} défis"),
+            ("✅ Défis réussis", f"{self.defis_reussis}"),
+            ("📊 Défis joués", f"{self.defis_joues}"),
+            ("📈 Taux de réussite", f"{(self.defis_reussis/self.defis_joues*100 if self.defis_joues > 0 else 0):.1f}%"),
+            ("🔍 Indices utilisés", f"{self.indices_decouverts}"),
+            ("⭐ Bonus streak total", f"{self.bonus_streak} points"),
+            ("🎯 Niveau actuel", f"{self.niveau.value}")
+        ]
+        
+        for label, value in stats_content:
+            line_frame = Frame(stats_window, bg=self.PALETTE["fond_principal"])
+            line_frame.pack(fill=X, padx=50, pady=8)
+            
+            Label(line_frame, text=label, font=("Century Gothic", 11), 
+                  bg=self.PALETTE["fond_principal"], fg=self.PALETTE["texte_fonce"]).pack(side=LEFT)
+            
+            Label(line_frame, text=value, font=("Century Gothic", 11, "bold"), 
+                  bg=self.PALETTE["fond_principal"], fg=self.PALETTE["primaire"]).pack(side=RIGHT)
+        
+        ttk.Button(stats_window, text="Fermer", command=stats_window.destroy).pack(pady=20)
+
+    def _afficher_explication(self):
+        """Affiche l'explication complète"""
+        penalite = 10
+        self.score = max(0, self.score - penalite)
+        
+        explication_window = Toplevel(self.fenetre_jeu)
+        explication_window.title("📚 Explication Fibonacci")
+        explication_window.geometry("500x400")
+        explication_window.configure(bg=self.PALETTE["fond_principal"])
+        
+        Label(explication_window, text="📚 EXPLICATION COMPLÈTE", 
+              font=("Century Gothic", 16, "bold"), bg=self.PALETTE["fond_principal"], 
+              fg=self.PALETTE["primaire"]).pack(pady=20)
+        
+        Label(explication_window, text=self.defi_actuel["question"], 
+              font=("Century Gothic", 12), bg=self.PALETTE["fond_principal"], 
+              fg=self.PALETTE["texte_fonce"], wraplength=450).pack(pady=10)
+        
+        reponse = self.defi_actuel["reponse"]
+        Label(explication_window, text=f"Réponse: {reponse}", 
+              font=("Century Gothic", 14, "bold"), bg=self.PALETTE["fond_principal"], 
+              fg=self.PALETTE["succes"]).pack(pady=10)
+        
+        explication_text = Text(explication_window, height=10, font=("Century Gothic", 10),
+                               bg=self.PALETTE["fond_clair"], fg=self.PALETTE["texte_fonce"], 
+                               wrap=WORD)
+        scrollbar = Scrollbar(explication_window, command=explication_text.yview)
+        explication_text.config(yscrollcommand=scrollbar.set)
+        
+        indices = self.defi_actuel.get("indices", [])
+        for indice in indices:
+            explication_text.insert(END, f"• {indice}\n\n")
+        
+        explication_text.pack(side=LEFT, fill=BOTH, expand=True, padx=20, pady=5)
+        scrollbar.pack(side=RIGHT, fill=Y)
+        explication_text.config(state=DISABLED)
+        
+        Label(explication_window, text=f"(-{penalite} points)", 
+              font=("Century Gothic", 10), bg=self.PALETTE["fond_principal"], 
+              fg=self.PALETTE["texte_clair"]).pack(pady=10)
+        
+        ttk.Button(explication_window, text="Fermer", 
+                  command=explication_window.destroy).pack(pady=10)
+        
+        self._ajouter_historique(f"📚 Explication achetée: -{penalite} points")
+        self._mettre_a_jour_stats()
 # =============================================================================
 # FONCTIONS D'ACCÈS UNIFIÉES
 # =============================================================================
+def lancer_jeu_des_24(parent=None):
+    """Lance le Jeu des 24"""
+    jeu = JeuDes24(parent)
+    jeu.lancer_jeu()
 
 def lancer_math_emoji(parent=None):
     """Lance le jeu Math Emoji"""
@@ -5572,7 +7712,19 @@ def lancer_chasse_premiers(parent=None):
     jeu = ChasseNombresPremiers(parent)
     jeu.lancer_jeu()
 
+def lancer_math_battle(parent=None):
+    """Lancer le Jeu Chasse aux Nombres Premiers"""
+    jeu = MathBattle(parent)
+    jeu.lancer_jeu()
 
+def lancer_defis_fibonacci(parent):
+    """Lance le jeu Défis Fibonacci"""
+    try:
+        jeu = DefisFibonacci(parent, "data/defis_fibonacci.json")
+        jeu.lancer_jeu()
+    except Exception as e:
+        print(f"Erreur lancement Défis Fibonacci: {e}")
+        messagebox.showerror("Erreur", f"Impossible de lancer le jeu:\n{str(e)}")
 
 # =============================================================================
 # LISTE DES JEUX DISPONIBLES (pour l'interface)
@@ -5653,5 +7805,18 @@ JEUX_DISPONIBLES = [
     "fonction": lancer_chasse_premiers,
     "disponible": True,
     "guide": lambda parent: afficher_guide_jeu("chasse_premiers", parent)
-    }
+    },{
+    "nom": "⚔️ Math Battle",
+    "description": "Affrontez l'ordinateur en calcul mental rapide !\n• 10 manches avec timer de 30 secondes\n• Difficulté progressive (facile → difficile)\n• Système de streak avec bonus de points\n• Différentes opérations : +, -, ×, ÷, mélange",
+    "fonction": lancer_math_battle,
+    "disponible": True,
+    "guide": lambda parent: afficher_guide_jeu("math_battle", parent)
+},
+{
+    "nom": "🌟 Défis Fibonacci",
+    "description": "Explorez la célèbre suite mathématique !\n• 8 types de défis variés\n• Spirale Fibonacci interactive\n• Faits sur le nombre d'or et la nature\n• Apprenez les propriétés mathématiques",
+    "fonction": lancer_defis_fibonacci,
+    "disponible": True,
+    "guide": lambda parent: afficher_guide_jeu("defis_fibonacci", parent)
+}
 ]

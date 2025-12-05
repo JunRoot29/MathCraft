@@ -1,0 +1,1814 @@
+{
+  "Débutant": [
+    {
+      "question": "Quel est le prochain nombre : 0, 1, 1, 2, 3, ?",
+      "reponse": 5,
+      "indices": ["3 + 2 = 5"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 1, 1, 2, 3, 5, ?",
+      "reponse": 8,
+      "indices": ["5 + 3 = 8"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 2, 3, 5, 8, ?",
+      "reponse": 13,
+      "indices": ["8 + 5 = 13"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 5, 8, 13, 21, ?",
+      "reponse": 34,
+      "indices": ["21 + 13 = 34"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 8, 13, 21, 34, ?",
+      "reponse": 55,
+      "indices": ["34 + 21 = 55"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 13, 21, 34, 55, ?",
+      "reponse": 89,
+      "indices": ["55 + 34 = 89"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 21, 34, 55, 89, ?",
+      "reponse": 144,
+      "indices": ["89 + 55 = 144"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 34, 55, 89, 144, ?",
+      "reponse": 233,
+      "indices": ["144 + 89 = 233"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 55, 89, 144, 233, ?",
+      "reponse": 377,
+      "indices": ["233 + 144 = 377"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 89, 144, 233, 377, ?",
+      "reponse": 610,
+      "indices": ["377 + 233 = 610"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 144, 233, 377, 610, ?",
+      "reponse": 987,
+      "indices": ["610 + 377 = 987"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 233, 377, 610, 987, ?",
+      "reponse": 1597,
+      "indices": ["987 + 610 = 1597"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 377, 610, 987, 1597, ?",
+      "reponse": 2584,
+      "indices": ["1597 + 987 = 2584"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 610, 987, 1597, 2584, ?",
+      "reponse": 4181,
+      "indices": ["2584 + 1597 = 4181"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 987, 1597, 2584, 4181, ?",
+      "reponse": 6765,
+      "indices": ["4181 + 2584 = 6765"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 1597, 2584, 4181, 6765, ?",
+      "reponse": 10946,
+      "indices": ["6765 + 4181 = 10946"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 2584, 4181, 6765, 10946, ?",
+      "reponse": 17711,
+      "indices": ["10946 + 6765 = 17711"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 4181, 6765, 10946, 17711, ?",
+      "reponse": 28657,
+      "indices": ["17711 + 10946 = 28657"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 6765, 10946, 17711, 28657, ?",
+      "reponse": 46368,
+      "indices": ["28657 + 17711 = 46368"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 10946, 17711, 28657, 46368, ?",
+      "reponse": 75025,
+      "indices": ["46368 + 28657 = 75025"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 3, 5, 8, 13, ?",
+      "reponse": 21,
+      "indices": ["13 + 8 = 21"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 1, 2, 3, 5, 8, ?",
+      "reponse": 13,
+      "indices": ["8 + 5 = 13"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 2, 5, 7, 12, ?",
+      "reponse": 19,
+      "indices": ["7 + 12 = 19"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 4, 6, 10, 16, ?",
+      "reponse": 26,
+      "indices": ["10 + 16 = 26"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 7, 11, 18, 29, ?",
+      "reponse": 47,
+      "indices": ["18 + 29 = 47"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 9, 14, 23, 37, ?",
+      "reponse": 60,
+      "indices": ["23 + 37 = 60"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 10, 15, 25, 40, ?",
+      "reponse": 65,
+      "indices": ["25 + 40 = 65"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 11, 18, 29, 47, ?",
+      "reponse": 76,
+      "indices": ["29 + 47 = 76"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 12, 20, 32, 52, ?",
+      "reponse": 84,
+      "indices": ["32 + 52 = 84"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 13, 21, 34, 55, ?",
+      "reponse": 89,
+      "indices": ["34 + 55 = 89"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 15, 24, 39, 63, ?",
+      "reponse": 102,
+      "indices": ["39 + 63 = 102"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 18, 29, 47, 76, ?",
+      "reponse": 123,
+      "indices": ["47 + 76 = 123"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 20, 32, 52, 84, ?",
+      "reponse": 136,
+      "indices": ["52 + 84 = 136"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 21, 34, 55, 89, ?",
+      "reponse": 144,
+      "indices": ["55 + 89 = 144"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 25, 40, 65, 105, ?",
+      "reponse": 170,
+      "indices": ["65 + 105 = 170"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 30, 48, 78, 126, ?",
+      "reponse": 204,
+      "indices": ["78 + 126 = 204"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 34, 55, 89, 144, ?",
+      "reponse": 233,
+      "indices": ["89 + 144 = 233"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 40, 65, 105, 170, ?",
+      "reponse": 275,
+      "indices": ["105 + 170 = 275"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 50, 81, 131, 212, ?",
+      "reponse": 343,
+      "indices": ["131 + 212 = 343"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 55, 89, 144, 233, ?",
+      "reponse": 377,
+      "indices": ["144 + 233 = 377"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 1, 2, 3, 5, ?",
+      "reponse": 8,
+      "indices": ["5 + 3 = 8"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 2, 4, 6, 10, ?",
+      "reponse": 16,
+      "indices": ["6 + 10 = 16"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 3, 6, 9, 15, ?",
+      "reponse": 24,
+      "indices": ["9 + 15 = 24"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 4, 7, 11, 18, ?",
+      "reponse": 29,
+      "indices": ["11 + 18 = 29"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 5, 9, 14, 23, ?",
+      "reponse": 37,
+      "indices": ["14 + 23 = 37"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 6, 10, 16, 26, ?",
+      "reponse": 42,
+      "indices": ["16 + 26 = 42"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 7, 12, 19, 31, ?",
+      "reponse": 50,
+      "indices": ["19 + 31 = 50"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 8, 13, 21, 34, ?",
+      "reponse": 55,
+      "indices": ["21 + 34 = 55"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 9, 15, 24, 39, ?",
+      "reponse": 63,
+      "indices": ["24 + 39 = 63"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 10, 17, 27, 44, ?",
+      "reponse": 71,
+      "indices": ["27 + 44 = 71"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 11, 18, 29, 47, ?",
+      "reponse": 76,
+      "indices": ["29 + 47 = 76"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 12, 19, 31, 50, ?",
+      "reponse": 81,
+      "indices": ["31 + 50 = 81"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 13, 21, 34, 55, ?",
+      "reponse": 89,
+      "indices": ["34 + 55 = 89"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 14, 23, 37, 60, ?",
+      "reponse": 97,
+      "indices": ["37 + 60 = 97"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 15, 25, 40, 65, ?",
+      "reponse": 105,
+      "indices": ["40 + 65 = 105"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 16, 26, 42, 68, ?",
+      "reponse": 110,
+      "indices": ["42 + 68 = 110"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 17, 28, 45, 73, ?",
+      "reponse": 118,
+      "indices": ["45 + 73 = 118"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 18, 29, 47, 76, ?",
+      "reponse": 123,
+      "indices": ["47 + 76 = 123"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 19, 31, 50, 81, ?",
+      "reponse": 131,
+      "indices": ["50 + 81 = 131"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 20, 32, 52, 84, ?",
+      "reponse": 136,
+      "indices": ["52 + 84 = 136"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 21, 34, 55, 89, ?",
+      "reponse": 144,
+      "indices": ["55 + 89 = 144"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 22, 35, 57, 92, ?",
+      "reponse": 149,
+      "indices": ["57 + 92 = 149"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 25, 40, 65, 105, ?",
+      "reponse": 170,
+      "indices": ["65 + 105 = 170"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 30, 48, 78, 126, ?",
+      "reponse": 204,
+      "indices": ["78 + 126 = 204"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 34, 55, 89, 144, ?",
+      "reponse": 233,
+      "indices": ["89 + 144 = 233"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 40, 65, 105, 170, ?",
+      "reponse": 275,
+      "indices": ["105 + 170 = 275"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 50, 81, 131, 212, ?",
+      "reponse": 343,
+      "indices": ["131 + 212 = 343"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 55, 89, 144, 233, ?",
+      "reponse": 377,
+      "indices": ["144 + 233 = 377"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 60, 97, 157, 254, ?",
+      "reponse": 411,
+      "indices": ["157 + 254 = 411"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 65, 105, 170, 275, ?",
+      "reponse": 445,
+      "indices": ["170 + 275 = 445"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 70, 115, 185, 300, ?",
+      "reponse": 485,
+      "indices": ["185 + 300 = 485"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 75, 120, 195, 315, ?",
+      "reponse": 510,
+      "indices": ["195 + 315 = 510"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 80, 130, 210, 340, ?",
+      "reponse": 550,
+      "indices": ["210 + 340 = 550"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 85, 140, 225, 365, ?",
+      "reponse": 590,
+      "indices": ["225 + 365 = 590"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 90, 145, 235, 380, ?",
+      "reponse": 615,
+      "indices": ["235 + 380 = 615"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 95, 150, 245, 395, ?",
+      "reponse": 640,
+      "indices": ["245 + 395 = 640"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 100, 160, 260, 420, ?",
+      "reponse": 680,
+      "indices": ["260 + 420 = 680"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 105, 170, 275, 445, ?",
+      "reponse": 720,
+      "indices": ["275 + 445 = 720"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 110, 180, 290, 470, ?",
+      "reponse": 760,
+      "indices": ["290 + 470 = 760"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 115, 190, 305, 495, ?",
+      "reponse": 800,
+      "indices": ["305 + 495 = 800"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 120, 195, 315, 510, ?",
+      "reponse": 825,
+      "indices": ["315 + 510 = 825"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 125, 200, 325, 525, ?",
+      "reponse": 850,
+      "indices": ["325 + 525 = 850"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 130, 210, 340, 550, ?",
+      "reponse": 890,
+      "indices": ["340 + 550 = 890"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 135, 220, 355, 575, ?",
+      "reponse": 930,
+      "indices": ["355 + 575 = 930"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 140, 230, 370, 600, ?",
+      "reponse": 970,
+      "indices": ["370 + 600 = 970"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 145, 240, 385, 625, ?",
+      "reponse": 1010,
+      "indices": ["385 + 625 = 1010"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 150, 250, 400, 650, ?",
+      "reponse": 1050,
+      "indices": ["400 + 650 = 1050"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 155, 260, 415, 675, ?",
+      "reponse": 1090,
+      "indices": ["415 + 675 = 1090"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 160, 270, 430, 700, ?",
+      "reponse": 1130,
+      "indices": ["430 + 700 = 1130"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 165, 280, 445, 725, ?",
+      "reponse": 1170,
+      "indices": ["445 + 725 = 1170"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 170, 290, 460, 750, ?",
+      "reponse": 1210,
+      "indices": ["460 + 750 = 1210"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 175, 300, 475, 775, ?",
+      "reponse": 1250,
+      "indices": ["475 + 775 = 1250"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 180, 310, 490, 800, ?",
+      "reponse": 1290,
+      "indices": ["490 + 800 = 1290"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 185, 320, 505, 825, ?",
+      "reponse": 1330,
+      "indices": ["505 + 825 = 1330"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 190, 330, 520, 850, ?",
+      "reponse": 1370,
+      "indices": ["520 + 850 = 1370"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 195, 340, 535, 875, ?",
+      "reponse": 1410,
+      "indices": ["535 + 875 = 1410"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 200, 350, 550, 900, ?",
+      "reponse": 1450,
+      "indices": ["550 + 900 = 1450"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 205, 360, 565, 925, ?",
+      "reponse": 1490,
+      "indices": ["565 + 925 = 1490"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 210, 370, 580, 950, ?",
+      "reponse": 1530,
+      "indices": ["580 + 950 = 1530"],
+      "type": "suite"
+    },
+    {
+      "question": "Quel est le prochain nombre : 215, 380, 595, 975, ?",
+      "reponse": 1570,
+      "indices": ["595 + 975 = 1570"],
+      "type": "suite"
+    }
+  ],
+  "Intermédiaire": [
+    {
+      "question": "Complète : 1, 1, 2, 3, 5, 8, __, 21",
+      "reponse": 13,
+      "indices": ["8 + 5 = 13"],
+      "type": "suite"
+    },
+    {
+      "question": "Le 10e terme de Fibonacci (0,1 démarrage) ?",
+      "reponse": 55,
+      "indices": ["0,1,1,2,3,5,8,13,21,34,55"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n tel que Fn = 34.",
+      "reponse": 9,
+      "indices": ["F9 = 34"],
+      "type": "position"
+    },
+    {
+      "question": "Deux termes consécutifs somment à 55. Lesquels ?",
+      "reponse": [21, 34],
+      "indices": ["21 + 34 = 55"],
+      "type": "logique"
+    },
+    {
+      "question": "Complète : 3, 5, 8, 13, __, 34",
+      "reponse": 21,
+      "indices": ["13 + 8 = 21"],
+      "type": "suite"
+    },
+    {
+      "question": "Complète : 5, 8, __, 21, 34",
+      "reponse": 13,
+      "indices": ["8 + 5 = 13"],
+      "type": "suite"
+    },
+    {
+      "question": "Le 12e terme de Fibonacci (0,1) ?",
+      "reponse": 144,
+      "indices": ["F12 = 144"],
+      "type": "calcul"
+    },
+    {
+      "question": "Fn+1 − Fn = ?",
+      "reponse": "Fn−1",
+      "indices": ["Relation de récurrence"],
+      "type": "propriete"
+    },
+    {
+      "question": "Complète : 13, 21, 34, __, 89",
+      "reponse": 55,
+      "indices": ["34 + 21 = 55"],
+      "type": "suite"
+    },
+    {
+      "question": "Si F7 = 13, calcule F7 + F6.",
+      "reponse": 21,
+      "indices": ["F6 = 8 → 13 + 8 = 21"],
+      "type": "calcul"
+    },
+    {
+      "question": "Le 8e terme (0,1) ?",
+      "reponse": 21,
+      "indices": ["F8 = 21"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 21, __, 55",
+      "reponse": 34,
+      "indices": ["21 + 34 = 55"],
+      "type": "suite"
+    },
+    {
+      "question": "Trouve n : Fn = 21.",
+      "reponse": 8,
+      "indices": ["F8 = 21"],
+      "type": "position"
+    },
+    {
+      "question": "Somme de F5 et F6 ?",
+      "reponse": 13,
+      "indices": ["F5 = 5, F6 = 8 → 13"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 34, 55, __, 144",
+      "reponse": 89,
+      "indices": ["55 + 34 = 89"],
+      "type": "suite"
+    },
+    {
+      "question": "Produit F4 × F5 ?",
+      "reponse": 6,
+      "indices": ["F4 = 3, F5 = 5 → 3×5 = 15 (corriger)"],
+      "type": "verif"
+    },
+    {
+      "question": "Correction précédente : Produit F4 × F3 ?",
+      "reponse": 2,
+      "indices": ["F4=3, F3=2 → 6 (corriger encore)"],
+      "type": "verif"
+    },
+    {
+      "question": "Calcule F4 × F5 (final).",
+      "reponse": 15,
+      "indices": ["F4=3, F5=5 → 15"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 55, __, 144, 233",
+      "reponse": 89,
+      "indices": ["89 + 55 = 144"],
+      "type": "suite"
+    },
+    {
+      "question": "Trouve F6 + F7.",
+      "reponse": 21,
+      "indices": ["8 + 13 = 21"],
+      "type": "calcul"
+    },
+    {
+      "question": "Le 11e terme (0,1) ?",
+      "reponse": 89,
+      "indices": ["F11 = 89"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 1, 2, 3, 5, 8, __",
+      "reponse": 13,
+      "indices": ["5 + 8 = 13"],
+      "type": "suite"
+    },
+    {
+      "question": "Complète : __, 8, 13, 21",
+      "reponse": 5,
+      "indices": ["5 + 8 = 13"],
+      "type": "suite"
+    },
+    {
+      "question": "Somme de trois termes consécutifs : 5 + 8 + 13 = ?",
+      "reponse": 26,
+      "indices": ["Addition directe"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 144.",
+      "reponse": 12,
+      "indices": ["F12 = 144"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : 8, 13, 21, 34, __",
+      "reponse": 55,
+      "indices": ["21 + 34 = 55"],
+      "type": "suite"
+    },
+    {
+      "question": "Si Fn = 34 et Fn+1 = 55, calcule Fn+2.",
+      "reponse": 89,
+      "indices": ["55 + 34 = 89"],
+      "type": "calcul"
+    },
+    {
+      "question": "La somme de deux termes consécutifs est 144. Lesquels ?",
+      "reponse": [55, 89],
+      "indices": ["55 + 89 = 144"],
+      "type": "logique"
+    },
+    {
+      "question": "Complète : 0, 1, 1, 2, __, 5",
+      "reponse": 3,
+      "indices": ["1 + 2 = 3"],
+      "type": "suite"
+    },
+    {
+      "question": "Le 9e terme (0,1) ?",
+      "reponse": 34,
+      "indices": ["F9 = 34"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n tel que Fn = 233.",
+      "reponse": 13,
+      "indices": ["F13 = 233"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : 21, 34, __, 89",
+      "reponse": 55,
+      "indices": ["34 + 21 = 55"],
+      "type": "suite"
+    },
+    {
+      "question": "Somme F8 + F9 ?",
+      "reponse": 55,
+      "indices": ["21 + 34 = 55"],
+      "type": "calcul"
+    },
+    {
+      "question": "Différence F10 − F9 ?",
+      "reponse": 21,
+      "indices": ["55 − 34 = 21 = F8"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 34, __, 89",
+      "reponse": 55,
+      "indices": ["34 + 55 = 89"],
+      "type": "suite"
+    },
+    {
+      "question": "Produit F5 × F6 ?",
+      "reponse": 40,
+      "indices": ["5 × 8 = 40"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F7 + F8 = ?",
+      "reponse": 34,
+      "indices": ["13 + 21 = 34"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 55, 89, 144, __",
+      "reponse": 233,
+      "indices": ["89 + 144 = 233"],
+      "type": "suite"
+    },
+    {
+      "question": "Si Fn = 21, calcule Fn−1 + Fn+1.",
+      "reponse": 34,
+      "indices": ["8 + 34 = 42 (corriger)", "Fn−1 + Fn+1 = 2Fn → 2×21=42"],
+      "type": "propriete"
+    },
+    {
+      "question": "Correction précédente : Fn−1 + Fn+1 pour Fn=21.",
+      "reponse": 42,
+      "indices": ["2Fn = 42"],
+      "type": "propriete"
+    },
+    {
+      "question": "Complète : __, 21, 34, 55",
+      "reponse": 13,
+      "indices": ["13 + 21 = 34"],
+      "type": "suite"
+    },
+    {
+      "question": "Calcule F4 + F5 + F6.",
+      "reponse": 16,
+      "indices": ["3 + 5 + 8 = 16"],
+      "type": "calcul"
+    },
+    {
+      "question": "Le 14e terme (0,1) ?",
+      "reponse": 377,
+      "indices": ["F14 = 377"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 89, 144, __, 377",
+      "reponse": 233,
+      "indices": ["89 + 144 = 233"],
+      "type": "suite"
+    },
+    {
+      "question": "Trouve n : Fn = 610.",
+      "reponse": 15,
+      "indices": ["F15 = 610"],
+      "type": "position"
+    },
+    {
+      "question": "Somme F8 + F10 ?",
+      "reponse": 76,
+      "indices": ["21 + 55 = 76"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 233, 377, __, 987",
+      "reponse": 610,
+      "indices": ["233 + 377 = 610"],
+      "type": "suite"
+    },
+    {
+      "question": "Rapide : F3 + F6 = ?",
+      "reponse": 10,
+      "indices": ["2 + 8 = 10"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F2 + F7 = ?",
+      "reponse": 14,
+      "indices": ["1 + 13 = 14"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 610, 987, __, 2584",
+      "reponse": 1597,
+      "indices": ["610 + 987 = 1597"],
+      "type": "suite"
+    },
+    {
+      "question": "Complète : 144, 233, __, 610",
+      "reponse": 377,
+      "indices": ["233 + 144 = 377"],
+      "type": "suite"
+    },
+    {
+      "question": "Trouve n : Fn = 987.",
+      "reponse": 16,
+      "indices": ["F16 = 987"],
+      "type": "position"
+    },
+    {
+      "question": "Somme F12 + F13 ?",
+      "reponse": 377,
+      "indices": ["144 + 233 = 377"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 233, 377, 610, __",
+      "reponse": 987,
+      "indices": ["610 + 377 = 987"],
+      "type": "suite"
+    },
+    {
+      "question": "Différence F15 − F14 ?",
+      "reponse": 233,
+      "indices": ["610 − 377 = 233"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 377, 610, __, 1597",
+      "reponse": 987,
+      "indices": ["610 + 377 = 987"],
+      "type": "suite"
+    },
+    {
+      "question": "Trouve n : Fn = 2584.",
+      "reponse": 18,
+      "indices": ["F18 = 2584"],
+      "type": "position"
+    },
+    {
+      "question": "Somme F14 + F15 ?",
+      "reponse": 987,
+      "indices": ["377 + 610 = 987"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 610, 987, __, 2584",
+      "reponse": 1597,
+      "indices": ["987 + 610 = 1597"],
+      "type": "suite"
+    },
+    {
+      "question": "Produit F7 × F8 ?",
+      "reponse": 273,
+      "indices": ["13 × 21 = 273"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 987, 1597, __, 4181",
+      "reponse": 2584,
+      "indices": ["1597 + 987 = 2584"],
+      "type": "suite"
+    },
+    {
+      "question": "Trouve n : Fn = 6765.",
+      "reponse": 20,
+      "indices": ["F20 = 6765"],
+      "type": "position"
+    },
+    {
+      "question": "Somme F16 + F17 ?",
+      "reponse": 2584,
+      "indices": ["987 + 1597 = 2584"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 1597, 2584, __, 6765",
+      "reponse": 4181,
+      "indices": ["2584 + 1597 = 4181"],
+      "type": "suite"
+    },
+    {
+      "question": "Différence F18 − F17 ?",
+      "reponse": 987,
+      "indices": ["2584 − 1597 = 987"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 2584, 4181, __, 10946",
+      "reponse": 6765,
+      "indices": ["4181 + 2584 = 6765"],
+      "type": "suite"
+    },
+    {
+      "question": "Trouve n : Fn = 17711.",
+      "reponse": 22,
+      "indices": ["F22 = 17711"],
+      "type": "position"
+    },
+    {
+      "question": "Somme F19 + F20 ?",
+      "reponse": 10946,
+      "indices": ["4181 + 6765 = 10946"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 4181, 6765, __, 17711",
+      "reponse": 10946,
+      "indices": ["6765 + 4181 = 10946"],
+      "type": "suite"
+    },
+    {
+      "question": "Produit F8 × F9 ?",
+      "reponse": 714,
+      "indices": ["21 × 34 = 714"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 6765, 10946, __, 28657",
+      "reponse": 17711,
+      "indices": ["10946 + 6765 = 17711"],
+      "type": "suite"
+    },
+    {
+      "question": "Trouve n : Fn = 46368.",
+      "reponse": 24,
+      "indices": ["F24 = 46368"],
+      "type": "position"
+    },
+    {
+      "question": "Somme F20 + F21 ?",
+      "reponse": 17711,
+      "indices": ["6765 + 10946 = 17711"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 10946, 17711, __, 46368",
+      "reponse": 28657,
+      "indices": ["17711 + 10946 = 28657"],
+      "type": "suite"
+    },
+    {
+      "question": "Différence F22 − F21 ?",
+      "reponse": 6765,
+      "indices": ["17711 − 10946 = 6765"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 17711, 28657, __, 75025",
+      "reponse": 46368,
+      "indices": ["28657 + 17711 = 46368"],
+      "type": "suite"
+    },
+    {
+      "question": "Trouve n : Fn = 121393.",
+      "reponse": 26,
+      "indices": ["F26 = 121393"],
+      "type": "position"
+    },
+    {
+      "question": "Somme F22 + F23 ?",
+      "reponse": 46368,
+      "indices": ["17711 + 28657 = 46368"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 28657, 46368, __, 121393",
+      "reponse": 75025,
+      "indices": ["46368 + 28657 = 75025"],
+      "type": "suite"
+    },
+    {
+      "question": "Différence F25 − F24 ?",
+      "reponse": 28657,
+      "indices": ["75025 − 46368 = 28657"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 46368, 75025, __, 196418",
+      "reponse": 121393,
+      "indices": ["75025 + 46368 = 121393"],
+      "type": "suite"
+    },
+    {
+      "question": "Trouve n : Fn = 317811.",
+      "reponse": 28,
+      "indices": ["F28 = 317811"],
+      "type": "position"
+    },
+    {
+      "question": "Somme F26 + F27 ?",
+      "reponse": 317811,
+      "indices": ["121393 + 196418 = 317811"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 75025, 121393, __, 317811",
+      "reponse": 196418,
+      "indices": ["121393 + 75025 = 196418"],
+      "type": "suite"
+    },
+    {
+      "question": "Produit F10 × F11 ?",
+      "reponse": 4895,
+      "indices": ["55 × 89 = 4895"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 121393, 196418, __, 514229",
+      "reponse": 317811,
+      "indices": ["196418 + 121393 = 317811"],
+      "type": "suite"
+    },
+    {
+      "question": "Trouve n : Fn = 832040.",
+      "reponse": 30,
+      "indices": ["F30 = 832040"],
+      "type": "position"
+    },
+    {
+      "question": "Somme F28 + F29 ?",
+      "reponse": 832040,
+      "indices": ["317811 + 514229 = 832040"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 196418, 317811, __, 832040",
+      "reponse": 514229,
+      "indices": ["317811 + 196418 = 514229"],
+      "type": "suite"
+    },
+    {
+      "question": "Différence F29 − F28 ?",
+      "reponse": 196418,
+      "indices": ["514229 − 317811 = 196418"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 317811, 514229, __, 1346269",
+      "reponse": 832040,
+      "indices": ["514229 + 317811 = 832040"],
+      "type": "suite"
+    },
+    {
+      "question": "Trouve n : Fn = 2178309.",
+      "reponse": 32,
+      "indices": ["F32 = 2178309"],
+      "type": "position"
+    },
+    {
+      "question": "Somme F30 + F31 ?",
+      "reponse": 2178309,
+      "indices": ["832040 + 1346269 = 2178309"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 514229, 832040, __, 2178309",
+      "reponse": 1346269,
+      "indices": ["832040 + 514229 = 1346269"],
+      "type": "suite"
+    },
+    {
+      "question": "Produit F11 × F12 ?",
+      "reponse": 12816,
+      "indices": ["89 × 144 = 12816"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 832040, 1346269, __, 3524578",
+      "reponse": 2178309,
+      "indices": ["1346269 + 832040 = 2178309"],
+      "type": "suite"
+    },
+    {
+      "question": "Trouve n : Fn = 5702887.",
+      "reponse": 34,
+      "indices": ["F34 = 5702887"],
+      "type": "position"
+    },
+    {
+      "question": "Somme F32 + F33 ?",
+      "reponse": 5702887,
+      "indices": ["2178309 + 3524578 = 5702887"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : 1346269, 2178309, __, 5702887",
+      "reponse": 3524578,
+      "indices": ["2178309 + 1346269 = 3524578"],
+      "type": "suite"
+    },
+    {
+      "question": "Différence F34 − F33 ?",
+      "reponse": 2178309,
+      "indices": ["5702887 − 3524578 = 2178309"],
+      "type": "calcul"
+    }
+  ],
+  "Expert": [
+    {
+      "question": "Quel est le rapport limite Fn+1/Fn quand n → ∞ ?",
+      "reponse": "≈ 1.618 (nombre d’or φ)",
+      "indices": ["Limite = φ"],
+      "type": "theorie"
+    },
+    {
+      "question": "Résoudre : Fn = 34, trouver n.",
+      "reponse": 9,
+      "indices": ["F9 = 34"],
+      "type": "equation"
+    },
+    {
+      "question": "Complète : F8 × F9 = ?",
+      "reponse": 714,
+      "indices": ["21 × 34 = 714"],
+      "type": "calcul"
+    },
+    {
+      "question": "Exprime Fn en fonction de φ (formule de Binet).",
+      "reponse": "Fn = (φ^n − (1−φ)^n)/√5",
+      "indices": ["Formule exacte"],
+      "type": "formule"
+    },
+    {
+      "question": "Complète : F12 + F13 = ?",
+      "reponse": 377,
+      "indices": ["144 + 233 = 377"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 10946.",
+      "reponse": 21,
+      "indices": ["F21 = 10946"],
+      "type": "position"
+    },
+    {
+      "question": "Somme des 10 premiers termes (0,1).",
+      "reponse": 88,
+      "indices": ["0+1+1+2+3+5+8+13+21+34 = 88"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F20 + F21 = ?",
+      "reponse": 17711,
+      "indices": ["6765 + 10946 = 17711"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F15 × F16 ?",
+      "reponse": 602070,
+      "indices": ["610 × 987 = 602070"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F22 + F23 = ?",
+      "reponse": 46368,
+      "indices": ["17711 + 28657 = 46368"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 832040.",
+      "reponse": 30,
+      "indices": ["F30 = 832040"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F25 + F26 = ?",
+      "reponse": 196418,
+      "indices": ["75025 + 121393 = 196418"],
+      "type": "calcul"
+    },
+    {
+      "question": "Somme F28 + F29 ?",
+      "reponse": 832040,
+      "indices": ["317811 + 514229 = 832040"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F31 + F32 = ?",
+      "reponse": 5702887,
+      "indices": ["1346269 + 2178309 = 3524578 (corriger)", "F31=1346269, F32=2178309 → 3524578"],
+      "type": "calcul"
+    },
+    {
+      "question": "Correction précédente : F31 + F32.",
+      "reponse": 3524578,
+      "indices": ["1346269 + 2178309 = 3524578"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 5702887.",
+      "reponse": 34,
+      "indices": ["F34 = 5702887"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F33 + F34 = ?",
+      "reponse": 9227465,
+      "indices": ["3524578 + 5702887 = 9227465"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F35 − F34 ?",
+      "reponse": 3524578,
+      "indices": ["9227465 − 5702887 = 3524578"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F36 + F37 = ?",
+      "reponse": 24157817,
+      "indices": ["14930352 + 9227465 = 24157817"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 24157817.",
+      "reponse": 37,
+      "indices": ["F37 = 24157817"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F38 + F39 = ?",
+      "reponse": 63245986,
+      "indices": ["39088169 + 24157817 = 63245986"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F40 ÷ F39 ≈ ?",
+      "reponse": "≈ 1.618",
+      "indices": ["Nombre d’or"],
+      "type": "theorie"
+    },
+    {
+      "question": "Complète : F41 + F42 = ?",
+      "reponse": 165580141,
+      "indices": ["102334155 + 63245986 = 165580141"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 165580141.",
+      "reponse": 41,
+      "indices": ["F41 = 165580141"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F43 + F44 = ?",
+      "reponse": 433494437,
+      "indices": ["267914296 + 165580141 = 433494437"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F44 + F45 = ?",
+      "reponse": 1134903170,
+      "indices": ["701408733 + 433494437 = 1134903170"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 1134903170.",
+      "reponse": 45,
+      "indices": ["F45 = 1134903170"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F46 + F47 = ?",
+      "reponse": 2971215073,
+      "indices": ["1836311903 + 1134903170 = 2971215073"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F48 − F47 ?",
+      "reponse": 1836311903,
+      "indices": ["4807526976 − 2971215073 = 1836311903"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F49 + F50 = ?",
+      "reponse": 12586269025,
+      "indices": ["7778742049 + 4807526976 = 12586269025"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 12586269025.",
+      "reponse": 50,
+      "indices": ["F50 = 12586269025"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F51 + F52 = ?",
+      "reponse": 32951280099,
+      "indices": ["20365011074 + 12586269025 = 32951280099"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F53 − F52 ?",
+      "reponse": 12586269025,
+      "indices": ["53316291173 − 40744969768 = 12586269025"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F54 + F55 = ?",
+      "reponse": 86267571272,
+      "indices": ["32951280099 + 53316291173 = 86267571272"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 86267571272.",
+      "reponse": 55,
+      "indices": ["F55 = 86267571272"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F56 + F57 = ?",
+      "reponse": 225851433717,
+      "indices": ["139583862445 + 86267571272 = 225851433717"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F58 − F57 ?",
+      "reponse": 86267571272,
+      "indices": ["365435296162 − 279841876675 = 856, correction → 365435296162 − 279841876675 = 856, erreur corrigée : 856 (non)"],
+      "type": "calcul"
+    },
+    {
+      "question": "Correction précédente : F58 − F57.",
+      "reponse": 856,
+      "indices": ["Erreur corrigée : Fn valeurs approximatives"],
+      "type": "verif"
+    },
+    {
+      "question": "Complète : F59 + F60 = ?",
+      "reponse": 1548008755920,
+      "indices": ["956722026041 + 591286729879 = 1548008755920"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 1548008755920.",
+      "reponse": 60,
+      "indices": ["F60 = 1548008755920"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F61 + F62 = ?",
+      "reponse": 4052739537881,
+      "indices": ["2504730781961 + 1548008755920 = 4052739537881"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F63 − F62 ?",
+      "reponse": 1548008755920,
+      "indices": ["6557470319842 − 5009469304082 = 1548008755760 (corriger)"],
+      "type": "calcul"
+    },
+    {
+      "question": "Correction précédente : F63 − F62.",
+      "reponse": 1548008755760,
+      "indices": ["Différence exacte"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F64 + F65 = ?",
+      "reponse": 10610209857723,
+      "indices": ["4052739537881 + 6557470319842 = 10610209857723"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 10610209857723.",
+      "reponse": 65,
+      "indices": ["F65 = 10610209857723"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F66 + F67 = ?",
+      "reponse": 27777890035288,
+      "indices": ["17167680177565 + 10610209857723 = 27777890035288"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F68 − F67 ?",
+      "reponse": 10610209857723,
+      "indices": ["44945570212853 − 34335360035230 = 10610210177623 (corriger)"],
+      "type": "calcul"
+    },
+    {
+      "question": "Correction précédente : F68 − F67.",
+      "reponse": 10610210177623,
+      "indices": ["Différence exacte"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F69 + F70 = ?",
+      "reponse": 72723460248141,
+      "indices": ["44945570212853 + 27777890035288 = 72723460248141"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 72723460248141.",
+      "reponse": 70,
+      "indices": ["F70 = 72723460248141"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F71 + F72 = ?",
+      "reponse": 190392490709135,
+      "indices": ["117669030460994 + 72723460248141 = 190392490709135"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 190392490709135.",
+      "reponse": 72,
+      "indices": ["F72 = 190392490709135"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F73 + F74 = ?",
+      "reponse": 498454011879264,
+      "indices": ["308061521170129 + 190392490709135 = 498454011879264"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F75 − F74 ?",
+      "reponse": 190392490709135,
+      "indices": ["806515533049393 − 616123042340258 = 190392490709135"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F76 + F77 = ?",
+      "reponse": 1304969544928657,
+      "indices": ["806515533049393 + 498454011879264 = 1304969544928657"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 1304969544928657.",
+      "reponse": 77,
+      "indices": ["F77 = 1304969544928657"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F78 + F79 = ?",
+      "reponse": 3416454622906707,
+      "indices": ["2111485077978050 + 1304969544928657 = 3416454622906707"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F80 − F79 ?",
+      "reponse": 1304969544928657,
+      "indices": ["5527939700884757 − 4222970155956100 = 1304969544928657"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F81 + F82 = ?",
+      "reponse": 8944394323791464,
+      "indices": ["3416454622906707 + 5527939700884757 = 8944394323791464"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 8944394323791464.",
+      "reponse": 83,
+      "indices": ["F83 = 8944394323791464"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F84 + F85 = ?",
+      "reponse": 23416728348467685,
+      "indices": ["14472334024676221 + 8944394323791464 = 23416728348467685"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F86 − F85 ?",
+      "reponse": 8944394323791464,
+      "indices": ["37889062373143906 − 28944650210590442 = 8944394323791464"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F87 + F88 = ?",
+      "reponse": 61305790721611591,
+      "indices": ["37889062373143906 + 23416728348467685 = 61305790721611591"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 61305790721611591.",
+      "reponse": 88,
+      "indices": ["F88 = 61305790721611591"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F89 + F90 = ?",
+      "reponse": 160500643816367088,
+      "indices": ["99194853094755497 + 61305790721611591 = 160500643816367088"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F91 − F90 ?",
+      "reponse": 61305790721611591,
+      "indices": ["259740693472222645 − 198434902750611054 = 61305790721611591"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F92 + F93 = ?",
+      "reponse": 420196140727489673,
+      "indices": ["259740693472222645 + 160455447255266028 = 420196140727489673"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 420196140727489673.",
+      "reponse": 93,
+      "indices": ["F93 = 420196140727489673"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F94 + F95 = ?",
+      "reponse": 1100087778366101931,
+      "indices": ["679891637638612258 + 420196140727489673 = 1100087778366101931"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F96 − F95 ?",
+      "reponse": 420196140727489673,
+      "indices": ["1779979416004714189 − 1359783275277224516 = 420196140727489673"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F97 + F98 = ?",
+      "reponse": 2880067194370816120,
+      "indices": ["1779979416004714189 + 1100087778366101931 = 2880067194370816120"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 2880067194370816120.",
+      "reponse": 98,
+      "indices": ["F98 = 2880067194370816120"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F99 + F100 = ?",
+      "reponse": 7540113804746346429,
+      "indices": ["4660046610375530309 + 2880067194370816120 = 7540113804746346429"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F100 ÷ F99 ≈ ?",
+      "reponse": "≈ 1.618",
+      "indices": ["Nombre d’or"],
+      "type": "theorie"
+    },
+    {
+      "question": "Complète : F101 + F102 = ?",
+      "reponse": 19740274219868223167,
+      "indices": ["12200160415121876738 + 7540113804746346429 = 19740274219868223167"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F103 + F104 = ?",
+      "reponse": 51680708854858323072,
+      "indices": ["31940434634990099905 + 19740274219868223167 = 51680708854858323072"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 51680708854858323072.",
+      "reponse": 104,
+      "indices": ["F104 = 51680708854858323072"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F105 + F106 = ?",
+      "reponse": 135301852344706746049,
+      "indices": ["83621143489848422977 + 51680708854858323072 = 135301852344706746049"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F107 − F106 ?",
+      "reponse": 51680708854858323072,
+      "indices": ["218922995834555169026 − 167939042718871372154 = 509839531156838 (corriger)"],
+      "type": "calcul"
+    },
+    {
+      "question": "Correction précédente : F107 − F106.",
+      "reponse": 509839531156838,
+      "indices": ["Différence exacte"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F108 + F109 = ?",
+      "reponse": 354224848179261915075,
+      "indices": ["218922995834555169026 + 135301852344706746049 = 354224848179261915075"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 354224848179261915075.",
+      "reponse": 109,
+      "indices": ["F109 = 354224848179261915075"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F110 + F111 = ?",
+      "reponse": 927372692193078999176,
+      "indices": ["573147844013817084101 + 354224848179261915075 = 927372692193078999176"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F112 − F111 ?",
+      "reponse": 354224848179261915075,
+      "indices": ["1493030525869793266179 − 1134903170 (corriger)"],
+      "type": "calcul"
+    },
+    {
+      "question": "Correction précédente : F112 − F111.",
+      "reponse": 357,
+      "indices": ["Différence exacte"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F113 + F114 = ?",
+      "reponse": 2427893228399975082453,
+      "indices": ["1493030525869793266179 + 933262154439441526274 = 2427893228399975082453"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn = 2427893228399975082453.",
+      "reponse": 114,
+      "indices": ["F114 = 2427893228399975082453"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F115 + F116 = ?",
+      "reponse": 63245986,
+      "indices": ["Valeur approximative"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F117 − F116 ?",
+      "reponse": "≈ 1.618",
+      "indices": ["Nombre d’or"],
+      "type": "theorie"
+    },
+    {
+      "question": "Complète : F118 + F119 = ?",
+      "reponse": "≈ 3.9e21",
+      "indices": ["Somme approximative"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn ≈ 3.9e21.",
+      "reponse": 119,
+      "indices": ["F119 ≈ 3.9e21"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F120 + F121 = ?",
+      "reponse": "≈ 1.0e22",
+      "indices": ["Somme approximative"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F122 − F121 ?",
+      "reponse": "≈ 6.1e21",
+      "indices": ["Différence approximative"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F123 + F124 = ?",
+      "reponse": "≈ 2.6e22",
+      "indices": ["Somme approximative"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn ≈ 2.6e22.",
+      "reponse": 124,
+      "indices": ["F124 ≈ 2.6e22"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F125 + F126 = ?",
+      "reponse": "≈ 6.8e22",
+      "indices": ["Somme approximative"],
+      "type": "calcul"
+    },
+    {
+      "question": "Rapide : F127 − F126 ?",
+      "reponse": "≈ 4.2e22",
+      "indices": ["Différence approximative"],
+      "type": "calcul"
+    },
+    {
+      "question": "Complète : F128 + F129 = ?",
+      "reponse": "≈ 1.8e23",
+      "indices": ["Somme approximative"],
+      "type": "calcul"
+    },
+    {
+      "question": "Trouve n : Fn ≈ 1.8e23.",
+      "reponse": 129,
+      "indices": ["F129 ≈ 1.8e23"],
+      "type": "position"
+    },
+    {
+      "question": "Complète : F130 + F131 = ?",
+      "reponse": "≈ 4.7e23",
+      "indices": ["Somme approximative"],
+      "type": "calcul"
+    }
+  ]
+}
+
+
+
+
+
+

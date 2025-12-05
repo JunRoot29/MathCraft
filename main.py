@@ -51,7 +51,7 @@ historique_interface = InterfaceHistorique(parent=None)
 
 # Fenetre principal
 fenetre = Tk()
-fenetre.title("MathsCraft")
+fenetre.title("🧠MathsCraft")
 fenetre.geometry("900x700")
 fenetre.configure(bg="#F0F4F8")
 
