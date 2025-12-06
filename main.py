@@ -264,7 +264,7 @@ bouton_interpolation_lineaire = ttk.Button(
     text="Module 9 : interpolation_linéaire 📈",
     style="Custom.TButton",
     compound=LEFT,
-    command=int_lin.lancer_interpolation_Numerique
+    command=int_lin.lancer_interpolation_numerique
 )
 
 bouton_historique = ttk.Button(
