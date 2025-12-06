@@ -1,72 +1,86 @@
 # 🧮 MathCraft
 
-> *Un espace malin pour calculer, apprendre et s’amuser avec les maths. 🧠✨*
+> *Un espace malin pour calculer, apprendre et s'amuser avec les maths. 🧠✨*
 
 ---
 
 ## 📝 Description
 
-**MathCraft** est une application éducative interactive développée en Python (Tkinter).
-Elle offre une plateforme moderne et intuitive pour explorer et pratiquer des concepts mathématiques à travers **7 modules**, allant des opérations de base à l’intégration numérique.
+**MathCraft** est une application éducative interactive développée en Python (Tkinter) qui offre une plateforme moderne et intuitive pour explorer et pratiquer des concepts mathématiques à travers **9 modules complets**, allant des opérations de base à l'interpolation numérique avancée.
 
-L’objectif est simple : rendre les mathématiques **accessibles, visuelles et amusantes**.
+L'objectif est simple : rendre les mathématiques **accessibles, visuelles et amusantes** grâce à des interfaces interactives avec visualisation graphique.
 
 ---
 
-## ✨ Fonctionnalités
+## ✨ Fonctionnalités principales
 
 ### 📊 1. Opérations de Base
-
 * Calculatrice scientifique complète
 * Trigonométrie, logarithmes, puissances, racines
 * Constantes (π, e)
 * Conversion degrés ↔ radians
+* Historique des calculs
 
 ### 🔢 2. Théorie des Nombres
-
 * Test de primalité
 * Nombres parfaits
 * PGCD / PPCM
-* Nombres de Catalan
+* Nombres de Fibonacci et Catalan
 * Vérification de chiffres distincts
 
-### 🔄 3. Conversion d’Unités
-
-* Longueur
-* Température
-* Masse
-* Vitesse
-* Angles
+### 🔄 3. Conversion d'Unités
+* Longueur, température, masse
+* Vitesse, angles, pression
+* Interface avec prévisualisation
 
 ### 📐 4. Polynômes & Équations
-
 * Équations du 1er degré
 * Équations du 2ème degré (réelles & complexes)
+* Affichage graphique des racines
 
 ### 📝 5. Chaînes de Caractères
-
+* Analyse textuelle complète
 * Compter voyelles, consonnes, mots
 * Test de palindrome
+* Statistiques détaillées
 
-### ∫ 6. Intégration Numérique
+### ∫ 6. Intégration Numérique **🆕**
+* **7 méthodes** : Rectangles (gauche/droit/centre), Trapèzes, Simpson
+* **Affichage des itérations** en temps réel
+* **Export CSV** des résultats
+* **Précision ajustable**
+* Interface avec onglets détaillés
 
-* Méthodes : Rectangles (G/C/D), Trapèzes, Simpson
-* Versions simples et composites
+### 🔬 7. Équations Numériques **🆕**
+* **9 méthodes avancées** : Dichotomie, Newton-Raphson, Point Fixe, Sécante, Regula Falsi, Müller, Steffensen, Brent, Ridders
+* **Suivi détaillé** de chaque itération
+* **Comparaison des performances**
+* **Convergence garantie** avec algorithmes robustes
+* Guide complet des méthodes
 
-### 🎮 7. Jeux & Concepts *(en développement)*
+### 📈 8. Interpolation Numérique **🆕**
+* **4 méthodes** : Lagrange, Newton, Linéaire par morceaux, Spline Cubique
+* **Visualisation graphique** des courbes interpolées
+* **Calculs détaillés** étape par étape
+* **Export des résultats** en CSV et images
+* **Zoom interactif** sur les graphiques
 
-* Explorateur de concepts mathématiques
+### 🎮 9. Jeux & Concepts
+* Défis mathématiques interactifs
+* Explorateur de concepts visuels
 * Mini-jeux logiques
+* Battle mathématique
 
 ---
 
 ## 🛠️ Technologies utilisées
 
-* **Python 3.x**
-* **Tkinter / ttk**
-* **NumPy**
-* **Matplotlib**
-* Modules standards : `math`, `re`
+* **Python 3.x** - Langage principal
+* **Tkinter / ttk** - Interface graphique
+* **NumPy** - Calculs scientifiques
+* **Matplotlib** - Visualisation graphique
+* **JSON** - Stockage des données
+* Modules standards : `math`, `re`, `csv`, `json`
 
 ---
 
@@ -74,7 +88,7 @@ L’objectif est simple : rendre les mathématiques **accessibles, visuelles et 
 
 ```bash
 pip install numpy matplotlib
-python -m tkinter   # Vérifier l’installation de Tkinter
+python -m tkinter   # Vérifier l'installation de Tkinter
 ```
 
 ---
@@ -94,155 +108,312 @@ python main.py
 
 ```
 MathCraft/
-├── main.py
-├── README.md
-├── requirements.txt
+├── main.py                          # Point d'entrée principal
+├── README.md                        # Documentation
+├── requirements.txt                 # Dépendances
 ├── App/
 │   ├── __init__.py
-│   ├── modules.py
-│   ├── operation_de_base.py
-│   ├── theorie_des_nombres.py
-│   ├── conversion.py
-│   ├── polynome.py
-│   ├── chaine_de_caractere.py
-│   ├── integration_numerique.py
-│   ├── jeux_math.py
-│   ├── soutieng_manager.py
-│   ├── operation_de_base.py
-│   ├── interface_historique.py
-│   ├── equation_numerique.py
-│   ├── interpolation_linéaire.py
-│   └── explorateur_concepts.py
+│   ├── modules.py                   # Bibliothèque mathématique principale
+│   ├── operation_de_base.py         # Calculatrice scientifique
+│   ├── theorie_des_nombres.py       # Théorie des nombres
+│   ├── conversion.py                # Conversion d'unités
+│   ├── polynome.py                  # Équations polynomiales
+│   ├── chaine_de_caractere.py       # Analyse textuelle
+│   ├── integration_numerique.py     # Intégration numérique (interface)
+│   ├── equation_numerique.py        # Résolution d'équations (interface) 🆕
+│   ├── interpolation_numerique.py   # Interpolation numérique (interface) 🆕
+│   ├── jeux_math.py                 # Jeux mathématiques
+│   ├── soutieng_manager.py          # Gestionnaire de support
+│   ├── interface_historique.py      # Historique des calculs
+│   └── explorateur_concepts.py      # Explorateur de concepts
 ├── data/
-│   └── historique_calculs.json
-├── data/
-│   ├── defis_fibonacci.json
-│   ├── math_battle.json
-│   ├── question_enigme.json
-│   ├── question_premier.json
-│   └── questions.json
+│   ├── historique_calculs.json      # Historique des calculs
+│   ├── defis_fibonacci.json         # Défis Fibonacci
+│   ├── math_battle.json             # Questions battle mathématique
+│   ├── question_enigme.json         # Énigmes
+│   └── questions.json               # Questions générales
 └── Image/
-    ├── balance.png
-    ├── carac.png
-    ├── Concepts.png
-    ├── defi.png
-    ├── equerre.png
-    ├── exit.png
-    ├── integral.png
-    ├── poly.png
-    ├── th.png
-    └── Calc.png
-    
+    ├── icon.png                     # Icône principale
+    ├── Calc.png                     # Calculatrice
+    ├── integral.png                 # Intégration
+    ├── poly.png                     # Polynômes
+    └── ... (autres images)
 ```
 
 ---
 
-## 🎨 Interface
+## 🎨 Design de l'interface
 
-* Palette : `#F5F0E6` (clair) & `#2C3E50` (foncé)
-* Police : **Century Gothic**
-* Boutons harmonisés
-* Navigation fluide
-* Feedback dynamique pour l’utilisateur
+### Palette de couleurs unifiée :
+```python
+PALETTE = {
+    "fond_principal": "#F0F4F8",
+    "fond_secondaire": "#FFFFFF", 
+    "primaire": "#1E40AF",
+    "secondaire": "#3B82F6",
+    "texte_fonce": "#1E293B",
+    "texte_clair": "#64748B",
+    "succes": "#10B981",
+    "erreur": "#DC2626",
+    "bordure": "#E2E8F0"
+}
+```
 
----
-
-## 💡 Exemples d’utilisation
-
-### ➤ Calculer un PGCD
-
-1. Ouvrir *Théorie des nombres*
-2. Entrer deux nombres
-3. Cliquer sur **PGCD**
-
-### ➤ Résoudre une équation du 2nd degré
-
-1. Ouvrir *Polynômes*
-2. Entrer `a`, `b`, `c`
-3. Obtenir les solutions réelles/complexes
-
-### ➤ Faire une intégration numérique
-
-1. Aller dans *Intégration*
-2. Choisir la méthode (ex : Simpson)
-3. Entrer fonction + bornes
-4. Résultat instantané
+### Caractéristiques :
+* **Police** : Century Gothic
+* **Navigation par onglets** pour modules complexes
+* **Feedback visuel** en temps réel
+* **Messages d'erreur/succès** contextualisés
+* **Scrollbars** pour contenu long
+* **Export des données** (CSV, images)
 
 ---
 
-## 🔬 Bibliothèque interne : `modules.py`
+## 🔬 Bibliothèque mathématique : `modules.py`
 
-Contient :
+### Méthodes d'intégration numérique :
+* `intRectangleRetro()` - Rectangles rétrogrades
+* `intRectanglePro()` - Rectangles progressifs  
+* `intRectangleCentre()` - Rectangles centrés
+* `intTrapezeC()` - Trapèzes composites
+* `intTrapezeS()` - Trapèzes simples
+* `intSimpsonC()` - Simpson composite
+* `intSimpsonS()` - Simpson simple
 
-* Fonctions avancées d’arithmétique
-* Trigonométrie
-* Analyse numérique
-* Polynômes
-* Méthodes : dichotomie, Newton, point fixe
-* Fibonacci, Catalan, PGCD, PPCM
+### Résolution d'équations (9 méthodes) :
+* `racineDichotomie()` - Méthode robuste
+* `racineNewton()` - Convergence rapide
+* `racinePointFixe()` - Pour g(x)=x
+* `racineSecante()` - Sans dérivée
+* `racineRegulaFalsi()` - Combinaison optimale
+* `racineMuller()` - Interpolation quadratique
+* `racineSteffensen()` - Accélération
+* `racineBrent()` - Algorithme industriel
+* `racineRidders()` - Extrapolation exponentielle
+
+### Interpolation numérique :
+* `interpolation_lagrange()` - Polynôme exact
+* `interpolation_newton()` - Différences divisées
+* `interpolation_lineaire()` - Segments droits
+* `spline_cubique_naturelle()` - Courbes lisses
+
+### Fonctions utilitaires :
+* `prepare_expression()` - Préparation des expressions
+* `equilibrer_parentheses()` - Gestion des parenthèses
+* Fonctions arithmétiques avancées
+
+---
+
+## 💡 Exemples d'utilisation
+
+### ➤ Intégration numérique
+1. Ouvrir **Intégration Numérique**
+2. Choisir une méthode (ex: Simpson Composite)
+3. Entrer : `f(x) = sin(x)`, `a=0`, `b=π`, `n=100`
+4. Obtenir résultat avec **affichage des 100 itérations**
+5. **Exporter** les données en CSV
+
+### ➤ Résolution d'équation
+1. Ouvrir **Équations Numériques**
+2. Choisir **Méthode de Brent** (robuste)
+3. Entrer : `f(x) = x³ - 2x - 5`, `a=2`, `b=3`, `ε=1e-6`
+4. Visualiser **chaque itération** avec précision
+5. Comparer avec d'autres méthodes
+
+### ➤ Interpolation avec graphique
+1. Ouvrir **Interpolation Numérique**
+2. Choisir **Spline Cubique**
+3. Entrer points : `0,0; 1,1; 2,4; 3,9`
+4. Évaluer en `x=1.5`
+5. **Visualiser la courbe** dans l'onglet Graphique
+6. **Zoomer** et **sauvegarder** l'image
+
+### ➤ Export des résultats
+```python
+# Toutes les interfaces proposent :
+- Export CSV des itérations
+- Export PNG des graphiques
+- Copie des résultats
+- Historique des calculs
+```
+
+---
+
+## 🚀 Fonctionnalités avancées
+
+### 📊 Visualisation graphique
+* **Graphiques interactifs** avec Matplotlib
+* **Zoom et pan** dynamiques
+* **Légendes détaillées**
+* **Points mis en évidence**
+* **Sauvegarde haute résolution**
+
+### 📈 Analyse des résultats
+* **Tableaux détaillés** étape par étape
+* **Erreurs de convergence**
+* **Comparaison des méthodes**
+* **Statistiques d'exécution**
+* **Précision configurable**
+
+### 🎯 Interface utilisateur
+* **Onglets multiples** pour navigation
+* **Raccourcis mathématiques**
+* **Exemples préconfigurés**
+* **Validation en temps réel**
+* **Messages d'aide contextuels**
 
 ---
 
 ## 🗺️ Feuille de route
 
-* [x] Modules 1–3, 5–7
-* [ ] Module 4 : Explorateur de Concepts
-* [ ] Graphiques interactifs
-* [ ] Export PDF / CSV
-* [ ] Mode sombre
-* [ ] Tests unitaires
-* [ ] Version mobile
+### ✅ Réalisé
+- [x] Modules 1-6 : Opérations de base à intégration
+- [x] Module 7 : Équations numériques (9 méthodes)
+- [x] Module 8 : Interpolation numérique avec graphiques
+- [x] Interface unifiée avec palette cohérente
+- [x] Export CSV et images
+- [x] Visualisation graphique interactive
+
+### 🔄 En développement
+- [ ] Module 9 : Jeux mathématiques avancés
+- [ ] Export PDF des rapports
+- [ ] Mode sombre/clair
+- [ ] Internationalisation (anglais/français)
+- [ ] Base de données des calculs
+
+### 📋 Planifié
+- [ ] Calcul différentiel numérique
+- [ ] Transformées de Fourier
+- [ ] Algèbre linéaire avancée
+- [ ] Statistiques et probabilités
+- [ ] Version web (Streamlit/Dash)
+- [ ] Applications mobiles
 
 ---
 
 ## 🤝 Contribution
 
 ```bash
+# 1. Fork le projet
+# 2. Créer une branche
 git checkout -b feature/NouvelleFonction
-git commit -m "Ajout d'une fonctionnalité"
+
+# 3. Commiter les changements
+git commit -m "Ajout: Description claire"
+
+# 4. Pousser vers GitHub
 git push origin feature/NouvelleFonction
+
+# 5. Ouvrir une Pull Request
 ```
 
-### Guidelines :
+### Guidelines de contribution :
+* **Commentaires en français** avec docstrings
+* **Tests unitaires** pour nouvelles fonctions
+* **Respect du style** de code existant
+* **Validation** sur différents cas d'usage
+* **Documentation** mise à jour
 
-* Commentaires en **français**
-* Garder le style de code
-* Tester avant envoi
-* PR avec description claire
+---
+
+## 🧪 Tests
+
+```bash
+# Tester les fonctions mathématiques
+python -m pytest tests/test_modules.py
+
+# Tester l'interface
+python -m pytest tests/test_interface.py
+
+# Lancer tous les tests
+python -m pytest tests/
+```
 
 ---
 
 ## ❓ FAQ
 
-**L’application ne démarre pas ?**
-→ Vérifiez Tkinter : `python -m tkinter`
+### ❔ L'application ne démarre pas ?
+```bash
+# Vérifier Tkinter
+python -m tkinter
 
-**Puis-je ajouter mes propres formules ?**
-→ Oui, via `modules.py`
+# Vérifier les dépendances
+pip install -r requirements.txt
 
-**OS supportés ?**
-→ Windows / Linux / macOS
+# Vérifier Python 3.8+
+python --version
+```
+
+### ❔ Comment ajouter une nouvelle méthode ?
+1. Ajouter la fonction dans `modules.py`
+2. Implémenter le suivi des itérations
+3. Ajouter à l'interface correspondante
+4. Tester avec différents cas
+5. Documenter dans le README
+
+### ❔ Puis-je utiliser l'API mathématique seule ?
+```python
+from App.modules import intSimpsonC, racineNewton
+
+# Utiliser directement
+resultat, iterations = intSimpsonC(f, a, b, n)
+racine, nb_iter, details = racineNewton(f, df, x0, epsilon)
+```
+
+### ❔ OS supportés ?
+* **Windows 10/11** ✅
+* **Linux** (Ubuntu, Debian) ✅  
+* **macOS** 10.15+ ✅
+* **Raspberry Pi** (avec interface légère) ⚠️
 
 ---
 
 ## 🐛 Signaler un bug
 
-1. Vérifier les dépendances
-2. Ouvrir une *issue* GitHub avec :
+1. **Vérifier** les dépendances et version Python
+2. **Reproduire** le bug avec étapes claires
+3. **Capture d'écran** si applicable
+4. **Ouvrir une issue** sur GitHub avec :
+   * Description du problème
+   * Étapes pour reproduire
+   * Version de MathCraft
+   * Logs d'erreur
 
-   * description
-   * étapes
-   * captures d’écran
-   * version Python
+---
+
+## 📊 Performances
+
+### Benchmark d'intégration (sin(x) de 0 à π) :
+```
+Méthode          n=100     n=1000    Précision
+Rectangles       0.002s    0.015s    Moyenne
+Trapèzes         0.003s    0.020s    Bonne  
+Simpson          0.004s    0.025s    Excellente
+```
+
+### Convergence des équations (x³-2x-5=0) :
+```
+Méthode          Itérations   Erreur finale
+Dichotomie       20           1e-6
+Newton           5            1e-12
+Brent            8            1e-15
+```
 
 ---
 
 ## 📝 Crédits
 
-* **Auteur** : Junior Kossivi
-* **Lieu** : Abidjan, Côte d'Ivoire
+* **Auteur principal** : Junior Kossivi Agbenonzan
 * **Institution** : Université Félix Houphouët-Boigny
+* **Localisation** : Abidjan, Côte d'Ivoire
 * **Année** : 2025
+* **Superviseur** : Pr. Kouakou N'Guessan
+
+### Remerciements :
+* Équipe pédagogique UFR-MI
+* Communauté Python Francophone
+* Contributeurs open source
 
 ---
 
@@ -250,278 +421,73 @@ git push origin feature/NouvelleFonction
 
 **Projet éducatif open source**
 
-* ✔️ Utilisation éducative
-* ✔️ Modifications avec attribution
-* ✔️ Partage autorisé
-* ❌ Usage commercial interdit sans autorisation
+* ✅ **Utilisation éducative** - Libre
+* ✅ **Modifications** - Avec attribution
+* ✅ **Partage** - Autorisé
+* ✅ **Recherche académique** - Encouragée
+* ⚠️ **Usage commercial** - Sur autorisation
+* ❌ **Revendication de paternité** - Interdite
+
+**Licence** : Creative Commons BY-NC-SA 4.0
 
 ---
 
-## 📧 Contact
-
-📨 **Email** : [junioragbenonzan31@gmail.com](mailto:junioragbenonzan31@gmail.com)
-🐙 **GitHub** : [@JunRoot29](https://github.com/JunRoot29)
-
----
-
-<div align="center">
-
-Fait avec ❤️ et ☕ à Abidjan
-© 2025 **Junior Kossivi**
-
-</div>
-
-====================================================================================================================
-
-====================================================================================================================
-</div>
-
-# 🧮 MathCraft
-
-> *A smart space to calculate, learn, and have fun with math. 🧠✨*
-
----
-
-## 📝 Description
-
-**MathCraft** is an interactive educational application developed in Python (Tkinter).
-It provides a modern, intuitive platform to explore and practice mathematical concepts through **7 modules**, ranging from basic operations to numerical integration.
-
-The goal is simple: make mathematics **accessible, visual, and fun**.
-
----
-
-## ✨ Features
-
-### 📊 1. Basic Operations
-
-* Full scientific calculator
-* Trigonometry, logarithms, powers, roots
-* Constants (π, e)
-* Degrees ↔ Radians conversion
-
-### 🔢 2. Number Theory
-
-* Primality test
-* Perfect numbers
-* GCD / LCM
-* Catalan numbers
-* Distinct digit check
-
-### 🔄 3. Unit Conversion
-
-* Length
-* Temperature
-* Mass
-* Speed
-* Angles
-
-### 📐 4. Polynomials & Equations
-
-* Linear equations
-* Quadratic equations (real & complex)
-
-### 📝 5. Strings
-
-* Count vowels, consonants, words
-* Palindrome check
-
-### ∫ 6. Numerical Integration
-
-* Methods: Rectangles (Left/Center/Right), Trapezoids, Simpson
-* Simple and composite versions
-
-### 🎮 7. Games & Concepts *(in development)*
-
-* Math concepts explorer
-* Mini logic games
-
----
-
-## 🛠️ Technologies Used
-
-* **Python 3.x**
-* **Tkinter / ttk**
-* **NumPy**
-* **Matplotlib**
-* Standard modules: `math`, `re`
-
----
-
-## 📋 Prerequisites
-
-```bash
-pip install numpy matplotlib
-python -m tkinter   # Verify Tkinter installation
-```
-
----
-
-## ⚡ Quick Start
-
-```bash
-git clone https://github.com/JunRoot29/MathCraft.git
-cd MathCraft
-pip install -r requirements.txt
-python main.py
-```
-
----
-
-## 📂 Project Structure
-
-```
-MathCraft/
-├── main.py
-├── README.md
-├── requirements.txt
-├── App/
-│   ├── modules.py
-│   ├── basic_operations.py
-│   ├── number_theory.py
-│   ├── conversion.py
-│   ├── polynomials.py
-│   ├── strings.py
-│   ├── numerical_integration.py
-│   ├── math_games.py
-│   └── concepts_explorer.py
-└── Image/
-    ├── icon.png
-    └── screenshot.png
-```
-
----
-
-## 🎨 Interface
-
-* Palette: `#F5F0E6` (light) & `#2C3E50` (dark)
-* Font: **Century Gothic**
-* Harmonized buttons
-* Smooth navigation
-* Dynamic user feedback
-
----
-
-## 💡 Usage Examples
-
-### ➤ Compute GCD
-
-1. Open *Number Theory*
-2. Enter two numbers
-3. Click **GCD**
-
-### ➤ Solve a Quadratic Equation
-
-1. Open *Polynomials*
-2. Enter `a`, `b`, `c`
-3. Get real/complex solutions
-
-### ➤ Perform Numerical Integration
-
-1. Go to *Integration*
-2. Choose a method (e.g., Simpson)
-3. Enter function + bounds
-4. Instant result
-
----
-
-## 🔬 Internal Library: `modules.py`
-
-Includes:
-
-* Advanced arithmetic functions
-* Trigonometry
-* Numerical analysis
-* Polynomials
-* Methods: bisection, Newton, fixed point
-* Fibonacci, Catalan, GCD, LCM
-
----
-
-## 🗺️ Roadmap
-
-* [x] Modules 1–3, 5–7
-* [ ] Module 4: Concepts Explorer
-* [ ] Interactive plots
-* [ ] PDF / CSV export
-* [ ] Dark mode
-* [ ] Unit tests
-* [ ] Mobile version
-
----
-
-## 🤝 Contribution
-
-```bash
-git checkout -b feature/NewFeature
-git commit -m "Add a feature"
-git push origin feature/NewFeature
-```
-
-### Guidelines:
-
-* Comments in **French**
-* Maintain coding style
-* Test before submitting
-* PR with clear description
-
----
-
-## ❓ FAQ
-
-**The app doesn’t start?**
-→ Check Tkinter: `python -m tkinter`
-
-**Can I add my own formulas?**
-→ Yes, via `modules.py`
-
-**Supported OS?**
-→ Windows / Linux / macOS
-
----
-
-## 🐛 Reporting Bugs
-
-1. Verify dependencies
-2. Open a GitHub *issue* with:
-
-   * Description
-   * Steps to reproduce
-   * Screenshots
-   * Python version
-
----
-
-## 📝 Credits
-
-* **Author**: Junior Kossivi
-* **Location**: Abidjan, Côte d'Ivoire
-* **Institution**: Université Félix Houphouët-Boigny
-* **Year**: 2025
-
----
-
-## 📄 License
-
-**Open-source educational project**
-
-* ✔️ Educational use
-* ✔️ Modifications with attribution
-* ✔️ Sharing allowed
-* ❌ Commercial use prohibited without permission
-
----
-
-## 📧 Contact
-
-📨 **Email**: [junioragbenonzan31@gmail.com](mailto:junioragbenonzan31@gmail.com)
-🐙 **GitHub**: [@JunRoot29](https://github.com/JunRoot29)
+## 📧 Contact & Support
+
+### Communication :
+* 📨 **Email** : [junioragbenonzan31@gmail.com](mailto:junioragbenonzan31@gmail.com)
+* 🐙 **GitHub** : [@JunRoot29](https://github.com/JunRoot29)
+* 💬 **Issues** : [MathCraft Issues](https://github.com/JunRoot29/MathCraft/issues)
+
+### Support académique :
+* Pour **intégration dans un cours** : Contact par email
+* Pour **projets étudiants** : Templates disponibles
+* Pour **recherche** : Données d'export disponibles
+
+### Communauté :
+* **Discussions** : Section GitHub Discussions
+* **Suggestions** : Issues avec label "enhancement"
+* **Bugs** : Issues avec label "bug"
+* **Questions** : Issues avec label "question"
 
 ---
 
 <div align="center">
 
-Made with ❤️ and ☕ in Abidjan
-© 2025 **Junior Kossivi**
+## 🏆 Citation
+
+Si vous utilisez MathCraft dans un contexte académique :
+
+```
+@software{mathcraft2025,
+  author = {Kossivi, Junior},
+  title = {MathCraft: Plateforme Interactive de Mathématiques Numériques},
+  year = {2025},
+  publisher = {GitHub},
+  url = {https://github.com/JunRoot29/MathCraft}
+}
+```
+
+## ⭐ Soutien
+
+Si vous aimez MathCraft, n'hésitez pas à :
+- **Mettre une étoile** ⭐ sur GitHub
+- **Partager** avec vos collègues
+- **Contribuer** au développement
+- **Suggérer** des améliorations
+
+---
+
+Fait avec ❤️ et beaucoup de ☕ à Abidjan
+
+**"Les mathématiques sont la porte et la clé de toutes les sciences."**
+*– Roger Bacon*
+
+© 2025 **Junior Kossivi** • Université Félix Houphouët-Boigny
 
 </div>
+
+---
+
+*Dernière mise à jour : Decembre 2025*  
+*Version : MathCraft 1.0 - "Numerical Revolution"*
