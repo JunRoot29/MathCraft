@@ -98,6 +98,7 @@ MathCraft/
 ├── README.md
 ├── requirements.txt
 ├── App/
+│   ├── __init__.py
 │   ├── modules.py
 │   ├── operation_de_base.py
 │   ├── theorie_des_nombres.py
@@ -106,10 +107,32 @@ MathCraft/
 │   ├── chaine_de_caractere.py
 │   ├── integration_numerique.py
 │   ├── jeux_math.py
+│   ├── soutieng_manager.py
+│   ├── operation_de_base.py
+│   ├── interface_historique.py
+│   ├── equation_numerique.py
+│   ├── interpolation_linéaire.py
 │   └── explorateur_concepts.py
+├── data/
+│   └── historique_calculs.json
+├── data/
+│   ├── defis_fibonacci.json
+│   ├── math_battle.json
+│   ├── question_enigme.json
+│   ├── question_premier.json
+│   └── questions.json
 └── Image/
-    ├── icon.png
-    └── screenshot.png
+    ├── balance.png
+    ├── carac.png
+    ├── Concepts.png
+    ├── defi.png
+    ├── equerre.png
+    ├── exit.png
+    ├── integral.png
+    ├── poly.png
+    ├── th.png
+    └── Calc.png
+    
 ```
 
 ---
