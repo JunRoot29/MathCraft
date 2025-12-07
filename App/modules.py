@@ -564,9 +564,11 @@ def compter_occurrences(chaine, mot):
     return f"Il y'a {i} fois {mot}"
 
 #Inverser une chaine de caractère
-def inversechaine(chaine):
-    b = str(chaine)
-    return b[::-1]
+def inverser_chaine(chaine):
+    """Inverse une chaîne de caractères
+    Exemple: "bonjour" -> "ruojnob"
+    """
+    return chaine[::-1]
 
 #Palindrome
 def palindrome(chaine):
@@ -578,7 +580,158 @@ def palindrome(chaine):
         return "✅ C'est un palindrome"
     else:
         return "❌ Réessayer, ce n'est pas un palindrome"
+    
+#Compte le nombre de mots
+def compter_mots(chaine):
+    """
+    Compte le nombre de mots dans une phrase
+    """
+    mots = chaine.split()
+    return len(mots)
+    
 
+
+def majuscules(chaine):
+    """Convertit en majuscules"""
+    return chaine.upper()
+
+def minuscules(chaine):
+    """Convertit en minuscules"""
+    return chaine.lower()
+
+def titre(chaine):
+    """Met la première lettre de chaque mot en majuscule"""
+    return chaine.title()
+
+def nettoyer_espaces(chaine):
+    """
+    Supprime les espaces en début, fin et les espaces multiples
+    """
+    return ' '.join(chaine.split())
+
+def est_anagramme(chaine1, chaine2):
+    """
+    Vérifie si deux chaînes sont des anagrammes
+    Exemple: "chien" et "niche"
+    """
+    # Nettoyer les chaînes (enlever espaces, mettre en minuscules)
+    chaine1_nettoyee = ''.join(chaine1.lower().split())
+    chaine2_nettoyee = ''.join(chaine2.lower().split())
+    
+    # Trier les lettres et comparer
+    return sorted(chaine1_nettoyee) == sorted(chaine2_nettoyee)
+
+
+import random
+import string
+
+def generer_mot_de_passe(longueur=12):
+    """
+    Génère un mot de passe aléatoire
+    """
+    caracteres = string.ascii_letters + string.digits + string.punctuation
+    return ''.join(random.choice(caracteres) for _ in range(longueur))
+
+import base64
+
+def encoder_base64(chaine):
+    """Encode une chaîne en base64"""
+    return base64.b64encode(chaine.encode()).decode()
+
+def decoder_base64(chaine):
+    """Décode une chaîne base64"""
+    return base64.b64decode(chaine.encode()).decode()
+
+def extraire_chiffres(chaine):
+    """
+    Extrait tous les chiffres d'une chaîne
+    """
+    return ''.join(filter(str.isdigit, chaine))
+
+def extraire_nombres(chaine):
+    """
+    Extrait tous les nombres (séquences de chiffres)
+    """
+    import re
+    return re.findall(r'\d+', chaine)
+
+def palindrome_amelioré(chaine):
+    """
+    Version améliorée sans dépendances externes
+    """
+    try:
+        # Convertir en minuscules
+        chaine = chaine.lower()
+        
+        # Dictionnaire des accents français
+        accents = {
+            'à': 'a', 'â': 'a', 'ä': 'a',
+            'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e',
+            'î': 'i', 'ï': 'i',
+            'ô': 'o', 'ö': 'o',
+            'ù': 'u', 'û': 'u', 'ü': 'u',
+            'ç': 'c',
+            'œ': 'oe', 'æ': 'ae'
+        }
+        
+        # Supprimer les accents
+        chaine_sans_accent = ''.join(accents.get(c, c) for c in chaine)
+        
+        # Garder uniquement les lettres (a-z)
+        lettres = "abcdefghijklmnopqrstuvwxyz"
+        chaine_nettoyee = ''.join(c for c in chaine_sans_accent if c in lettres)
+        
+        # Vérifier si vide
+        if not chaine_nettoyee:
+            return "❌ Pas de lettres à vérifier"
+        
+        # Vérifier le palindrome
+        if chaine_nettoyee == chaine_nettoyee[::-1]:
+            return f"✅ C'est un palindrome ! ({chaine_nettoyee})"
+        else:
+            return "❌ Ce n'est pas un palindrome"
+            
+    except Exception as e:
+        return f"❌ Erreur: {str(e)}"
+    
+
+def compter_mots(chaine):
+    """
+    Compte le nombre de mots dans une phrase
+    """
+    mots = chaine.split()
+    return len(mots)
+
+def compter_consonnes(chaine):
+    """
+    Compte le nombre de consonnes dans une chaîne
+    """
+    voyelles = "aeiouyàâäéèêëîïôöùûü"
+    chaine_lower = chaine.lower()
+    consonnes = 0
+    
+    for caractere in chaine_lower:
+        if caractere.isalpha() and caractere not in voyelles:
+            consonnes += 1
+    
+    return consonnes
+
+
+def rot13(chaine):
+    """
+    Applique le chiffrement ROT13
+    """
+    resultat = []
+    for caractere in chaine:
+        if 'a' <= caractere <= 'z':
+            base = ord('a')
+            resultat.append(chr((ord(caractere) - base + 13) % 26 + base))
+        elif 'A' <= caractere <= 'Z':
+            base = ord('A')
+            resultat.append(chr((ord(caractere) - base + 13) % 26 + base))
+        else:
+            resultat.append(caractere)
+    return ''.join(resultat)
 
 #Concatenation
 def concachaine(chaine1,chaine2):

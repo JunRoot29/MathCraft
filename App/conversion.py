@@ -38,7 +38,7 @@ unit_to_temperature = {
     "Rankine (°R)": "rankine"
 }
 
-## Dictionnaire de conversion des unités de masse et poids
+# Dictionnaire de conversion des unités de masse et poids
 unit_to_masse_et_poids = {
     "Tonne": 1000000,
     "Quintal": 100000,
@@ -52,7 +52,7 @@ unit_to_masse_et_poids = {
     "Carat": 0.2
 }
 
-## Dictionnaire de conversion des unités de vitesse
+# Dictionnaire de conversion des unités de vitesse
 unit_to_vitesse = {
     "Mètre par seconde": 1,
     "Kilomètre par heure": 0.2778,
@@ -76,6 +76,26 @@ unit_to_angles = {
     "Seconde d'arc": 0.00000485,# π / (180 × 3600)
     "Milliradian": 0.001,
     "Microradian": 0.000001
+}
+
+# Dictionnaire de conversion des systèmes numériques
+unit_to_data_systems = {
+    "Binaire (base 2)": 2,
+    "Décimal (base 10)": 10,
+    "Octal (base 8)": 8,
+    "Hexadécimal (base 16)": 16
+}
+
+# Dictionnaire de conversion des unités de données informatiques
+unit_to_data_storage = {
+    "Bit": 0.125,
+    "Byte (Octet)": 1,
+    "Kilobyte (KB)": 1024,
+    "Megabyte (MB)": 1048576,
+    "Gigabyte (GB)": 1073741824,
+    "Terabyte (TB)": 1099511627776,
+    "Petabyte (PB)": 1125899906842624,
+    "Exabyte (EB)": 1152921504606846976
 }
 
 """=========================Les fonctions de Conversion============================="""
@@ -154,6 +174,59 @@ def convertir_angles(valeur, unite_depart, unite_arrivee):
     except Exception as e:
         return f"❌Erreur, Vérifiez la saisie avant conversion"
 
+# Fonction de conversion des systèmes numériques
+def convertir_systemes_numeriques(valeur, unite_depart, unite_arrivee):
+    try:
+        # Nettoyer la valeur (enlever les espaces)
+        valeur = valeur.strip()
+        
+        # Obtenir les bases
+        base_depart = unit_to_data_systems[unite_depart]
+        base_arrivee = unit_to_data_systems[unite_arrivee]
+        
+        # Convertir d'abord en décimal
+        if base_depart == 10:
+            decimal_val = int(valeur)
+        elif base_depart == 2:
+            decimal_val = int(valeur, 2)
+        elif base_depart == 8:
+            decimal_val = int(valeur, 8)
+        elif base_depart == 16:
+            decimal_val = int(valeur, 16)
+        else:
+            return "❌Base de départ non supportée"
+        
+        # Convertir du décimal vers la base d'arrivée
+        if base_arrivee == 10:
+            resultat = str(decimal_val)
+        elif base_arrivee == 2:
+            resultat = bin(decimal_val)[2:]  # [2:] pour enlever le '0b'
+        elif base_arrivee == 8:
+            resultat = oct(decimal_val)[2:]  # [2:] pour enlever le '0o'
+        elif base_arrivee == 16:
+            resultat = hex(decimal_val)[2:].upper()  # [2:] pour enlever le '0x'
+        else:
+            return "❌Base d'arrivée non supportée"
+        
+        return f"✅{resultat}"
+        
+    except ValueError:
+        return f"❌Valeur invalide pour le système {unite_depart}"
+    except Exception as e:
+        return f"❌Erreur lors de la conversion"
+
+# Fonction de conversion des unités de stockage
+def convertir_stockage_donnees(valeur, unite_depart, unite_arrivee):
+    try:
+        valeur = float(valeur)
+        # Convertir d'abord en bytes
+        en_bytes = valeur * unit_to_data_storage[unite_depart]
+        # Convertir de bytes vers l'unité d'arrivée
+        resultat = en_bytes / unit_to_data_storage[unite_arrivee]
+        return f"✅{round(resultat, 6)}"
+    except Exception as e:
+        return f"❌Erreur, Vérifiez la saisie avant conversion"
+
 """===================================================================================="""
 # Style global pour les boutons arrondis
 def configurer_style():
@@ -179,23 +252,21 @@ def configurer_style():
 def launch_conversion(parent=None):
     conversion = Toplevel(parent)
     conversion.title("Conversion")
-    conversion.geometry("600x700")
-    conversion.configure(bg=PALETTE["fond_principal"])  # Utilisation de la palette
+    conversion.geometry("650x750")
+    conversion.configure(bg=PALETTE["fond_principal"])
 
     Label(conversion, text="Conversion", font=("Century Gothic", 24, "bold"), 
           bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack()
     Label(conversion, text="Et si on s'amusait à convertir ? \n Choisi ton Opération!", 
           font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack()
 
-    options = ["Longueur 📏", "Masse et Poids 🏋️", "Température🌡️", "Vitesse 🏃🏾", "Angles 📐", "Données 🖲️"]
+    options = ["Longueur 📏", "Masse et Poids 🏋️", "Température🌡️", "Vitesse 🏃🏾", 
+               "Angles 📐", "Systèmes Numériques 🔢", "Stockage Données 💾"]
     combo = ttk.Combobox(conversion, values=options, font=("Century Gothic", 14), state="readonly")
     combo.set("Longueur 📏")
     combo.pack()
 
     champ_valeur_var = StringVar()
-
-    def ajouter_texte(valeur):
-        champ_valeur_var.set(champ_valeur_var.get() + valeur)
 
     def selection(event):
         choix = combo.get()
@@ -208,8 +279,10 @@ def launch_conversion(parent=None):
                 lancer_vitesse()
             elif choix == "Angles 📐":
                 lancer_angles()
-            elif choix == "Données 🖲️":
-                lancer_donnees()
+            elif choix == "Systèmes Numériques 🔢":
+                lancer_systemes_numeriques()
+            elif choix == "Stockage Données 💾":
+                lancer_stockage_donnees()
             elif choix == "Masse et Poids 🏋️":
                 lancer_masse_poids()
             else:
@@ -315,22 +388,109 @@ def launch_conversion(parent=None):
         bouton_quitter = ttk.Button(cadre_vitesse, text="Quitter", style="Quit.TButton", command=conversion.destroy)
         bouton_quitter.pack(pady=10)
 
-    def lancer_donnees():
+    def lancer_systemes_numeriques():
         for widget in conversion.winfo_children():
             if isinstance(widget, Frame):
                 widget.destroy()
 
-        cadre_donnees = Frame(conversion, bg=PALETTE["fond_principal"])
-        cadre_donnees.pack(pady=10)
+        cadre_systemes = Frame(conversion, bg=PALETTE["fond_principal"])
+        cadre_systemes.pack(pady=10)
 
-        Label(cadre_donnees, text="Module Données - En développement", 
-              font=("Century Gothic", 16), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack(pady=20)
-        Label(cadre_donnees, text="Cette fonctionnalité sera disponible prochainement", 
-              font=("Century Gothic", 12), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack(pady=10)
+        Label(cadre_systemes, text="Valeur à convertir :", font=("Century Gothic", 14), 
+              bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack()
+        champ_valeur = Entry(cadre_systemes, font=("Century Gothic", 14), textvariable=champ_valeur_var)
+        champ_valeur.pack()
+
+        Label(cadre_systemes, text="De :", font=("Century Gothic", 14), 
+              bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack()
+        unite_depart = ttk.Combobox(cadre_systemes, values=list(unit_to_data_systems.keys()), 
+                                   font=("Century Gothic", 12), state="readonly")
+        unite_depart.set("Décimal (base 10)")
+        unite_depart.pack()
+
+        Label(cadre_systemes, text="Vers :", font=("Century Gothic", 14), 
+              bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack()
+        unite_arrivee = ttk.Combobox(cadre_systemes, values=list(unit_to_data_systems.keys()), 
+                                    font=("Century Gothic", 12), state="readonly")
+        unite_arrivee.set("Binaire (base 2)")
+        unite_arrivee.pack()
+
+        # Info supplémentaire pour l'utilisateur
+        info_label = Label(cadre_systemes, 
+                         text="Pour hexadécimal, utilisez les lettres A-F (majuscules)", 
+                         font=("Century Gothic", 10), 
+                         bg=PALETTE["fond_principal"], 
+                         fg=PALETTE["primaire"])
+        info_label.pack(pady=5)
+
+        champ_resultat = Label(cadre_systemes, text="", font=("Century Gothic", 14), 
+                              bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
+        champ_resultat.pack(pady=10)
+
+        def calculer():
+            val = champ_valeur.get()
+            u1 = unite_depart.get()
+            u2 = unite_arrivee.get()
+            res = convertir_systemes_numeriques(val, u1, u2)
+            if "✅" in res:
+                champ_resultat.config(text=f"Résultat : {res} ({u2.split()[0]})", fg=PALETTE["primaire"])
+            else:
+                champ_resultat.config(text=f"Résultat : {res}", fg=PALETTE["erreur"])
+
+        bouton_convertir = ttk.Button(cadre_systemes, text="Convertir", style="Custom.TButton", command=calculer)
+        bouton_convertir.pack(pady=5)
 
         # Bouton Quitter
-        bouton_quitter = ttk.Button(cadre_donnees, text="Quitter", style="Quit.TButton", command=conversion.destroy)
-        bouton_quitter.pack(pady=20)
+        bouton_quitter = ttk.Button(cadre_systemes, text="Quitter", style="Quit.TButton", command=conversion.destroy)
+        bouton_quitter.pack(pady=10)
+
+    def lancer_stockage_donnees():
+        for widget in conversion.winfo_children():
+            if isinstance(widget, Frame):
+                widget.destroy()
+
+        cadre_stockage = Frame(conversion, bg=PALETTE["fond_principal"])
+        cadre_stockage.pack(pady=10)
+
+        Label(cadre_stockage, text="Valeur à convertir :", font=("Century Gothic", 14), 
+              bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack()
+        champ_valeur = Entry(cadre_stockage, font=("Century Gothic", 14), textvariable=champ_valeur_var)
+        champ_valeur.pack()
+
+        Label(cadre_stockage, text="De :", font=("Century Gothic", 14), 
+              bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack()
+        unite_depart = ttk.Combobox(cadre_stockage, values=list(unit_to_data_storage.keys()), 
+                                   font=("Century Gothic", 12), state="readonly")
+        unite_depart.set("Megabyte (MB)")
+        unite_depart.pack()
+
+        Label(cadre_stockage, text="Vers :", font=("Century Gothic", 14), 
+              bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack()
+        unite_arrivee = ttk.Combobox(cadre_stockage, values=list(unit_to_data_storage.keys()), 
+                                    font=("Century Gothic", 12), state="readonly")
+        unite_arrivee.set("Gigabyte (GB)")
+        unite_arrivee.pack()
+
+        champ_resultat = Label(cadre_stockage, text="", font=("Century Gothic", 14), 
+                              bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
+        champ_resultat.pack(pady=10)
+
+        def calculer():
+            val = champ_valeur.get()
+            u1 = unite_depart.get()
+            u2 = unite_arrivee.get()
+            res = convertir_stockage_donnees(val, u1, u2)
+            if "✅" in res:
+                champ_resultat.config(text=f"Résultat : {res} {u2.split()[0]}", fg=PALETTE["primaire"])
+            else:
+                champ_resultat.config(text=f"Résultat : {res} {u2.split()[0]}", fg=PALETTE["erreur"])
+
+        bouton_convertir = ttk.Button(cadre_stockage, text="Convertir", style="Custom.TButton", command=calculer)
+        bouton_convertir.pack(pady=5)
+
+        # Bouton Quitter
+        bouton_quitter = ttk.Button(cadre_stockage, text="Quitter", style="Quit.TButton", command=conversion.destroy)
+        bouton_quitter.pack(pady=10)
 
     def lancer_masse_poids():
         for widget in conversion.winfo_children():

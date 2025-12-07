@@ -89,6 +89,7 @@ L'objectif est simple : rendre les mathématiques **accessibles, visuelles et am
 ```bash
 pip install numpy matplotlib
 python -m tkinter   # Vérifier l'installation de Tkinter
+pip install pyperclip 
 ```
 
 ---
