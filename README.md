@@ -115,18 +115,18 @@ MathCraft/
 ├── App/
 │   ├── __init__.py
 │   ├── modules.py                   # Bibliothèque mathématique principale
-│   ├── operation_de_base.py         # Calculatrice scientifique
-│   ├── theorie_des_nombres.py       # Théorie des nombres
-│   ├── conversion.py                # Conversion d'unités
-│   ├── polynome.py                  # Équations polynomiales
-│   ├── chaine_de_caractere.py       # Analyse textuelle
+│   ├── operation_de_base.py         # Calculatrice scientifique(interface)
+│   ├── theorie_des_nombres.py       # Théorie des nombres(interface)
+│   ├── conversion.py                # Conversion d'unités(interface)
+│   ├── polynome.py                  # Équations polynomiales(interface)
+│   ├── chaine_de_caractere.py       # Analyse textuelle(interface)
 │   ├── integration_numerique.py     # Intégration numérique (interface)
 │   ├── equation_numerique.py        # Résolution d'équations (interface) 🆕
 │   ├── interpolation_numerique.py   # Interpolation numérique (interface) 🆕
 │   ├── jeux_math.py                 # Jeux mathématiques
 │   ├── soutieng_manager.py          # Gestionnaire de support
-│   ├── interface_historique.py      # Historique des calculs
-│   └── explorateur_concepts.py      # Explorateur de concepts
+│   ├── interface_historique.py      # Historique des calculs(interface)
+│   └── explorateur_concepts.py      # Explorateur de concepts(interface)
 ├── data/
 │   ├── historique_calculs.json      # Historique des calculs
 │   ├── defis_fibonacci.json         # Défis Fibonacci
