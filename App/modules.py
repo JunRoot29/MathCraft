@@ -1981,73 +1981,68 @@ def spline_cubique_naturelle(x_points, y_points, x):
 
 def interpolation_hermite(x_points, y_points, dy_points, x):
     """
-    Interpolation d'Hermite (avec valeurs et dérivées)
-    
+    Interpolation d'Hermite (formule de Hermite via bases de Lagrange modifiées)
+
     Args:
         x_points: Liste des abscisses
         y_points: Liste des ordonnées
-        dy_points: Liste des dérivées
+        dy_points: Liste des dérivées en chaque abscisse
         x: Point où évaluer
-    
+
     Returns:
-        tuple: (valeur_interpolee, polynome, details)
+        tuple: (valeur_interpolee, polynome_description, details)
     """
     if len(x_points) != len(y_points) or len(x_points) != len(dy_points):
         raise ValueError("Toutes les listes doivent avoir la même longueur")
-    
+
     n = len(x_points)
-    
-    # Doubler les points pour inclure les dérivées
-    z_points = []
+
+    # Calculer les polynômes de base L_i(x) et leur dérivée en x_i
+    def L_i(x_val, i):
+        num = 1.0
+        den = 1.0
+        for j in range(n):
+            if j == i:
+                continue
+            num *= (x_val - x_points[j])
+            den *= (x_points[i] - x_points[j])
+        return num / den if den != 0 else 0.0
+
+    def L_i_prime_at_xi(i):
+        s = 0.0
+        for j in range(n):
+            if j == i:
+                continue
+            s += 1.0 / (x_points[i] - x_points[j])
+        return s
+
+    result = 0.0
+    terms = []
+
     for i in range(n):
-        z_points.extend([x_points[i], x_points[i]])
-    
-    # Table des différences divisées modifiée
-    m = 2 * n
-    Q = [[0] * m for _ in range(m)]
-    
-    for i in range(n):
-        # Valeurs de la fonction
-        Q[2 * i][0] = y_points[i]
-        Q[2 * i + 1][0] = y_points[i]
-        
-        # Différences divisées pour les points doubles
-        if i > 0:
-            Q[2 * i][1] = (Q[2 * i][0] - Q[2 * i - 1][0]) / (z_points[2 * i] - z_points[2 * i - 1])
-    
-    # Remplir les dérivées
-    for i in range(n):
-        Q[2 * i + 1][1] = dy_points[i]
-    
-    # Calculer les différences divisées d'ordre supérieur
-    for j in range(2, m):
-        for i in range(m - j):
-            Q[i][j] = (Q[i + 1][j - 1] - Q[i][j - 1]) / (z_points[i + j] - z_points[i])
-    
-    # Évaluation du polynôme d'Hermite
-    result = Q[0][0]
-    produit = 1
-    polynome_terms = [f"{Q[0][0]:.6f}"]
-    
-    for i in range(1, m):
-        produit *= (x - z_points[i - 1])
-        result += Q[0][i] * produit
-        
-        terme = f"{Q[0][i]:.6f}"
-        for j in range(i):
-            terme += f" * (x - {z_points[j]:.6f})"
-        
-        polynome_terms.append(terme)
-    
-    polynome = "P(x) = " + " + ".join(polynome_terms)
-    
+        Li_x = L_i(x, i)
+        Li_prime_xi = L_i_prime_at_xi(i)
+        yi = y_points[i]
+        dyi = dy_points[i]
+
+        # Hermite basis contributions
+        hi1 = (1 - 2 * (x - x_points[i]) * Li_prime_xi) * (Li_x ** 2) * yi
+        hi2 = (x - x_points[i]) * (Li_x ** 2) * dyi
+
+        result += hi1 + hi2
+        terms.append((hi1, hi2))
+
+    # Construire une description de polynôme sommaire
+    polynome_desc = f"Hermite interpolation using {n} points"
+
     details = {
-        'Q_table': Q,
-        'z_points': z_points,
-        'ordre': m
+        'terms': terms,
+        'x_points': x_points,
+        'y_points': y_points,
+        'dy_points': dy_points
     }
-    
-    return result, polynome, details
+
+    return result, polynome_desc, details
 
 
 def interpolation_bezier(points_control, t):

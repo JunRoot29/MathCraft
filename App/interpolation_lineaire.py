@@ -34,7 +34,7 @@ PALETTE = {
 }
 
 # Liste des méthodes d'interpolation disponibles
-METHODES = ["Lagrange", "Newton", "Linéaire par morceaux", "Spline Cubique Naturelle"]
+METHODES = ["Lagrange", "Newton", "Linéaire par morceaux", "Spline Cubique Naturelle", "Hermite"]
 
 
 def prepare_expression(expr: str) -> str:
@@ -447,6 +447,65 @@ def afficher_calculs_dans_interface(resultats, methode, notebook, fenetre):
             cell.grid(row=row_idx, column=col_idx, sticky="nsew")
         
         row_idx += 1
+
+    elif "hermite" in methode_lower and 'details' in resultats:
+        # Afficher les contributions Hermite (hi1, hi2)
+        details = resultats.get('details', {})
+        terms = details.get('terms', [])
+        x_pts = details.get('x_points', [])
+        y_pts = details.get('y_points', [])
+        dy_pts = details.get('dy_points', [])
+
+        # En-têtes
+        headers_hermite = ["i", "x_i", "y_i", "y'_i", "hi1", "hi2", "hi1+hi2"]
+        for col_idx, header in enumerate(headers_hermite):
+            header_label = Label(scrollable_frame, text=header, 
+                                font=("Century Gothic", 10, "bold"),
+                                bg=PALETTE["table_header"],
+                                fg=PALETTE["texte_fonce"],
+                                relief="solid",
+                                borderwidth=1,
+                                padx=10,
+                                pady=5,
+                                width=14)
+            header_label.grid(row=0, column=col_idx, sticky="nsew")
+
+        row_idx = 1
+        for i in range(len(terms)):
+            bg_color = PALETTE["table_even"] if row_idx % 2 == 0 else PALETTE["table_odd"]
+            hi1, hi2 = terms[i]
+            values = [
+                str(i),
+                f"{x_pts[i]:.6f}",
+                f"{y_pts[i]:.6f}",
+                f"{dy_pts[i]:.6f}",
+                f"{hi1:.6f}",
+                f"{hi2:.6f}",
+                f"{(hi1+hi2):.6f}"
+            ]
+            for col_idx, value in enumerate(values):
+                cell = Label(scrollable_frame, text=value,
+                            font=("Century Gothic", 9),
+                            bg=bg_color,
+                            fg=PALETTE["texte_fonce"],
+                            relief="solid",
+                            borderwidth=1,
+                            padx=10,
+                            pady=5,
+                            width=14,
+                            anchor="center")
+                cell.grid(row=row_idx, column=col_idx, sticky="nsew")
+            row_idx += 1
+
+        # Afficher le vecteur des dérivées
+        dy_frame = Frame(frame_calculs, bg=PALETTE["fond_principal"])
+        dy_frame.pack(pady=10, fill=X, padx=20)
+        Label(dy_frame, text="Dérivées fournies:", font=("Century Gothic", 11, "bold"),
+              bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack(anchor="w")
+        Label(dy_frame, text=", ".join([f"{d:.6f}" for d in dy_pts]),
+              font=("Century Gothic", 10), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"]).pack(anchor="w")
+
+        row_idx += 1
     
     # Afficher le polynôme si disponible
     if 'polynome' in resultats:
@@ -638,6 +697,18 @@ def afficher_graphe_interpolation(resultats, methode, notebook, fenetre):
         for x in x_curve:
             y_curve.append(evaluer_spline_cubique(x_sorted, y_sorted, x))
         titre = "Spline Cubique Naturelle"
+        style_courbe = '-'
+    
+    elif methode == "Hermite":
+        # Nécessite les dérivées dans resultats['derivées']
+        dy_points = resultats.get('derivées', None)
+        if dy_points is None:
+            # Si pas de dérivées, tracer une ligne vide
+            y_curve = [float('nan')] * len(x_curve)
+        else:
+            for x in x_curve:
+                y_curve.append(modu.interpolation_hermite(x_sorted, y_sorted, dy_points, x)[0])
+        titre = "Interpolation d'Hermite"
         style_courbe = '-'
     
     # Tracer la courbe interpolée
@@ -922,7 +993,17 @@ def lancer_interpolation_numerique(parent=None):
     
     # Insérer un exemple
     text_points.insert("1.0", "0,0; 1,1; 2,4; 3,9")
-    
+
+    # Champ pour les dérivées (utile pour Hermite)
+    Label(scrollable_calc_frame, text="Dérivées en chaque point (format: d1; d2; d3; ...) — requis pour Hermite",
+          font=("Century Gothic", 11), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"]).pack(pady=(10, 0))
+
+    text_derivatives = Text(scrollable_calc_frame, font=("Century Gothic", 11), height=2,
+                          relief="solid", borderwidth=1)
+    text_derivatives.pack(padx=20, pady=5, fill=X)
+    # Exemple pour la parabole y=x^2 : dérivées 0,2,4,6
+    text_derivatives.insert("1.0", "0; 2; 4; 6")
+
     # Section point d'évaluation
     Label(scrollable_calc_frame, text="Point x où évaluer l'interpolation :",
           font=("Century Gothic", 12, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"]).pack(pady=10)
@@ -943,17 +1024,29 @@ def lancer_interpolation_numerique(parent=None):
         ("Parabole", "0,0; 1,1; 2,4; 3,9"),
         ("Sinus", "0,0; 1.57,1; 3.14,0; 4.71,-1"),
         ("Cosinus", "0,1; 1.57,0; 3.14,-1; 4.71,0"),
-        ("Courbe quelconque", "0,1; 1,3; 2,2; 3,5; 4,4")
+        ("Courbe quelconque", "0,1; 1,3; 2,2; 3,5; 4,4"),
+        ("Parabole (Hermite)", "0,0; 1,1; 2,4; 3,9", "0; 2; 4; 6")
     ]
     
     def charger_exemple(points):
-        text_points.delete("1.0", END)
-        text_points.insert("1.0", points)
+        # Supporte soit une chaîne (points) soit un tuple (points, derivs)
+        if isinstance(points, (list, tuple)):
+            pts = points[0]
+            text_points.delete("1.0", END)
+            text_points.insert("1.0", pts)
+            if len(points) > 1:
+                derivs = points[1]
+                text_derivatives.delete("1.0", END)
+                text_derivatives.insert("1.0", derivs)
+        else:
+            text_points.delete("1.0", END)
+            text_points.insert("1.0", points)
     
-    for nom, points in exemples:
+    for example in exemples:
+        nom = example[0]
         btn = ttk.Button(frame_exemples, text=nom, style="Small.TButton",
-                        command=lambda p=points: charger_exemple(p))
-        btn.pack(side="left", padx=2, pady=5) 
+                        command=lambda e=example: charger_exemple(e))
+        btn.pack(side="left", padx=2, pady=5)
     
     # Zone de résultat
     frame_resultat = Frame(scrollable_calc_frame, bg=PALETTE["fond_principal"])
@@ -1032,6 +1125,27 @@ def lancer_interpolation_numerique(parent=None):
                     'details': details
                 })
             
+            elif choix == "Hermite":
+                # Récupérer les dérivées fournies
+                deriv_text = text_derivatives.get("1.0", END).strip()
+                if not deriv_text:
+                    raise ValueError("Pour Hermite, veuillez fournir les dérivées correspondantes dans la case 'Dérivées'")
+                # Parse: format attendu d1; d2; d3 ...
+                try:
+                    dy_parts = [s.strip() for s in deriv_text.split(';') if s.strip()]
+                    dy_points = [float(s) for s in dy_parts]
+                except Exception:
+                    raise ValueError("Format des dérivées invalide : utilisez d1; d2; d3; ...")
+                if len(dy_points) != len(points):
+                    raise ValueError("Nombre de dérivées différent du nombre de points")
+                result, polynome, details = modu.interpolation_hermite(x_points, y_points, dy_points, x_eval)
+                resultats.update({
+                    'valeur': result,
+                    'polynome': polynome,
+                    'details': details,
+                    'derivées': dy_points
+                })
+
             # Affichage du résultat
             resultat_label.config(text=f"✅ {choix}:\nP({x_eval}) = {resultats['valeur']:.8f}", 
                                  fg=PALETTE["succes"])

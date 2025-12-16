@@ -149,7 +149,7 @@ main_area = Frame(fenetre, bg="#F0F4F8")
 main_area.pack(pady=10, padx=20, fill=BOTH, expand=True)
 
 # Sidebar (gauche) — avec scroll si nécessaire
-sidebar = Frame(main_area, bg="#F0F4F8", width=300)
+sidebar = Frame(main_area, bg="#F0F4F8", width=500)
 sidebar.pack(side=LEFT, fill=Y)
 sidebar.pack_propagate(False)
 
