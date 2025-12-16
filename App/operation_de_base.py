@@ -55,6 +55,15 @@ def launch_operation(parent=None):
                         relief="flat",
                         focuscolor="none")
         
+        # Style pour boutons de la calculatrice (taille réduite)
+        style.configure("Calc.TButton",
+                        foreground=PALETTE["fond_secondaire"],
+                        background=PALETTE["primaire"],
+                        font=("Century Gothic", 10),
+                        padding=2,
+                        relief="flat",
+                        width=6)
+        
         # Style spécial pour le bouton Quitter
         style.configure("Quit.TButton",
                         foreground=PALETTE["fond_secondaire"],
@@ -111,11 +120,11 @@ def launch_operation(parent=None):
     ligne1_frame = Frame(main_frame, bg=PALETTE["fond_principal"])
     ligne1_frame.pack(pady=3)
 
-    btn1 = ttk.Button(ligne1_frame, text="ESC", style="Custom.TButton", width=6)
-    btn2 = ttk.Button(ligne1_frame, text="(", style="Custom.TButton", width=6)
-    btn3 = ttk.Button(ligne1_frame, text=")", style="Custom.TButton", width=6)
-    btn4 = ttk.Button(ligne1_frame, text="%", style="Custom.TButton", width=6)
-    btn33 = ttk.Button(ligne1_frame, text="|  |", style="Custom.TButton", width=6)
+    btn1 = ttk.Button(ligne1_frame, text="ESC", style="Calc.TButton", width=6)
+    btn2 = ttk.Button(ligne1_frame, text="(", style="Calc.TButton", width=6)
+    btn3 = ttk.Button(ligne1_frame, text=")", style="Calc.TButton", width=6)
+    btn4 = ttk.Button(ligne1_frame, text="%", style="Calc.TButton", width=6)
+    btn33 = ttk.Button(ligne1_frame, text="|  |", style="Calc.TButton", width=6)
 
     btn1.pack(side="left", padx=2)
     btn2.pack(side="left", padx=2)
@@ -127,11 +136,11 @@ def launch_operation(parent=None):
     ligne2_frame = Frame(main_frame, bg=PALETTE["fond_principal"])
     ligne2_frame.pack(pady=3)
 
-    btn5 = ttk.Button(ligne2_frame, text="cos", style="Custom.TButton", width=6)
-    btn6 = ttk.Button(ligne2_frame, text="sin", style="Custom.TButton", width=6)
-    btn7 = ttk.Button(ligne2_frame, text="tan", style="Custom.TButton", width=6)
-    btn8 = ttk.Button(ligne2_frame, text="+/-", style="Custom.TButton", width=6)
-    btn34 = ttk.Button(ligne2_frame, text="Deg°", style="Custom.TButton", width=6)
+    btn5 = ttk.Button(ligne2_frame, text="cos", style="Calc.TButton", width=6)
+    btn6 = ttk.Button(ligne2_frame, text="sin", style="Calc.TButton", width=6)
+    btn7 = ttk.Button(ligne2_frame, text="tan", style="Calc.TButton", width=6)
+    btn8 = ttk.Button(ligne2_frame, text="+/-", style="Calc.TButton", width=6)
+    btn34 = ttk.Button(ligne2_frame, text="Deg°", style="Calc.TButton", width=6)
 
     btn5.pack(side="left", padx=2)
     btn6.pack(side="left", padx=2)
@@ -143,11 +152,11 @@ def launch_operation(parent=None):
     ligne3_frame = Frame(main_frame, bg=PALETTE["fond_principal"])
     ligne3_frame.pack(pady=3)
 
-    btn9 = ttk.Button(ligne3_frame, text="√", style="Custom.TButton", width=6)
-    btn10 = ttk.Button(ligne3_frame, text="ln", style="Custom.TButton", width=6)
-    btn11 = ttk.Button(ligne3_frame, text="1/x", style="Custom.TButton", width=6)
-    btn12 = ttk.Button(ligne3_frame, text="π", style="Custom.TButton", width=6)
-    btn35 = ttk.Button(ligne3_frame, text="←", style="Custom.TButton", width=6)
+    btn9 = ttk.Button(ligne3_frame, text="√", style="Calc.TButton", width=6)
+    btn10 = ttk.Button(ligne3_frame, text="ln", style="Calc.TButton", width=6)
+    btn11 = ttk.Button(ligne3_frame, text="1/x", style="Calc.TButton", width=6)
+    btn12 = ttk.Button(ligne3_frame, text="π", style="Calc.TButton", width=6)
+    btn35 = ttk.Button(ligne3_frame, text="←", style="Calc.TButton", width=6)
 
     btn9.pack(side="left", padx=2)
     btn10.pack(side="left", padx=2)
@@ -159,10 +168,10 @@ def launch_operation(parent=None):
     ligne4_frame = Frame(main_frame, bg=PALETTE["fond_principal"])
     ligne4_frame.pack(pady=3)
 
-    btn13 = ttk.Button(ligne4_frame, text="!", style="Custom.TButton", width=6)
-    btn14 = ttk.Button(ligne4_frame, text="log", style="Custom.TButton", width=6)
-    btn15 = ttk.Button(ligne4_frame, text="x²", style="Custom.TButton", width=6)
-    btn16 = ttk.Button(ligne4_frame, text="x^(n)", style="Custom.TButton", width=6)
+    btn13 = ttk.Button(ligne4_frame, text="!", style="Calc.TButton", width=6)
+    btn14 = ttk.Button(ligne4_frame, text="log", style="Calc.TButton", width=6)
+    btn15 = ttk.Button(ligne4_frame, text="x²", style="Calc.TButton", width=6)
+    btn16 = ttk.Button(ligne4_frame, text="x^(n)", style="Calc.TButton", width=6)
 
     btn13.pack(side="left", padx=2)
     btn14.pack(side="left", padx=2)
@@ -173,10 +182,10 @@ def launch_operation(parent=None):
     ligne5_frame = Frame(main_frame, bg=PALETTE["fond_principal"])
     ligne5_frame.pack(pady=3)
 
-    btn17 = ttk.Button(ligne5_frame, text="7", style="Custom.TButton", width=6)
-    btn18 = ttk.Button(ligne5_frame, text="8", style="Custom.TButton", width=6)
-    btn19 = ttk.Button(ligne5_frame, text="9", style="Custom.TButton", width=6)
-    btn20 = ttk.Button(ligne5_frame, text="+", style="Custom.TButton", width=6)
+    btn17 = ttk.Button(ligne5_frame, text="7", style="Calc.TButton", width=6)
+    btn18 = ttk.Button(ligne5_frame, text="8", style="Calc.TButton", width=6)
+    btn19 = ttk.Button(ligne5_frame, text="9", style="Calc.TButton", width=6)
+    btn20 = ttk.Button(ligne5_frame, text="+", style="Calc.TButton", width=6)
 
     btn17.pack(side="left", padx=2)
     btn18.pack(side="left", padx=2)
@@ -187,10 +196,10 @@ def launch_operation(parent=None):
     ligne6_frame = Frame(main_frame, bg=PALETTE["fond_principal"])
     ligne6_frame.pack(pady=3)
 
-    btn21 = ttk.Button(ligne6_frame, text="4", style="Custom.TButton", width=6)
-    btn22 = ttk.Button(ligne6_frame, text="5", style="Custom.TButton", width=6)
-    btn23 = ttk.Button(ligne6_frame, text="6", style="Custom.TButton", width=6)
-    btn24 = ttk.Button(ligne6_frame, text="-", style="Custom.TButton", width=6)
+    btn21 = ttk.Button(ligne6_frame, text="4", style="Calc.TButton", width=6)
+    btn22 = ttk.Button(ligne6_frame, text="5", style="Calc.TButton", width=6)
+    btn23 = ttk.Button(ligne6_frame, text="6", style="Calc.TButton", width=6)
+    btn24 = ttk.Button(ligne6_frame, text="-", style="Calc.TButton", width=6)
 
     btn21.pack(side="left", padx=2)
     btn22.pack(side="left", padx=2)
@@ -201,10 +210,10 @@ def launch_operation(parent=None):
     ligne7_frame = Frame(main_frame, bg=PALETTE["fond_principal"])
     ligne7_frame.pack(pady=3)
 
-    btn25 = ttk.Button(ligne7_frame, text="1", style="Custom.TButton", width=6)
-    btn26 = ttk.Button(ligne7_frame, text="2", style="Custom.TButton", width=6)
-    btn27 = ttk.Button(ligne7_frame, text="3", style="Custom.TButton", width=6)
-    btn28 = ttk.Button(ligne7_frame, text="/", style="Custom.TButton", width=6)
+    btn25 = ttk.Button(ligne7_frame, text="1", style="Calc.TButton", width=6)
+    btn26 = ttk.Button(ligne7_frame, text="2", style="Calc.TButton", width=6)
+    btn27 = ttk.Button(ligne7_frame, text="3", style="Calc.TButton", width=6)
+    btn28 = ttk.Button(ligne7_frame, text="/", style="Calc.TButton", width=6)
 
     btn25.pack(side="left", padx=2)
     btn26.pack(side="left", padx=2)
@@ -215,10 +224,10 @@ def launch_operation(parent=None):
     ligne8_frame = Frame(main_frame, bg=PALETTE["fond_principal"])
     ligne8_frame.pack(pady=3)
 
-    btn29 = ttk.Button(ligne8_frame, text="0", style="Custom.TButton", width=6)
-    btn30 = ttk.Button(ligne8_frame, text=".", style="Custom.TButton", width=6)
-    btn31 = ttk.Button(ligne8_frame, text="×", style="Custom.TButton", width=6)
-    btn32 = ttk.Button(ligne8_frame, text="=", style="Custom.TButton", width=6)
+    btn29 = ttk.Button(ligne8_frame, text="0", style="Calc.TButton", width=6)
+    btn30 = ttk.Button(ligne8_frame, text=".", style="Calc.TButton", width=6)
+    btn31 = ttk.Button(ligne8_frame, text="×", style="Calc.TButton", width=6)
+    btn32 = ttk.Button(ligne8_frame, text="=", style="Calc.TButton", width=6)
 
     btn29.pack(side="left", padx=2)
     btn30.pack(side="left", padx=2)

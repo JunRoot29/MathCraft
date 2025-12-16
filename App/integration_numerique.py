@@ -165,6 +165,12 @@ def executer_methode(choix, a, b, n, fonction):
     return methodes[choix](fonction, a, b, n)
 
 
+# Helper pour savoir si on doit créer une Toplevel ou utiliser un Frame parent
+def _is_toplevel_parent(parent):
+    import tkinter as tk
+    return parent is None or isinstance(parent, (tk.Tk, tk.Toplevel))
+
+
 def afficher_iterations_dans_interface(iterations, methode, notebook, fenetre):
     """Affiche les itérations dans un onglet du notebook"""
     
@@ -409,17 +415,26 @@ def lancer_integration_numerique(parent=None):
     # Variable pour suivre l'onglet d'itérations actuel
     current_iterations_tab = None
     
-    # Initialisation de la fenêtre
-    fenetre_integration = Toplevel(parent) if parent else Tk()
-    fenetre_integration.configure(bg=PALETTE["fond_principal"])
-    fenetre_integration.geometry("1000x800")  # Plus large pour accommoder le notebook
-    fenetre_integration.title("Intégration Numérique avec Itérations")
-    fenetre_integration.resizable(True, True)
-    
-    # Centrer la fenêtre
-    if parent:
-        fenetre_integration.transient(parent)
-        fenetre_integration.grab_set()
+    # Initialisation de la fenêtre / zone de contenu
+    is_toplevel = _is_toplevel_parent(parent)
+    if is_toplevel:
+        fenetre_integration = Toplevel(parent) if parent else Tk()
+        fenetre_integration.configure(bg=PALETTE["fond_principal"])
+        fenetre_integration.geometry("1000x800")  # Plus large pour accommoder le notebook
+        fenetre_integration.title("Intégration Numérique avec Itérations")
+        fenetre_integration.resizable(True, True)
+        # Centrer la fenêtre
+        if parent:
+            fenetre_integration.transient(parent)
+            fenetre_integration.grab_set()
+    else:
+        fenetre_integration = parent
+        for w in list(fenetre_integration.winfo_children()):
+            w.destroy()
+        try:
+            fenetre_integration.configure(bg=PALETTE["fond_principal"])
+        except Exception:
+            pass
     
     # Configuration du style
     def configurer_style():
@@ -436,9 +451,10 @@ def lancer_integration_numerique(parent=None):
         style.configure("Custom.TButton",
                         foreground=PALETTE["fond_secondaire"],
                         background=PALETTE["primaire"],
-                        font=("Century Gothic", 10, "bold"),
-                        padding=6,
-                        relief="flat")
+                        font=("Century Gothic", 9, "bold"),
+                        padding=4,
+                        relief="flat",
+                        width=18)
         
         style.configure("Quit.TButton",
                         foreground=PALETTE["fond_secondaire"],
@@ -446,9 +462,21 @@ def lancer_integration_numerique(parent=None):
                         font=("Century Gothic", 10, "bold"),
                         padding=6,
                         relief="flat")
+
+        # Style pour petits boutons (raccourcis)
+        style.configure("Small.TButton",
+                        foreground=PALETTE["fond_secondaire"],
+                        background=PALETTE["primaire"],
+                        font=("Century Gothic", 9),
+                        padding=2,
+                        relief="flat",
+                        width=8)
         
         # Effets de survol
         style.map("Custom.TButton",
+                 background=[('active', PALETTE["secondaire"]),
+                            ('pressed', '#1E3A8A')])
+        style.map("Small.TButton",
                  background=[('active', PALETTE["secondaire"]),
                             ('pressed', '#1E3A8A')])
         
@@ -564,7 +592,7 @@ def lancer_integration_numerique(parent=None):
     ]
     
     for text, insert_text in boutons_ligne1:
-        btn = ttk.Button(ligne1, text=text, style="Custom.TButton",
+        btn = ttk.Button(ligne1, text=text, style="Small.TButton",
                         command=lambda t=insert_text: inserer_texte(t, entree_f))
         btn.pack(side="left", padx=2)
     
@@ -581,7 +609,7 @@ def lancer_integration_numerique(parent=None):
     ]
     
     for text, insert_text in boutons_ligne2:
-        btn = ttk.Button(ligne2, text=text, style="Custom.TButton",
+        btn = ttk.Button(ligne2, text=text, style="Small.TButton",
                         command=lambda t=insert_text: inserer_texte(t, entree_f))
         btn.pack(side="left", padx=2)
     
@@ -599,13 +627,13 @@ def lancer_integration_numerique(parent=None):
     
     for text, action in boutons_ligne3:
         if action == "clear":
-            btn = ttk.Button(ligne3, text=text, style="Custom.TButton",
+            btn = ttk.Button(ligne3, text=text, style="Small.TButton",
                             command=lambda: var_f.set(""))
         elif action == "backspace":
-            btn = ttk.Button(ligne3, text=text, style="Custom.TButton",
+            btn = ttk.Button(ligne3, text=text, style="Small.TButton",
                             command=lambda: supprimer_caractere(entree_f))
         else:
-            btn = ttk.Button(ligne3, text=text, style="Custom.TButton",
+            btn = ttk.Button(ligne3, text=text, style="Small.TButton",
                             command=lambda t=action: inserer_texte(t, entree_f))
         btn.pack(side="left", padx=2)
     
@@ -684,8 +712,15 @@ def lancer_integration_numerique(parent=None):
                                 style="Custom.TButton", command=calculer)
     bouton_calculer.pack(side="left", padx=10)
     
+    def _quit_local():
+        if is_toplevel:
+            fenetre_integration.destroy()
+        else:
+            for w in list(fenetre_integration.winfo_children()):
+                w.destroy()
+
     bouton_exit = ttk.Button(frame_boutons_finaux, text="🚪 Fermer la fenêtre",
-                           style="Quit.TButton", command=fenetre_integration.destroy)
+                           style="Quit.TButton", command=_quit_local)
     bouton_exit.pack(side="left", padx=10)
     
     # Exemples
@@ -809,7 +844,7 @@ def lancer_integration_numerique(parent=None):
            font=("Century Gothic", 10, "bold"),
            bg=PALETTE["erreur"],
            fg="white",
-           command=fenetre_integration.destroy,
+           command=_quit_local,
            padx=20,
            pady=10).pack(pady=20)
     

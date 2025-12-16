@@ -64,20 +64,35 @@ def configurer_styles():
                         ('pressed', '#991B1B')],
              foreground=[('active', PALETTE["fond_secondaire"])])
 
+
+# Helper pour savoir si on doit créer une Toplevel ou utiliser un Frame parent
+def _is_toplevel_parent(parent):
+    import tkinter as tk
+    return parent is None or isinstance(parent, (tk.Tk, tk.Toplevel))
+
 def lancer_explorateur_concepts(parent=None):
     """Lance le menu principal des jeux mathématiques"""
     # Configurer les styles d'abord
     configurer_styles()
-    
-    explorateur = Toplevel(parent)
-    explorateur.title("🎮 Explorateur de Concepts - Jeux Mathématiques")
-    explorateur.geometry("550x650")
-    explorateur.configure(bg=PALETTE["fond_principal"])
-    explorateur.resizable(False, False)
+    is_toplevel = _is_toplevel_parent(parent)
+    if is_toplevel:
+        explorateur = Toplevel(parent)
+        explorateur.title("🎮 Explorateur de Concepts - Jeux Mathématiques")
+        explorateur.geometry("550x650")
+        explorateur.configure(bg=PALETTE["fond_principal"])
+        explorateur.resizable(False, False)
 
-    # Centrer la fenêtre
-    explorateur.transient(parent)
-    explorateur.grab_set()
+        # Centrer la fenêtre
+        explorateur.transient(parent)
+        explorateur.grab_set()
+    else:
+        explorateur = parent
+        for w in list(explorateur.winfo_children()):
+            w.destroy()
+        try:
+            explorateur.configure(bg=PALETTE["fond_principal"])
+        except Exception:
+            pass
 
     # Cadre principal avec défilement
     main_frame = Frame(explorateur, bg=PALETTE["fond_principal"])
@@ -148,10 +163,17 @@ def lancer_explorateur_concepts(parent=None):
     separator2.pack(fill='x', pady=20)
 
     # Bouton retour
+    def _quit_local():
+        if is_toplevel:
+            explorateur.destroy()
+        else:
+            for w in list(explorateur.winfo_children()):
+                w.destroy()
+
     ttk.Button(scrollable_frame, 
               text="🚪 Retour au Menu Principal",
               style="Retour.TButton",
-              command=explorateur.destroy).pack(pady=10, fill=X, padx=5)
+              command=_quit_local).pack(pady=10, fill=X, padx=5)
 
     # Pied de page
     footer = Label(scrollable_frame,

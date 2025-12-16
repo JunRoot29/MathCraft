@@ -149,6 +149,12 @@ def parse_points(points_str):
         raise ValueError(f"Format de points invalide: {str(e)}\nUtilisez: x1,y1; x2,y2; ...")
 
 
+# Helper pour savoir si on doit créer une Toplevel ou utiliser un Frame parent
+def _is_toplevel_parent(parent):
+    import tkinter as tk
+    return parent is None or isinstance(parent, (tk.Tk, tk.Toplevel))
+
+
 def evaluer_polynome_lagrange(x_points, y_points, x):
     """Évalue le polynôme de Lagrange en x (pour tracé du graphe)"""
     n = len(x_points)
@@ -793,17 +799,26 @@ def lancer_interpolation_numerique(parent=None):
     current_calculs_tab = None
     current_graphe_tab = None
     
-    # Initialisation de la fenêtre
-    fenetre_interpolation = Toplevel(parent) if parent else Tk()
-    fenetre_interpolation.configure(bg=PALETTE["fond_principal"])
-    fenetre_interpolation.geometry("1100x850")  # Un peu plus grand pour les graphiques
-    fenetre_interpolation.title("Interpolation Numérique avec Calculs Détaillés et Graphiques")
-    fenetre_interpolation.resizable(True, True)
-    
-    # Centrer la fenêtre
-    if parent:
-        fenetre_interpolation.transient(parent)
-        fenetre_interpolation.grab_set()
+    # Initialisation de la fenêtre / zone de contenu
+    is_toplevel = _is_toplevel_parent(parent)
+    if is_toplevel:
+        fenetre_interpolation = Toplevel(parent) if parent else Tk()
+        fenetre_interpolation.configure(bg=PALETTE["fond_principal"])
+        fenetre_interpolation.geometry("1100x850")  # Un peu plus grand pour les graphiques
+        fenetre_interpolation.title("Interpolation Numérique avec Calculs Détaillés et Graphiques")
+        fenetre_interpolation.resizable(True, True)
+        # Centrer la fenêtre
+        if parent:
+            fenetre_interpolation.transient(parent)
+            fenetre_interpolation.grab_set()
+    else:
+        fenetre_interpolation = parent
+        for w in list(fenetre_interpolation.winfo_children()):
+            w.destroy()
+        try:
+            fenetre_interpolation.configure(bg=PALETTE["fond_principal"])
+        except Exception:
+            pass
     
     # Configuration du style
     def configurer_style():
@@ -820,9 +835,10 @@ def lancer_interpolation_numerique(parent=None):
         style.configure("Custom.TButton",
                         foreground=PALETTE["fond_secondaire"],
                         background=PALETTE["primaire"],
-                        font=("Century Gothic", 10, "bold"),
-                        padding=6,
-                        relief="flat")
+                        font=("Century Gothic", 9, "bold"),
+                        padding=4,
+                        relief="flat",
+                        width=18)
         
         style.configure("Quit.TButton",
                         foreground=PALETTE["fond_secondaire"],
@@ -935,9 +951,9 @@ def lancer_interpolation_numerique(parent=None):
         text_points.insert("1.0", points)
     
     for nom, points in exemples:
-        btn = ttk.Button(frame_exemples, text=nom, style="Custom.TButton",
+        btn = ttk.Button(frame_exemples, text=nom, style="Small.TButton",
                         command=lambda p=points: charger_exemple(p))
-        btn.pack(side="left", padx=2, pady=5)
+        btn.pack(side="left", padx=2, pady=5) 
     
     # Zone de résultat
     frame_resultat = Frame(scrollable_calc_frame, bg=PALETTE["fond_principal"])
@@ -1065,8 +1081,15 @@ def lancer_interpolation_numerique(parent=None):
                                command=lambda: [text_points.delete("1.0", END), entree_x.delete(0, END)])
     bouton_effacer.pack(side="left", padx=10)
     
+    def _close_local():
+        if is_toplevel:
+            fenetre_interpolation.destroy()
+        else:
+            for w in list(fenetre_interpolation.winfo_children()):
+                w.destroy()
+
     bouton_exit = ttk.Button(frame_boutons_finaux, text="🚪 Fermer la fenêtre",
-                           style="Quit.TButton", command=fenetre_interpolation.destroy)
+                           style="Quit.TButton", command=_close_local)
     bouton_exit.pack(side="left", padx=10)
     
     # Exemples
@@ -1213,7 +1236,7 @@ def lancer_interpolation_numerique(parent=None):
            font=("Century Gothic", 10, "bold"),
            bg=PALETTE["erreur"],
            fg="white",
-           command=fenetre_interpolation.destroy,
+           command=_close_local,
            padx=20,
            pady=10).pack(pady=20)
     

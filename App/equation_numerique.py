@@ -467,6 +467,15 @@ def lancer_equation_Numerique(parent=None):
                         padding=6,
                         relief="flat")
         
+        # Style pour petits boutons (raccourcis mathématiques)
+        style.configure("Small.TButton",
+                        foreground=PALETTE["fond_secondaire"],
+                        background=PALETTE["primaire"],
+                        font=("Century Gothic", 10),
+                        padding=2,
+                        relief="flat",
+                        width=10)
+        
         style.configure("Quit.TButton",
                         foreground=PALETTE["fond_secondaire"],
                         background=PALETTE["erreur"],
@@ -650,7 +659,7 @@ def lancer_equation_Numerique(parent=None):
     ]
     
     for text, insert_text in boutons_ligne1:
-        btn = ttk.Button(ligne1, text=text, style="Custom.TButton",
+        btn = ttk.Button(ligne1, text=text, style="Small.TButton",
                         command=lambda t=insert_text: entree_f.insert(END, t))
         btn.pack(side="left", padx=2)
     
@@ -667,7 +676,7 @@ def lancer_equation_Numerique(parent=None):
     ]
     
     for text, insert_text in boutons_ligne2:
-        btn = ttk.Button(ligne2, text=text, style="Custom.TButton",
+        btn = ttk.Button(ligne2, text=text, style="Small.TButton",
                         command=lambda t=insert_text: entree_f.insert(END, t))
         btn.pack(side="left", padx=2)
     
