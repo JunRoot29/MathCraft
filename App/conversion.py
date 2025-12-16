@@ -249,11 +249,27 @@ def configurer_style():
                     width=40)
     return style
 
+# Helper pour savoir si on doit créer une Toplevel ou utiliser un Frame parent
+def _is_toplevel_parent(parent):
+    import tkinter as tk
+    return parent is None or isinstance(parent, (tk.Tk, tk.Toplevel))
+
+
 def launch_conversion(parent=None):
-    conversion = Toplevel(parent)
-    conversion.title("Conversion")
-    conversion.geometry("650x750")
-    conversion.configure(bg=PALETTE["fond_principal"])
+    is_toplevel = _is_toplevel_parent(parent)
+    if is_toplevel:
+        conversion = Toplevel(parent)
+        conversion.title("Conversion")
+        conversion.geometry("650x750")
+        conversion.configure(bg=PALETTE["fond_principal"])
+    else:
+        conversion = parent
+        for w in list(conversion.winfo_children()):
+            w.destroy()
+        try:
+            conversion.configure(bg=PALETTE["fond_principal"])
+        except Exception:
+            pass
 
     Label(conversion, text="Conversion", font=("Century Gothic", 24, "bold"), 
           bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack()
@@ -337,7 +353,13 @@ def launch_conversion(parent=None):
         bouton_convertir.pack(pady=5)
 
         # Bouton Quitter
-        bouton_quitter = ttk.Button(cadre_longueur, text="Quitter", style="Quit.TButton", command=conversion.destroy)
+        def _quit_local():
+            if is_toplevel:
+                conversion.destroy()
+            else:
+                for w in list(conversion.winfo_children()):
+                    w.destroy()
+        bouton_quitter = ttk.Button(cadre_longueur, text="Quitter", style="Quit.TButton", command=_quit_local)
         bouton_quitter.pack(pady=10)
 
     def lancer_vitesse():
@@ -385,7 +407,13 @@ def launch_conversion(parent=None):
         bouton_convertir.pack(pady=5)
 
         # Bouton Quitter
-        bouton_quitter = ttk.Button(cadre_vitesse, text="Quitter", style="Quit.TButton", command=conversion.destroy)
+        def _quit_local():
+            if is_toplevel:
+                conversion.destroy()
+            else:
+                for w in list(conversion.winfo_children()):
+                    w.destroy()
+        bouton_quitter = ttk.Button(cadre_vitesse, text="Quitter", style="Quit.TButton", command=_quit_local)
         bouton_quitter.pack(pady=10)
 
     def lancer_systemes_numeriques():
@@ -441,7 +469,13 @@ def launch_conversion(parent=None):
         bouton_convertir.pack(pady=5)
 
         # Bouton Quitter
-        bouton_quitter = ttk.Button(cadre_systemes, text="Quitter", style="Quit.TButton", command=conversion.destroy)
+        def _quit_local():
+            if is_toplevel:
+                conversion.destroy()
+            else:
+                for w in list(conversion.winfo_children()):
+                    w.destroy()
+        bouton_quitter = ttk.Button(cadre_systemes, text="Quitter", style="Quit.TButton", command=_quit_local)
         bouton_quitter.pack(pady=10)
 
     def lancer_stockage_donnees():
@@ -489,7 +523,13 @@ def launch_conversion(parent=None):
         bouton_convertir.pack(pady=5)
 
         # Bouton Quitter
-        bouton_quitter = ttk.Button(cadre_stockage, text="Quitter", style="Quit.TButton", command=conversion.destroy)
+        def _quit_local():
+            if is_toplevel:
+                conversion.destroy()
+            else:
+                for w in list(conversion.winfo_children()):
+                    w.destroy()
+        bouton_quitter = ttk.Button(cadre_stockage, text="Quitter", style="Quit.TButton", command=_quit_local)
         bouton_quitter.pack(pady=10)
 
     def lancer_masse_poids():
@@ -537,7 +577,13 @@ def launch_conversion(parent=None):
         bouton_convertir.pack(pady=5)
 
         # Bouton Quitter
-        bouton_quitter = ttk.Button(cadre_masse, text="Quitter", style="Quit.TButton", command=conversion.destroy)
+        def _quit_local():
+            if is_toplevel:
+                conversion.destroy()
+            else:
+                for w in list(conversion.winfo_children()):
+                    w.destroy()
+        bouton_quitter = ttk.Button(cadre_masse, text="Quitter", style="Quit.TButton", command=_quit_local)
         bouton_quitter.pack(pady=10)
 
     def lancer_temperature():
@@ -585,7 +631,13 @@ def launch_conversion(parent=None):
         bouton_convertir.pack(pady=5)
 
         # Bouton Quitter
-        bouton_quitter = ttk.Button(cadre_temperature, text="Quitter", style="Quit.TButton", command=conversion.destroy)
+        def _quit_local():
+            if is_toplevel:
+                conversion.destroy()
+            else:
+                for w in list(conversion.winfo_children()):
+                    w.destroy()
+        bouton_quitter = ttk.Button(cadre_temperature, text="Quitter", style="Quit.TButton", command=_quit_local)
         bouton_quitter.pack(pady=10)
 
     def lancer_angles():
@@ -633,5 +685,11 @@ def launch_conversion(parent=None):
         bouton_convertir.pack(pady=5)
 
         # Bouton Quitter
-        bouton_quitter = ttk.Button(cadre_angles, text="Quitter", style="Quit.TButton", command=conversion.destroy)
+        def _quit_local():
+            if is_toplevel:
+                conversion.destroy()
+            else:
+                for w in list(conversion.winfo_children()):
+                    w.destroy()
+        bouton_quitter = ttk.Button(cadre_angles, text="Quitter", style="Quit.TButton", command=_quit_local)
         bouton_quitter.pack(pady=10)

@@ -21,8 +21,26 @@ class InterfaceHistorique:
         self.parent = parent
         self.fenetre = None
     
-    def afficher_historique(self):
-        """Affiche la fenêtre de gestion de l'historique"""
+    def afficher_historique(self, parent=None):
+        """Affiche la fenêtre de gestion de l'historique.
+        Si `parent` est un Frame, on intègre l'interface dans ce frame.
+        """
+        # Mode intégré si parent est fourni et n'est pas une fenêtre
+        if parent is not None and not isinstance(parent, (tk.Tk, tk.Toplevel)):
+            self.fenetre = parent
+            # nettoyer le parent
+            for child in list(self.fenetre.winfo_children()):
+                child.destroy()
+            # Style
+            style = ttk.Style()
+            style.configure("Historique.TButton", padding=10, font=("Century Gothic", 10))
+            style.configure("Historique.Treeview", font=("Century Gothic", 9))
+
+            self._creer_interface()
+            self._actualiser_affichage()
+            return
+
+        # Comportement d'origine (fenêtre séparée)
         if self.fenetre and self.fenetre.winfo_exists():
             self.fenetre.lift()
             return

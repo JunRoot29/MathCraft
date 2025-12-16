@@ -69,6 +69,11 @@ def configurer_style():
 
 style = configurer_style()
 
+# Helper pour savoir si on doit créer une Toplevel ou utiliser un Frame parent
+def _is_toplevel_parent(parent):
+    import tkinter as tk
+    return parent is None or isinstance(parent, (tk.Tk, tk.Toplevel))
+
 def ajouter_conseils(fenetre, conseils, titre="💡 Conseils :"):
     """Fonction pour ajouter des conseils avec style unifié"""
     frame_conseils = Frame(fenetre, bg=PALETTE["fond_principal"])
@@ -83,11 +88,21 @@ def ajouter_conseils(fenetre, conseils, titre="💡 Conseils :"):
 
 # ------------------ Polynôme de degré 1 ------------------
 def lancer_polynome1(parent=None):
-    fenetre_polynome1 = Toplevel(parent)
-    fenetre_polynome1.configure(bg=PALETTE["fond_principal"])
-    fenetre_polynome1.title("Polynôme degré 1")
-    fenetre_polynome1.geometry("500x650")
-    fenetre_polynome1.resizable(False, False)
+    is_toplevel = _is_toplevel_parent(parent)
+    if is_toplevel:
+        fenetre_polynome1 = Toplevel(parent)
+        fenetre_polynome1.configure(bg=PALETTE["fond_principal"])
+        fenetre_polynome1.title("Polynôme degré 1")
+        fenetre_polynome1.geometry("500x650")
+        fenetre_polynome1.resizable(False, False)
+    else:
+        fenetre_polynome1 = parent
+        for child in list(fenetre_polynome1.winfo_children()):
+            child.destroy()
+        try:
+            fenetre_polynome1.configure(bg=PALETTE["fond_principal"])
+        except Exception:
+            pass
 
     def lancer_graphe1():
         # Récupération et conversion des valeurs
@@ -183,8 +198,14 @@ def lancer_polynome1(parent=None):
     ajouter_conseils(fenetre_polynome1, conseils_degre1, "💡 Conseils pour les polynômes degré 1 :")
 
     # Bouton Quitter
+    def _quit_local_1():
+        if is_toplevel:
+            fenetre_polynome1.destroy()
+        else:
+            for w in list(fenetre_polynome1.winfo_children()):
+                w.destroy()
     button_quitter = ttk.Button(fenetre_polynome1, style="Quit.TButton", text="🚪 Quitter", 
-                               command=fenetre_polynome1.destroy)
+                               command=_quit_local_1)
     button_quitter.pack(pady=10)
 
 # ------------------ Polynôme de degré 2 ------------------
@@ -302,7 +323,13 @@ def lancer_polynome2(parent=None):
     ajouter_conseils(fenetre_polynome2, conseils_degre2, "💡 Conseils pour les polynômes degré 2 :")
 
     # Bouton Quitter
-    button_quitter = ttk.Button(fenetre_polynome2, style="Quit.TButton", text="🚪 Quitter", command=fenetre_polynome2.destroy)
+    def _quit_local_2():
+        if is_toplevel:
+            fenetre_polynome2.destroy()
+        else:
+            for w in list(fenetre_polynome2.winfo_children()):
+                w.destroy()
+    button_quitter = ttk.Button(fenetre_polynome2, style="Quit.TButton", text="🚪 Quitter", command=_quit_local_2)
     button_quitter.pack(pady=10)
 
 # ------------------ Polynôme de degré 3 ------------------
@@ -454,21 +481,37 @@ def lancer_polynome3(parent=None):
     ajouter_conseils(fenetre_polynome3, conseils_degre3, "💡 Conseils pour les polynômes degré 3 :")
 
     # Bouton Quitter
+    def _quit_local_3():
+        if is_toplevel:
+            fenetre_polynome3.destroy()
+        else:
+            for w in list(fenetre_polynome3.winfo_children()):
+                w.destroy()
     button_quitter = ttk.Button(fenetre_polynome3, style="Quit.TButton", text="🚪 Quitter", 
-                               command=fenetre_polynome3.destroy)
+                               command=_quit_local_3)
     button_quitter.pack(pady=10)
 
 # ------------------ Menu principal ------------------
 def lancer_polynome(parent=None):
-    fenetre_polynome = Toplevel(parent)
-    fenetre_polynome.configure(bg=PALETTE["fond_principal"])
-    fenetre_polynome.title("Polynômes")
-    fenetre_polynome.geometry("500x600")
-    fenetre_polynome.resizable(False, False)
+    is_toplevel = _is_toplevel_parent(parent)
+    if is_toplevel:
+        fenetre_polynome = Toplevel(parent)
+        fenetre_polynome.configure(bg=PALETTE["fond_principal"])
+        fenetre_polynome.title("Polynômes")
+        fenetre_polynome.geometry("500x600")
+        fenetre_polynome.resizable(False, False)
 
-    # Centrer la fenêtre
-    fenetre_polynome.transient(parent)
-    fenetre_polynome.grab_set()
+        # Centrer la fenêtre
+        fenetre_polynome.transient(parent)
+        fenetre_polynome.grab_set()
+    else:
+        fenetre_polynome = parent
+        for child in list(fenetre_polynome.winfo_children()):
+            child.destroy()
+        try:
+            fenetre_polynome.configure(bg=PALETTE["fond_principal"])
+        except Exception:
+            pass
 
     label1 = Label(fenetre_polynome, text="🧮 MODULE POLYNÔMES",
                    fg=PALETTE["primaire"], bg=PALETTE["fond_principal"], font=("Century Gothic", 18, "bold"), justify="center")
@@ -494,10 +537,16 @@ def lancer_polynome(parent=None):
                          style="Custom.TButton",
                          command=lambda: lancer_polynome3(fenetre_polynome))
 
+    def _quit_local_main():
+        if is_toplevel:
+            fenetre_polynome.destroy()
+        else:
+            for w in list(fenetre_polynome.winfo_children()):
+                w.destroy()
     button3 = ttk.Button(fenetre_polynome,
                          text="🚪 Retour au Menu Principal",
                          style="Quit.TButton",
-                         command=fenetre_polynome.destroy)
+                         command=_quit_local_main)
 
     button1.pack(pady=15, fill=X, padx=50)
     button2.pack(pady=15, fill=X, padx=50)

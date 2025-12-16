@@ -396,6 +396,11 @@ def afficher_iterations(iterations, methode, notebook, fenetre):
     return frame_iterations
 
 
+def _is_toplevel_parent(parent):
+    import tkinter as tk
+    return parent is None or isinstance(parent, (tk.Tk, tk.Toplevel))
+
+
 def lancer_equation_Numerique(parent=None):
     """
     Ouvre une nouvelle fenêtre pour la résolution d'équations numériques.
@@ -422,17 +427,26 @@ def lancer_equation_Numerique(parent=None):
     # Variable pour suivre l'onglet d'itérations
     current_iterations_tab = None
     
-    # Initialisation de la fenêtre
-    fenetre = Toplevel(parent) if parent else Tk()
-    fenetre.configure(bg=PALETTE["fond_principal"])
-    fenetre.geometry("1100x800")
-    fenetre.title("Résolution d'Équations Numériques")
-    fenetre.resizable(True, True)
-    
-    # Centrer la fenêtre
-    if parent:
-        fenetre.transient(parent)
-        fenetre.grab_set()
+    # Initialisation de la fenêtre / zone de contenu
+    is_toplevel = _is_toplevel_parent(parent)
+    if is_toplevel:
+        fenetre = Toplevel(parent) if parent else Tk()
+        fenetre.configure(bg=PALETTE["fond_principal"])
+        fenetre.geometry("1100x800")
+        fenetre.title("Résolution d'Équations Numériques")
+        fenetre.resizable(True, True)
+        # Centrer la fenêtre
+        if parent:
+            fenetre.transient(parent)
+            fenetre.grab_set()
+    else:
+        fenetre = parent
+        for w in list(fenetre.winfo_children()):
+            w.destroy()
+        try:
+            fenetre.configure(bg=PALETTE["fond_principal"])
+        except Exception:
+            pass
     
     # Configuration du style
     def configurer_style():
@@ -769,8 +783,14 @@ def lancer_equation_Numerique(parent=None):
                                                 var_x0, var_x1, var_x2]])
     bouton_effacer.pack(side="left", padx=10)
     
+    def _close_local():
+        if is_toplevel:
+            fenetre.destroy()
+        else:
+            for w in list(fenetre.winfo_children()):
+                w.destroy()
     bouton_quitter = ttk.Button(frame_boutons, text="🚪 Fermer",
-                               style="Quit.TButton", command=fenetre.destroy)
+                               style="Quit.TButton", command=_close_local)
     bouton_quitter.pack(side="left", padx=10)
     
     # Exemples
@@ -935,8 +955,14 @@ def lancer_equation_Numerique(parent=None):
           justify=LEFT).pack(pady=20, padx=50)
     
     # Bouton de fermeture
+    def _close_about():
+        if is_toplevel:
+            fenetre.destroy()
+        else:
+            for w in list(fenetre.winfo_children()):
+                w.destroy()
     ttk.Button(frame_apropos, text="Fermer l'application",
                style="Quit.TButton",
-               command=fenetre.destroy).pack(pady=20)
+               command=_close_about).pack(pady=20)
     
     return fenetre

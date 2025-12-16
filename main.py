@@ -144,172 +144,190 @@ style.map("Quit.TButton",
           background=[('active', '#B91C1C'), ('pressed', '#991B1B')],
           foreground=[('active', "#FF0202")])
 
-# Cadre pour contenir les boutons avec défilement si nécessaire
-frame = Frame(fenetre, bg="#F0F4F8")
-frame.pack(pady=10, padx=20, fill=BOTH, expand=True)
+# Layout principal : sidebar gauche + content à droite
+main_area = Frame(fenetre, bg="#F0F4F8")
+main_area.pack(pady=10, padx=20, fill=BOTH, expand=True)
 
-# Créer un Canvas avec une Scrollbar
-canvas = Canvas(frame, bg="#F0F4F8", highlightthickness=0)
-scrollbar = ttk.Scrollbar(frame, orient="vertical", command=canvas.yview)
-scrollable_frame = Frame(canvas, bg="#F0F4F8")
+# Sidebar (gauche) — avec scroll si nécessaire
+sidebar = Frame(main_area, bg="#F0F4F8", width=300)
+sidebar.pack(side=LEFT, fill=Y)
+sidebar.pack_propagate(False)
 
-scrollable_frame.bind(
-    "<Configure>",
-    lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
-)
+sidebar_canvas = Canvas(sidebar, bg="#F0F4F8", highlightthickness=0)
+sidebar_scrollbar = ttk.Scrollbar(sidebar, orient="vertical", command=sidebar_canvas.yview)
+sidebar_inner = Frame(sidebar_canvas, bg="#F0F4F8")
 
-canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
-canvas.configure(yscrollcommand=scrollbar.set)
+sidebar_inner.bind("<Configure>", lambda e: sidebar_canvas.configure(scrollregion=sidebar_canvas.bbox("all")))
+sidebar_canvas.create_window((0, 0), window=sidebar_inner, anchor="nw")
+sidebar_canvas.configure(yscrollcommand=sidebar_scrollbar.set)
+sidebar_canvas.pack(side=LEFT, fill=BOTH, expand=True)
+sidebar_scrollbar.pack(side=RIGHT, fill=Y)
 
-canvas.pack(side="left", fill="both", expand=True)
-scrollbar.pack(side="right", fill="y")
+def _on_sidebar_mouse_wheel(event):
+    sidebar_canvas.yview_scroll(int(-1*(event.delta/120)), "units")
 
-# Permettre le défilement avec la molette de la souris
-def _on_mouse_wheel(event):
-    canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+sidebar_canvas.bind_all("<MouseWheel>", _on_sidebar_mouse_wheel)
 
-canvas.bind_all("<MouseWheel>", _on_mouse_wheel)
+# Cadre de contenu (droite)
+content_frame = Frame(main_area, bg="#FFFFFF")
+content_frame.pack(side=LEFT, fill=BOTH, expand=True, padx=(20,0))
+
+def clear_content():
+    for w in content_frame.winfo_children():
+        w.destroy()
+
+def show_module(func):
+    """Efface le content_frame puis lance le module dans `content_frame`.
+    Si le module ne supporte pas `parent=` il ouvrira une fenêtre séparée."""
+    clear_content()
+    try:
+        func(parent=content_frame)
+    except TypeError:
+        func()
 
 # === CONTENU PRINCIPAL ===
+# Zone de présentation (à droite)
 labels = Label(
-    scrollable_frame,
+    content_frame,
     text="🧮 ✨ Un espace malin pour Calculer, Apprendre et s'amuser avec les maths.",
     font=("Century Gothic", 13),
     fg="#64748B",
-    bg="#F0F4F8"
+    bg="#FFFFFF",
+    wraplength=520,
+    justify="left"
 )
-labels.pack(pady=(0, 20))
+labels.pack(pady=(20, 10), padx=20, anchor="nw")
 
 # Séparateur
-separator1 = ttk.Separator(scrollable_frame, orient='horizontal')
-separator1.pack(fill='x', padx=50, pady=15)
+separator1 = ttk.Separator(content_frame, orient='horizontal')
+separator1.pack(fill='x', padx=20, pady=15)
 
-# === SECTION BOUTONS ===
+# === SECTION BOUTONS (sidebar) ===
 label2 = Label(
-    scrollable_frame,
+    sidebar_inner,
     text="Choisis ton opération !",
     fg="#1E293B",
     bg="#F0F4F8",
-    font=("Century Gothic", 16, "bold"),
-    justify="center"
+    font=("Century Gothic", 14, "bold"),
+    justify="left"
 )
-label2.pack(pady=(10, 20))
+label2.pack(pady=(10, 10), padx=10, anchor="w")
 
 # Boutons pour les Modules
 bouton1 = ttk.Button(
-    scrollable_frame,
+    sidebar_inner,
     text="Module 1 : Opération de Base 🧮",
     style="Custom.TButton",
     compound=LEFT,
-    command=op.launch_operation,
+    command=lambda: show_module(op.launch_operation),
 )
 
 bouton2 = ttk.Button(
-    scrollable_frame,
+    sidebar_inner,
     text="Module 2 : Théorie des nombres ➕",
     style="Custom.TButton",
     compound=LEFT,
-    command=theorie.lancer_theorie,
+    command=lambda: show_module(theorie.lancer_theorie),
 )
 
 bouton3 = ttk.Button(
-    scrollable_frame,
+    sidebar_inner,
     text="Module 3 : Conversion ⚖️",
     style="Custom.TButton",
     compound=LEFT,
-    command=conv.launch_conversion
+    command=lambda: show_module(conv.launch_conversion)
 )
 
 bouton4 = ttk.Button(
-    scrollable_frame,
+    sidebar_inner,
     text="Module 4 : Explorateur de Concepts (Jeu) 🎯",
     style="Custom.TButton", 
     compound=LEFT,
-    command=exp_concepts.lancer_explorateur_concepts
+    command=lambda: show_module(exp_concepts.lancer_explorateur_concepts)
 )
 
 bouton6 = ttk.Button(
-    scrollable_frame,
+    sidebar_inner,
     text="Module 5 : Polynomes & Equations 📈",
     style="Custom.TButton",
     compound=LEFT,
-    command=poly.lancer_polynome)
+    command=lambda: show_module(poly.lancer_polynome))
 
 bouton8 = ttk.Button(
-    scrollable_frame,
+    sidebar_inner,
     text="Module 6 : Opération sur les chaines de caractère 🔠",
     style="Custom.TButton",
     compound=LEFT,
-    command=ch.lancer_chaine
+    command=lambda: show_module(ch.lancer_chaine)
 )
 
 bouton9 = ttk.Button(
-    scrollable_frame,
+    sidebar_inner,
     text="Module 7 : Intégration Numérique 📊",
     style="Custom.TButton",
     compound=LEFT,
-    command=int_num.lancer_integration_numerique
+    command=lambda: show_module(int_num.lancer_integration_numerique)
 )
 
 bouton_equation_num = ttk.Button(
-    scrollable_frame,
+    sidebar_inner,
     text="Module 8 : Resolution (Numérique) d'équation 🟰",
     style="Custom.TButton",
     compound=LEFT,
-    command=eq_num.lancer_equation_Numerique
+    command=lambda: show_module(eq_num.lancer_equation_Numerique)
 )
 
 bouton_interpolation_lineaire = ttk.Button(
-    scrollable_frame,
+    sidebar_inner,
     text="Module 9 : interpolation_linéaire 📈",
     style="Custom.TButton",
     compound=LEFT,
-    command=int_lin.lancer_interpolation_numerique
+    command=lambda: show_module(int_lin.lancer_interpolation_numerique)
 )
 
 bouton_historique = ttk.Button(
-    scrollable_frame,
+    sidebar_inner,
     text="📊 Historique des Calculs", 
     style="Custom.TButton",
     compound=LEFT,
-    command=lambda: historique_interface.afficher_historique()
+    command=lambda: historique_interface.afficher_historique(parent=content_frame)
 )
 
 # Placement des boutons
-bouton1.pack(pady=8, fill=X, padx=60)
-bouton2.pack(pady=8, fill=X, padx=60)
-bouton3.pack(pady=8, fill=X, padx=60)
-bouton4.pack(pady=8, fill=X, padx=60)
-bouton6.pack(pady=8, fill=X, padx=60)
-bouton8.pack(pady=8, fill=X, padx=60)
-bouton9.pack(pady=8, fill=X, padx=60)
-bouton_equation_num.pack(pady=8, fill=X, padx=60)
-bouton_interpolation_lineaire.pack(pady=8, fill=X, padx=60)
-bouton_historique.pack(pady=8, fill=X, padx=60)
+bouton1.pack(pady=8, fill=X, padx=20)
+bouton2.pack(pady=8, fill=X, padx=20)
+bouton3.pack(pady=8, fill=X, padx=20)
+bouton4.pack(pady=8, fill=X, padx=20)
+bouton6.pack(pady=8, fill=X, padx=20)
+bouton8.pack(pady=8, fill=X, padx=20)
+bouton9.pack(pady=8, fill=X, padx=20)
+bouton_equation_num.pack(pady=8, fill=X, padx=20)
+bouton_interpolation_lineaire.pack(pady=8, fill=X, padx=20)
+bouton_historique.pack(pady=8, fill=X, padx=20)
 
 # Séparateur avant le bouton Quitter
-separator2 = ttk.Separator(scrollable_frame, orient='horizontal')
-separator2.pack(fill='x', padx=50, pady=20)
+separator2 = ttk.Separator(sidebar_inner, orient='horizontal')
+separator2.pack(fill='x', padx=10, pady=20)
 
 # Bouton Quitter avec style distinct
 bouton10 = ttk.Button(
-    scrollable_frame,
+    sidebar_inner,
     text="Quitter",
     style="Quit.TButton",
     compound=LEFT,
     command=fenetre.destroy
 )
-bouton10.pack(pady=10, fill=X, padx=60)
+bouton10.pack(pady=10, fill=X, padx=20)
 
-# === PIED DE PAGE ===
+# === PIED DE PAGE (zone de contenu) ===
 footer = Label(
-    scrollable_frame,
+    content_frame,
     text="© 2026 MathsCraft - Développé Par Junior Kossivi",
     font=("Century Gothic", 9),
     fg="#94A3B8",
-    bg="#F0F4F8"
+    bg="#FFFFFF"
 )
-footer.pack(pady=(30, 20))
+footer.pack(pady=(30, 20), padx=20, anchor="se")
 
 # Mettre à jour la référence parent de l'historique
 historique_interface.parent = fenetre

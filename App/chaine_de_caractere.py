@@ -724,12 +724,27 @@ def lancer_operation(operation_type):
     titre_text, description = descriptions.get(operation_type, (f"Opération {operation_type}", ""))
     lancer_operation_texte(operation_type, titre_text, description)
 
-def lancer_chaine():
-    chaine = Toplevel()
-    chaine.configure(bg=PALETTE["fond_principal"])
-    chaine.geometry("600x750")
-    chaine.title("Opérations sur les chaînes de caractères")
-    centrer_fenetre(chaine)
+def lancer_chaine(parent=None):
+    is_toplevel = False
+    try:
+        is_toplevel = (parent is None) or isinstance(parent, (Tk, Toplevel))
+    except Exception:
+        is_toplevel = True
+
+    if is_toplevel:
+        chaine = Toplevel(parent)
+        chaine.configure(bg=PALETTE["fond_principal"])
+        chaine.geometry("600x750")
+        chaine.title("Opérations sur les chaînes de caractères")
+        centrer_fenetre(chaine)
+    else:
+        chaine = parent
+        for w in list(chaine.winfo_children()):
+            w.destroy()
+        try:
+            chaine.configure(bg=PALETTE["fond_principal"])
+        except Exception:
+            pass
 
     # Frame principal avec padding
     main_frame = Frame(chaine, bg=PALETTE["fond_principal"], padx=20, pady=20)
@@ -807,8 +822,14 @@ def lancer_chaine():
     quit_frame = Frame(main_frame, bg=PALETTE["fond_principal"])
     quit_frame.pack(pady=(15, 0), fill=X)
     
+    def _quit_local():
+        if is_toplevel:
+            chaine.destroy()
+        else:
+            for w in list(chaine.winfo_children()):
+                w.destroy()
     quit_button = ttk.Button(quit_frame, text="🚪 Quitter", style="Quit.TButton", 
-                           command=chaine.destroy)
+                           command=_quit_local)
     quit_button.pack(pady=10, fill=X, padx=10)
 
     # Activer le défilement avec la molette de la souris

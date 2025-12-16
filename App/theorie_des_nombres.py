@@ -54,6 +54,12 @@ def configurer_style():
     
     return style
 
+
+# Helper pour savoir si on doit créer une Toplevel ou utiliser un Frame parent
+def _is_toplevel_parent(parent):
+    import tkinter as tk
+    return parent is None or isinstance(parent, (tk.Tk, tk.Toplevel))
+
 # Fonction pour ajouter les conseils dans chaque fenêtre
 def ajouter_conseils(fenetre, conseils):
     frame_conseils = Frame(fenetre, bg=PALETTE["fond_principal"])
@@ -68,11 +74,21 @@ def ajouter_conseils(fenetre, conseils):
 
 # Fonction pour lancer la fenêtre "Nombre parfait"
 def lancer_nombre_parfait(parent=None):
-    nbr = Toplevel(parent) 
-    nbr.title("Nombre Parfait") 
-    nbr.configure(bg=PALETTE["fond_principal"])
-    nbr.geometry("600x550")
-    nbr.resizable(False, False)
+    is_toplevel = _is_toplevel_parent(parent)
+    if is_toplevel:
+        nbr = Toplevel(parent)
+        nbr.title("Nombre Parfait")
+        nbr.configure(bg=PALETTE["fond_principal"])
+        nbr.geometry("600x550")
+        nbr.resizable(False, False)
+    else:
+        nbr = parent
+        for child in list(nbr.winfo_children()):
+            child.destroy()
+        try:
+            nbr.configure(bg=PALETTE["fond_principal"])
+        except Exception:
+            pass
 
     label = Label(nbr, text="VERIFICATION NOMBRE PARFAIT", font=("Century Gothic", 16, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
     label.pack(pady=20)
@@ -128,11 +144,21 @@ def lancer_nombre_parfait(parent=None):
 
 # Fonction pour lancer la fenêtre "Nombre distinct"
 def lancer_nombre_distinct(parent=None):
-    nbr = Toplevel(parent) 
-    nbr.title("Nombre distinct") 
-    nbr.configure(bg=PALETTE["fond_principal"])
-    nbr.geometry("600x550")
-    nbr.resizable(False, False)
+    is_toplevel = _is_toplevel_parent(parent)
+    if is_toplevel:
+        nbr = Toplevel(parent)
+        nbr.title("Nombre distinct")
+        nbr.configure(bg=PALETTE["fond_principal"])
+        nbr.geometry("600x550")
+        nbr.resizable(False, False)
+    else:
+        nbr = parent
+        for child in list(nbr.winfo_children()):
+            child.destroy()
+        try:
+            nbr.configure(bg=PALETTE["fond_principal"])
+        except Exception:
+            pass
     
     label = Label(nbr, text="VERIFICATION NOMBRE DISTINCT", font=("Century Gothic", 16, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
     label.pack(pady=20)
@@ -188,11 +214,21 @@ def lancer_nombre_distinct(parent=None):
 
 # Fonction pour lancer la fenêtre "Nombre premier"
 def lancer_nombre_premier(parent=None):
-    nbr = Toplevel(parent) 
-    nbr.title("Nombre Premier") 
-    nbr.configure(bg=PALETTE["fond_principal"])
-    nbr.geometry("600x650")
-    nbr.resizable(False, False)
+    is_toplevel = _is_toplevel_parent(parent)
+    if is_toplevel:
+        nbr = Toplevel(parent)
+        nbr.title("Nombre Premier")
+        nbr.configure(bg=PALETTE["fond_principal"])
+        nbr.geometry("600x650")
+        nbr.resizable(False, False)
+    else:
+        nbr = parent
+        for child in list(nbr.winfo_children()):
+            child.destroy()
+        try:
+            nbr.configure(bg=PALETTE["fond_principal"])
+        except Exception:
+            pass
     
     label = Label(nbr, text="TEST DE PRIMALITÉ", font=("Century Gothic", 16, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
     label.pack(pady=20)
@@ -248,11 +284,21 @@ def lancer_nombre_premier(parent=None):
 
 # Fonction pour lancer le PGCD
 def lancer_pgcd(parent=None):
-    nbr = Toplevel(parent) 
-    nbr.title("PGCD") 
-    nbr.configure(bg=PALETTE["fond_principal"])
-    nbr.geometry("600x600")
-    nbr.resizable(False, False)
+    is_toplevel = _is_toplevel_parent(parent)
+    if is_toplevel:
+        nbr = Toplevel(parent)
+        nbr.title("PGCD")
+        nbr.configure(bg=PALETTE["fond_principal"])
+        nbr.geometry("600x600")
+        nbr.resizable(False, False)
+    else:
+        nbr = parent
+        for child in list(nbr.winfo_children()):
+            child.destroy()
+        try:
+            nbr.configure(bg=PALETTE["fond_principal"])
+        except Exception:
+            pass
 
     label = Label(nbr, text="CALCUL PGCD", font=("Century Gothic", 16, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
     label.pack(pady=20)
@@ -316,11 +362,21 @@ def lancer_pgcd(parent=None):
 
 # Fonction pour lancer le PPCM
 def lancer_ppcm(parent=None):
-    nbr = Toplevel(parent) 
-    nbr.title("PPCM") 
-    nbr.configure(bg=PALETTE["fond_principal"])
-    nbr.geometry("600x650")
-    nbr.resizable(False, False)
+    is_toplevel = _is_toplevel_parent(parent)
+    if is_toplevel:
+        nbr = Toplevel(parent)
+        nbr.title("PPCM")
+        nbr.configure(bg=PALETTE["fond_principal"])
+        nbr.geometry("600x650")
+        nbr.resizable(False, False)
+    else:
+        nbr = parent
+        for child in list(nbr.winfo_children()):
+            child.destroy()
+        try:
+            nbr.configure(bg=PALETTE["fond_principal"])
+        except Exception:
+            pass
 
     label = Label(nbr, text="CALCUL PPCM", font=("Century Gothic", 16, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
     label.pack(pady=20)
@@ -384,11 +440,21 @@ def lancer_ppcm(parent=None):
 
 # Fonction pour lancer la fenêtre "Nombre Catalan"
 def lancer_nombre_catalan(parent=None):
-    nbr = Toplevel(parent) 
-    nbr.title("Nombres Catalans") 
-    nbr.configure(bg=PALETTE["fond_principal"])
-    nbr.geometry("600x550")
-    nbr.resizable(False, False)
+    is_toplevel = _is_toplevel_parent(parent)
+    if is_toplevel:
+        nbr = Toplevel(parent)
+        nbr.title("Nombres Catalans")
+        nbr.configure(bg=PALETTE["fond_principal"])
+        nbr.geometry("600x550")
+        nbr.resizable(False, False)
+    else:
+        nbr = parent
+        for child in list(nbr.winfo_children()):
+            child.destroy()
+        try:
+            nbr.configure(bg=PALETTE["fond_principal"])
+        except Exception:
+            pass
 
     label = Label(nbr, text="CALCUL DU NOMBRE CATALAN", font=("Century Gothic", 16, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
     label.pack(pady=20)
@@ -444,15 +510,25 @@ def lancer_nombre_catalan(parent=None):
 
 # Fonction principale pour lancer le module "Théorie des nombres"
 def lancer_theorie(parent=None):
-    th = Toplevel(parent)
-    th.title("Théorie des nombres")
-    th.configure(bg=PALETTE["fond_principal"])
-    th.geometry("500x800")
-    th.resizable(False, False)
+    is_toplevel = _is_toplevel_parent(parent)
+    if is_toplevel:
+        th = Toplevel(parent)
+        th.title("Théorie des nombres")
+        th.configure(bg=PALETTE["fond_principal"])
+        th.geometry("500x800")
+        th.resizable(False, False)
 
-    # Centrer la fenêtre
-    th.transient(parent)
-    th.grab_set()
+        # Centrer la fenêtre
+        th.transient(parent)
+        th.grab_set()
+    else:
+        th = parent
+        for child in list(th.winfo_children()):
+            child.destroy()
+        try:
+            th.configure(bg=PALETTE["fond_principal"])
+        except Exception:
+            pass
 
     # Présentation du module
     frame_presentation = Frame(th, bg=PALETTE["fond_principal"])
