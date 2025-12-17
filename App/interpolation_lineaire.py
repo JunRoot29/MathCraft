@@ -1,6 +1,6 @@
 """
 interpolation_numerique.py - Interface graphique pour l'interpolation numérique avec affichage des calculs et graphiques
-Auteur: MathCraft
+Auteur: Junior Kossivi
 Description: Interface Tkinter pour les méthodes d'interpolation numérique avec affichage direct des calculs et graphiques
 """
 

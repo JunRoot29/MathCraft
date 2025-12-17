@@ -1,4 +1,9 @@
 """Interface pour Théorie des nombres - Module 2"""
+"""
+theorie_des_nombres.py - Interface graphique pour l'exploration de concepts Math accéssibles
+Auteur: Junior Kossivi
+Description: Interface Tkinter pour les méthodes de théories des nombres (Nombres Parfait, nombres premier, pgcd, ppcmn...)
+"""
 
 from tkinter import *
 from tkinter import ttk

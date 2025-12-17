@@ -197,9 +197,10 @@ class TestChainesCaracteres(unittest.TestCase):
     
     def test_compterVoyelles(self):
         self.assertEqual(compterVoyelles("Bonjour"), 3)
-        self.assertEqual(compterVoyelles("Python"), 1)
+        self.assertEqual(compterVoyelles("Python"), 2)
         self.assertEqual(compterVoyelles("AEIOUY"), 6)
-        self.assertEqual(compterVoyelles(""), 0)
+        self.assertEqual(compterVoyelles(""), 0
+        )
     
     def test_compterlettre(self):
         self.assertEqual(compterlettre("bonjour", "o"), "Il y'a 2 fois o")
@@ -223,27 +224,27 @@ class TestIntegrationNumerique(unittest.TestCase):
     
     def test_intRectangleRetro(self):
         def f(x): return x  # ∫x dx = x²/2
-        result = intRectangleRetro(f, 0, 2, 1000)
+        result, iterations = intRectangleRetro(f, 0, 2, 1000)
         self.assertAlmostEqual(result, 2.0, places=1)
     
     def test_intRectanglePro(self):
         def f(x): return 1  # ∫1 dx = x
-        result = intRectanglePro(f, 0, 5, 1000)
+        result, iterations = intRectanglePro(f, 0, 5, 1000)
         self.assertAlmostEqual(result, 5.0, places=1)
     
     def test_intRectangleCentre(self):
         def f(x): return x  # ∫x dx = x²/2
-        result = intRectangleCentre(f, 0, 2, 1000)
+        result, iterations = intRectangleCentre(f, 0, 2, 1000)
         self.assertAlmostEqual(result, 2.0, places=1)
     
     def test_intTrapezeSimple(self):
         def f(x): return 2*x  # ∫2x dx = x²
-        result = intTrapezeS(f, 0, 3, 1000)
+        result, iterations = intTrapezeS(f, 0, 3, 1000)
         self.assertAlmostEqual(result, 9.0, places=1)
     
     def test_intSimpsonSimple(self):
         def f(x): return x**2  # ∫x² dx = x³/3
-        result = intSimpsonS(f, 0, 3, 1000)
+        result, iterations = intSimpsonS(f, 0, 3, 1000)
         self.assertAlmostEqual(result, 9.0, places=1)
 
 class TestEquationsNonLineaires(unittest.TestCase):
@@ -251,16 +252,16 @@ class TestEquationsNonLineaires(unittest.TestCase):
     
     def test_racineDichotomie(self):
         def f(x): return x**2 - 4  # racine à x=2
-        racine, iterations = racineDichotomie(0, 3, 0.0001, f)
+        racine, nb_iter, details = racineDichotomie(0, 3, 0.0001, f)
         self.assertAlmostEqual(racine, 2.0, places=3)
-        self.assertGreater(iterations, 0)
+        self.assertGreater(nb_iter, 0)
     
     def test_racineNewton(self):
         def f(x): return x**2 - 4
         def df(x): return 2*x
-        racine, iterations = racineNewton(f, df, 3, 0.0001)
+        racine, nb_iter, details = racineNewton(f, df, 3, 0.0001)
         self.assertAlmostEqual(racine, 2.0, places=3)
-        self.assertGreater(iterations, 0)
+        self.assertGreater(nb_iter, 0)
 
 class TestConversions(unittest.TestCase):
     """Tests pour les conversions d'unités"""
@@ -303,16 +304,19 @@ class TestConversions(unittest.TestCase):
     def test_convertir_vitesse(self):
         # 1 m/s = 3.6 km/h
         result = convertir_vitesse(1, "Mètre par seconde", "Kilomètre par heure")
-        self.assertIn("✅3.6", result)
+        self.assertTrue(result.startswith("✅"))
+        self.assertAlmostEqual(float(result[1:]), 3.6, places=3)
     
     def test_convertir_angles(self):
         # 180° = π radians
         result = convertir_angles(180, "Degré", "Radian")
-        self.assertIn("✅3.1416", result)
+        self.assertTrue(result.startswith("✅"))
+        self.assertAlmostEqual(float(result[1:]), math.pi, places=3)
         
         # π radians = 180°
         result = convertir_angles(math.pi, "Radian", "Degré")
-        self.assertIn("✅180.0", result)
+        self.assertTrue(result.startswith("✅"))
+        self.assertAlmostEqual(float(result[1:]), 180.0, places=3)
 
 class TestFonctionsComplexes(unittest.TestCase):
     """Tests pour des cas complexes et limites"""
@@ -330,7 +334,7 @@ class TestFonctionsComplexes(unittest.TestCase):
     def test_chaines_complexes(self):
         # Test avec chaînes complexes
         texte_complexe = "Le cheval de mon cousin est malade"
-        self.assertEqual(compterVoyelles(texte_complexe), 11)
+        self.assertEqual(compterVoyelles(texte_complexe), 12)
         self.assertEqual(compterlettre(texte_complexe, "e"), "Il y'a 5 fois e")
 
 def run_all_tests():

@@ -1,7 +1,7 @@
 """
 equation_numerique.py - Interface pour la résolution d'équations numériques
-Auteur: MathCraft
-Description: Interface Tkinter pour les méthodes de résolution d'équations
+Auteur: Junior Kossivi
+Description: Interface Tkinter pour les méthodes de résolution d'équations  de façon numérique
 """
 
 from tkinter import *

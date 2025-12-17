@@ -1,3 +1,8 @@
+"""
+chaine_de_caractere.py - Interface pour le Traitement des chaine de caratère
+Auteur: Junior Kossivi
+Description: Interface Tkinter pour les méthodes de résolution d'opération sur les chaine de caractère
+"""
 from tkinter import *
 from tkinter import ttk
 import pyperclip  # Pour copier dans le presse-papier

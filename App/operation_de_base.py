@@ -1,3 +1,9 @@
+"""
+operation_de_base.py - Interface de calcul simple
+Auteur: Junior Kossivi
+Description: Interface Tkinter pour les calcul simples (Une Calculatrice)
+"""
+
 import math
 from tkinter import *
 from tkinter import ttk

@@ -57,7 +57,7 @@ fenetre.title("🧠MathsCraft")
 fenetre.geometry("900x700")
 fenetre.configure(bg="#F0F4F8")
 
-# === MENU BURGER SIMPLIFIÉ ET FONCTIONNEL ===
+# === MENU BURGER ===
 def creer_menu_burger():
     """Crée un menu burger simple et fonctionnel"""
     # Cadre pour le header

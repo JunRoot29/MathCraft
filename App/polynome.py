@@ -1,5 +1,10 @@
 
 """Interface pour Polynome - Module 5"""
+"""
+polynome.py - Interface graphique pour la résolution d'équation du 1er, 2nd et 3ème dégrés avec affichage des calculs et graphiques
+Auteur: Junior Kossivi
+Description: Interface Tkinter pour les méthodes d'équation avec affichage direct des calculs et graphiques
+"""
 import math
 from tkinter import *
 from tkinter import ttk
@@ -210,11 +215,21 @@ def lancer_polynome1(parent=None):
 
 # ------------------ Polynôme de degré 2 ------------------
 def lancer_polynome2(parent=None):
-    fenetre_polynome2 = Toplevel(parent)
-    fenetre_polynome2.configure(bg=PALETTE["fond_principal"])
-    fenetre_polynome2.title("Polynôme degré 2")
-    fenetre_polynome2.geometry("500x900")
-    fenetre_polynome2.resizable(False, False)
+    is_toplevel = _is_toplevel_parent(parent)
+    if is_toplevel:
+        fenetre_polynome2 = Toplevel(parent)
+        fenetre_polynome2.configure(bg=PALETTE["fond_principal"])
+        fenetre_polynome2.title("Polynôme degré 2")
+        fenetre_polynome2.geometry("500x900")
+        fenetre_polynome2.resizable(False, False)
+    else:
+        fenetre_polynome2 = parent
+        for child in list(fenetre_polynome2.winfo_children()):
+            child.destroy()
+        try:
+            fenetre_polynome2.configure(bg=PALETTE["fond_principal"])
+        except Exception:
+            pass
 
     # === Fonction pour afficher le graphe ===
     def lancer_graphe2():
@@ -334,11 +349,21 @@ def lancer_polynome2(parent=None):
 
 # ------------------ Polynôme de degré 3 ------------------
 def lancer_polynome3(parent=None):
-    fenetre_polynome3 = Toplevel(parent)
-    fenetre_polynome3.configure(bg=PALETTE["fond_principal"])
-    fenetre_polynome3.title("Polynôme degré 3")
-    fenetre_polynome3.geometry("500x950")
-    fenetre_polynome3.resizable(False, False)
+    is_toplevel = _is_toplevel_parent(parent)
+    if is_toplevel:
+        fenetre_polynome3 = Toplevel(parent)
+        fenetre_polynome3.configure(bg=PALETTE["fond_principal"])
+        fenetre_polynome3.title("Polynôme degré 3")
+        fenetre_polynome3.geometry("500x950")
+        fenetre_polynome3.resizable(False, False)
+    else:
+        fenetre_polynome3 = parent
+        for child in list(fenetre_polynome3.winfo_children()):
+            child.destroy()
+        try:
+            fenetre_polynome3.configure(bg=PALETTE["fond_principal"])
+        except Exception:
+            pass
 
     def lancer_graphe3():
         # Récupération et conversion des valeurs

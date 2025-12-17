@@ -1,4 +1,9 @@
 """Interface pour l'Explorateur de Concepts - Module 4"""
+"""
+explorateur_concepts.py - Interface pour la découverte
+Auteur: Junior Kossivi
+Description: Interface Tkinter pour la présentations de jeu mathématiques
+"""
 from tkinter import *
 from tkinter import ttk
 from .jeux_math import JEUX_DISPONIBLES

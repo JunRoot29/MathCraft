@@ -1,5 +1,6 @@
 """
 Module central pour tous les jeux mathématiques de MathCraft
+Auteur: Junior Kossivi
 """
 import random
 import time

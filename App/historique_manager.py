@@ -39,8 +39,29 @@ class HistoriqueManager:
         except Exception as e:
             print(f"Erreur sauvegarde historique: {e}")
     
-    def ajouter_calcul(self, module: str, operation: str, entree: Dict, resultat: str):
-        """Ajoute un calcul à l'historique"""
+    def ajouter_calcul(self, module: str, operation: str, entree: Dict, resultat):
+        """Ajoute un calcul à l'historique.
+
+        Le champ `resultat` peut être :
+        - une valeur simple (float, str...)
+        - un tuple (valeur, details) pour les méthodes d'intégration et d'itérations
+        - une structure (dict/list)
+
+        Cette méthode normalise le résultat pour garantir une représentation JSON-friendly.
+        """
+        # Normaliser le résultat pour supporter (valeur, details) et autres types
+        try:
+            if isinstance(resultat, tuple) and len(resultat) == 2 and isinstance(resultat[1], (list, dict)):
+                normalized = {"valeur": resultat[0], "details": resultat[1]}
+            elif isinstance(resultat, dict):
+                normalized = resultat
+            elif isinstance(resultat, list):
+                normalized = {"valeur": None, "details": resultat}
+            else:
+                normalized = resultat
+        except Exception:
+            normalized = str(resultat)
+
         calcul = {
             "id": len(self.historique) + 1,
             "timestamp": datetime.datetime.now().isoformat(),
@@ -48,7 +69,7 @@ class HistoriqueManager:
             "module": module,
             "operation": operation,
             "entree": entree,
-            "resultat": resultat
+            "resultat": normalized
         }
         
         # Ajouter à l'historique global
@@ -82,9 +103,10 @@ class HistoriqueManager:
         resultats = []
         
         for calcul in self.historique:
+            resultat_str = json.dumps(calcul.get("resultat", ""), ensure_ascii=False).lower()
             if (terme in calcul["module"].lower() or 
                 terme in calcul["operation"].lower() or 
-                terme in str(calcul["resultat"]).lower() or
+                terme in resultat_str or
                 any(terme in str(v).lower() for v in calcul["entree"].values())):
                 resultats.append(calcul)
         
@@ -123,9 +145,9 @@ class HistoriqueManager:
                             'module': calcul['module'],
                             'operation': calcul['operation'],
                             'entree': str(calcul['entree']),
-                            'resultat': calcul['resultat']
+                            'resultat': json.dumps(calcul['resultat'], ensure_ascii=False)
                         }
-                        writer.writerow(row)
+                        writer.writerow(row) 
             
             return f"✅ Historique exporté CSV: {fichier}"
         except Exception as e:

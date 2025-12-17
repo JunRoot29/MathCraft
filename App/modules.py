@@ -35,14 +35,20 @@ def factoiter(n):
 
 #Nombre premier
 def nb_premier(n):
-    tab=[]
-    for i in range(1,n+1):
-        if n%i == 0:
-            tab.append(i)
-    if tab[0] == 1 and tab[1]==n and len(tab)==2:
-        return "✅ Ce nombre est Premier"
-    else:
+    """Teste si n est premier (retourne une chaîne descriptive)."""
+    if n <= 1:
         return "❌ Ce nombre est Non premier"
+    # Vérification simple jusqu'à sqrt(n)
+    if n <= 3:
+        return "✅ Ce nombre est Premier"
+    if n % 2 == 0:
+        return "❌ Ce nombre est Non premier"
+    i = 3
+    while i * i <= n:
+        if n % i == 0:
+            return "❌ Ce nombre est Non premier"
+        i += 2
+    return "✅ Ce nombre est Premier"
 
 #Calcul du PGCD itératif
 def pgcditer(a,b):
@@ -57,10 +63,10 @@ def pgcdrec(a,b):
 
 #Calcul du PPCM
 def ppcm(a,b):
+    # Retourne la valeur absolue du PPCM même si a ou b sont négatifs
     if a == 0 or b == 0:
         return 0
-    else:
-        return (a*b)/pgcdrec(a,b)
+    return abs((a*b)//pgcdrec(a,b)) if isinstance(a, int) and isinstance(b, int) else abs((a*b)/pgcdrec(a,b))
 
 #Convertir un nombre décimal en binaire
 def decimale_binaire(n):
@@ -125,12 +131,21 @@ def racine(a):
     
 #Calcul de la puissance d'un nombre
 def puissance(a,n):
+    """Calcul de la puissance (supporte n négatif)."""
     if n == 0:
         return 1
-    elif n>0:
-        return a*puissance(a,n-1)
-    elif n<0:
-        return 1/puissance(a, n)
+    if n < 0:
+        return 1 / puissance(a, -n)
+    # Utiliser exponentiation rapide pour éviter récursion profonde
+    result = 1
+    base = a
+    exp = n
+    while exp > 0:
+        if exp % 2 == 1:
+            result *= base
+        base *= base
+        exp //= 2
+    return result
     
 
 #Calcul de la puissance (puissance rapide)
@@ -540,10 +555,11 @@ def save_Contact(n) :
 
 #Compter le nombre de voyelles dans une chaine
 def compterVoyelles(chaine):
-    voyelles = "aeiouyAEIOUY"
+    """Compte les voyelles en ne considérant que les lettres (ignore signes de ponctuation et chiffres)."""
+    voyelles = "aeiouy"
     compteur = 0
-    for i in chaine:
-        if i in voyelles:
+    for i in chaine.lower():
+        if i.isalpha() and i in voyelles:
            compteur += 1
     return compteur
 
@@ -750,20 +766,7 @@ def concachaine(chaine1,chaine2):
 # ======================================================================================
 
 def racineDichotomie(a, b, epsilon, f, max_iter=1000):
-    """
-    Méthode de dichotomie pour trouver une racine de f(x)=0
-    Convergence linéaire (1/2^n)
-    
-    Args:
-        a: Borne inférieure
-        b: Borne supérieure
-        epsilon: Précision souhaitée
-        f: Fonction à étudier
-        max_iter: Nombre maximum d'itérations
-    
-    Returns:
-        tuple: (racine, nombre_d_iterations, liste_des_itérations)
-    """
+    """Méthode de dichotomie. Retourne (racine, iterations, details) pour compatibilité avec l'interface."""
     i = 0
     iterations = []
     
@@ -776,7 +779,6 @@ def racineDichotomie(a, b, epsilon, f, max_iter=1000):
         fb = f(b)
         fc = f(c)
         
-        # Stocker les informations de l'itération
         iterations.append({
             'iteration': i + 1,
             'a': a,
@@ -800,24 +802,12 @@ def racineDichotomie(a, b, epsilon, f, max_iter=1000):
     if i >= max_iter:
         raise ValueError(f"❌ Convergence non atteinte après {max_iter} itérations")
     
+    # Retourner racine, nombre d'itérations, et les détails (ordre: racine, nombre, itérations)
     return ((a + b) / 2, i, iterations)
 
 
 def racineNewton(f, df, x0, epsilon, max_iter=1000):
-    """
-    Méthode de Newton-Raphson pour trouver une racine de f(x)=0
-    Convergence quadratique (très rapide quand ça marche)
-    
-    Args:
-        f: Fonction à étudier
-        df: Dérivée de f
-        x0: Point de départ
-        epsilon: Précision souhaitée
-        max_iter: Nombre maximum d'itérations
-    
-    Returns:
-        tuple: (racine, nombre_d_iterations, liste_des_itérations)
-    """
+    """Newton-Raphson ; retourne (racine, nombre, details) pour compatibilité avec l'interface."""
     i = 0
     iterations = []
     x = x0
@@ -826,7 +816,6 @@ def racineNewton(f, df, x0, epsilon, max_iter=1000):
         fx = f(x)
         dfx = df(x)
         
-        # Stocker les informations de l'itération
         iterations.append({
             'iteration': i + 1,
             'x_n': x,
@@ -844,7 +833,6 @@ def racineNewton(f, df, x0, epsilon, max_iter=1000):
         
         x_new = x - fx / dfx
         
-        # Vérifier la divergence
         if abs(x_new) > 1e10:
             raise ValueError("❌ Divergence détectée")
         
@@ -1309,18 +1297,22 @@ def racineRidders(f, a, b, epsilon, max_iter=1000):
 # ======================================================================================
 
 def intRectangleRetro(f, a, b, n):
-    """Méthode des rectangles rétrograde (gauche) avec suivi des itérations"""
+    """Méthode des rectangles rétrograde (gauche) avec suivi des itérations
+
+    Retourne un tuple (resultat, iterations) où `resultat` est un float et
+    `iterations` est une liste de dicts détaillant chaque étape.
+    """
     if n <= 0:
         raise ValueError("Le nombre de subdivisions n doit être positif")
     h = (b - a) / n
-    somme = 0
+    somme = 0.0
     iterations = []  # Liste pour stocker les données de chaque itération
     
     for i in range(n):
         xi = a + i * h
-        fxi = f(xi)
-        somme += fxi
+        fxi = float(f(xi))
         aire_partielle = fxi * h
+        somme += fxi
         
         # Stocker les informations de l'itération
         iterations.append({

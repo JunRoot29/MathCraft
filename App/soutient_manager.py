@@ -17,7 +17,7 @@ PALETTE = {
 
 class SoutienManager:
     def __init__(self):
-        self.lien_kofi = "https://ko-fi.com/juniorkossivi"  # Votre lien Ko-fi
+        self.lien_kofi = "https://ko-fi.com/juniorkossivi"  # Mon lien Ko-fi
         
     def afficher_fenetre_soutien(self, parent=None):
         """Affiche la fenêtre de soutien"""

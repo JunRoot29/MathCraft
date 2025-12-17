@@ -19,7 +19,7 @@ L'objectif est simple : rendre les mathématiques **accessibles, visuelles et am
 * Trigonométrie, logarithmes, puissances, racines
 * Constantes (π, e)
 * Conversion degrés ↔ radians
-* Historique des calculs
+* Historique des calculs (supporte désormais des résultats structurés pour les méthodes renvoyant des détails, ex. intégration)
 
 ### 🔢 2. Théorie des Nombres
 * Test de primalité
@@ -50,6 +50,9 @@ L'objectif est simple : rendre les mathématiques **accessibles, visuelles et am
 * **Export CSV** des résultats
 * **Précision ajustable**
 * Interface avec onglets détaillés
+
+> **Note technique :** Les fonctions d'intégration retournent désormais un tuple `(resultat, iterations)` —
+> `resultat` est un float et `iterations` est une liste de dictionnaires décrivant chaque étape (utile pour l'interface et l'export).
 
 ### 🔬 7. Équations Numériques **🆕**
 * **9 méthodes avancées** : Dichotomie, Newton-Raphson, Point Fixe, Sécante, Regula Falsi, Müller, Steffensen, Brent, Ridders
@@ -437,8 +440,7 @@ Brent            8            1e-15
 
 ### Communication :
 * 📨 **Email** : [junioragbenonzan31@gmail.com](mailto:junioragbenonzan31@gmail.com)
-* 🐙 **GitHub** : [@JunRoot29](https://github.com/JunRoot29)
-* 💬 **Issues** : [MathCraft Issues](https://github.com/JunRoot29/MathCraft/issues)
+* 🐙 **GitHub** : [@JunRoot29](https://github.com/JunRoot29)* ☕ **Ko-fi** : [https://ko-fi.com/juniorkossivi](https://ko-fi.com/juniorkossivi)* 💬 **Issues** : [MathCraft Issues](https://github.com/JunRoot29/MathCraft/issues)
 
 ### Support académique :
 * Pour **intégration dans un cours** : Contact par email
@@ -476,6 +478,7 @@ Si vous aimez MathCraft, n'hésitez pas à :
 - **Partager** avec vos collègues
 - **Contribuer** au développement
 - **Suggérer** des améliorations
+- **Soutenir via Ko-fi** ☕ : [https://ko-fi.com/juniorkossivi](https://ko-fi.com/juniorkossivi)
 
 ---
 

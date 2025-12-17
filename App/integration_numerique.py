@@ -1,6 +1,6 @@
 """
 integration_numerique.py - Interface graphique pour l'intégration numérique avec affichage des itérations
-Auteur: MathCraft
+Auteur: Junior Kossivi
 Description: Interface Tkinter pour les méthodes d'intégration numérique avec affichage direct des itérations
 """
 

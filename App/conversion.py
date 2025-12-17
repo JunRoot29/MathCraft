@@ -1,3 +1,9 @@
+"""
+conversion.py - Interface pour les conversions de valeurs
+Auteur: Junior Kossivi
+Description: Interface Tkinter pour les méthodes de conversion de valeurs numériques (Poids, data, longueur, vitesse,...)
+"""
+
 import math
 from tkinter import *
 from tkinter import ttk
@@ -55,13 +61,13 @@ unit_to_masse_et_poids = {
 # Dictionnaire de conversion des unités de vitesse
 unit_to_vitesse = {
     "Mètre par seconde": 1,
-    "Kilomètre par heure": 0.2778,
+    "Kilomètre par heure": 0.2777777777777778,  # 1 km/h = 1/3.6 m/s
     "Kilomètre par seconde": 1000,
     "Centimètre par seconde": 0.01,
     "Millimètre par seconde": 0.001,
     "Mile par heure": 0.44704,
     "Mile par seconde": 1609.34,
-    "Noeud (nautique )": 0.5144,
+    "Noeud (nautique )": 0.5144444444444444,
     "Mach (vitesse du son à 20°C)": 343,  # à 20°C dans l'air
     "Pied par seconde": 0.3048,
     "Pouce par seconde": 0.0254
