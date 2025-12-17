@@ -412,7 +412,6 @@ Brent            8            1e-15
 * **Institution** : Université Félix Houphouët-Boigny
 * **Localisation** : Abidjan, Côte d'Ivoire
 * **Année** : 2025
-* **Superviseur** : Pr. Kouakou N'Guessan
 
 ### Remerciements :
 * Équipe pédagogique UFR-MI
