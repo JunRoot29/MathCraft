@@ -1,0 +1,77 @@
+name: Auto-merge PRs with 'automerge' label
+
+on:
+  workflow_run:
+    workflows: ['CI']
+    types: [completed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-merge PRs labeled 'automerge'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const prs = github.context.payload.workflow_run.pull_requests || [];
+            if (prs.length === 0) {
+              core.info('No pull requests associated with this workflow run.');
+            }
+
+            for (const pr of prs) {
+              const prNumber = pr.number;
+              core.info(`Evaluating PR #${prNumber}...`);
+
+              // Fetch full PR details (mergeable may be null initially)
+              let prData = (await github.rest.pulls.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: prNumber,
+              })).data;
+
+              const labels = (prData.labels || []).map(l => l.name || l);
+
+              if (!labels.includes('automerge')) {
+                core.info(`PR #${prNumber} does not have 'automerge' label — skipping.`);
+                continue;
+              }
+
+              // Wait up to 30s for mergeable to be calculated if null
+              if (prData.mergeable === null) {
+                core.info('Mergeable unknown, waiting for calculation...');
+                let attempts = 0;
+                while (prData.mergeable === null && attempts < 6) {
+                  await new Promise(r => setTimeout(r, 5000));
+                  prData = (await github.rest.pulls.get({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: prNumber,
+                  })).data;
+                  attempts += 1;
+                }
+              }
+
+              if (!prData.mergeable) {
+                core.info(`PR #${prNumber} is not mergeable (state=${prData.mergeable_state}) — skipping.`);
+                continue;
+              }
+
+              // Attempt to merge
+              try {
+                await github.rest.pulls.merge({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: prNumber,
+                  merge_method: 'merge',
+                  commit_title: `Auto-merge PR #${prNumber} after CI success`,
+                });
+                core.info(`Merged PR #${prNumber}.`);
+              } catch (err) {
+                core.info(`Failed to merge PR #${prNumber}: ${err.message}`);
+              }
+            }
