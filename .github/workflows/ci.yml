@@ -33,8 +33,18 @@ jobs:
       - name: Install test deps
         run: python -m pip install pytest
 
-      - name: Run unit tests
-        run: python test.py
+      - name: Run unit tests (verbose)
+        run: |
+          echo "--- Python version and environment ---"
+          python --version
+          python -u -c "import sys, platform; print(platform.platform())"
+          python -m pip --version
+          python -m pip list
+          echo "--- Running tests ---"
+          python -u test.py
 
       - name: Run import check (no-root-on-import)
-        run: python tools/test_no_root_on_import.py
+        if: always()
+        run: |
+          echo "--- Running import-check ---"
+          python tools/test_no_root_on_import.py
