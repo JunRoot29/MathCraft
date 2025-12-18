@@ -189,14 +189,14 @@ def show_module(func):
 # Zone de présentation (à droite)
 labels = Label(
     content_frame,
-    text="🧮 ✨ Un espace malin pour Calculer, Apprendre et s'amuser avec les maths.",
+    text="🧮 ✨ Un espace malin pour Calculer,\nApprendre et s'amuser avec les maths.",
     font=("Century Gothic", 13),
     fg="#64748B",
     bg="#FFFFFF",
     wraplength=520,
-    justify="left"
+    justify="center",
 )
-labels.pack(pady=(20, 10), padx=20, anchor="nw")
+labels.pack(pady=(20, 10), padx=20, anchor="center")
 
 # Séparateur
 separator1 = ttk.Separator(content_frame, orient='horizontal')
@@ -327,7 +327,7 @@ footer = Label(
     fg="#94A3B8",
     bg="#FFFFFF"
 )
-footer.pack(pady=(30, 20), padx=20, anchor="se")
+footer.pack(pady=(30, 20), padx=20, anchor="center")
 
 # Mettre à jour la référence parent de l'historique
 historique_interface.parent = fenetre
