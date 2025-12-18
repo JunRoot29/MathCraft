@@ -1,14 +1,40 @@
 """Interface pour Théorie des nombres - Module 2"""
+# ruff: noqa: E402,F405
 """
 theorie_des_nombres.py - Interface graphique pour l'exploration de concepts Math accéssibles
 Auteur: Junior Kossivi
 Description: Interface Tkinter pour les méthodes de théories des nombres (Nombres Parfait, nombres premier, pgcd, ppcmn...)
 """
 
-from tkinter import *
+import tkinter as tk
 from tkinter import ttk
 from .modules import nbr_distinct, nbr_parfait, nb_premier, catalan, pgcdrec, ppcm
 from .historique_manager import historique_manager
+from .style_manager import ensure_style
+
+# Alias tkinter (remplacer les star-imports pour satisfaire le linter)
+Label = tk.Label
+Frame = tk.Frame
+Toplevel = tk.Toplevel
+Text = tk.Text
+Canvas = tk.Canvas
+Menu = tk.Menu
+Menubutton = tk.Menubutton
+Scrollbar = tk.Scrollbar
+Entry = tk.Entry
+LEFT = tk.LEFT
+RIGHT = tk.RIGHT
+BOTH = tk.BOTH
+X = tk.X
+Y = tk.Y
+W = tk.W
+NW = tk.NW
+WORD = tk.WORD
+# Constantes et états
+DISABLED = tk.DISABLED
+NORMAL = tk.NORMAL
+END = tk.END
+INSERT = tk.INSERT
 
 # Palette unifiée (même que main.py)
 PALETTE = {
@@ -120,14 +146,14 @@ def lancer_nombre_parfait(parent=None):
             # ============================
             
             label2.config(text=f"Résultat : {resultat}", fg=PALETTE["primaire"])
-        except:
+        except Exception:
             label2.config(text="Réessayer : Opération Impossible", fg=PALETTE["erreur"])
 
     def remise_a_blanc():
         label2.configure(text="Résultat : ", fg=PALETTE["texte_fonce"])
         entre.delete("1.0", "end")
 
-    style = configurer_style()
+    ensure_style()
     bouton1 = ttk.Button(nbr, style="Custom.TButton", text="Tester", command=test_parfait)
     bouton1.pack(pady=10) 
     
@@ -190,14 +216,14 @@ def lancer_nombre_distinct(parent=None):
             # ============================
             
             label2.config(text=f"Résultat : {resultat}", fg=PALETTE["primaire"])
-        except:
+        except Exception:
             label2.config(text="Réessayer : Opération Impossible", fg=PALETTE["erreur"])
 
     def remise_a_blanc():
         label2.configure(text="Résultat : ", fg=PALETTE["texte_fonce"])
         entre.delete("1.0", "end")
 
-    style = configurer_style()
+    ensure_style()
     bouton1 = ttk.Button(nbr, style="Custom.TButton", text="Tester", command=test_distinct)
     bouton1.pack(pady=10) 
     
@@ -260,14 +286,14 @@ def lancer_nombre_premier(parent=None):
             # ============================
             
             label2.config(text=f"Résultat : {resultat}", fg=PALETTE["primaire"])
-        except:
+        except Exception:
             label2.config(text="Réessayer : Opération Impossible", fg=PALETTE["erreur"])
 
     def remise_a_blanc():
         label2.configure(text="Résultat : ", fg=PALETTE["texte_fonce"])
         entre.delete("1.0", "end")
 
-    style = configurer_style()
+    ensure_style()
     bouton1 = ttk.Button(nbr, style="Custom.TButton", text="Tester", command=test_premier)
     bouton1.pack(pady=10) 
     
@@ -337,7 +363,7 @@ def lancer_pgcd(parent=None):
             # ============================
             
             label_resultat.config(text=f"Résultat : {resultat}", fg=PALETTE["primaire"])
-        except:
+        except Exception:
             label_resultat.config(text="Réessayer : Opération Impossible", fg=PALETTE["erreur"])
 
     def remise_a_blanc():
@@ -345,7 +371,7 @@ def lancer_pgcd(parent=None):
         entre1.delete("1.0", "end")
         entre2.delete("1.0", "end")
 
-    style = configurer_style()
+    ensure_style()
     bouton1 = ttk.Button(nbr, style="Custom.TButton", text="Calculer", command=test_pgcd)
     bouton1.pack(pady=10) 
     
@@ -415,7 +441,7 @@ def lancer_ppcm(parent=None):
             # ============================
             
             label_resultat.config(text=f"Résultat : {resultat}", fg=PALETTE["primaire"])
-        except:
+        except Exception:
             label_resultat.config(text="Réessayer : Opération Impossible", fg=PALETTE["erreur"])
 
     def remise_a_blanc():
@@ -423,7 +449,7 @@ def lancer_ppcm(parent=None):
         entre1.delete("1.0", "end")
         entre2.delete("1.0", "end")
 
-    style = configurer_style()
+    ensure_style()
     bouton1 = ttk.Button(nbr, style="Custom.TButton", text="Calculer", command=test_ppcm)
     bouton1.pack(pady=10) 
     
@@ -486,14 +512,14 @@ def lancer_nombre_catalan(parent=None):
             # ============================
             
             label2.config(text=f"Résultat : {resultat}", fg=PALETTE["primaire"])
-        except:
+        except Exception:
             label2.config(text="Réessayer : Opération Impossible", fg=PALETTE["erreur"])
 
     def remise_a_blanc():
         label2.configure(text="Résultat : ", fg=PALETTE["texte_fonce"])
         entre.delete("1.0", "end")
 
-    style = configurer_style()
+    ensure_style()
     bouton1 = ttk.Button(nbr, style="Custom.TButton", text="Calculer", command=test_catalan)
     bouton1.pack(pady=10) 
     
@@ -579,7 +605,7 @@ def lancer_theorie(parent=None):
         ("🎯 Nombres Catalans", lancer_nombre_catalan)
     ]
 
-    style = configurer_style()
+    ensure_style()
     for texte, commande in boutons_config:
         bouton = ttk.Button(frame_boutons, text=texte, style="Custom.TButton", 
                            command=lambda cmd=commande: cmd(th))

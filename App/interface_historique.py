@@ -3,8 +3,8 @@ Interface pour la gestion de l'historique des calculs
 """
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
-import json
 from .historique_manager import historique_manager
+from .style_manager import ensure_style
 
 # Palette unifiée (identique aux autres fichiers)
 PALETTE = {
@@ -32,9 +32,7 @@ class InterfaceHistorique:
             for child in list(self.fenetre.winfo_children()):
                 child.destroy()
             # Style
-            style = ttk.Style()
-            style.configure("Historique.TButton", padding=10, font=("Century Gothic", 10))
-            style.configure("Historique.Treeview", font=("Century Gothic", 9))
+            ensure_style()
 
             self._creer_interface()
             self._actualiser_affichage()
@@ -52,9 +50,7 @@ class InterfaceHistorique:
         self.fenetre.minsize(800, 600)
         
         # Style
-        style = ttk.Style()
-        style.configure("Historique.TButton", padding=10, font=("Century Gothic", 10))
-        style.configure("Historique.Treeview", font=("Century Gothic", 9))
+        ensure_style()
         
         self._creer_interface()
         self._actualiser_affichage()

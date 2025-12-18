@@ -12,8 +12,10 @@ import math
 import cmath
 import numpy as np
 import matplotlib.pyplot as plt
-from functools import lru_cache
 import re
+import random
+import string
+import base64
 
 
 #Opérations arithmétiques de bases
@@ -103,7 +105,7 @@ def nbr_distinct(n):
         if chaine.count(lettre)>1:
             etat = True
             break
-    if etat == True:
+    if etat:
         return "✅ Ce nombre n'est pas distinct"
     else:
         return "❌ Ce nombre est distinct"
@@ -604,7 +606,6 @@ def compter_mots(chaine):
     """
     mots = chaine.split()
     return len(mots)
-    
 
 
 def majuscules(chaine):
@@ -638,8 +639,8 @@ def est_anagramme(chaine1, chaine2):
     return sorted(chaine1_nettoyee) == sorted(chaine2_nettoyee)
 
 
-import random
-import string
+# Les imports ont été consolidés au sommet du fichier pour respecter E402.
+
 
 def generer_mot_de_passe(longueur=12):
     """
@@ -648,7 +649,6 @@ def generer_mot_de_passe(longueur=12):
     caracteres = string.ascii_letters + string.digits + string.punctuation
     return ''.join(random.choice(caracteres) for _ in range(longueur))
 
-import base64
 
 def encoder_base64(chaine):
     """Encode une chaîne en base64"""
@@ -668,7 +668,6 @@ def extraire_nombres(chaine):
     """
     Extrait tous les nombres (séquences de chiffres)
     """
-    import re
     return re.findall(r'\d+', chaine)
 
 def palindrome_amelioré(chaine):
@@ -710,13 +709,6 @@ def palindrome_amelioré(chaine):
     except Exception as e:
         return f"❌ Erreur: {str(e)}"
     
-
-def compter_mots(chaine):
-    """
-    Compte le nombre de mots dans une phrase
-    """
-    mots = chaine.split()
-    return len(mots)
 
 def compter_consonnes(chaine):
     """
@@ -1619,12 +1611,10 @@ def voir_graphe2(a, b, c):
         # Si racines réelles, centrer autour des racines
         racine1 = (-b_val - np.sqrt(discriminant)) / (2*a_val)
         racine2 = (-b_val + np.sqrt(discriminant)) / (2*a_val)
-        centre = (racine1 + racine2) / 2
         x_min = min(racine1, racine2) - 5
         x_max = max(racine1, racine2) + 5
     else:
         # Sinon domaine par défaut
-        centre = 0
         x_min, x_max = -10, 10
     
     x = np.linspace(x_min, x_max, 1000)

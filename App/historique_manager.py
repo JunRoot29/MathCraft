@@ -4,8 +4,7 @@ Gestionnaire d'historique et sauvegarde des calculs
 import json
 import os
 import datetime
-from typing import Dict, List, Any
-import pickle
+from typing import Dict, List
 import csv
 
 class HistoriqueManager:

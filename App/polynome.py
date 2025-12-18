@@ -5,10 +5,43 @@ polynome.py - Interface graphique pour la résolution d'équation du 1er, 2nd et
 Auteur: Junior Kossivi
 Description: Interface Tkinter pour les méthodes d'équation avec affichage direct des calculs et graphiques
 """
-import math
-from tkinter import *
+# ruff: noqa: E402,F405
+import tkinter as tk
 from tkinter import ttk
 from .modules import polynome1, polynome2, polynome3, voir_graphe1, voir_graphe2, voir_graphe3
+try:
+    from .historique_manager import historique_manager
+except ImportError:
+    # Solution de secours
+    import sys
+    import os
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from App.historique_manager import historique_manager
+from .style_manager import ensure_style
+
+# Alias tkinter (remplacer les star-imports pour satisfaire le linter)
+Label = tk.Label
+Frame = tk.Frame
+Toplevel = tk.Toplevel
+Text = tk.Text
+Canvas = tk.Canvas
+Menu = tk.Menu
+Menubutton = tk.Menubutton
+Scrollbar = tk.Scrollbar
+Entry = tk.Entry
+LEFT = tk.LEFT
+RIGHT = tk.RIGHT
+BOTH = tk.BOTH
+X = tk.X
+Y = tk.Y
+W = tk.W
+NW = tk.NW
+WORD = tk.WORD
+# Constantes et états
+DISABLED = tk.DISABLED
+NORMAL = tk.NORMAL
+END = tk.END
+INSERT = tk.INSERT
 
 # Palette unifiée (même que main.py)
 PALETTE = {
@@ -23,56 +56,18 @@ PALETTE = {
     "bordure": "#E2E8F0",
 }
 
-# Import simplifié
-try:
-    from .historique_manager import historique_manager
-except ImportError:
-    # Solution de secours
-    import sys
-    import os
-    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    from App.historique_manager import historique_manager
 
 def enregistrer_calcul(module, operation, entree, resultat):
     """Fonction wrapper pour l'historique"""
     return historique_manager.ajouter_calcul(module, operation, entree, resultat)
 
-def configurer_style():
-    style = ttk.Style()
-    style.theme_use("clam")  # ✅ Ajout du thème clam
-    
-    # Style bouton principal
-    style.configure("Custom.TButton",
-                    foreground=PALETTE["fond_secondaire"],
-                    background=PALETTE["primaire"],
-                    font=("Century Gothic", 12, "bold"),
-                    padding=15,
-                    relief="flat",
-                    focuscolor="none")
-    
-    # Style spécial pour le bouton Quitter
-    style.configure("Quit.TButton",
-                    foreground=PALETTE["fond_secondaire"],
-                    background=PALETTE["erreur"],
-                    font=("Century Gothic", 12, "bold"),
-                    padding=12,
-                    relief="flat",
-                    focuscolor="none")
-    
-    # Effets de survol
-    style.map("Custom.TButton",
-             background=[('active', PALETTE["secondaire"]),
-                        ('pressed', '#1E3A8A')],
-             foreground=[('active', PALETTE["fond_secondaire"])])
-    
-    style.map("Quit.TButton",
-             background=[('active', '#B91C1C'),
-                        ('pressed', '#991B1B')],
-             foreground=[('active', PALETTE["fond_secondaire"])])
-    
-    return style
 
-style = configurer_style()
+def configurer_style():
+    """Compat wrapper: délègue à App.style_manager.ensure_style()."""
+    return ensure_style()
+
+
+
 
 # Helper pour savoir si on doit créer une Toplevel ou utiliser un Frame parent
 def _is_toplevel_parent(parent):
@@ -93,6 +88,8 @@ def ajouter_conseils(fenetre, conseils, titre="💡 Conseils :"):
 
 # ------------------ Polynôme de degré 1 ------------------
 def lancer_polynome1(parent=None):
+    # Assurer que le style est configuré si une racine existe
+    ensure_style()
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
         fenetre_polynome1 = Toplevel(parent)
@@ -214,7 +211,8 @@ def lancer_polynome1(parent=None):
     button_quitter.pack(pady=10)
 
 # ------------------ Polynôme de degré 2 ------------------
-def lancer_polynome2(parent=None):
+def lancer_polynome2(parent=None):    # Assurer que le style est configuré si une racine existe
+    ensure_style()
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
         fenetre_polynome2 = Toplevel(parent)
@@ -348,7 +346,8 @@ def lancer_polynome2(parent=None):
     button_quitter.pack(pady=10)
 
 # ------------------ Polynôme de degré 3 ------------------
-def lancer_polynome3(parent=None):
+def lancer_polynome3(parent=None):    # Assurer que le style est configuré si une racine existe
+    ensure_style()
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
         fenetre_polynome3 = Toplevel(parent)
@@ -518,6 +517,8 @@ def lancer_polynome3(parent=None):
 
 # ------------------ Menu principal ------------------
 def lancer_polynome(parent=None):
+    # Assurer que le style est configuré si une racine existe
+    ensure_style()
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
         fenetre_polynome = Toplevel(parent)

@@ -1,9 +1,35 @@
 """
 Gestionnaire de soutien pour MathCraft
 """
+# ruff: noqa: E402,F405
 import webbrowser
-from tkinter import *
+import tkinter as tk
 from tkinter import ttk
+from .style_manager import ensure_style
+
+# Alias tkinter (remplacer les star-imports pour satisfaire le linter)
+Label = tk.Label
+Frame = tk.Frame
+Toplevel = tk.Toplevel
+Text = tk.Text
+Canvas = tk.Canvas
+Menu = tk.Menu
+Menubutton = tk.Menubutton
+Scrollbar = tk.Scrollbar
+Entry = tk.Entry
+LEFT = tk.LEFT
+RIGHT = tk.RIGHT
+BOTH = tk.BOTH
+X = tk.X
+Y = tk.Y
+W = tk.W
+NW = tk.NW
+WORD = tk.WORD
+# Constantes et états
+DISABLED = tk.DISABLED
+NORMAL = tk.NORMAL
+END = tk.END
+INSERT = tk.INSERT
 
 # Palette unifiée (identique aux autres fichiers)
 PALETTE = {
@@ -157,8 +183,10 @@ class SoutienManager:
         buttons_frame.pack(fill=X, pady=20)
         
         # Style pour les boutons
-        style = ttk.Style()
-        style.configure("Soutien.TButton", font=("Century Gothic", 10))
+        s = ensure_style()
+        if s is None:
+            s = ttk.Style()
+        s.configure("Soutien.TButton", font=("Century Gothic", 10))
         
         # Bouton principal Ko-fi
         ttk.Button(buttons_frame, text="☕ Aller sur Ko-fi", 

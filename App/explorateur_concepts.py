@@ -1,11 +1,37 @@
 """Interface pour l'Explorateur de Concepts - Module 4"""
+# ruff: noqa: E402,F405
 """
 explorateur_concepts.py - Interface pour la découverte
 Auteur: Junior Kossivi
 Description: Interface Tkinter pour la présentations de jeu mathématiques
 """
-from tkinter import *
+import tkinter as tk
 from tkinter import ttk
+from .style_manager import ensure_style
+
+# Alias tkinter (remplacer les star-imports pour satisfaire le linter)
+Label = tk.Label
+Frame = tk.Frame
+Toplevel = tk.Toplevel
+Text = tk.Text
+Canvas = tk.Canvas
+Menu = tk.Menu
+Menubutton = tk.Menubutton
+Scrollbar = tk.Scrollbar
+Entry = tk.Entry
+LEFT = tk.LEFT
+RIGHT = tk.RIGHT
+BOTH = tk.BOTH
+X = tk.X
+Y = tk.Y
+W = tk.W
+NW = tk.NW
+WORD = tk.WORD
+# Constantes et états
+DISABLED = tk.DISABLED
+NORMAL = tk.NORMAL
+END = tk.END
+INSERT = tk.INSERT
 from .jeux_math import JEUX_DISPONIBLES
 
 # Palette de couleurs améliorée
@@ -23,11 +49,16 @@ PALETTE = {
 
 def configurer_styles():
     """Configure les styles ttk pour l'explorateur de concepts"""
-    style = ttk.Style()
-    style.theme_use("clam")
+    s = ensure_style()
+    if s is None:
+        s = ttk.Style()
+        try:
+            s.theme_use("clam")
+        except Exception:
+            pass
     
     # Style bouton jeu actif
-    style.configure("JeuActif.TButton",
+    s.configure("JeuActif.TButton",
                    foreground=PALETTE["fond_secondaire"],
                    background=PALETTE["primaire"],
                    font=("Century Gothic", 11, "bold"),
@@ -36,7 +67,7 @@ def configurer_styles():
                    focuscolor="none")
     
     # Style bouton jeu inactif
-    style.configure("JeuInactif.TButton",
+    s.configure("JeuInactif.TButton",
                    foreground=PALETTE["texte_clair"],
                    background=PALETTE["bordure"],
                    font=("Century Gothic", 11),
@@ -45,7 +76,7 @@ def configurer_styles():
                    focuscolor="none")
     
     # Style bouton retour
-    style.configure("Retour.TButton",
+    s.configure("Retour.TButton",
                    foreground=PALETTE["fond_secondaire"],
                    background=PALETTE["erreur"],
                    font=("Century Gothic", 11, "bold"),
@@ -54,17 +85,17 @@ def configurer_styles():
                    focuscolor="none")
     
     # Effets au survol
-    style.map("JeuActif.TButton",
+    s.map("JeuActif.TButton",
              background=[('active', PALETTE["secondaire"]),
                         ('pressed', '#1E3A8A')],
              foreground=[('active', PALETTE["fond_secondaire"])])
     
-    style.map("JeuInactif.TButton",
+    s.map("JeuInactif.TButton",
              background=[('active', '#D1D5DB'),
                         ('pressed', '#9CA3AF')],
              foreground=[('active', PALETTE["texte_clair"])])
     
-    style.map("Retour.TButton",
+    s.map("Retour.TButton",
              background=[('active', '#B91C1C'),
                         ('pressed', '#991B1B')],
              foreground=[('active', PALETTE["fond_secondaire"])])

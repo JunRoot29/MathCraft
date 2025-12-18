@@ -2,12 +2,49 @@
 Module central pour tous les jeux mathématiques de MathCraft
 Auteur: Junior Kossivi
 """
+# ruff: noqa: E402,F405
 import random
 import time
 import math
-from tkinter import *
+import tkinter as tk
 from tkinter import ttk, messagebox
-import json, time
+from .style_manager import ensure_style
+
+# Alias tkinter (remplacer les star-imports pour satisfaire le linter)
+Label = tk.Label
+Frame = tk.Frame
+Toplevel = tk.Toplevel
+Text = tk.Text
+Canvas = tk.Canvas
+Menu = tk.Menu
+Menubutton = tk.Menubutton
+Scrollbar = tk.Scrollbar
+Entry = tk.Entry
+Button = tk.Button
+Tk = tk.Tk
+LEFT = tk.LEFT
+RIGHT = tk.RIGHT
+BOTH = tk.BOTH
+X = tk.X
+Y = tk.Y
+W = tk.W
+NW = tk.NW
+E = tk.E
+N = tk.N
+CENTER = tk.CENTER
+VERTICAL = tk.VERTICAL
+HORIZONTAL = tk.HORIZONTAL
+WORD = tk.WORD
+# Constantes et états
+DISABLED = tk.DISABLED
+NORMAL = tk.NORMAL
+END = tk.END
+INSERT = tk.INSERT
+StringVar = tk.StringVar
+BooleanVar = tk.BooleanVar
+IntVar = tk.IntVar
+DoubleVar = tk.DoubleVar
+import json
 import os
 from enum import Enum
 
@@ -1061,7 +1098,7 @@ class MathQuizzChallenge:
             else:
                 self._temps_ecoule()
                 
-        except Exception as e:
+        except Exception:
             # Si la fenêtre est fermée, arrêter le timer
             self.timer_actif = False
 
@@ -1206,7 +1243,7 @@ class MathQuizzChallenge:
                     reponse_joueur_eval = eval(reponse_joueur)
                     reponse_correcte_eval = eval(reponse_correcte)
                     correct = abs(reponse_joueur_eval - reponse_correcte_eval) < 0.001
-                except:
+                except Exception:
                     correct = False
             else:
                 # Réponses numériques normales
@@ -1482,7 +1519,7 @@ class CourseAuxNombres:
             else:
                 self.feedback_label.config(text=f"❌ Résultat: {resultat}, cible: {self.cible_actuelle}", fg=PALETTE["erreur"])
                 
-        except Exception as e:
+        except Exception:
             self.feedback_label.config(text="❌ Calcul invalide", fg=PALETTE["erreur"])
 
     def _extraire_nombres(self, calcul):
@@ -1555,7 +1592,7 @@ class CourseAuxNombres:
                         try:
                             if abs(eval(calcul) - self.cible_actuelle) < 0.001:
                                 solutions.append(calcul)
-                        except:
+                        except Exception:
                             pass
         return solutions
 
@@ -1767,7 +1804,7 @@ class JeuDes24:
             else:
                 self.feedback_label.config(text=f"❌ Résultat: {resultat}, cible: 24", fg=PALETTE["erreur"])
                 
-        except Exception as e:
+        except Exception:
             self.feedback_label.config(text="❌ Calcul invalide", fg=PALETTE["erreur"])
 
     def _extraire_nombres(self, calcul):
@@ -1851,7 +1888,7 @@ class JeuDes24:
                     if abs(eval(calcul2) - 24) < 0.001:
                         solutions.append(calcul2)
                         
-                except:
+                except Exception:
                     pass
                     
         return solutions[:5]  # Retourne max 5 solutions
@@ -1911,7 +1948,7 @@ class MathEmoji:
         self.niveau_label.pack(side=LEFT, padx=20)
 
         # Catégorie
-        self.categorie_label = Label(stats_frame, text=f"🎨 Catégorie: Fruits",
+        self.categorie_label = Label(stats_frame, text="🎨 Catégorie: Fruits",
                                     font=("Arial", 12), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"])
         self.categorie_label.pack(side=RIGHT, padx=20)
 
@@ -1962,8 +1999,10 @@ class MathEmoji:
         self.feedback_label.pack(pady=15)
 
         # Style pour le bouton accent
-        style = ttk.Style()
-        style.configure("Accent.TButton", foreground="white", background="#4CAF50")
+        s = ensure_style()
+        if s is None:
+            s = ttk.Style()
+        s.configure("Accent.TButton", foreground="white", background="#4CAF50")
 
     def _generer_equation(self):
         """Génère une nouvelle équation avec emojis"""
@@ -2118,7 +2157,7 @@ class MathEmoji:
                     fg=PALETTE["erreur"]
                 )
                 
-        except Exception as e:
+        except Exception:
             self.feedback_label.config(text="❌ Erreur de saisie", fg=PALETTE["erreur"])
 
     def _calculer_points(self):
@@ -2221,7 +2260,7 @@ class CalculMentalExpress:
         right_stats = Frame(stats_frame, bg=PALETTE["fond_principal"])
         right_stats.pack(side=RIGHT)
         
-        self.precision_label = Label(right_stats, text=f"🎯 Précision: 0%",
+        self.precision_label = Label(right_stats, text="🎯 Précision: 0%",
                                    font=("Century Gothic", 10), bg=PALETTE["fond_principal"], fg=PALETTE["texte_clair"])
         self.precision_label.pack(anchor=E)
         
@@ -2551,7 +2590,7 @@ class SudokuMathematique:
                                   font=("Century Gothic", 10), bg=PALETTE["fond_principal"], fg=PALETTE["erreur"])
         self.erreurs_label.pack(anchor=E)
         
-        self.progression_label = Label(right_stats, text=f"📈 Progression: 0%",
+        self.progression_label = Label(right_stats, text="📈 Progression: 0%",
                                      font=("Century Gothic", 10), bg=PALETTE["fond_principal"], fg=PALETTE["texte_clair"])
         self.progression_label.pack(anchor=E)
 
@@ -2883,7 +2922,7 @@ class SudokuMathematique:
                         if valeur_joueur != self.grille_solution[i][j]:
                             correct = False
                             case['frame'].config(bg="#FFCDD2")  # Rouge pour les erreurs
-                    except:
+                    except Exception:
                         correct = False
         
         if correct:
@@ -3042,7 +3081,7 @@ class BatailleDesFractions:
         right_stats = Frame(stats_frame, bg=PALETTE["fond_principal"])
         right_stats.pack(side=RIGHT)
         
-        self.cartes_label = Label(right_stats, text=f"🃏 Cartes: 0/0",
+        self.cartes_label = Label(right_stats, text="🃏 Cartes: 0/0",
                                  font=("Century Gothic", 10), bg=PALETTE["fond_principal"], fg=PALETTE["texte_clair"])
         self.cartes_label.pack(anchor=E)
 
@@ -4034,7 +4073,7 @@ class DessineMoiUneFonction:
 # =============================================================================
 
 """Classe Repertoriant les difficulté"""
-class Difficulty(Enum):
+class MysteryDifficulty(Enum):
     DEBUTANT = "Débutant"
     INTERMEDIAIRE = "Intermédiaire"
     EXPERT = "Expert"
@@ -4111,13 +4150,12 @@ class EnigmeManager:
         return stats
 
 
-import os
 
 class MystereMathematique:
     def __init__(self, parent, json_file_path=None):
         self.parent = parent
         self.score = 0
-        self.niveau = Difficulty.DEBUTANT
+        self.niveau = MysteryDifficulty.DEBUTANT
         self.mystere_actuel = None
         self.indices_decouverts = 0
         self.essais_restants = 5
@@ -4204,7 +4242,7 @@ class MystereMathematique:
         right_stats = Frame(stats_frame, bg=self.PALETTE["fond_principal"])
         right_stats.pack(side=RIGHT)
         
-        self.type_label = Label(right_stats, text=f"🔍 Type: ?",
+        self.type_label = Label(right_stats, text="🔍 Type: ?",
                               font=("Century Gothic", 10), bg=self.PALETTE["fond_principal"], fg=self.PALETTE["texte_clair"])
         self.type_label.pack(anchor=E)
 
@@ -4289,11 +4327,11 @@ class MystereMathematique:
         """Prépare une nouvelle énigme"""
         # Mettre à jour le niveau selon le score
         if self.score < 200:
-            self.niveau = Difficulty.DEBUTANT
+            self.niveau = MysteryDifficulty.DEBUTANT
         elif self.score < 500:
-            self.niveau = Difficulty.INTERMEDIAIRE
+            self.niveau = MysteryDifficulty.INTERMEDIAIRE
         else:
-            self.niveau = Difficulty.EXPERT
+            self.niveau = MysteryDifficulty.EXPERT
         
         # Obtenir une énigme aléatoire
         self.mystere_actuel = self.enigme_manager.get_random_enigme(self.niveau)
@@ -4397,7 +4435,7 @@ class MystereMathematique:
                     self._reussite_enigme()
                 else:
                     self._echec_essai(reponse_joueur)
-            except:
+            except Exception:
                 self._echec_essai(reponse_joueur)
         else:
             # Réponse unique
@@ -4928,7 +4966,7 @@ class ChasseNombresPremiers:
             elif nombre > 10 and nombre % 11 == 0:
                 indices.append(f"❌ {nombre} ÷ 11 = {nombre // 11} → divisible par 11")
             else:
-                indices.append(f"ℹ️  Pas divisible par 2, 3, 5, 7, 11...")
+                indices.append("ℹ️  Pas divisible par 2, 3, 5, 7, 11...")
         
         # Indice 3 : Limite de test
         if nombre > 2 and nombre % 2 != 0:
@@ -5106,7 +5144,7 @@ class ChasseNombresPremiers:
         # Récupérer la réponse
         try:
             reponse_joueur = self.reponse_entry.get().strip()
-        except:
+        except Exception:
             # Si pas de champ entry (boutons uniquement)
             self._afficher_feedback("❌ Veuillez entrer une réponse", self.PALETTE["erreur"])
             return
@@ -5154,7 +5192,7 @@ class ChasseNombresPremiers:
                 # Validation textuelle simple
                 return str(reponse_joueur).strip().lower() == str(reponse_correcte).strip().lower()
                 
-        except:
+        except Exception:
             return False
 
     def _valider_decomposition(self, reponse_joueur, reponse_correcte):
@@ -5179,7 +5217,7 @@ class ChasseNombresPremiers:
         
         try:
             return trier_facteurs(reponse_joueur) == trier_facteurs(reponse_correcte)
-        except:
+        except Exception:
             return reponse_joueur == reponse_correcte
 
     def _valider_diviseurs(self, reponse_joueur, reponse_correcte):
@@ -5197,14 +5235,14 @@ class ChasseNombresPremiers:
                 nombres_corrects = sorted([int(x.strip()) for x in str(reponse_correcte).replace(",", " ").split()])
             
             return nombres_joueur == nombres_corrects
-        except:
+        except Exception:
             return False
 
     def _valider_nombre(self, reponse_joueur, reponse_correcte):
         """Valide un nombre"""
         try:
             return int(reponse_joueur) == int(reponse_correcte)
-        except:
+        except Exception:
             return reponse_joueur == str(reponse_correcte)
 
     def _afficher_indices(self):
@@ -5354,9 +5392,9 @@ class ChasseNombresPremiers:
                 self._afficher_feedback(f"❌ Réponse incorrecte. Il te reste {self.essais_restants} essai{'s' if self.essais_restants > 1 else ''}.", 
                                       self.PALETTE["erreur"])
             else:
-                self._afficher_feedback(f"❌ Réponse incorrecte.", self.PALETTE["erreur"])
+                self._afficher_feedback("❌ Réponse incorrecte.", self.PALETTE["erreur"])
             
-            self._ajouter_log(f"❌ Essai incorrect")
+            self._ajouter_log("❌ Essai incorrect")
             self._mettre_a_jour_stats()
             
         except Exception as e:
@@ -5369,8 +5407,7 @@ class ChasseNombresPremiers:
             self.streak = 0
             self.bonus_streak = 0
             
-            # Extraire le nombre
-            question_text = self.question_actuelle["question"]
+            # Extraire la réponse attendue
             reponse = self.question_actuelle["reponse"]
             
             # Pénalité
@@ -5871,7 +5908,9 @@ class MathBattle:
                     commande = self._effacer_caractere
                     width = 8
                 else:
-                    commande = lambda t=texte: self._ajouter_caractere(t)
+                    def _commande(t=texte):
+                        self._ajouter_caractere(t)
+                    commande = _commande
                     width = 5
                 
                 btn = ttk.Button(ligne_frame, text=texte, command=commande, width=width)
@@ -6179,7 +6218,7 @@ class MathBattle:
             if self.streak >= 3:
                 bonus = min(5, self.streak - 2)  # +1 point par streak au-delà de 3
                 self.bonus_streak += bonus
-                message = f"✅ BONNE RÉPONSE ! (+1 point"
+                message = "✅ BONNE RÉPONSE ! (+1 point"
                 if bonus > 0:
                     message += f" +{bonus} bonus streak"
                 message += ")"
@@ -6283,6 +6322,7 @@ class MathBattle:
         Label(resultat_window, text=titre, 
               font=("Century Gothic", 24, "bold"), bg=self.PALETTE["fond_principal"], 
               fg=couleur_titre).pack(pady=10)
+        Label(resultat_window, text=message, font=("Century Gothic", 12), bg=self.PALETTE["fond_principal"]).pack(pady=10)
         
         # Score final
         score_frame = Frame(resultat_window, bg=self.PALETTE["fond_clair"], relief="solid", borderwidth=2)
@@ -6658,7 +6698,7 @@ class DefisFibonacci:
         self.defis_label.pack(side=LEFT, padx=20)
         
         # Type de défi
-        self.type_label = Label(stats_line2, text=f"🔍 TYPE: ?", 
+        self.type_label = Label(stats_line2, text="🔍 TYPE: ?", 
                                font=("Century Gothic", 11), bg=self.PALETTE["fond_clair"], 
                                fg=self.PALETTE["texte_clair"])
         self.type_label.pack(side=RIGHT, padx=20)
@@ -7153,7 +7193,6 @@ class DefisFibonacci:
             
             # Dessiner le quart de cercle pour la spirale
             start_angle = angle
-            end_angle = angle + 90
             
             if i % 4 == 0:  # En bas à droite
                 self.spirale_canvas.create_arc(
@@ -7305,7 +7344,7 @@ class DefisFibonacci:
         # Récupérer la réponse
         try:
             reponse_joueur = self.reponse_entry.get().strip()
-        except:
+        except Exception:
             self._afficher_feedback("❌ Veuillez entrer une réponse", self.PALETTE["erreur"])
             return
         
@@ -7349,17 +7388,17 @@ class DefisFibonacci:
                     val_joueur = float(reponse_joueur)
                     val_correcte = float(reponse_correcte)
                     return abs(val_joueur - val_correcte) < 0.001
-                except:
+                except Exception:
                     return False
                 
             else:
                 # Validation numérique simple
                 try:
                     return int(reponse_joueur) == int(reponse_correcte)
-                except:
+                except Exception:
                     return reponse_joueur == str(reponse_correcte)
                     
-        except:
+        except Exception:
             return False
 
     def _afficher_indices(self):
@@ -7496,7 +7535,7 @@ class DefisFibonacci:
             else:
                 self._afficher_feedback("❌ Réponse incorrecte.", self.PALETTE["erreur"])
             
-            self._ajouter_historique(f"❌ Essai incorrect")
+            self._ajouter_historique("❌ Essai incorrect")
             self._mettre_a_jour_stats()
             
         except Exception as e:

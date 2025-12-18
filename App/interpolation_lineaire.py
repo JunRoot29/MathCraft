@@ -3,16 +3,51 @@ interpolation_numerique.py - Interface graphique pour l'interpolation numérique
 Auteur: Junior Kossivi
 Description: Interface Tkinter pour les méthodes d'interpolation numérique avec affichage direct des calculs et graphiques
 """
+# ruff: noqa: E402,F405
 
-from tkinter import *
+import tkinter as tk
 from tkinter import ttk
+from .style_manager import ensure_style
+
+# Alias tkinter (remplacer les star-imports pour satisfaire le linter)
+Label = tk.Label
+Frame = tk.Frame
+Toplevel = tk.Toplevel
+Text = tk.Text
+Canvas = tk.Canvas
+Menu = tk.Menu
+Menubutton = tk.Menubutton
+Scrollbar = tk.Scrollbar
+Entry = tk.Entry
+Button = tk.Button
+Tk = tk.Tk
+LEFT = tk.LEFT
+RIGHT = tk.RIGHT
+BOTH = tk.BOTH
+X = tk.X
+Y = tk.Y
+W = tk.W
+NW = tk.NW
+E = tk.E
+N = tk.N
+VERTICAL = tk.VERTICAL
+HORIZONTAL = tk.HORIZONTAL
+WORD = tk.WORD
+# Constantes et états
+DISABLED = tk.DISABLED
+NORMAL = tk.NORMAL
+END = tk.END
+INSERT = tk.INSERT
+StringVar = tk.StringVar
+BooleanVar = tk.BooleanVar
+IntVar = tk.IntVar
+DoubleVar = tk.DoubleVar
 import re
 import math
 import csv
 import numpy as np
 from math import factorial
 from tkinter import filedialog, messagebox
-import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from . import modules as modu
@@ -237,7 +272,7 @@ def evaluer_spline_cubique(x_points, y_points, x_eval):
                 return y1 + (y2 - y1) * (x_eval - x1) / (x2 - x1)
         
         return y_sorted[-1]
-    except:
+    except Exception:
         # Fallback à l'interpolation linéaire
         return evaluer_interpolation_lineaire(x_points, y_points, x_eval)
 
@@ -648,8 +683,7 @@ def afficher_graphe_interpolation(resultats, methode, notebook, fenetre):
         return frame_graphe
     
     # Séparer les coordonnées
-    x_points = [p[0] for p in points]
-    y_points = [p[1] for p in points]
+    # (utilisation directe de points triés ci-dessous)
     
     # Trier pour l'affichage
     points_sorted = sorted(points, key=lambda p: p[0])
@@ -863,8 +897,7 @@ def lancer_interpolation_numerique(parent=None):
     """
     
     # Variables associées aux champs d'entrée
-    var_points = StringVar()
-    var_x = StringVar()
+    # (aucune variable utilisée directement ici pour le moment)
     
     # Variables pour suivre les onglets
     current_calculs_tab = None
@@ -893,8 +926,15 @@ def lancer_interpolation_numerique(parent=None):
     
     # Configuration du style
     def configurer_style():
-        style = ttk.Style()
-        style.theme_use("clam")
+        s = ensure_style()  # central style; fallback to local theme if needed
+        try:
+            if s is None:
+                style = ttk.Style()
+                style.theme_use("clam")
+            else:
+                style = s
+        except Exception:
+            style = s
         
         # Style pour les onglets
         style.configure("TNotebook", background=PALETTE["fond_principal"])
@@ -929,7 +969,7 @@ def lancer_interpolation_numerique(parent=None):
         
         return style
     
-    style = configurer_style()
+    ensure_style()
     
     # Créer un notebook (onglets)
     notebook = ttk.Notebook(fenetre_interpolation)
@@ -1154,13 +1194,13 @@ def lancer_interpolation_numerique(parent=None):
             if current_calculs_tab is not None:
                 try:
                     notebook.forget(current_calculs_tab)
-                except:
+                except Exception:
                     pass
             
             if current_graphe_tab is not None:
                 try:
                     notebook.forget(current_graphe_tab)
-                except:
+                except Exception:
                     pass
             
             # Créer un nouvel onglet pour afficher les calculs

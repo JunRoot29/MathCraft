@@ -1,4 +1,4 @@
-from tkinter import *
+import tkinter as tk
 from tkinter import ttk
 from App import polynome as poly
 from App import operation_de_base as op
@@ -52,7 +52,7 @@ def afficher_a_propos():
 historique_interface = InterfaceHistorique(parent=None)  
 
 # Fenetre principal
-fenetre = Tk()
+fenetre = tk.Tk()
 fenetre.title("🧠MathsCraft")
 fenetre.geometry("900x700")
 fenetre.configure(bg="#F0F4F8")
@@ -61,12 +61,12 @@ fenetre.configure(bg="#F0F4F8")
 def creer_menu_burger():
     """Crée un menu burger simple et fonctionnel"""
     # Cadre pour le header
-    header_frame = Frame(fenetre, bg="#F0F4F8", height=60)
-    header_frame.pack(fill=X, padx=20, pady=10)
+    header_frame = tk.Frame(fenetre, bg="#F0F4F8", height=60)
+    header_frame.pack(fill=tk.X, padx=20, pady=10)
     header_frame.pack_propagate(False)
     
     # Bouton menu burger à gauche
-    burger_btn = Menubutton(
+    burger_btn = tk.Menubutton(
         header_frame,
         text="☰",
         font=("Arial", 16, "bold"),
@@ -77,20 +77,20 @@ def creer_menu_burger():
         cursor="hand2",
         width=3
     )
-    burger_btn.pack(side=LEFT, padx=(0, 15))
+    burger_btn.pack(side=tk.LEFT, padx=(0, 15))
     
     # Titre à côté du bouton burger
-    title_label = Label(
+    title_label = tk.Label(
         header_frame,
         text="MathCrafts",
         font=("Century Gothic", 20, "bold"),
         fg="#1E40AF",
         bg="#F0F4F8"
     )
-    title_label.pack(side=LEFT)
+    title_label.pack(side=tk.LEFT)
     
     # Créer le menu déroulant
-    menu = Menu(burger_btn, tearoff=0, bg="white", fg="#1E293B", font=("Century Gothic", 10))
+    menu = tk.Menu(burger_btn, tearoff=0, bg="white", fg="#1E293B", font=("Century Gothic", 10))
     
     # Ajouter les options au menu
     menu.add_command(label="📚 Guides", command=afficher_guides)
@@ -145,23 +145,23 @@ style.map("Quit.TButton",
           foreground=[('active', "#FF0202")])
 
 # Layout principal : sidebar gauche + content à droite
-main_area = Frame(fenetre, bg="#F0F4F8")
-main_area.pack(pady=10, padx=20, fill=BOTH, expand=True)
+main_area = tk.Frame(fenetre, bg="#F0F4F8")
+main_area.pack(pady=10, padx=20, fill=tk.BOTH, expand=True)
 
 # Sidebar (gauche) — avec scroll si nécessaire
-sidebar = Frame(main_area, bg="#F0F4F8", width=500)
-sidebar.pack(side=LEFT, fill=Y)
+sidebar = tk.Frame(main_area, bg="#F0F4F8", width=500)
+sidebar.pack(side=tk.LEFT, fill=tk.Y)
 sidebar.pack_propagate(False)
 
-sidebar_canvas = Canvas(sidebar, bg="#F0F4F8", highlightthickness=0)
+sidebar_canvas = tk.Canvas(sidebar, bg="#F0F4F8", highlightthickness=0)
 sidebar_scrollbar = ttk.Scrollbar(sidebar, orient="vertical", command=sidebar_canvas.yview)
-sidebar_inner = Frame(sidebar_canvas, bg="#F0F4F8")
+sidebar_inner = tk.Frame(sidebar_canvas, bg="#F0F4F8")
 
 sidebar_inner.bind("<Configure>", lambda e: sidebar_canvas.configure(scrollregion=sidebar_canvas.bbox("all")))
 sidebar_canvas.create_window((0, 0), window=sidebar_inner, anchor="nw")
 sidebar_canvas.configure(yscrollcommand=sidebar_scrollbar.set)
-sidebar_canvas.pack(side=LEFT, fill=BOTH, expand=True)
-sidebar_scrollbar.pack(side=RIGHT, fill=Y)
+sidebar_canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+sidebar_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
 def _on_sidebar_mouse_wheel(event):
     sidebar_canvas.yview_scroll(int(-1*(event.delta/120)), "units")
@@ -169,8 +169,8 @@ def _on_sidebar_mouse_wheel(event):
 sidebar_canvas.bind_all("<MouseWheel>", _on_sidebar_mouse_wheel)
 
 # Cadre de contenu (droite)
-content_frame = Frame(main_area, bg="#FFFFFF")
-content_frame.pack(side=LEFT, fill=BOTH, expand=True, padx=(20,0))
+content_frame = tk.Frame(main_area, bg="#FFFFFF")
+content_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(20,0))
 
 def clear_content():
     for w in content_frame.winfo_children():
@@ -187,29 +187,30 @@ def show_module(func):
 
 # === CONTENU PRINCIPAL ===
 # Zone de présentation (à droite)
-labels = Label(
+labels = tk.Label(
     content_frame,
-    text="🧮 ✨ Un espace malin pour Calculer, Apprendre et s'amuser avec les maths.",
+    text="🧮 ✨ Un espace malin pour Calculer,\nApprendre et s'amuser avec les maths.",
     font=("Century Gothic", 13),
     fg="#64748B",
     bg="#FFFFFF",
     wraplength=520,
     justify="left"
 )
-labels.pack(pady=(20, 10), padx=20, anchor="nw")
+labels.pack(pady=(20, 10), padx=20, anchor="center")
 
 # Séparateur
 separator1 = ttk.Separator(content_frame, orient='horizontal')
 separator1.pack(fill='x', padx=20, pady=15)
 
 # === SECTION BOUTONS (sidebar) ===
-label2 = Label(
+label2 = tk.Label(
     sidebar_inner,
     text="Choisis ton opération !",
     fg="#1E293B",
     bg="#F0F4F8",
     font=("Century Gothic", 14, "bold"),
-    justify="left"
+    justify="center",
+    anchor="center"
 )
 label2.pack(pady=(10, 10), padx=10, anchor="w")
 
@@ -218,7 +219,7 @@ bouton1 = ttk.Button(
     sidebar_inner,
     text="Module 1 : Opération de Base 🧮",
     style="Custom.TButton",
-    compound=LEFT,
+    compound=tk.LEFT,
     command=lambda: show_module(op.launch_operation),
 )
 
@@ -226,7 +227,7 @@ bouton2 = ttk.Button(
     sidebar_inner,
     text="Module 2 : Théorie des nombres ➕",
     style="Custom.TButton",
-    compound=LEFT,
+    compound=tk.LEFT,
     command=lambda: show_module(theorie.lancer_theorie),
 )
 
@@ -234,15 +235,15 @@ bouton3 = ttk.Button(
     sidebar_inner,
     text="Module 3 : Conversion ⚖️",
     style="Custom.TButton",
-    compound=LEFT,
+    compound=tk.LEFT,
     command=lambda: show_module(conv.launch_conversion)
 )
 
 bouton4 = ttk.Button(
     sidebar_inner,
     text="Module 4 : Explorateur de Concepts (Jeu) 🎯",
-    style="Custom.TButton", 
-    compound=LEFT,
+    style="Custom.TButton",
+    compound=tk.LEFT,
     command=lambda: show_module(exp_concepts.lancer_explorateur_concepts)
 )
 
@@ -250,14 +251,14 @@ bouton6 = ttk.Button(
     sidebar_inner,
     text="Module 5 : Polynomes & Equations 📈",
     style="Custom.TButton",
-    compound=LEFT,
+    compound=tk.LEFT,
     command=lambda: show_module(poly.lancer_polynome))
 
 bouton8 = ttk.Button(
     sidebar_inner,
     text="Module 6 : Opération sur les chaines de caractère 🔠",
     style="Custom.TButton",
-    compound=LEFT,
+    compound=tk.LEFT,
     command=lambda: show_module(ch.lancer_chaine)
 )
 
@@ -265,7 +266,7 @@ bouton9 = ttk.Button(
     sidebar_inner,
     text="Module 7 : Intégration Numérique 📊",
     style="Custom.TButton",
-    compound=LEFT,
+    compound=tk.LEFT,
     command=lambda: show_module(int_num.lancer_integration_numerique)
 )
 
@@ -273,7 +274,7 @@ bouton_equation_num = ttk.Button(
     sidebar_inner,
     text="Module 8 : Resolution (Numérique) d'équation 🟰",
     style="Custom.TButton",
-    compound=LEFT,
+    compound=tk.LEFT,
     command=lambda: show_module(eq_num.lancer_equation_Numerique)
 )
 
@@ -281,29 +282,29 @@ bouton_interpolation_lineaire = ttk.Button(
     sidebar_inner,
     text="Module 9 : interpolation_linéaire 📈",
     style="Custom.TButton",
-    compound=LEFT,
+    compound=tk.LEFT,
     command=lambda: show_module(int_lin.lancer_interpolation_numerique)
 )
 
 bouton_historique = ttk.Button(
     sidebar_inner,
-    text="📊 Historique des Calculs", 
+    text="📊 Historique des Calculs",
     style="Custom.TButton",
-    compound=LEFT,
+    compound=tk.LEFT,
     command=lambda: historique_interface.afficher_historique(parent=content_frame)
 )
 
 # Placement des boutons
-bouton1.pack(pady=8, fill=X, padx=20)
-bouton2.pack(pady=8, fill=X, padx=20)
-bouton3.pack(pady=8, fill=X, padx=20)
-bouton4.pack(pady=8, fill=X, padx=20)
-bouton6.pack(pady=8, fill=X, padx=20)
-bouton8.pack(pady=8, fill=X, padx=20)
-bouton9.pack(pady=8, fill=X, padx=20)
-bouton_equation_num.pack(pady=8, fill=X, padx=20)
-bouton_interpolation_lineaire.pack(pady=8, fill=X, padx=20)
-bouton_historique.pack(pady=8, fill=X, padx=20)
+bouton1.pack(pady=8, fill=tk.X, padx=20)
+bouton2.pack(pady=8, fill=tk.X, padx=20)
+bouton3.pack(pady=8, fill=tk.X, padx=20)
+bouton4.pack(pady=8, fill=tk.X, padx=20)
+bouton6.pack(pady=8, fill=tk.X, padx=20)
+bouton8.pack(pady=8, fill=tk.X, padx=20)
+bouton9.pack(pady=8, fill=tk.X, padx=20)
+bouton_equation_num.pack(pady=8, fill=tk.X, padx=20)
+bouton_interpolation_lineaire.pack(pady=8, fill=tk.X, padx=20)
+bouton_historique.pack(pady=8, fill=tk.X, padx=20)
 
 # Séparateur avant le bouton Quitter
 separator2 = ttk.Separator(sidebar_inner, orient='horizontal')
@@ -314,20 +315,20 @@ bouton10 = ttk.Button(
     sidebar_inner,
     text="Quitter",
     style="Quit.TButton",
-    compound=LEFT,
+    compound=tk.LEFT,
     command=fenetre.destroy
 )
-bouton10.pack(pady=10, fill=X, padx=20)
+bouton10.pack(pady=10, fill=tk.X, padx=20)
 
 # === PIED DE PAGE (zone de contenu) ===
-footer = Label(
+footer = tk.Label(
     content_frame,
     text="© 2026 MathsCraft - Développé Par Junior Kossivi",
     font=("Century Gothic", 9),
     fg="#94A3B8",
     bg="#FFFFFF"
 )
-footer.pack(pady=(30, 20), padx=20, anchor="se")
+footer.pack(pady=(30, 20), padx=20, anchor="center")
 
 # Mettre à jour la référence parent de l'historique
 historique_interface.parent = fenetre

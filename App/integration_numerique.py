@@ -3,15 +3,51 @@ integration_numerique.py - Interface graphique pour l'intégration numérique av
 Auteur: Junior Kossivi
 Description: Interface Tkinter pour les méthodes d'intégration numérique avec affichage direct des itérations
 """
+# ruff: noqa: E402,F405
 
-from tkinter import *
+import tkinter as tk
 from tkinter import ttk
 import re
+
+# Alias tkinter (remplacer les star-imports pour satisfaire le linter)
+Label = tk.Label
+Frame = tk.Frame
+Toplevel = tk.Toplevel
+Text = tk.Text
+Canvas = tk.Canvas
+Menu = tk.Menu
+Menubutton = tk.Menubutton
+Scrollbar = tk.Scrollbar
+Entry = tk.Entry
+Button = tk.Button
+Tk = tk.Tk
+LEFT = tk.LEFT
+RIGHT = tk.RIGHT
+BOTH = tk.BOTH
+X = tk.X
+Y = tk.Y
+W = tk.W
+NW = tk.NW
+E = tk.E
+N = tk.N
+VERTICAL = tk.VERTICAL
+HORIZONTAL = tk.HORIZONTAL
+WORD = tk.WORD
+# Constantes et états
+DISABLED = tk.DISABLED
+NORMAL = tk.NORMAL
+END = tk.END
+INSERT = tk.INSERT
+StringVar = tk.StringVar
+BooleanVar = tk.BooleanVar
+IntVar = tk.IntVar
+DoubleVar = tk.DoubleVar
 import math
 import csv
 from math import factorial
 from tkinter import filedialog, messagebox
 from . import modules as modu
+from .style_manager import ensure_style
 
 # Palette unifiée
 PALETTE = {
@@ -438,55 +474,17 @@ def lancer_integration_numerique(parent=None):
     
     # Configuration du style
     def configurer_style():
-        style = ttk.Style()
-        style.theme_use("clam")
-        
-        # Style pour les onglets
-        style.configure("TNotebook", background=PALETTE["fond_principal"])
-        style.configure("TNotebook.Tab", 
-                       font=("Century Gothic", 10),
-                       padding=[10, 5])
-        
-        # Style pour les boutons
-        style.configure("Custom.TButton",
-                        foreground=PALETTE["fond_secondaire"],
-                        background=PALETTE["primaire"],
-                        font=("Century Gothic", 9, "bold"),
-                        padding=4,
-                        relief="flat",
-                        width=18)
-        
-        style.configure("Quit.TButton",
-                        foreground=PALETTE["fond_secondaire"],
-                        background=PALETTE["erreur"],
-                        font=("Century Gothic", 10, "bold"),
-                        padding=6,
-                        relief="flat")
-
-        # Style pour petits boutons (raccourcis)
-        style.configure("Small.TButton",
-                        foreground=PALETTE["fond_secondaire"],
-                        background=PALETTE["primaire"],
-                        font=("Century Gothic", 9),
-                        padding=2,
-                        relief="flat",
-                        width=8)
-        
-        # Effets de survol
-        style.map("Custom.TButton",
-                 background=[('active', PALETTE["secondaire"]),
-                            ('pressed', '#1E3A8A')])
-        style.map("Small.TButton",
-                 background=[('active', PALETTE["secondaire"]),
-                            ('pressed', '#1E3A8A')])
-        
-        style.map("Quit.TButton",
-                 background=[('active', '#B91C1C'),
-                            ('pressed', '#991B1B')])
-        
-        return style
+        """Compat wrapper: renvoie un style configuré, en privilégiant la config centralisée."""
+        s = ensure_style()
+        if s is None:
+            s = ttk.Style()
+            try:
+                s.theme_use("clam")
+            except Exception:
+                pass
+        return s
     
-    style = configurer_style()
+    ensure_style()
     
     # Créer un notebook (onglets)
     notebook = ttk.Notebook(fenetre_integration)
@@ -688,7 +686,7 @@ def lancer_integration_numerique(parent=None):
             if current_iterations_tab is not None:
                 try:
                     notebook.forget(current_iterations_tab)
-                except:
+                except Exception:
                     pass
             
             # Créer un nouvel onglet pour afficher les itérations

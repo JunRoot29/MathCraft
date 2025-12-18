@@ -3,10 +3,36 @@ operation_de_base.py - Interface de calcul simple
 Auteur: Junior Kossivi
 Description: Interface Tkinter pour les calcul simples (Une Calculatrice)
 """
+# ruff: noqa: E402,F405
 
 import math
-from tkinter import *
+import tkinter as tk
 from tkinter import ttk
+from .style_manager import ensure_style
+
+# Alias tkinter (remplacer les star-imports pour satisfaire le linter)
+Label = tk.Label
+Frame = tk.Frame
+Toplevel = tk.Toplevel
+Text = tk.Text
+Canvas = tk.Canvas
+Menu = tk.Menu
+Menubutton = tk.Menubutton
+Scrollbar = tk.Scrollbar
+Entry = tk.Entry
+LEFT = tk.LEFT
+RIGHT = tk.RIGHT
+BOTH = tk.BOTH
+X = tk.X
+Y = tk.Y
+W = tk.W
+NW = tk.NW
+WORD = tk.WORD
+# Constantes et états
+DISABLED = tk.DISABLED
+NORMAL = tk.NORMAL
+END = tk.END
+INSERT = tk.INSERT
 import re
 from .historique_manager import historique_manager
 
@@ -49,50 +75,55 @@ def launch_operation(parent=None):
             pass
 
     def configurer_style():
-        style = ttk.Style()
-        style.theme_use("clam")  # ✅ Ajout du thème clam
+        s = ensure_style()
+        if s is None:
+            s = ttk.Style()
+            try:
+                s.theme_use("clam")  # ✅ Ajout du thème clam
+            except Exception:
+                pass
         
         # Style bouton principal
-        style.configure("Custom.TButton",
-                        foreground=PALETTE["fond_secondaire"],
-                        background=PALETTE["primaire"],
-                        font=("Century Gothic", 10, "bold"),
-                        padding=8,
-                        relief="flat",
-                        focuscolor="none")
+        s.configure("Custom.TButton",
+                    foreground=PALETTE["fond_secondaire"],
+                    background=PALETTE["primaire"],
+                    font=("Century Gothic", 10, "bold"),
+                    padding=8,
+                    relief="flat",
+                    focuscolor="none")
         
         # Style pour boutons de la calculatrice (taille réduite)
-        style.configure("Calc.TButton",
-                        foreground=PALETTE["fond_secondaire"],
-                        background=PALETTE["primaire"],
-                        font=("Century Gothic", 10),
-                        padding=2,
-                        relief="flat",
-                        width=6)
+        s.configure("Calc.TButton",
+                    foreground=PALETTE["fond_secondaire"],
+                    background=PALETTE["primaire"],
+                    font=("Century Gothic", 10),
+                    padding=2,
+                    relief="flat",
+                    width=6)
         
         # Style spécial pour le bouton Quitter
-        style.configure("Quit.TButton",
-                        foreground=PALETTE["fond_secondaire"],
-                        background=PALETTE["erreur"],
-                        font=("Century Gothic", 11, "bold"),
-                        padding=10,
-                        relief="flat",
-                        focuscolor="none")
+        s.configure("Quit.TButton",
+                    foreground=PALETTE["fond_secondaire"],
+                    background=PALETTE["erreur"],
+                    font=("Century Gothic", 11, "bold"),
+                    padding=10,
+                    relief="flat",
+                    focuscolor="none")
         
         # Effets de survol
-        style.map("Custom.TButton",
-                 background=[('active', PALETTE["secondaire"]),
-                            ('pressed', '#1E3A8A')],
-                 foreground=[('active', PALETTE["fond_secondaire"])])
+        s.map("Custom.TButton",
+             background=[('active', PALETTE["secondaire"]),
+                        ('pressed', '#1E3A8A')],
+             foreground=[('active', PALETTE["fond_secondaire"])])
         
-        style.map("Quit.TButton",
-                 background=[('active', '#B91C1C'),
-                            ('pressed', '#991B1B')],
-                 foreground=[('active', PALETTE["fond_secondaire"])])
+        s.map("Quit.TButton",
+             background=[('active', '#B91C1C'),
+                        ('pressed', '#991B1B')],
+             foreground=[('active', PALETTE["fond_secondaire"])])
         
-        return style
+        return s
 
-    style = configurer_style()
+    ensure_style()
     
     # Titre principal
     label1 = Label(operation, text="🧮 CALCULATRICE DE BASE", 

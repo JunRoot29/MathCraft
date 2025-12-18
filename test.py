@@ -29,10 +29,7 @@ from App.modules import (
     
     # Intégration
     intRectangleRetro, intRectanglePro, intRectangleCentre,
-    intTrapezeS, intTrapezeC, intSimpsonS, intSimpsonC,
-    
-    # Équations
-    racineDichotomie, racineNewton
+    intTrapezeS, intSimpsonS, racineDichotomie, racineNewton
 )
 
 from App.conversion import (

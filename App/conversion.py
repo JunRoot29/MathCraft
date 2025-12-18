@@ -3,10 +3,46 @@ conversion.py - Interface pour les conversions de valeurs
 Auteur: Junior Kossivi
 Description: Interface Tkinter pour les méthodes de conversion de valeurs numériques (Poids, data, longueur, vitesse,...)
 """
+# ruff: noqa: E402,F405
 
-import math
-from tkinter import *
+import tkinter as tk
 from tkinter import ttk
+from .style_manager import ensure_style
+
+# Alias tkinter (remplacer les star-imports pour satisfaire le linter)
+Label = tk.Label
+Frame = tk.Frame
+Toplevel = tk.Toplevel
+Text = tk.Text
+Canvas = tk.Canvas
+Menu = tk.Menu
+Menubutton = tk.Menubutton
+Scrollbar = tk.Scrollbar
+Entry = tk.Entry
+Button = tk.Button
+Tk = tk.Tk
+LEFT = tk.LEFT
+RIGHT = tk.RIGHT
+BOTH = tk.BOTH
+X = tk.X
+Y = tk.Y
+W = tk.W
+NW = tk.NW
+E = tk.E
+N = tk.N
+CENTER = tk.CENTER
+SUNKEN = tk.SUNKEN
+SOLID = tk.SOLID
+WORD = tk.WORD
+# Constantes et états
+DISABLED = tk.DISABLED
+NORMAL = tk.NORMAL
+END = tk.END
+INSERT = tk.INSERT
+StringVar = tk.StringVar
+BooleanVar = tk.BooleanVar
+IntVar = tk.IntVar
+DoubleVar = tk.DoubleVar
 import sys
 import os
 sys.path.append(os.path.dirname(__file__))
@@ -113,8 +149,8 @@ def convertir_longueur(valeur, unite_depart, unite_arrivee):
         en_metre = valeur * unit_to_meter[unite_depart]
         resultat = en_metre / unit_to_meter[unite_arrivee]
         return f"✅{round(resultat, 4)}"
-    except Exception as e:
-        return f"❌Erreur, Vérifiez la saisie avant conversion"
+    except Exception:
+        return "❌Erreur, Vérifiez la saisie avant conversion"
     
 # Fonction de conversion de Température
 def convertir_temperature(valeur, unite_depart, unite_arrivee):
@@ -147,8 +183,8 @@ def convertir_temperature(valeur, unite_depart, unite_arrivee):
         
         return f"✅{round(resultat, 4)}"
         
-    except Exception as e:
-        return f"❌Erreur, Vérifiez la saisie avant conversion"
+    except Exception:
+        return "❌Erreur, Vérifiez la saisie avant conversion"
 
 # Fonction de conversion de Masse et Poids
 def convertir_masse_et_poids(valeur, unite_depart, unite_arrivee):
@@ -157,8 +193,8 @@ def convertir_masse_et_poids(valeur, unite_depart, unite_arrivee):
         en_gramme = valeur * unit_to_masse_et_poids[unite_depart]
         resultat = en_gramme / unit_to_masse_et_poids[unite_arrivee]
         return f"✅{round(resultat, 4)}"
-    except Exception as e:
-        return f"❌Erreur, Vérifiez la saisie avant conversion"
+    except Exception:
+        return "❌Erreur, Vérifiez la saisie avant conversion"
 
 # Fonction de conversion de Vitesse
 def convertir_vitesse(valeur, unite_depart, unite_arrivee):
@@ -167,8 +203,8 @@ def convertir_vitesse(valeur, unite_depart, unite_arrivee):
         en_gramme = valeur * unit_to_vitesse[unite_depart]
         resultat = en_gramme / unit_to_vitesse[unite_arrivee]
         return f"✅{round(resultat, 4)}"
-    except Exception as e:
-        return f"❌Erreur, Vérifiez la saisie avant conversion"
+    except Exception:
+        return "❌Erreur, Vérifiez la saisie avant conversion"
 
 # Fonction de conversion des angles
 def convertir_angles(valeur, unite_depart, unite_arrivee):
@@ -177,8 +213,8 @@ def convertir_angles(valeur, unite_depart, unite_arrivee):
         en_gramme = valeur * unit_to_angles[unite_depart]
         resultat = en_gramme / unit_to_angles[unite_arrivee]
         return f"✅{round(resultat, 4)}"
-    except Exception as e:
-        return f"❌Erreur, Vérifiez la saisie avant conversion"
+    except Exception:
+        return "❌Erreur, Vérifiez la saisie avant conversion"
 
 # Fonction de conversion des systèmes numériques
 def convertir_systemes_numeriques(valeur, unite_depart, unite_arrivee):
@@ -218,8 +254,8 @@ def convertir_systemes_numeriques(valeur, unite_depart, unite_arrivee):
         
     except ValueError:
         return f"❌Valeur invalide pour le système {unite_depart}"
-    except Exception as e:
-        return f"❌Erreur lors de la conversion"
+    except Exception:
+        return "❌Erreur lors de la conversion"
 
 # Fonction de conversion des unités de stockage
 def convertir_stockage_donnees(valeur, unite_depart, unite_arrivee):
@@ -230,30 +266,37 @@ def convertir_stockage_donnees(valeur, unite_depart, unite_arrivee):
         # Convertir de bytes vers l'unité d'arrivée
         resultat = en_bytes / unit_to_data_storage[unite_arrivee]
         return f"✅{round(resultat, 6)}"
-    except Exception as e:
-        return f"❌Erreur, Vérifiez la saisie avant conversion"
+    except Exception:
+        return "❌Erreur, Vérifiez la saisie avant conversion"
 
 """===================================================================================="""
 # Style global pour les boutons arrondis
 def configurer_style():
-    style = ttk.Style()
-    style.configure("Custom.TButton",
-                    foreground="#FFFFFF",
-                    background=PALETTE["secondaire"],  # Utilisation de la palette
-                    font=("Century Gothic", 14),
-                    padding=15,
-                    relief="flat",
-                    width=40)
+    s = ensure_style()
+    if s is None:
+        s = ttk.Style()
+        try:
+            s.theme_use("clam")
+        except Exception:
+            pass
+
+    s.configure("Custom.TButton",
+                foreground="#FFFFFF",
+                background=PALETTE["secondaire"],  # Utilisation de la palette
+                font=("Century Gothic", 14),
+                padding=15,
+                relief="flat",
+                width=40)
     
     # Style spécial pour le bouton Quitter
-    style.configure("Quit.TButton",
-                    foreground="#FFFFFF",
-                    background=PALETTE["erreur"],  # Utilisation de la palette
-                    font=("Century Gothic", 14),
-                    padding=15,
-                    relief="flat",
-                    width=40)
-    return style
+    s.configure("Quit.TButton",
+                foreground="#FFFFFF",
+                background=PALETTE["erreur"],  # Utilisation de la palette
+                font=("Century Gothic", 14),
+                padding=15,
+                relief="flat",
+                width=40)
+    return s
 
 # Helper pour savoir si on doit créer une Toplevel ou utiliser un Frame parent
 def _is_toplevel_parent(parent):

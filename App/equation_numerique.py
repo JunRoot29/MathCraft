@@ -3,9 +3,11 @@ equation_numerique.py - Interface pour la résolution d'équations numériques
 Auteur: Junior Kossivi
 Description: Interface Tkinter pour les méthodes de résolution d'équations  de façon numérique
 """
+# ruff: noqa: E402,F405
 
-from tkinter import *
+from tkinter import *  # noqa: F403,F405
 from tkinter import ttk
+from .style_manager import ensure_style
 import re
 import math
 import csv
@@ -494,7 +496,7 @@ def lancer_equation_Numerique(parent=None):
         
         return style
     
-    style = configurer_style()
+    ensure_style()
     
     # Créer un notebook (onglets)
     notebook = ttk.Notebook(fenetre)
@@ -608,13 +610,13 @@ def lancer_equation_Numerique(parent=None):
         return entry
     
     # Créer les champs de paramètres
-    entry_a = create_param_row(frame_params, "Borne a", var_a)
-    entry_b = create_param_row(frame_params, "Borne b", var_b)
-    entry_x0 = create_param_row(frame_params, "Point initial x0", var_x0)
-    entry_x1 = create_param_row(frame_params, "Point x1", var_x1)
-    entry_x2 = create_param_row(frame_params, "Point x2", var_x2)
-    entry_epsilon = create_param_row(frame_params, "Précision ε", var_epsilon, "1e-6")
-    entry_max_iter = create_param_row(frame_params, "Max itérations", var_max_iter, "1000")
+    create_param_row(frame_params, "Borne a", var_a)
+    create_param_row(frame_params, "Borne b", var_b)
+    create_param_row(frame_params, "Point initial x0", var_x0)
+    create_param_row(frame_params, "Point x1", var_x1)
+    create_param_row(frame_params, "Point x2", var_x2)
+    create_param_row(frame_params, "Précision ε", var_epsilon, "1e-6")
+    create_param_row(frame_params, "Max itérations", var_max_iter, "1000")
     
     # Section pour les fonctions supplémentaires
     frame_fonctions_supp = Frame(scrollable_frame, bg=PALETTE["fond_principal"])
@@ -760,7 +762,7 @@ def lancer_equation_Numerique(parent=None):
             if current_iterations_tab is not None:
                 try:
                     notebook.forget(current_iterations_tab)
-                except:
+                except Exception:
                     pass
             
             # Créer un nouvel onglet pour afficher les itérations

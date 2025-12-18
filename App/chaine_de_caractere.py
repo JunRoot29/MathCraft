@@ -3,8 +3,42 @@ chaine_de_caractere.py - Interface pour le Traitement des chaine de caratère
 Auteur: Junior Kossivi
 Description: Interface Tkinter pour les méthodes de résolution d'opération sur les chaine de caractère
 """
-from tkinter import *
+# ruff: noqa: E402,F405
+import tkinter as tk
 from tkinter import ttk
+from .style_manager import ensure_style
+
+# Alias tkinter (remplacer les star-imports pour satisfaire le linter)
+Label = tk.Label
+Frame = tk.Frame
+Toplevel = tk.Toplevel
+Text = tk.Text
+Canvas = tk.Canvas
+Menu = tk.Menu
+Menubutton = tk.Menubutton
+Scrollbar = tk.Scrollbar
+Entry = tk.Entry
+Button = tk.Button
+Tk = tk.Tk
+LEFT = tk.LEFT
+RIGHT = tk.RIGHT
+BOTH = tk.BOTH
+X = tk.X
+Y = tk.Y
+W = tk.W
+NW = tk.NW
+E = tk.E
+N = tk.N
+CENTER = tk.CENTER
+SUNKEN = tk.SUNKEN
+SOLID = tk.SOLID
+WORD = tk.WORD
+# Constantes et états
+DISABLED = tk.DISABLED
+NORMAL = tk.NORMAL
+END = tk.END
+INSERT = tk.INSERT
+StringVar = tk.StringVar
 import pyperclip  # Pour copier dans le presse-papier
 from .modules import compterVoyelles, compterlettre, compter_occurrences, palindrome_amelioré
 from .modules import inverser_chaine, compter_mots, majuscules, minuscules, nettoyer_espaces, est_anagramme, generer_mot_de_passe, encoder_base64, decoder_base64, compter_consonnes, extraire_chiffres, rot13
@@ -22,35 +56,42 @@ PALETTE = {
 }
 
 def configurer_style():
-    style = ttk.Style()
-    style.configure("Custom.TButton",
-                    foreground="#FFFFFF",
-                    background=PALETTE["secondaire"],
-                    font=("Century Gothic", 12),
-                    relief="flat",
-                    padding=10)
+    s = ensure_style()
+    if s is None:
+        s = ttk.Style()
+        try:
+            s.theme_use("clam")
+        except Exception:
+            pass
+
+    s.configure("Custom.TButton",
+                foreground="#FFFFFF",
+                background=PALETTE["secondaire"],
+                font=("Century Gothic", 12),
+                relief="flat",
+                padding=10)
     
-    style.configure("Copier.TButton",
-                    foreground="#FFFFFF",
-                    background="#6B7280",
-                    font=("Century Gothic", 10),
-                    relief="flat",
-                    padding=6)
+    s.configure("Copier.TButton",
+                foreground="#FFFFFF",
+                background="#6B7280",
+                font=("Century Gothic", 10),
+                relief="flat",
+                padding=6)
     
-    style.configure("Quit.TButton",
-                    foreground="#FFFFFF",
-                    background=PALETTE["erreur"],
-                    font=("Century Gothic", 12),
-                    relief="flat",
-                    padding=10)
+    s.configure("Quit.TButton",
+                foreground="#FFFFFF",
+                background=PALETTE["erreur"],
+                font=("Century Gothic", 12),
+                relief="flat",
+                padding=10)
     
-    style.configure("Petit.TButton",
-                    foreground="#FFFFFF",
-                    background=PALETTE["secondaire"],
-                    font=("Century Gothic", 10),
-                    relief="flat",
-                    padding=6)
-    return style
+    s.configure("Petit.TButton",
+                foreground="#FFFFFF",
+                background=PALETTE["secondaire"],
+                font=("Century Gothic", 10),
+                relief="flat",
+                padding=6)
+    return s
 
 def centrer_fenetre(fenetre):
     """Centre une fenêtre sur l'écran"""
@@ -122,7 +163,7 @@ def creer_zone_resultat_copiable(parent, hauteur=6):
                 original_text = copier_button.cget("text")
                 copier_button.config(text="✅ Copié !")
                 parent.after(2000, lambda: copier_button.config(text=original_text))
-            except Exception as e:
+            except Exception:
                 copier_button.config(text="❌ Erreur")
                 parent.after(2000, lambda: copier_button.config(text="📋 Copier le résultat"))
 
@@ -145,7 +186,7 @@ def lancer_compt_voy(parent):
     page.title("Compteur de voyelles")
     centrer_fenetre(page)
     
-    style = configurer_style()
+    ensure_style()
 
     main_frame = Frame(page, bg=PALETTE["fond_principal"], padx=30, pady=20)
     main_frame.pack(fill=BOTH, expand=True)
@@ -213,7 +254,7 @@ def lancer_compt_lettre():
     page.title("Compteur de lettres")
     centrer_fenetre(page)
     
-    style = configurer_style()
+    ensure_style()
 
     main_frame = Frame(page, bg=PALETTE["fond_principal"], padx=30, pady=20)
     main_frame.pack(fill=BOTH, expand=True)
@@ -309,7 +350,7 @@ def lancer_rech_mot():
     page.title("Recherche de mot")
     centrer_fenetre(page)
     
-    style = configurer_style()
+    ensure_style()
 
     main_frame = Frame(page, bg=PALETTE["fond_principal"], padx=30, pady=20)
     main_frame.pack(fill=BOTH, expand=True)
@@ -401,7 +442,7 @@ def lancer_palindrome():
     page.title("Détecteur de Palindromes")
     centrer_fenetre(page)
     
-    style = configurer_style()
+    ensure_style()
 
     main_frame = Frame(page, bg=PALETTE["fond_principal"], padx=30, pady=20)
     main_frame.pack(fill=BOTH, expand=True)
@@ -522,7 +563,7 @@ def lancer_operation_texte(operation, titre_text="Opération Texte", description
     page.title(titre_text)
     centrer_fenetre(page)
     
-    style = configurer_style()
+    ensure_style()
 
     # Frame principal
     main_frame = Frame(page, bg=PALETTE["fond_principal"], padx=30, pady=20)
@@ -792,7 +833,7 @@ def lancer_chaine(parent=None):
     button_container.bind("<Configure>", configure_scrollregion)
     canvas.bind("<Configure>", lambda e: canvas.itemconfig(canvas_window, width=canvas.winfo_width() - 20))
 
-    style = configurer_style()
+    ensure_style()
     
     # Liste des boutons avec leurs commandes et emojis
     boutons = [
