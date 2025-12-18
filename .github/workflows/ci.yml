@@ -40,11 +40,41 @@ jobs:
           python -u -c "import sys, platform; print(platform.platform())"
           python -m pip --version
           python -m pip list
+          # Save a compact python environment snapshot
+          python - <<'PY'
+import sys, platform
+open('python_env.txt','w').write(sys.version + "\n" + platform.platform())
+PY
           echo "--- Running tests ---"
-          python -u test.py
+          # Run tests and capture output to file so we can upload it even if tests fail
+          python - <<'PY'
+import sys, subprocess
+with open('test_output.txt','wb') as f:
+    p = subprocess.run([sys.executable, 'test.py'], stdout=f, stderr=subprocess.STDOUT)
+    open('test_rc.txt','w').write(str(p.returncode))
+    sys.exit(p.returncode)
+PY
 
       - name: Run import check (no-root-on-import)
         if: always()
         run: |
           echo "--- Running import-check ---"
-          python tools/test_no_root_on_import.py
+          python - <<'PY'
+import sys, subprocess
+with open('import_check_output.txt','wb') as f:
+    p = subprocess.run([sys.executable, 'tools/test_no_root_on_import.py'], stdout=f, stderr=subprocess.STDOUT)
+    open('import_check_rc.txt','w').write(str(p.returncode))
+    sys.exit(p.returncode)
+PY
+
+      - name: Upload test & import logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-logs-${{ matrix.os }}
+          path: |
+            test_output.txt
+            test_rc.txt
+            import_check_output.txt
+            import_check_rc.txt
+            python_env.txt
