@@ -1,0 +1,41 @@
+name: Auto-label PRs with 'automerge'
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  add-automerge-label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add 'automerge' label for PRs opened by repo owner
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            if (!pr) {
+              core.info('No pull_request payload, skipping.');
+              return;
+            }
+
+            const prNumber = pr.number;
+            const prAuthor = pr.user && pr.user.login;
+            const baseRef = pr.base && pr.base.ref;
+            const repoOwner = context.repo.owner;
+
+            // Only add label if the PR is opened by the repository owner and targets main
+            if (prAuthor === repoOwner && baseRef === 'main') {
+              core.info(`Adding 'automerge' label to PR #${prNumber} opened by ${prAuthor}`);
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                labels: ['automerge']
+              });
+            } else {
+              core.info(`PR #${prNumber} not eligible for auto-label (author=${prAuthor}, base=${baseRef})`);
+            }
