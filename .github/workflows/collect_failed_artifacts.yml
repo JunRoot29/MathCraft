@@ -1,0 +1,71 @@
+name: Collect CI failure artifacts
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+
+jobs:
+  collect_artifacts:
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch artifacts list & download
+        env:
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          REPO: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          echo "Run ID: $RUN_ID"
+          api="https://api.github.com/repos/${REPO}/actions/runs/${RUN_ID}/artifacts"
+          echo "Fetching artifacts list..."
+          curl -s -H "Authorization: Bearer $GITHUB_TOKEN" "$api" > artifacts.json
+          if [ $(jq -r '.artifacts | length' artifacts.json) -eq 0 ]; then
+            echo "No artifacts found."
+            exit 0
+          fi
+
+          for id in $(jq -r '.artifacts[].id' artifacts.json); do
+            echo "Downloading artifact $id"
+            curl -s -L -H "Authorization: Bearer $GITHUB_TOKEN" "https://api.github.com/repos/${REPO}/actions/artifacts/${id}/zip" -o artifact_${id}.zip
+            if [ -s artifact_${id}.zip ]; then
+              mkdir -p artifact_${id}
+              unzip -q artifact_${id}.zip -d artifact_${id} || true
+            else
+              echo "Downloaded artifact_${id}.zip is empty or missing"
+            fi
+          done
+
+      - name: Post diagnostic comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const run = context.payload.workflow_run;
+            const repo = context.repo;
+            const head_sha = run.head_sha;
+            const prs = await github.rest.repos.listPullRequestsAssociatedWithCommit({ owner: repo.owner, repo: repo.repo, commit_sha: head_sha });
+            if (prs.data.length === 0) {
+              core.info(`No PRs found for commit ${head_sha}`);
+            } else {
+              const pr = prs.data[0];
+              const fs = require('fs');
+              let body = 'La CI a **échoué** pour ce commit. J\'ai récupéré les artefacts disponibles et listé leur contenu :\n\n';
+              const files = require('fs').readdirSync('.');
+              let found = false;
+              for (const f of files) {
+                if (f.startsWith('artifact_') && fs.lstatSync(f).isDirectory()) {
+                  found = true;
+                  body += `- ${f}:\n`;
+                  const inner = fs.readdirSync(f).slice(0,50).map(x => '  - '+x).join('\n');
+                  body += inner + '\n\n';
+                }
+              }
+              if (!found) body += 'Aucun artefact disponible pour ce run.\n\n';
+              body += 'Vous pouvez télécharger les artefacts depuis l\'interface Actions, ou me demander d\'extraire des parties spécifiques (logs/tests).';
+              await github.rest.issues.createComment({ owner: repo.owner, repo: repo.repo, issue_number: pr.number, body: body });
+            }
