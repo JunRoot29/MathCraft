@@ -48,8 +48,6 @@ def afficher_a_propos():
         "- Intégration numérique"
     )
 
-# Initialiser l'interface historique
-historique_interface = InterfaceHistorique(parent=None)  
 
 # Fenetre principal
 fenetre = Tk()
@@ -106,11 +104,21 @@ def creer_menu_burger():
 # Créer le menu burger
 creer_menu_burger()
 
-# Configuration du style pour les boutons
-style = ttk.Style(fenetre)
-style.theme_use('clam')
+# Utiliser le module de styles centralisé, puis appliquer les ajustements locaux
+try:
+    from App.styles import ensure_styles_configured
+    ensure_styles_configured({
+        "fond_secondaire": "#FFFFFF",
+        "primaire": "#3B82F6",
+        "erreur": "#DC2626",
+        "secondaire": "#2563EB"
+    })
+except Exception:
+    pass
 
-# Style pour les boutons principaux
+style = ttk.Style(fenetre)
+
+# Style pour les boutons principaux (ajustements locaux)
 style.configure("Custom.TButton",
                 foreground="#FFFFFF",
                 background="#3B82F6",
@@ -329,7 +337,7 @@ footer = Label(
 )
 footer.pack(pady=(30, 20), padx=20, anchor="center")
 
-# Mettre à jour la référence parent de l'historique
-historique_interface.parent = fenetre
+# Initialiser l'interface historique maintenant que la fenêtre principale existe
+historique_interface = InterfaceHistorique(parent=fenetre)
 
 fenetre.mainloop()

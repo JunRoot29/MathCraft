@@ -156,7 +156,12 @@ class SoutienManager:
         buttons_frame = Frame(main_frame, bg=PALETTE["fond_principal"])
         buttons_frame.pack(fill=X, pady=20)
         
-        # Style pour les boutons
+        # Style pour les boutons (assurer styles globaux d'abord)
+        try:
+            from .styles import ensure_styles_configured
+            ensure_styles_configured(PALETTE)
+        except Exception:
+            pass
         style = ttk.Style()
         style.configure("Soutien.TButton", font=("Century Gothic", 10))
         
@@ -209,7 +214,7 @@ class SoutienManager:
         text_widget.config(state="disabled")
         
         ttk.Button(fenetre_partage, text="Fermer", 
-                  command=fenetre_partage.destroy).pack(pady=10)
+                  command=fenetre_partage.destroy, style="Soutien.TButton").pack(pady=10)
 
 # Instance globale
 soutien_manager = SoutienManager()

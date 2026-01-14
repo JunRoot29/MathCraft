@@ -38,46 +38,36 @@ def enregistrer_calcul(module, operation, entree, resultat):
     return historique_manager.ajouter_calcul(module, operation, entree, resultat)
 
 def configurer_style():
-    style = ttk.Style()
-    style.theme_use("clam")  # ✅ Ajout du thème clam
-    
-    # Style bouton principal
-    style.configure("Custom.TButton",
-                    foreground=PALETTE["fond_secondaire"],
-                    background=PALETTE["primaire"],
-                    font=("Century Gothic", 12, "bold"),
-                    padding=15,
-                    relief="flat",
-                    focuscolor="none")
-    
-    # Style spécial pour le bouton Quitter
-    style.configure("Quit.TButton",
-                    foreground=PALETTE["fond_secondaire"],
-                    background=PALETTE["erreur"],
-                    font=("Century Gothic", 12, "bold"),
-                    padding=12,
-                    relief="flat",
-                    focuscolor="none")
-    
-    # Effets de survol
-    style.map("Custom.TButton",
-             background=[('active', PALETTE["secondaire"]),
-                        ('pressed', '#1E3A8A')],
-             foreground=[('active', PALETTE["fond_secondaire"])])
-    
-    style.map("Quit.TButton",
-             background=[('active', '#B91C1C'),
-                        ('pressed', '#991B1B')],
-             foreground=[('active', PALETTE["fond_secondaire"])])
+    # Utilise le module centralisé pour garantir l'uniformité et éviter la création d'un root à l'import
+    try:
+        from .styles import ensure_styles_configured
+        ensure_styles_configured(PALETTE)
+    except Exception:
+        pass
+    return ttk.Style()
+
+    # Style pour le bouton Retour (header, top-left)
+    try:
+        style.configure("Return.Header.TButton",
+                        foreground=PALETTE["fond_secondaire"],
+                        background=PALETTE["primaire"],
+                        font=("Century Gothic", 10, "bold"),
+                        padding=6,
+                        relief="flat")
+        style.map("Return.Header.TButton",
+                 background=[('active', PALETTE["secondaire"]), ('pressed', '#1E3A8A')])
+    except Exception:
+        pass
     
     return style
 
-style = configurer_style()
 
 # Helper pour savoir si on doit créer une Toplevel ou utiliser un Frame parent
 def _is_toplevel_parent(parent):
     import tkinter as tk
-    return parent is None or isinstance(parent, (tk.Tk, tk.Toplevel))
+    # Only create a new Toplevel when no parent is provided or when parent is the root Tk.
+    # If parent is a Toplevel (e.g., the games selection window), reuse that window instead of opening a new one.
+    return parent is None or isinstance(parent, tk.Tk)
 
 def ajouter_conseils(fenetre, conseils, titre="💡 Conseils :"):
     """Fonction pour ajouter des conseils avec style unifié"""
@@ -93,6 +83,8 @@ def ajouter_conseils(fenetre, conseils, titre="💡 Conseils :"):
 
 # ------------------ Polynôme de degré 1 ------------------
 def lancer_polynome1(parent=None):
+    # Configure style lazily to avoid creating a Tk root at import time
+    configurer_style()
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
         fenetre_polynome1 = Toplevel(parent)
@@ -202,19 +194,36 @@ def lancer_polynome1(parent=None):
     ]
     ajouter_conseils(fenetre_polynome1, conseils_degre1, "💡 Conseils pour les polynômes degré 1 :")
 
-    # Bouton Quitter
+    # Boutons Retour et Quitter
+    def _retour_local_1():
+        if is_toplevel:
+            # Si c'est une fenêtre indépendante, on la ferme
+            fenetre_polynome1.destroy()
+        else:
+            # Sinon on revient au menu polynômes dans la même fenêtre
+            lancer_polynome(fenetre_polynome1)
+
     def _quit_local_1():
         if is_toplevel:
             fenetre_polynome1.destroy()
         else:
             for w in list(fenetre_polynome1.winfo_children()):
                 w.destroy()
-    button_quitter = ttk.Button(fenetre_polynome1, style="Quit.TButton", text="🚪 Quitter", 
-                               command=_quit_local_1)
+
+    bouton_retour = ttk.Button(fenetre_polynome1, style="Return.Header.TButton", text="🔙 Retour", command=_retour_local_1)
+    try:
+        bouton_retour.place(x=12, y=12)
+    except Exception:
+        bouton_retour.pack(pady=5)
+
+
+    button_quitter = ttk.Button(fenetre_polynome1, style="Quit.TButton", text="🚪 Quitter", command=_quit_local_1)
     button_quitter.pack(pady=10)
 
 # ------------------ Polynôme de degré 2 ------------------
 def lancer_polynome2(parent=None):
+    # Configure style lazily to avoid creating a Tk root at import time
+    configurer_style()
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
         fenetre_polynome2 = Toplevel(parent)
@@ -337,18 +346,34 @@ def lancer_polynome2(parent=None):
     ]
     ajouter_conseils(fenetre_polynome2, conseils_degre2, "💡 Conseils pour les polynômes degré 2 :")
 
-    # Bouton Quitter
+    # Boutons Retour et Quitter
+    def _retour_local_2():
+        if is_toplevel:
+            fenetre_polynome2.destroy()
+        else:
+            lancer_polynome(fenetre_polynome2)
+
     def _quit_local_2():
         if is_toplevel:
             fenetre_polynome2.destroy()
         else:
             for w in list(fenetre_polynome2.winfo_children()):
                 w.destroy()
+
+    bouton_retour = ttk.Button(fenetre_polynome2, style="Return.Header.TButton", text="🔙 Retour", command=_retour_local_2)
+    try:
+        bouton_retour.place(x=12, y=12)
+    except Exception:
+        bouton_retour.pack(pady=5)
+
+
     button_quitter = ttk.Button(fenetre_polynome2, style="Quit.TButton", text="🚪 Quitter", command=_quit_local_2)
     button_quitter.pack(pady=10)
 
 # ------------------ Polynôme de degré 3 ------------------
 def lancer_polynome3(parent=None):
+    # Configure style lazily to avoid creating a Tk root at import time
+    configurer_style()
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
         fenetre_polynome3 = Toplevel(parent)
@@ -505,19 +530,34 @@ def lancer_polynome3(parent=None):
     ]
     ajouter_conseils(fenetre_polynome3, conseils_degre3, "💡 Conseils pour les polynômes degré 3 :")
 
-    # Bouton Quitter
+    # Boutons Retour et Quitter
+    def _retour_local_3():
+        if is_toplevel:
+            fenetre_polynome3.destroy()
+        else:
+            lancer_polynome(fenetre_polynome3)
+
     def _quit_local_3():
         if is_toplevel:
             fenetre_polynome3.destroy()
         else:
             for w in list(fenetre_polynome3.winfo_children()):
                 w.destroy()
+
+    bouton_retour = ttk.Button(fenetre_polynome3, style="Return.Header.TButton", text="🔙 Retour", command=_retour_local_3)
+    try:
+        bouton_retour.place(x=12, y=12)
+    except Exception:
+        bouton_retour.pack(pady=5)
+
     button_quitter = ttk.Button(fenetre_polynome3, style="Quit.TButton", text="🚪 Quitter", 
                                command=_quit_local_3)
     button_quitter.pack(pady=10)
 
 # ------------------ Menu principal ------------------
 def lancer_polynome(parent=None):
+    # Configure style lazily to avoid creating a Tk root at import time
+    configurer_style()
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
         fenetre_polynome = Toplevel(parent)
@@ -568,6 +608,12 @@ def lancer_polynome(parent=None):
         else:
             for w in list(fenetre_polynome.winfo_children()):
                 w.destroy()
+            # Revenir à la sélection des jeux dans la même fenêtre
+            try:
+                from .jeux_math import creer_interface_jeux
+                creer_interface_jeux(fenetre_polynome)
+            except Exception:
+                pass
     button3 = ttk.Button(fenetre_polynome,
                          text="🚪 Retour au Menu Principal",
                          style="Quit.TButton",

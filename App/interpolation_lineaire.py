@@ -609,10 +609,10 @@ def afficher_calculs_dans_interface(resultats, methode, notebook, fenetre):
             messagebox.showerror("Erreur d'export", f"Erreur lors de l'export : {str(e)}")
     
     ttk.Button(button_frame, text="📥 Exporter en CSV", 
-              command=exporter_csv).pack(side=LEFT, padx=5)
+              style="Jeu.TButton", command=exporter_csv).pack(side=LEFT, padx=5)
     
     ttk.Button(button_frame, text="Fermer cet onglet", 
-              command=lambda: notebook.forget(frame_calculs)).pack(side=LEFT, padx=5)
+              style="Jeu.TButton", command=lambda: notebook.forget(frame_calculs)).pack(side=LEFT, padx=5)
     
     # Configurer la taille minimale pour le scroll
     canvas.update_idletasks()
@@ -830,19 +830,19 @@ def afficher_graphe_interpolation(resultats, methode, notebook, fenetre):
     
     # Boutons de contrôle du graphe
     ttk.Button(button_frame, text="💾 Sauvegarder l'image", 
-              command=sauvegarder_graphe).pack(side=LEFT, padx=5)
+              style="Jeu.TButton", command=sauvegarder_graphe).pack(side=LEFT, padx=5)
     
     ttk.Button(button_frame, text="🔍 Zoom +", 
-              command=zoom_in).pack(side=LEFT, padx=5)
+              style="Jeu.TButton", command=zoom_in).pack(side=LEFT, padx=5)
     
     ttk.Button(button_frame, text="🔍 Zoom -", 
-              command=zoom_out).pack(side=LEFT, padx=5)
+              style="Jeu.TButton", command=zoom_out).pack(side=LEFT, padx=5)
     
     ttk.Button(button_frame, text="🔄 Réinitialiser", 
-              command=reset_zoom).pack(side=LEFT, padx=5)
+              style="Jeu.TButton", command=reset_zoom).pack(side=LEFT, padx=5)
     
     ttk.Button(button_frame, text="Fermer cet onglet", 
-              command=lambda: notebook.forget(frame_graphe)).pack(side=LEFT, padx=5)
+              style="Jeu.TButton", command=lambda: notebook.forget(frame_graphe)).pack(side=LEFT, padx=5)
     
     return frame_graphe
 
@@ -893,6 +893,11 @@ def lancer_interpolation_numerique(parent=None):
     
     # Configuration du style
     def configurer_style():
+        try:
+            from .styles import ensure_styles_configured
+            ensure_styles_configured(PALETTE)
+        except Exception:
+            pass
         style = ttk.Style()
         style.theme_use("clam")
         

@@ -384,10 +384,10 @@ def afficher_iterations(iterations, methode, notebook, fenetre):
             messagebox.showerror("Erreur d'export", f"Erreur lors de l'export : {str(e)}")
     
     ttk.Button(button_frame, text="📥 Exporter en CSV", 
-              command=exporter_csv).pack(side=LEFT, padx=5)
+              style="Jeu.TButton", command=exporter_csv).pack(side=LEFT, padx=5)
     
     ttk.Button(button_frame, text="Fermer cet onglet", 
-              command=lambda: notebook.forget(frame_iterations)).pack(side=LEFT, padx=5)
+              style="Jeu.TButton", command=lambda: notebook.forget(frame_iterations)).pack(side=LEFT, padx=5)
     
     # Configurer la taille minimale pour le scroll
     canvas.update_idletasks()
@@ -450,6 +450,11 @@ def lancer_equation_Numerique(parent=None):
     
     # Configuration du style
     def configurer_style():
+        try:
+            from .styles import ensure_styles_configured
+            ensure_styles_configured(PALETTE)
+        except Exception:
+            pass
         style = ttk.Style()
         style.theme_use("clam")
         

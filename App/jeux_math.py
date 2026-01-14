@@ -25,6 +25,38 @@ PALETTE = {
 # GUIDES ET EXEMPLES POUR TOUS LES JEUX
 # =============================================================================
 
+# Helper pour bouton de retour uniforme (placement top-left)
+def _ensure_return_style():
+    try:
+        from .styles import ensure_styles_configured
+        ensure_styles_configured(PALETTE)
+    except Exception:
+        try:
+            style = ttk.Style()
+            style.configure("Return.Header.TButton",
+                            foreground=PALETTE["fond_principal"],
+                            background=PALETTE["primaire"],
+                            font=("Century Gothic", 10, "bold"),
+                            padding=6,
+                            relief="flat")
+        except Exception:
+            pass
+
+
+def _ajouter_bouton_retour_to_window(window, is_toplevel, on_return):
+    """Ajoute un bouton Retour en haut à gauche (placement absolu)"""
+    _ensure_return_style()
+    try:
+        btn = ttk.Button(window, text="🔙 Retour", style="Return.Header.TButton", command=on_return)
+        # Place en haut à gauche, devant les autres widgets sans casser le layout
+        btn.place(x=12, y=12)
+    except Exception:
+        try:
+            ttk.Button(window, text="🔙 Retour", style="Jeu.TButton", command=on_return).place(x=12, y=12)
+        except Exception:
+            pass
+
+
 GUIDES_JEUX = {
     "math_quizz": {
         "titre": "🎯 Guide du Math Quizz Challenge",
@@ -698,7 +730,7 @@ def afficher_guide_jeu(nom_jeu, parent=None):
     
     # Bouton fermer
     ttk.Button(scrollable_frame, text="Fermer le guide", 
-              command=fenetre_guide.destroy).pack(pady=20)
+              style="Jeu.TButton", command=fenetre_guide.destroy).pack(pady=20)
     
     # Espace final
     Label(scrollable_frame, text="", bg=PALETTE["fond_principal"], height=2).pack()
@@ -709,12 +741,27 @@ def afficher_guide_jeu(nom_jeu, parent=None):
 
 def creer_interface_jeux(parent=None):
     """Crée l'interface de sélection des jeux avec scrollbar"""
-    fenetre_jeux = Toplevel(parent) if parent else Tk()
-    fenetre_jeux.title("🎮 MathCraft - Sélection des Jeux")
-    fenetre_jeux.geometry("900x800")
-    fenetre_jeux.configure(bg=PALETTE["fond_principal"])
+    if parent:
+        fenetre_jeux = parent
+        for child in list(fenetre_jeux.winfo_children()):
+            child.destroy()
+        try:
+            fenetre_jeux.title("🎮 MathCraft - Sélection des Jeux")
+            fenetre_jeux.configure(bg=PALETTE["fond_principal"])
+        except Exception:
+            pass
+    else:
+        fenetre_jeux = Tk()
+        fenetre_jeux.title("🎮 MathCraft - Sélection des Jeux")
+        fenetre_jeux.geometry("900x800")
+        fenetre_jeux.configure(bg=PALETTE["fond_principal"])
     
     # Style
+    try:
+        from .styles import ensure_styles_configured
+        ensure_styles_configured(PALETTE)
+    except Exception:
+        pass
     style = ttk.Style()
     style.configure("Jeu.TButton", 
                    font=("Century Gothic", 12),
@@ -802,7 +849,7 @@ def creer_interface_jeux(parent=None):
             # Bouton jouer
             jouer_btn = ttk.Button(buttons_frame, text="🎮 Jouer", 
                                   style="Jeu.TButton",
-                                  command=jeu["fonction"])
+                                  command=lambda f=jeu["fonction"]: f(fenetre_jeux))
             jouer_btn.pack(pady=5)
             
             # Bouton guide si disponible
@@ -916,13 +963,37 @@ class MathQuizzChallenge:
 
     def lancer_jeu(self):
         """Lance l'interface du jeu améliorée"""
-        self.fenetre_jeu = Toplevel(self.parent)
-        self.fenetre_jeu.title("🎯 Math Quizz Challenge Pro")
-        self.fenetre_jeu.geometry("700x800")
-        self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
-        
+        is_toplevel = self.parent is None or isinstance(self.parent, (Tk, Toplevel))
+        if is_toplevel:
+            self.fenetre_jeu = Toplevel(self.parent)
+            self.fenetre_jeu.title("🎯 Math Quizz Challenge Pro")
+            self.fenetre_jeu.geometry("700x800")
+            self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
+        else:
+            self.fenetre_jeu = self.parent
+            for child in list(self.fenetre_jeu.winfo_children()):
+                child.destroy()
+            try:
+                self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
+            except Exception:
+                pass
+
         self._creer_interface_avance()
         self._prochaine_question()
+
+        def _retour():
+            if is_toplevel:
+                self.fenetre_jeu.destroy()
+            else:
+                try:
+                    creer_interface_jeux(self.fenetre_jeu)
+                except Exception:
+                    pass
+
+        try:
+            _ajouter_bouton_retour_to_window(self.fenetre_jeu, is_toplevel, _retour)
+        except Exception:
+            pass
 
     def _creer_interface_avance(self):
         """Crée l'interface avancée avec timer et progression"""
@@ -977,7 +1048,7 @@ class MathQuizzChallenge:
 
         # Bouton guide
         guide_button = ttk.Button(self.badges_frame, text="📚 Guide du jeu", 
-                                 command=lambda: afficher_guide_jeu("math_quizz", self.fenetre_jeu))
+                                 command=lambda: afficher_guide_jeu("math_quizz", self.fenetre_jeu), style="Guide.TButton")
         guide_button.pack(side=RIGHT, padx=10)
 
         # Séparateur
@@ -1012,13 +1083,13 @@ class MathQuizzChallenge:
         buttons_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
         buttons_frame.pack(fill=X, padx=20, pady=20)
         
-        ttk.Button(buttons_frame, text="✅ Vérifier la réponse", 
+        ttk.Button(buttons_frame, text="✅ Vérifier la réponse", style="Jeu.TButton", 
                   command=self._verifier_reponse).pack(side=LEFT, padx=10)
         
-        ttk.Button(buttons_frame, text="➡️ Question suivante", 
+        ttk.Button(buttons_frame, text="➡️ Question suivante", style="Jeu.TButton", 
                   command=self._prochaine_question).pack(side=LEFT, padx=10)
         
-        ttk.Button(buttons_frame, text="📊 Voir les badges", 
+        ttk.Button(buttons_frame, text="📊 Voir les badges", style="Jeu.TButton", 
                   command=self._afficher_badges).pack(side=RIGHT, padx=10)
 
         # Feedback
@@ -1258,14 +1329,38 @@ class CourseAuxNombres:
         
     def lancer_jeu(self):
         """Lance le jeu Course aux Nombres"""
-        self.fenetre_jeu = Toplevel(self.parent)
-        self.fenetre_jeu.title("🏆 Course aux Nombres")
-        self.fenetre_jeu.geometry("800x700")
-        self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
-        self.fenetre_jeu.protocol("WM_DELETE_WINDOW", self._fermer_jeu)
-        
+        is_toplevel = self.parent is None or isinstance(self.parent, (Tk, Toplevel))
+        if is_toplevel:
+            self.fenetre_jeu = Toplevel(self.parent)
+            self.fenetre_jeu.title("🏆 Course aux Nombres")
+            self.fenetre_jeu.geometry("800x700")
+            self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
+            self.fenetre_jeu.protocol("WM_DELETE_WINDOW", self._fermer_jeu)
+        else:
+            self.fenetre_jeu = self.parent
+            for child in list(self.fenetre_jeu.winfo_children()):
+                child.destroy()
+            try:
+                self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
+            except Exception:
+                pass
+
         self._creer_interface()
         self._nouveau_defi()
+
+        def _retour():
+            if is_toplevel:
+                self.fenetre_jeu.destroy()
+            else:
+                try:
+                    creer_interface_jeux(self.fenetre_jeu)
+                except Exception:
+                    pass
+
+        try:
+            _ajouter_bouton_retour_to_window(self.fenetre_jeu, is_toplevel, _retour)
+        except Exception:
+            pass
 
     def _creer_interface(self):
         """Crée l'interface du jeu"""
@@ -1294,7 +1389,7 @@ class CourseAuxNombres:
 
         # Bouton guide
         guide_button = ttk.Button(stats_frame, text="📚 Guide du jeu", 
-                                 command=lambda: afficher_guide_jeu("course_nombres", self.fenetre_jeu))
+                                 style="Jeu.TButton", command=lambda: afficher_guide_jeu("course_nombres", self.fenetre_jeu))
         guide_button.pack(side=RIGHT, padx=10)
 
         # Cible
@@ -1339,13 +1434,13 @@ class CourseAuxNombres:
         buttons_frame.pack(fill=X, padx=20, pady=15)
         
         ttk.Button(buttons_frame, text="✅ Vérifier le calcul", 
-                  command=self._verifier_calcul).pack(side=LEFT, padx=10)
+                  style="Jeu.TButton", command=self._verifier_calcul).pack(side=LEFT, padx=10)
         
         ttk.Button(buttons_frame, text="🔄 Nouveau défi", 
-                  command=self._nouveau_defi).pack(side=LEFT, padx=10)
+                  style="Jeu.TButton", command=self._nouveau_defi).pack(side=LEFT, padx=10)
         
         ttk.Button(buttons_frame, text="💡 Voir solutions", 
-                  command=self._afficher_solutions).pack(side=RIGHT, padx=10)
+                  style="Jeu.TButton", command=self._afficher_solutions).pack(side=RIGHT, padx=10)
 
         # Solutions trouvées
         solutions_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
@@ -1580,13 +1675,37 @@ class JeuDes24:
         
     def lancer_jeu(self):
         """Lance le Jeu des 24"""
-        self.fenetre_jeu = Toplevel(self.parent)
-        self.fenetre_jeu.title("🎯 Le Jeu des 24")
-        self.fenetre_jeu.geometry("700x600")
-        self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
-        
+        is_toplevel = self.parent is None or isinstance(self.parent, (Tk, Toplevel))
+        if is_toplevel:
+            self.fenetre_jeu = Toplevel(self.parent)
+            self.fenetre_jeu.title("🎯 Le Jeu des 24")
+            self.fenetre_jeu.geometry("700x600")
+            self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
+        else:
+            self.fenetre_jeu = self.parent
+            for child in list(self.fenetre_jeu.winfo_children()):
+                child.destroy()
+            try:
+                self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
+            except Exception:
+                pass
+
         self._creer_interface()
         self._nouveau_defi()
+
+        def _retour():
+            if is_toplevel:
+                self.fenetre_jeu.destroy()
+            else:
+                try:
+                    creer_interface_jeux(self.fenetre_jeu)
+                except Exception:
+                    pass
+
+        try:
+            _ajouter_bouton_retour_to_window(self.fenetre_jeu, is_toplevel, _retour)
+        except Exception:
+            pass
 
     def _creer_interface(self):
         """Crée l'interface du jeu"""
@@ -1651,13 +1770,13 @@ class JeuDes24:
         buttons_frame.pack(fill=X, padx=20, pady=15)
         
         ttk.Button(buttons_frame, text="✅ Vérifier le calcul", 
-                  command=self._verifier_calcul).pack(side=LEFT, padx=10)
+                  style="Jeu.TButton", command=self._verifier_calcul).pack(side=LEFT, padx=10)
         
         ttk.Button(buttons_frame, text="🔄 Nouveau défi", 
-                  command=self._nouveau_defi).pack(side=LEFT, padx=10)
+                  style="Jeu.TButton", command=self._nouveau_defi).pack(side=LEFT, padx=10)
         
         ttk.Button(buttons_frame, text="💡 Voir solutions", 
-                  command=self._afficher_solutions).pack(side=RIGHT, padx=10)
+                  style="Jeu.TButton", command=self._afficher_solutions).pack(side=RIGHT, padx=10)
 
         # Solutions trouvées
         solutions_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
@@ -1881,13 +2000,37 @@ class MathEmoji:
 
     def lancer_jeu(self):
         """Lance le jeu Math Emoji"""
-        self.fenetre_jeu = Toplevel(self.parent)
-        self.fenetre_jeu.title("🍎 Math Emoji")
-        self.fenetre_jeu.geometry("700x600")
-        self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
-        
+        is_toplevel = self.parent is None or isinstance(self.parent, (Tk, Toplevel))
+        if is_toplevel:
+            self.fenetre_jeu = Toplevel(self.parent)
+            self.fenetre_jeu.title("🍎 Math Emoji")
+            self.fenetre_jeu.geometry("700x600")
+            self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
+        else:
+            self.fenetre_jeu = self.parent
+            for child in list(self.fenetre_jeu.winfo_children()):
+                child.destroy()
+            try:
+                self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
+            except Exception:
+                pass
+
         self._creer_interface()
         self._nouvelle_equation()
+
+        def _retour():
+            if is_toplevel:
+                self.fenetre_jeu.destroy()
+            else:
+                try:
+                    creer_interface_jeux(self.fenetre_jeu)
+                except Exception:
+                    pass
+
+        try:
+            _ajouter_bouton_retour_to_window(self.fenetre_jeu, is_toplevel, _retour)
+        except Exception:
+            pass
 
     def _creer_interface(self):
         """Crée l'interface du jeu"""
@@ -1917,7 +2060,7 @@ class MathEmoji:
 
         # Bouton guide
         guide_button = ttk.Button(stats_frame, text="📚 Guide du jeu", 
-                                 command=lambda: afficher_guide_jeu("math_emoji", self.fenetre_jeu))
+                                 command=lambda: afficher_guide_jeu("math_emoji", self.fenetre_jeu), style="Guide.TButton")
         guide_button.pack(side=RIGHT, padx=10)
 
         # Équations
@@ -1947,14 +2090,14 @@ class MathEmoji:
         buttons_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
         buttons_frame.pack(fill=X, padx=30, pady=20)
         
-        ttk.Button(buttons_frame, text="✅ Vérifier les réponses", 
-                  command=self._verifier_reponses, style="Accent.TButton").pack(side=LEFT, padx=10)
+        ttk.Button(buttons_frame, text="✅ Vérifier les réponses", style="Jeu.TButton", 
+                  command=self._verifier_reponses).pack(side=LEFT, padx=10)
         
-        ttk.Button(buttons_frame, text="🔄 Nouvelle équation", 
+        ttk.Button(buttons_frame, text="🔄 Nouvelle équation", style="Jeu.TButton", 
                   command=self._nouvelle_equation).pack(side=LEFT, padx=10)
         
         ttk.Button(buttons_frame, text="💡 Indice", 
-                  command=self._donner_indice).pack(side=RIGHT, padx=10)
+                  style="Jeu.TButton", command=self._donner_indice).pack(side=RIGHT, padx=10)
 
         # Feedback
         self.feedback_label = Label(self.fenetre_jeu, text="", 
@@ -2176,13 +2319,37 @@ class CalculMentalExpress:
         
     def lancer_jeu(self):
         """Lance le Calcul Mental Express"""
-        self.fenetre_jeu = Toplevel(self.parent)
-        self.fenetre_jeu.title("🌀 Calcul Mental Express")
-        self.fenetre_jeu.geometry("600x500")
-        self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
-        
+        is_toplevel = self.parent is None or isinstance(self.parent, (Tk, Toplevel))
+        if is_toplevel:
+            self.fenetre_jeu = Toplevel(self.parent)
+            self.fenetre_jeu.title("🌀 Calcul Mental Express")
+            self.fenetre_jeu.geometry("600x500")
+            self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
+        else:
+            self.fenetre_jeu = self.parent
+            for child in list(self.fenetre_jeu.winfo_children()):
+                child.destroy()
+            try:
+                self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
+            except Exception:
+                pass
+
         self._creer_interface()
         self._nouvelle_question()
+
+        def _retour():
+            if is_toplevel:
+                self.fenetre_jeu.destroy()
+            else:
+                try:
+                    creer_interface_jeux(self.fenetre_jeu)
+                except Exception:
+                    pass
+
+        try:
+            _ajouter_bouton_retour_to_window(self.fenetre_jeu, is_toplevel, _retour)
+        except Exception:
+            pass
 
     def _creer_interface(self):
         """Crée l'interface du jeu"""
@@ -2265,13 +2432,13 @@ class CalculMentalExpress:
         buttons_frame.pack(fill=X, padx=40, pady=15)
         
         ttk.Button(buttons_frame, text="✅ Vérifier", 
-                  command=self._verifier_reponse).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._verifier_reponse).pack(side=LEFT, padx=5)
         
         ttk.Button(buttons_frame, text="➡️ Passer", 
-                  command=self._nouvelle_question).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._nouvelle_question).pack(side=LEFT, padx=5)
         
         ttk.Button(buttons_frame, text="📚 Guide", 
-                  command=lambda: afficher_guide_jeu("calcul_mental_express", self.fenetre_jeu)).pack(side=RIGHT, padx=5)
+                  style="Jeu.TButton", command=lambda: afficher_guide_jeu("calcul_mental_express", self.fenetre_jeu)).pack(side=RIGHT, padx=5)
 
         # Feedback
         self.feedback_label = Label(self.fenetre_jeu, text="", 
@@ -2502,13 +2669,37 @@ class SudokuMathematique:
         
     def lancer_jeu(self):
         """Lance le Sudoku Mathématique"""
-        self.fenetre_jeu = Toplevel(self.parent)
-        self.fenetre_jeu.title("🧩 Sudoku Mathématique")
-        self.fenetre_jeu.geometry("800x700")
-        self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
-        
+        is_toplevel = self.parent is None or isinstance(self.parent, (Tk, Toplevel))
+        if is_toplevel:
+            self.fenetre_jeu = Toplevel(self.parent)
+            self.fenetre_jeu.title("🧩 Sudoku Mathématique")
+            self.fenetre_jeu.geometry("800x700")
+            self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
+        else:
+            self.fenetre_jeu = self.parent
+            for child in list(self.fenetre_jeu.winfo_children()):
+                child.destroy()
+            try:
+                self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
+            except Exception:
+                pass
+
         self._creer_interface()
         self._nouvelle_grille()
+
+        def _retour():
+            if is_toplevel:
+                self.fenetre_jeu.destroy()
+            else:
+                try:
+                    creer_interface_jeux(self.fenetre_jeu)
+                except Exception:
+                    pass
+
+        try:
+            _ajouter_bouton_retour_to_window(self.fenetre_jeu, is_toplevel, _retour)
+        except Exception:
+            pass
 
     def _creer_interface(self):
         """Crée l'interface du jeu"""
@@ -2557,7 +2748,7 @@ class SudokuMathematique:
 
         # Bouton guide
         guide_button = ttk.Button(stats_frame, text="📚 Guide du jeu", 
-                                 command=lambda: afficher_guide_jeu("sudoku_math", self.fenetre_jeu))
+                                 style="Jeu.TButton", command=lambda: afficher_guide_jeu("sudoku_math", self.fenetre_jeu))
         guide_button.pack(side=RIGHT, padx=10)
 
         # Cadre principal pour la grille
@@ -2626,7 +2817,7 @@ class SudokuMathematique:
 
         for i in range(1, 10):
             btn = ttk.Button(chiffres_frame, text=str(i), width=4,
-                           command=lambda num=i: self._inserer_chiffre(num))
+                           style="Jeu.TButton", command=lambda num=i: self._inserer_chiffre(num))
             btn.grid(row=(i-1)//3, column=(i-1)%3, padx=2, pady=2)
 
         # Boutons d'action
@@ -2634,16 +2825,16 @@ class SudokuMathematique:
         action_frame.pack(pady=10)
 
         ttk.Button(action_frame, text="🔍 Vérifier la grille", 
-                  command=self._verifier_grille).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._verifier_grille).pack(side=LEFT, padx=5)
         
         ttk.Button(action_frame, text="🧹 Effacer la case", 
-                  command=self._effacer_case).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._effacer_case).pack(side=LEFT, padx=5)
         
         ttk.Button(action_frame, text="🔄 Nouvelle grille", 
-                  command=self._nouvelle_grille).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._nouvelle_grille).pack(side=LEFT, padx=5)
         
         ttk.Button(action_frame, text="💡 Indice", 
-                  command=self._donner_indice).pack(side=RIGHT, padx=5)
+                  style="Jeu.TButton", command=self._donner_indice).pack(side=RIGHT, padx=5)
 
         # Feedback
         self.feedback_label = Label(main_frame, text="", 
@@ -2993,13 +3184,37 @@ class BatailleDesFractions:
         
     def lancer_jeu(self):
         """Lance la Bataille des Fractions"""
-        self.fenetre_jeu = Toplevel(self.parent)
-        self.fenetre_jeu.title("🎲 Bataille des Fractions")
-        self.fenetre_jeu.geometry("800x700")
-        self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
-        
+        is_toplevel = self.parent is None or isinstance(self.parent, (Tk, Toplevel))
+        if is_toplevel:
+            self.fenetre_jeu = Toplevel(self.parent)
+            self.fenetre_jeu.title("🎲 Bataille des Fractions")
+            self.fenetre_jeu.geometry("800x700")
+            self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
+        else:
+            self.fenetre_jeu = self.parent
+            for child in list(self.fenetre_jeu.winfo_children()):
+                child.destroy()
+            try:
+                self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
+            except Exception:
+                pass
+
         self._creer_interface()
         self._nouvelle_partie()
+
+        def _retour():
+            if is_toplevel:
+                self.fenetre_jeu.destroy()
+            else:
+                try:
+                    creer_interface_jeux(self.fenetre_jeu)
+                except Exception:
+                    pass
+
+        try:
+            _ajouter_bouton_retour_to_window(self.fenetre_jeu, is_toplevel, _retour)
+        except Exception:
+            pass
 
     def _creer_interface(self):
         """Crée l'interface du jeu"""
@@ -3048,7 +3263,7 @@ class BatailleDesFractions:
 
         # Bouton guide
         guide_button = ttk.Button(stats_frame, text="📚 Guide du jeu", 
-                                 command=lambda: afficher_guide_jeu("bataille_fractions", self.fenetre_jeu))
+                                 command=lambda: afficher_guide_jeu("bataille_fractions", self.fenetre_jeu), style="Guide.TButton")
         guide_button.pack(side=RIGHT, padx=10)
 
         # Zone de jeu principale
@@ -3089,13 +3304,13 @@ class BatailleDesFractions:
         actions_frame.pack(fill=X, pady=20)
         
         ttk.Button(actions_frame, text="🔄 Nouvelle Partie", 
-                  command=self._nouvelle_partie).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._nouvelle_partie).pack(side=LEFT, padx=5)
         
         ttk.Button(actions_frame, text="💡 Aide Comparaison", 
-                  command=self._afficher_aide_comparaison).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._afficher_aide_comparaison).pack(side=LEFT, padx=5)
         
         ttk.Button(actions_frame, text="🎯 Stratégie", 
-                  command=self._afficher_strategie).pack(side=RIGHT, padx=5)
+                  style="Jeu.TButton", command=self._afficher_strategie).pack(side=RIGHT, padx=5)
 
         # Feedback
         self.feedback_label = Label(jeu_frame, text="", 
@@ -3228,7 +3443,7 @@ class BatailleDesFractions:
             
             # Bouton pour jouer la carte
             btn = ttk.Button(carte_frame, text="Jouer", 
-                           command=lambda c=carte: self._jouer_carte(c))
+                           style="Jeu.TButton", command=lambda c=carte: self._jouer_carte(c))
             btn.pack(pady=5)
             
             # Stocker la référence
@@ -3653,13 +3868,37 @@ class DessineMoiUneFonction:
 
     def lancer_jeu(self):
         """Lance l'interface du jeu et initialise une partie."""
-        self.fenetre_jeu = Toplevel(self.parent)
-        self.fenetre_jeu.title("📈 Dessine-moi une Fonction - Version Enrichie")
-        self.fenetre_jeu.geometry("900x750")
-        self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
+        is_toplevel = self.parent is None or isinstance(self.parent, (Tk, Toplevel))
+        if is_toplevel:
+            self.fenetre_jeu = Toplevel(self.parent)
+            self.fenetre_jeu.title("📈 Dessine-moi une Fonction - Version Enrichie")
+            self.fenetre_jeu.geometry("900x750")
+            self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
+        else:
+            self.fenetre_jeu = self.parent
+            for child in list(self.fenetre_jeu.winfo_children()):
+                child.destroy()
+            try:
+                self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
+            except Exception:
+                pass
 
         self._creer_interface()
         self._nouvelle_fonction()
+
+        def _retour():
+            if is_toplevel:
+                self.fenetre_jeu.destroy()
+            else:
+                try:
+                    creer_interface_jeux(self.fenetre_jeu)
+                except Exception:
+                    pass
+
+        try:
+            _ajouter_bouton_retour_to_window(self.fenetre_jeu, is_toplevel, _retour)
+        except Exception:
+            pass
 
     def _creer_interface(self):
         """Construire l'interface Tkinter pour le jeu."""
@@ -3709,7 +3948,7 @@ class DessineMoiUneFonction:
 
         # Bouton guide
         guide_button = ttk.Button(stats_frame, text="📚 Guide du jeu", 
-                                 command=lambda: afficher_guide_jeu("dessine_fonction", self.fenetre_jeu))
+                                 command=lambda: afficher_guide_jeu("dessine_fonction", self.fenetre_jeu), style="Guide.TButton")
         guide_button.pack(side=RIGHT, padx=10)
 
         # Cadre principal
@@ -3746,26 +3985,26 @@ class DessineMoiUneFonction:
         gauche_frame.pack(side=LEFT)
         
         ttk.Button(gauche_frame, text="🧹 Effacer", 
-                  command=self._effacer_dessin).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._effacer_dessin).pack(side=LEFT, padx=5)
         
         ttk.Button(gauche_frame, text="✅ Vérifier", 
-                  command=self._verifier_dessin).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._verifier_dessin).pack(side=LEFT, padx=5)
         
         ttk.Button(gauche_frame, text="🔄 Nouvelle Fonction", 
-                  command=self._nouvelle_fonction).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._nouvelle_fonction).pack(side=LEFT, padx=5)
 
         # Boutons droite
         droite_frame = Frame(controles_frame, bg=PALETTE["fond_principal"])
         droite_frame.pack(side=RIGHT)
         
         ttk.Button(droite_frame, text="📐 Afficher Grille", 
-                  command=self._basculer_grille).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._basculer_grille).pack(side=LEFT, padx=5)
         
         ttk.Button(droite_frame, text="💡 Indice", 
-                  command=self._donner_indice).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._donner_indice).pack(side=LEFT, padx=5)
         
         ttk.Button(droite_frame, text="🎯 Types de Fonctions", 
-                  command=self._afficher_types_fonctions).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._afficher_types_fonctions).pack(side=LEFT, padx=5)
 
         # Feedback
         self.feedback_label = Label(main_frame, text="", 
@@ -4155,13 +4394,37 @@ class MystereMathematique:
     
     def lancer_jeu(self):
         """Lance le Mystère Mathématique"""
-        self.fenetre_jeu = Toplevel(self.parent)
-        self.fenetre_jeu.title("🕵️ Mystère Mathématique")
-        self.fenetre_jeu.geometry("800x700")
-        self.fenetre_jeu.configure(bg=self.PALETTE["fond_principal"])
-        
+        is_toplevel = self.parent is None or isinstance(self.parent, (Tk, Toplevel))
+        if is_toplevel:
+            self.fenetre_jeu = Toplevel(self.parent)
+            self.fenetre_jeu.title("🕵️ Mystère Mathématique")
+            self.fenetre_jeu.geometry("800x700")
+            self.fenetre_jeu.configure(bg=self.PALETTE["fond_principal"])
+        else:
+            self.fenetre_jeu = self.parent
+            for child in list(self.fenetre_jeu.winfo_children()):
+                child.destroy()
+            try:
+                self.fenetre_jeu.configure(bg=self.PALETTE["fond_principal"])
+            except Exception:
+                pass
+
         self._creer_interface()
         self._nouvelle_enigme()
+
+        def _retour():
+            if is_toplevel:
+                self.fenetre_jeu.destroy()
+            else:
+                try:
+                    creer_interface_jeux(self.fenetre_jeu)
+                except Exception:
+                    pass
+
+        try:
+            _ajouter_bouton_retour_to_window(self.fenetre_jeu, is_toplevel, _retour)
+        except Exception:
+            pass
 
     def _creer_interface(self):
         """Crée l'interface du jeu"""
@@ -4254,16 +4517,16 @@ class MystereMathematique:
         boutons_frame.pack(fill=X, pady=15)
         
         ttk.Button(boutons_frame, text="🔍 Obtenir un indice", 
-                  command=self._obtenir_indice).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._obtenir_indice).pack(side=LEFT, padx=5)
         
         ttk.Button(boutons_frame, text="✅ Vérifier la réponse", 
-                  command=self._verifier_reponse).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._verifier_reponse).pack(side=LEFT, padx=5)
         
         ttk.Button(boutons_frame, text="🔄 Nouvelle énigme", 
-                  command=self._nouvelle_enigme).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._nouvelle_enigme).pack(side=LEFT, padx=5)
         
         ttk.Button(boutons_frame, text="💡 Solution complète", 
-                  command=self._afficher_solution).pack(side=RIGHT, padx=5)
+                  style="Jeu.TButton", command=self._afficher_solution).pack(side=RIGHT, padx=5)
 
         # Feedback
         self.feedback_label = Label(main_frame, text="", 
@@ -4561,7 +4824,7 @@ class MystereMathematique:
         Label(solution_window, text=f"\n(–{penalite} points)", 
               font=("Century Gothic", 11, "bold"), bg=self.PALETTE["fond_principal"], fg=self.PALETTE["erreur"]).pack(pady=10)
         
-        ttk.Button(solution_window, text="Fermer", 
+        ttk.Button(solution_window, text="Fermer", style="Jeu.TButton", 
                   command=solution_window.destroy).pack(pady=10)
         
         self._ajouter_log(f"📉 Solution achetée: -{penalite} points")
@@ -4668,21 +4931,46 @@ class ChasseNombresPremiers:
     
     def lancer_jeu(self):
         """Lance la fenêtre du jeu"""
-        self.fenetre_jeu = Toplevel(self.parent)
-        self.fenetre_jeu.title("🔢 Chasse aux Nombres Premiers")
-        self.fenetre_jeu.geometry("900x800")
-        self.fenetre_jeu.configure(bg=self.PALETTE["fond_principal"])
-        
+        is_toplevel = self.parent is None or isinstance(self.parent, (Tk, Toplevel))
+        if is_toplevel:
+            self.fenetre_jeu = Toplevel(self.parent)
+            self.fenetre_jeu.title("🔢 Chasse aux Nombres Premiers")
+            self.fenetre_jeu.geometry("900x800")
+            self.fenetre_jeu.configure(bg=self.PALETTE["fond_principal"])
+        else:
+            self.fenetre_jeu = self.parent
+            for child in list(self.fenetre_jeu.winfo_children()):
+                child.destroy()
+            try:
+                self.fenetre_jeu.configure(bg=self.PALETTE["fond_principal"])
+            except Exception:
+                pass
+
         self._creer_interface()
         self._nouvelle_question()
-        
-        # Centrer la fenêtre
-        self.fenetre_jeu.update_idletasks()
-        width = self.fenetre_jeu.winfo_width()
-        height = self.fenetre_jeu.winfo_height()
-        x = (self.fenetre_jeu.winfo_screenwidth() // 2) - (width // 2)
-        y = (self.fenetre_jeu.winfo_screenheight() // 2) - (height // 2)
-        self.fenetre_jeu.geometry(f'{width}x{height}+{x}+{y}')
+
+        # Centrer la fenêtre si Toplevel
+        if is_toplevel:
+            self.fenetre_jeu.update_idletasks()
+            width = self.fenetre_jeu.winfo_width()
+            height = self.fenetre_jeu.winfo_height()
+            x = (self.fenetre_jeu.winfo_screenwidth() // 2) - (width // 2)
+            y = (self.fenetre_jeu.winfo_screenheight() // 2) - (height // 2)
+            self.fenetre_jeu.geometry(f'{width}x{height}+{x}+{y}')
+
+        def _retour():
+            if is_toplevel:
+                self.fenetre_jeu.destroy()
+            else:
+                try:
+                    creer_interface_jeux(self.fenetre_jeu)
+                except Exception:
+                    pass
+
+        try:
+            _ajouter_bouton_retour_to_window(self.fenetre_jeu, is_toplevel, _retour)
+        except Exception:
+            pass
     
     def _creer_interface(self):
         """Crée l'interface graphique du jeu"""
@@ -4792,19 +5080,19 @@ class ChasseNombresPremiers:
         boutons_action_frame.pack(fill=X, pady=10)
         
         ttk.Button(boutons_action_frame, text="🔍 Obtenir un indice", 
-                  command=self._obtenir_indice).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._obtenir_indice).pack(side=LEFT, padx=5)
         
         ttk.Button(boutons_action_frame, text="🔄 Question suivante", 
-                  command=self._nouvelle_question).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._nouvelle_question).pack(side=LEFT, padx=5)
         
         ttk.Button(boutons_action_frame, text="📊 Statistiques", 
-                  command=self._afficher_statistiques).pack(side=RIGHT, padx=5)
+                  style="Jeu.TButton", command=self._afficher_statistiques).pack(side=RIGHT, padx=5)
         
         ttk.Button(boutons_action_frame, text="❓ Explication complète", 
-                  command=self._afficher_explication).pack(side=RIGHT, padx=5)
+                  style="Jeu.TButton", command=self._afficher_explication).pack(side=RIGHT, padx=5)
         
         ttk.Button(boutons_action_frame, text="📚 Guide", 
-                  command=lambda: afficher_guide_jeu("chasse_premiers", self.fenetre_jeu)).pack(side=RIGHT, padx=5)
+                  style="Jeu.TButton", command=lambda: afficher_guide_jeu("chasse_premiers", self.fenetre_jeu)).pack(side=RIGHT, padx=5)
         
         # Zone de log
         log_frame = Frame(main_frame, bg=self.PALETTE["fond_clair"], relief="solid", borderwidth=1)
@@ -5004,11 +5292,11 @@ class ChasseNombresPremiers:
             boutons_frame.pack()
             
             self.btn_oui = ttk.Button(boutons_frame, text="✅ OUI, c'est PREMIER", 
-                                     command=lambda: self._verifier_reponse("Oui"), width=20)
+                                     style="Jeu.TButton", command=lambda: self._verifier_reponse("Oui"), width=20)
             self.btn_oui.pack(side=LEFT, padx=10)
             
             self.btn_non = ttk.Button(boutons_frame, text="❌ NON, c'est COMPOSITE", 
-                                     command=lambda: self._verifier_reponse("Non"), width=20)
+                                     style="Jeu.TButton", command=lambda: self._verifier_reponse("Non"), width=20)
             self.btn_non.pack(side=LEFT, padx=10)
             
         elif type_question == "vrai_faux":
@@ -5017,11 +5305,11 @@ class ChasseNombresPremiers:
             boutons_frame.pack()
             
             self.btn_vrai = ttk.Button(boutons_frame, text="✅ VRAI", 
-                                      command=lambda: self._verifier_reponse("Vrai"), width=15)
+                                      style="Jeu.TButton", command=lambda: self._verifier_reponse("Vrai"), width=15)
             self.btn_vrai.pack(side=LEFT, padx=10)
             
             self.btn_faux = ttk.Button(boutons_frame, text="❌ FAUX", 
-                                      command=lambda: self._verifier_reponse("Faux"), width=15)
+                                      style="Jeu.TButton", command=lambda: self._verifier_reponse("Faux"), width=15)
             self.btn_faux.pack(side=LEFT, padx=10)
             
         elif type_question in ["decomposition", "diviseurs", "nombre_mystere"]:
@@ -5050,7 +5338,7 @@ class ChasseNombresPremiers:
                       fg=self.PALETTE["texte_clair"]).pack(pady=2)
             
             ttk.Button(saisie_frame, text="✅ Valider la réponse", 
-                      command=self._verifier_reponse_texte).pack(pady=10)
+                      style="Jeu.TButton", command=self._verifier_reponse_texte).pack(pady=10)
         
         else:
             # Par défaut, champ de saisie générique
@@ -5063,7 +5351,7 @@ class ChasseNombresPremiers:
             self.reponse_entry.bind("<Return>", lambda e: self._verifier_reponse_texte())
             
             ttk.Button(saisie_frame, text="✅ Valider", 
-                      command=self._verifier_reponse_texte).pack(pady=5)
+                      style="Jeu.TButton", command=self._verifier_reponse_texte).pack(pady=5)
 
     def _verifier_reponse(self, reponse_joueur):
         """Vérifie la réponse pour les questions à choix (Oui/Non, Vrai/Faux)"""
@@ -5265,11 +5553,11 @@ class ChasseNombresPremiers:
     def _desactiver_controles(self):
         """Désactive tous les contrôles de réponse"""
         for widget in self.controles_reponse_frame.winfo_children():
-            if isinstance(widget, ttk.Button):
+            if isinstance(widget, ttk.Button, style="Jeu.TButton"):
                 widget.config(state="disabled")
             elif isinstance(widget, Frame):
                 for child in widget.winfo_children():
-                    if isinstance(child, ttk.Button):
+                    if isinstance(child, ttk.Button, style="Jeu.TButton"):
                         child.config(state="disabled")
                     elif isinstance(child, Entry):
                         child.config(state="disabled")
@@ -5281,11 +5569,11 @@ class ChasseNombresPremiers:
         if type_question in ["premier", "vrai_faux"]:
             # Réactiver les boutons
             for widget in self.controles_reponse_frame.winfo_children():
-                if isinstance(widget, ttk.Button):
+                if isinstance(widget, ttk.Button, style="Jeu.TButton"):
                     widget.config(state="normal")
                 elif isinstance(widget, Frame):
                     for child in widget.winfo_children():
-                        if isinstance(child, ttk.Button):
+                        if isinstance(child, ttk.Button, style="Jeu.TButton"):
                             child.config(state="normal")
         else:
             # Réactiver le champ de saisie
@@ -5296,7 +5584,7 @@ class ChasseNombresPremiers:
                     for child in widget.winfo_children():
                         if isinstance(child, Entry):
                             child.config(state="normal")
-                        elif isinstance(child, ttk.Button):
+                        elif isinstance(child, ttk.Button, style="Jeu.TButton"):
                             child.config(state="normal")
 
     def _reussite_question(self):
@@ -5531,7 +5819,7 @@ class ChasseNombresPremiers:
         # Bouton fermer
         btn_frame = Frame(stats_window, bg=self.PALETTE["fond_principal"])
         btn_frame.pack(pady=15)
-        ttk.Button(btn_frame, text="Fermer", command=stats_window.destroy).pack()
+        ttk.Button(btn_frame, text="Fermer", command=stats_window.destroy, style="Jeu.TButton").pack()
     
     def _afficher_explication(self):
         """Affiche l'explication complète"""
@@ -5597,7 +5885,7 @@ class ChasseNombresPremiers:
         
         # Bouton fermer
         ttk.Button(explication_window, text="Fermer", 
-                  command=explication_window.destroy).pack(pady=10)
+                  command=explication_window.destroy, style="Jeu.TButton").pack(pady=10)
         
         self._ajouter_log(f"📚 Explication achetée: -{penalite} points")
         self._mettre_a_jour_stats()
@@ -5675,24 +5963,51 @@ class MathBattle:
     
     def lancer_jeu(self):
         """Lance la fenêtre du jeu"""
-        self.fenetre_jeu = Toplevel(self.parent)
-        self.fenetre_jeu.title("⚔️ Math Battle")
-        self.fenetre_jeu.geometry("1000x800")
-        self.fenetre_jeu.configure(bg=self.PALETTE["fond_principal"])
-        
-        # Empêcher la fermeture accidentelle
-        self.fenetre_jeu.protocol("WM_DELETE_WINDOW", self._quitter_jeu)
-        
+        is_toplevel = self.parent is None or isinstance(self.parent, (Tk, Toplevel))
+        if is_toplevel:
+            self.fenetre_jeu = Toplevel(self.parent)
+            self.fenetre_jeu.title("⚔️ Math Battle")
+            self.fenetre_jeu.geometry("1000x800")
+            self.fenetre_jeu.configure(bg=self.PALETTE["fond_principal"])
+            # Empêcher la fermeture accidentelle
+            self.fenetre_jeu.protocol("WM_DELETE_WINDOW", self._quitter_jeu)
+        else:
+            self.fenetre_jeu = self.parent
+            for child in list(self.fenetre_jeu.winfo_children()):
+                child.destroy()
+            try:
+                self.fenetre_jeu.configure(bg=self.PALETTE["fond_principal"])
+            except Exception:
+                pass
+
         self._creer_interface()
         self._nouvelle_manche()
-        
-        # Centrer la fenêtre
-        self.fenetre_jeu.update_idletasks()
-        width = self.fenetre_jeu.winfo_width()
-        height = self.fenetre_jeu.winfo_height()
-        x = (self.fenetre_jeu.winfo_screenwidth() // 2) - (width // 2)
-        y = (self.fenetre_jeu.winfo_screenheight() // 2) - (height // 2)
-        self.fenetre_jeu.geometry(f'{width}x{height}+{x}+{y}')
+
+        # Centrer la fenêtre si Toplevel
+        if is_toplevel:
+            self.fenetre_jeu.update_idletasks()
+            width = self.fenetre_jeu.winfo_width()
+            height = self.fenetre_jeu.winfo_height()
+            x = (self.fenetre_jeu.winfo_screenwidth() // 2) - (width // 2)
+            y = (self.fenetre_jeu.winfo_screenheight() // 2) - (height // 2)
+            self.fenetre_jeu.geometry(f'{width}x{height}+{x}+{y}')
+
+        def _retour():
+            if is_toplevel:
+                try:
+                    self.fenetre_jeu.destroy()
+                except Exception:
+                    pass
+            else:
+                try:
+                    creer_interface_jeux(self.fenetre_jeu)
+                except Exception:
+                    pass
+
+        try:
+            _ajouter_bouton_retour_to_window(self.fenetre_jeu, is_toplevel, _retour)
+        except Exception:
+            pass
     
     def _quitter_jeu(self):
         """Demande confirmation avant de quitter"""
@@ -5799,15 +6114,15 @@ class MathBattle:
         boutons_frame.pack(pady=15)
         
         self.btn_valider = ttk.Button(boutons_frame, text="✅ VALIDER (ENTRER)", 
-                                     command=self._valider_reponse, width=20)
+                                     style="Jeu.TButton", command=self._valider_reponse, width=20)
         self.btn_valider.pack(side=LEFT, padx=5)
         
         self.btn_passer = ttk.Button(boutons_frame, text="⏭️ PASSER", 
-                                    command=self._passer_question, width=15)
+                                    style="Jeu.TButton", command=self._passer_question, width=15)
         self.btn_passer.pack(side=LEFT, padx=5)
         
         ttk.Button(boutons_frame, text="📚 Guide", 
-                  command=lambda: afficher_guide_jeu("math_battle", self.fenetre_jeu)).pack(side=RIGHT, padx=5)
+                  style="Jeu.TButton", command=lambda: afficher_guide_jeu("math_battle", self.fenetre_jeu)).pack(side=RIGHT, padx=5)
         
         # Zone de résultat de la manche
         self.resultat_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
@@ -5838,16 +6153,16 @@ class MathBattle:
         boutons_fin_frame.pack(fill=X, pady=5)
         
         ttk.Button(boutons_fin_frame, text="📊 Statistiques", 
-                  command=self._afficher_statistiques).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._afficher_statistiques).pack(side=LEFT, padx=5)
         
         ttk.Button(boutons_fin_frame, text="🔄 Recommencer", 
-                  command=self._recommencer_jeu).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._recommencer_jeu).pack(side=LEFT, padx=5)
         
         ttk.Button(boutons_fin_frame, text="🏆 Classement", 
-                  command=self._afficher_classement).pack(side=RIGHT, padx=5)
+                  style="Jeu.TButton", command=self._afficher_classement).pack(side=RIGHT, padx=5)
         
         ttk.Button(boutons_fin_frame, text="❌ Quitter", 
-                  command=self._quitter_jeu).pack(side=RIGHT, padx=5)
+                  style="Jeu.TButton", command=self._quitter_jeu).pack(side=RIGHT, padx=5)
 
     def _creer_clavier_numerique(self, parent):
         """Crée un clavier numérique pour aider à la saisie"""
@@ -5874,7 +6189,7 @@ class MathBattle:
                     commande = lambda t=texte: self._ajouter_caractere(t)
                     width = 5
                 
-                btn = ttk.Button(ligne_frame, text=texte, command=commande, width=width)
+                btn = ttk.Button(ligne_frame, text=texte, style="Jeu.TButton", command=commande, width=width)
                 btn.pack(side=LEFT, padx=2, pady=2)
 
     def _ajouter_caractere(self, caractere):
@@ -6330,13 +6645,13 @@ class MathBattle:
         boutons_frame.pack(pady=30)
         
         ttk.Button(boutons_frame, text="🔄 Rejouer", 
-                  command=lambda: [resultat_window.destroy(), self._recommencer_jeu()]).pack(side=LEFT, padx=10)
+                  style="Jeu.TButton", command=lambda: [resultat_window.destroy(), self._recommencer_jeu()]).pack(side=LEFT, padx=10)
         
         ttk.Button(boutons_frame, text="📊 Statistiques détaillées", 
-                  command=lambda: [resultat_window.destroy(), self._afficher_statistiques()]).pack(side=LEFT, padx=10)
+                  style="Jeu.TButton", command=lambda: [resultat_window.destroy(), self._afficher_statistiques()]).pack(side=LEFT, padx=10)
         
         ttk.Button(boutons_frame, text="❌ Quitter", 
-                  command=lambda: [resultat_window.destroy(), self.fenetre_jeu.destroy()]).pack(side=RIGHT, padx=10)
+                  style="Jeu.TButton", command=lambda: [resultat_window.destroy(), self.fenetre_jeu.destroy()]).pack(side=RIGHT, padx=10)
 
     def _afficher_statistiques(self):
         """Affiche les statistiques détaillées"""
@@ -6412,7 +6727,7 @@ class MathBattle:
         # Bouton fermer
         btn_frame = Frame(stats_window, bg=self.PALETTE["fond_principal"])
         btn_frame.pack(pady=15)
-        ttk.Button(btn_frame, text="Fermer", command=stats_window.destroy).pack()
+        ttk.Button(btn_frame, text="Fermer", command=stats_window.destroy, style="Jeu.TButton").pack()
 
     def _afficher_classement(self):
         """Affiche le classement (simulé pour l'instant)"""
@@ -6463,7 +6778,7 @@ class MathBattle:
         # Bouton
         btn_frame = Frame(classement_window, bg=self.PALETTE["fond_principal"])
         btn_frame.pack(pady=20)
-        ttk.Button(btn_frame, text="Fermer", command=classement_window.destroy).pack()
+        ttk.Button(btn_frame, text="Fermer", command=classement_window.destroy, style="Jeu.TButton").pack()
 
     def _recommencer_jeu(self):
         """Recommence le jeu depuis le début"""
@@ -6578,21 +6893,46 @@ class DefisFibonacci:
     
     def lancer_jeu(self):
         """Lance la fenêtre du jeu"""
-        self.fenetre_jeu = Toplevel(self.parent)
-        self.fenetre_jeu.title("🌟 Défis Fibonacci")
-        self.fenetre_jeu.geometry("950x850")
-        self.fenetre_jeu.configure(bg=self.PALETTE["fond_principal"])
-        
+        is_toplevel = self.parent is None or isinstance(self.parent, (Tk, Toplevel))
+        if is_toplevel:
+            self.fenetre_jeu = Toplevel(self.parent)
+            self.fenetre_jeu.title("🌟 Défis Fibonacci")
+            self.fenetre_jeu.geometry("950x850")
+            self.fenetre_jeu.configure(bg=self.PALETTE["fond_principal"])
+        else:
+            self.fenetre_jeu = self.parent
+            for child in list(self.fenetre_jeu.winfo_children()):
+                child.destroy()
+            try:
+                self.fenetre_jeu.configure(bg=self.PALETTE["fond_principal"])
+            except Exception:
+                pass
+
         self._creer_interface()
         self._nouveau_defi()
-        
-        # Centrer la fenêtre
-        self.fenetre_jeu.update_idletasks()
-        width = self.fenetre_jeu.winfo_width()
-        height = self.fenetre_jeu.winfo_height()
-        x = (self.fenetre_jeu.winfo_screenwidth() // 2) - (width // 2)
-        y = (self.fenetre_jeu.winfo_screenheight() // 2) - (height // 2)
-        self.fenetre_jeu.geometry(f'{width}x{height}+{x}+{y}')
+
+        # Centrer la fenêtre si Toplevel
+        if is_toplevel:
+            self.fenetre_jeu.update_idletasks()
+            width = self.fenetre_jeu.winfo_width()
+            height = self.fenetre_jeu.winfo_height()
+            x = (self.fenetre_jeu.winfo_screenwidth() // 2) - (width // 2)
+            y = (self.fenetre_jeu.winfo_screenheight() // 2) - (height // 2)
+            self.fenetre_jeu.geometry(f'{width}x{height}+{x}+{y}')
+
+        def _retour():
+            if is_toplevel:
+                self.fenetre_jeu.destroy()
+            else:
+                try:
+                    creer_interface_jeux(self.fenetre_jeu)
+                except Exception:
+                    pass
+
+        try:
+            _ajouter_bouton_retour_to_window(self.fenetre_jeu, is_toplevel, _retour)
+        except Exception:
+            pass
     
     def _creer_interface(self):
         """Crée l'interface graphique du jeu"""
@@ -6724,22 +7064,22 @@ class DefisFibonacci:
         boutons_frame.pack(fill=X, pady=10)
         
         ttk.Button(boutons_frame, text="🔍 Obtenir un indice", 
-                  command=self._obtenir_indice).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._obtenir_indice).pack(side=LEFT, padx=5)
         
         ttk.Button(boutons_frame, text="✅ Valider", 
-                  command=self._valider_reponse).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._valider_reponse).pack(side=LEFT, padx=5)
         
         ttk.Button(boutons_frame, text="🔄 Nouveau défi", 
-                  command=self._nouveau_defi).pack(side=LEFT, padx=5)
+                  style="Jeu.TButton", command=self._nouveau_defi).pack(side=LEFT, padx=5)
         
         ttk.Button(boutons_frame, text="📊 Statistiques", 
-                  command=self._afficher_statistiques).pack(side=RIGHT, padx=5)
+                  style="Jeu.TButton", command=self._afficher_statistiques).pack(side=RIGHT, padx=5)
         
         ttk.Button(boutons_frame, text="❓ Explication", 
-                  command=self._afficher_explication).pack(side=RIGHT, padx=5)
+                  style="Jeu.TButton", command=self._afficher_explication).pack(side=RIGHT, padx=5)
         
         ttk.Button(boutons_frame, text="📚 Guide", 
-                  command=lambda: afficher_guide_jeu("defis_fibonacci", self.fenetre_jeu)).pack(side=RIGHT, padx=5)
+                  style="Jeu.TButton", command=lambda: afficher_guide_jeu("defis_fibonacci", self.fenetre_jeu)).pack(side=RIGHT, padx=5)
         
         # Zone d'historique et faits Fibonacci
         historique_frame = Frame(main_frame, bg=self.PALETTE["fond_clair"], relief="solid", borderwidth=1)
@@ -7208,11 +7548,11 @@ class DefisFibonacci:
             boutons_frame.pack()
             
             self.btn_oui = ttk.Button(boutons_frame, text="✅ OUI", 
-                                     command=lambda: self._valider_reponse_choix("Oui"), width=15)
+                                     style="Jeu.TButton", command=lambda: self._valider_reponse_choix("Oui"), width=15)
             self.btn_oui.pack(side=LEFT, padx=10)
             
             self.btn_non = ttk.Button(boutons_frame, text="❌ NON", 
-                                     command=lambda: self._valider_reponse_choix("Non"), width=15)
+                                     style="Jeu.TButton", command=lambda: self._valider_reponse_choix("Non"), width=15)
             self.btn_non.pack(side=LEFT, padx=10)
             
         elif type_defi in ["suite_fibonacci"]:
@@ -7233,7 +7573,7 @@ class DefisFibonacci:
                   fg=self.PALETTE["texte_clair"]).pack(pady=2)
             
             ttk.Button(saisie_frame, text="✅ Valider", 
-                      command=self._valider_reponse).pack(pady=10)
+                      style="Jeu.TButton", command=self._valider_reponse).pack(pady=10)
             
         else:
             # Champ de saisie unique
@@ -7255,7 +7595,7 @@ class DefisFibonacci:
                       fg=self.PALETTE["texte_clair"]).pack(pady=2)
             
             ttk.Button(saisie_frame, text="✅ Valider", 
-                      command=self._valider_reponse).pack(pady=10)
+                      style="Jeu.TButton", command=self._valider_reponse).pack(pady=10)
     
     def _valider_reponse(self):
         """Méthode principale de validation qui redirige vers la bonne méthode"""
@@ -7416,11 +7756,11 @@ class DefisFibonacci:
     def _desactiver_controles(self):
         """Désactive tous les contrôles de réponse"""
         for widget in self.controles_reponse_frame.winfo_children():
-            if isinstance(widget, ttk.Button):
+            if isinstance(widget, ttk.Button, style="Jeu.TButton"):
                 widget.config(state="disabled")
             elif isinstance(widget, Frame):
                 for child in widget.winfo_children():
-                    if isinstance(child, ttk.Button):
+                    if isinstance(child, ttk.Button, style="Jeu.TButton"):
                         child.config(state="disabled")
                     elif isinstance(child, Entry):
                         child.config(state="disabled")
@@ -7431,11 +7771,11 @@ class DefisFibonacci:
         
         if type_defi in ["est_fibonacci"]:
             for widget in self.controles_reponse_frame.winfo_children():
-                if isinstance(widget, ttk.Button):
+                if isinstance(widget, ttk.Button, style="Jeu.TButton"):
                     widget.config(state="normal")
                 elif isinstance(widget, Frame):
                     for child in widget.winfo_children():
-                        if isinstance(child, ttk.Button):
+                        if isinstance(child, ttk.Button, style="Jeu.TButton"):
                             child.config(state="normal")
         else:
             for widget in self.controles_reponse_frame.winfo_children():
@@ -7445,7 +7785,7 @@ class DefisFibonacci:
                     for child in widget.winfo_children():
                         if isinstance(child, Entry):
                             child.config(state="normal")
-                        elif isinstance(child, ttk.Button):
+                        elif isinstance(child, ttk.Button, style="Jeu.TButton"):
                             child.config(state="normal")
 
     def _reussite_defi(self):
@@ -7612,7 +7952,7 @@ class DefisFibonacci:
             Label(line_frame, text=value, font=("Century Gothic", 11, "bold"), 
                   bg=self.PALETTE["fond_principal"], fg=self.PALETTE["primaire"]).pack(side=RIGHT)
         
-        ttk.Button(stats_window, text="Fermer", command=stats_window.destroy).pack(pady=20)
+        ttk.Button(stats_window, text="Fermer", command=stats_window.destroy, style="Jeu.TButton").pack(pady=20)
 
     def _afficher_explication(self):
         """Affiche l'explication complète"""
@@ -7656,7 +7996,7 @@ class DefisFibonacci:
               fg=self.PALETTE["texte_clair"]).pack(pady=10)
         
         ttk.Button(explication_window, text="Fermer", 
-                  command=explication_window.destroy).pack(pady=10)
+                  command=explication_window.destroy, style="Jeu.TButton").pack(pady=10)
         
         self._ajouter_historique(f"📚 Explication achetée: -{penalite} points")
         self._mettre_a_jour_stats()

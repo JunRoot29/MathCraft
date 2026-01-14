@@ -32,6 +32,11 @@ class InterfaceHistorique:
             for child in list(self.fenetre.winfo_children()):
                 child.destroy()
             # Style
+            try:
+                from .styles import ensure_styles_configured
+                ensure_styles_configured(PALETTE)
+            except Exception:
+                pass
             style = ttk.Style()
             style.configure("Historique.TButton", padding=10, font=("Century Gothic", 10))
             style.configure("Historique.Treeview", font=("Century Gothic", 9))
@@ -52,6 +57,11 @@ class InterfaceHistorique:
         self.fenetre.minsize(800, 600)
         
         # Style
+        try:
+            from .styles import ensure_styles_configured
+            ensure_styles_configured(PALETTE)
+        except Exception:
+            pass
         style = ttk.Style()
         style.configure("Historique.TButton", padding=10, font=("Century Gothic", 10))
         style.configure("Historique.Treeview", font=("Century Gothic", 9))
@@ -315,5 +325,3 @@ class InterfaceHistorique:
             messagebox.showinfo("Historique vidé", resultat)
             self._actualiser_affichage()
 
-# Instance globale
-interface_historique = InterfaceHistorique()

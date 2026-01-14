@@ -236,6 +236,11 @@ def convertir_stockage_donnees(valeur, unite_depart, unite_arrivee):
 """===================================================================================="""
 # Style global pour les boutons arrondis
 def configurer_style():
+    try:
+        from .styles import ensure_styles_configured
+        ensure_styles_configured(PALETTE)
+    except Exception:
+        pass
     style = ttk.Style()
     style.configure("Custom.TButton",
                     foreground="#FFFFFF",

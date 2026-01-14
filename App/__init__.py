@@ -3,7 +3,7 @@ Package MathCraft - Application éducative de mathématiques
 """
 
 from .historique_manager import historique_manager
-from .interface_historique import interface_historique
+from .interface_historique import InterfaceHistorique
 
 __version__ = "2.1.0"
 __author__ = "Junior Kossivi"

@@ -22,6 +22,11 @@ PALETTE = {
 }
 
 def configurer_style():
+    try:
+        from .styles import ensure_styles_configured
+        ensure_styles_configured(PALETTE)
+    except Exception:
+        pass
     style = ttk.Style()
     style.configure("Custom.TButton",
                     foreground="#FFFFFF",

@@ -25,6 +25,11 @@ PALETTE = {
 
 # Définition du style global pour les boutons arrondis
 def configurer_style():
+    try:
+        from .styles import ensure_styles_configured
+        ensure_styles_configured(PALETTE)
+    except Exception:
+        pass
     style = ttk.Style()
     style.theme_use("clam")  # ✅ Ajout du thème clam
     
