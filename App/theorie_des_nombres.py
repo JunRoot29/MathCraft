@@ -31,10 +31,9 @@ def configurer_style():
     except Exception:
         pass
     style = ttk.Style()
-    style.theme_use("clam")  # ✅ Ajout du thème clam
     
-    # Style bouton principal
-    style.configure("Custom.TButton",
+    # Style bouton principal (scope module)
+    style.configure("Theorie.Custom.TButton",
                     foreground=PALETTE["fond_secondaire"],
                     background=PALETTE["primaire"],
                     font=("Century Gothic", 12, "bold"),
@@ -42,8 +41,8 @@ def configurer_style():
                     relief="flat",
                     focuscolor="none")
     
-    # Style spécial pour le bouton Quitter
-    style.configure("Quit.TButton",
+    # Style spécial pour le bouton Quitter (scope module)
+    style.configure("Theorie.Quit.TButton",
                     foreground=PALETTE["fond_secondaire"],
                     background=PALETTE["erreur"],
                     font=("Century Gothic", 12, "bold"),
@@ -52,12 +51,12 @@ def configurer_style():
                     focuscolor="none")
     
     # Effets de survol
-    style.map("Custom.TButton",
+    style.map("Theorie.Custom.TButton",
              background=[('active', PALETTE["secondaire"]),
                         ('pressed', '#1E3A8A')],
              foreground=[('active', PALETTE["fond_secondaire"])])
     
-    style.map("Quit.TButton",
+    style.map("Theorie.Quit.TButton",
              background=[('active', '#B91C1C'),
                         ('pressed', '#991B1B')],
              foreground=[('active', PALETTE["fond_secondaire"])])
@@ -133,13 +132,13 @@ def lancer_nombre_parfait(parent=None):
         entre.delete("1.0", "end")
 
     style = configurer_style()
-    bouton1 = ttk.Button(nbr, style="Custom.TButton", text="Tester", command=test_parfait)
+    bouton1 = ttk.Button(nbr, style="Theorie.Custom.TButton", text="Tester", command=test_parfait)
     bouton1.pack(pady=10) 
     
     label2 = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label2.pack(pady=10)
 
-    bouton2 = ttk.Button(nbr, style="Custom.TButton", text="Remise à blanc", command=remise_a_blanc)
+    bouton2 = ttk.Button(nbr, style="Theorie.Custom.TButton", text="Remise à blanc", command=remise_a_blanc)
     bouton2.pack(pady=10)
 
     # Conseils pour les nombres parfaits
@@ -203,13 +202,13 @@ def lancer_nombre_distinct(parent=None):
         entre.delete("1.0", "end")
 
     style = configurer_style()
-    bouton1 = ttk.Button(nbr, style="Custom.TButton", text="Tester", command=test_distinct)
+    bouton1 = ttk.Button(nbr, style="Theorie.Custom.TButton", text="Tester", command=test_distinct)
     bouton1.pack(pady=10) 
     
     label2 = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label2.pack(pady=10)
 
-    bouton2 = ttk.Button(nbr, style="Custom.TButton", text="Remise à blanc", command=remise_a_blanc)
+    bouton2 = ttk.Button(nbr, style="Theorie.Custom.TButton", text="Remise à blanc", command=remise_a_blanc)
     bouton2.pack(pady=10)
 
     # Conseils pour les nombres distincts
@@ -273,13 +272,13 @@ def lancer_nombre_premier(parent=None):
         entre.delete("1.0", "end")
 
     style = configurer_style()
-    bouton1 = ttk.Button(nbr, style="Custom.TButton", text="Tester", command=test_premier)
+    bouton1 = ttk.Button(nbr, style="Theorie.Custom.TButton", text="Tester", command=test_premier)
     bouton1.pack(pady=10) 
     
     label2 = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label2.pack(pady=10)
 
-    bouton2 = ttk.Button(nbr, style="Custom.TButton", text="Remise à blanc", command=remise_a_blanc)
+    bouton2 = ttk.Button(nbr, style="Theorie.Custom.TButton", text="Remise à blanc", command=remise_a_blanc)
     bouton2.pack(pady=10)
 
     # Conseils pour les nombres premiers
@@ -351,7 +350,7 @@ def lancer_pgcd(parent=None):
         entre2.delete("1.0", "end")
 
     style = configurer_style()
-    bouton1 = ttk.Button(nbr, style="Custom.TButton", text="Calculer", command=test_pgcd)
+    bouton1 = ttk.Button(nbr, style="Theorie.Custom.TButton", text="Calculer", command=test_pgcd)
     bouton1.pack(pady=10) 
     
     label_resultat = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])

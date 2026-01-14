@@ -899,7 +899,6 @@ def lancer_interpolation_numerique(parent=None):
         except Exception:
             pass
         style = ttk.Style()
-        style.theme_use("clam")
         
         # Style pour les onglets
         style.configure("TNotebook", background=PALETTE["fond_principal"])
@@ -907,8 +906,8 @@ def lancer_interpolation_numerique(parent=None):
                        font=("Century Gothic", 10),
                        padding=[10, 5])
         
-        # Style pour les boutons
-        style.configure("Custom.TButton",
+        # Style pour les boutons (scope local au module)
+        style.configure("Interpolation.Custom.TButton",
                         foreground=PALETTE["fond_secondaire"],
                         background=PALETTE["primaire"],
                         font=("Century Gothic", 9, "bold"),
@@ -916,7 +915,7 @@ def lancer_interpolation_numerique(parent=None):
                         relief="flat",
                         width=18)
         
-        style.configure("Quit.TButton",
+        style.configure("Interpolation.Quit.TButton",
                         foreground=PALETTE["fond_secondaire"],
                         background=PALETTE["erreur"],
                         font=("Century Gothic", 10, "bold"),
@@ -924,11 +923,11 @@ def lancer_interpolation_numerique(parent=None):
                         relief="flat")
         
         # Effets de survol
-        style.map("Custom.TButton",
+        style.map("Interpolation.Custom.TButton",
                  background=[('active', PALETTE["secondaire"]),
                             ('pressed', '#1E3A8A')])
         
-        style.map("Quit.TButton",
+        style.map("Interpolation.Quit.TButton",
                  background=[('active', '#B91C1C'),
                             ('pressed', '#991B1B')])
         
@@ -1049,7 +1048,7 @@ def lancer_interpolation_numerique(parent=None):
     
     for example in exemples:
         nom = example[0]
-        btn = ttk.Button(frame_exemples, text=nom, style="Small.TButton",
+        btn = ttk.Button(frame_exemples, text=nom, style="Interpolation.Small.TButton",
                         command=lambda e=example: charger_exemple(e))
         btn.pack(side="left", padx=2, pady=5)
     

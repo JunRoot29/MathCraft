@@ -28,28 +28,28 @@ def configurer_style():
     except Exception:
         pass
     style = ttk.Style()
-    style.configure("Custom.TButton",
+    style.configure("Chaine.Custom.TButton",
                     foreground="#FFFFFF",
                     background=PALETTE["secondaire"],
                     font=("Century Gothic", 12),
                     relief="flat",
                     padding=10)
     
-    style.configure("Copier.TButton",
+    style.configure("Chaine.Copier.TButton",
                     foreground="#FFFFFF",
                     background="#6B7280",
                     font=("Century Gothic", 10),
                     relief="flat",
                     padding=6)
     
-    style.configure("Quit.TButton",
+    style.configure("Chaine.Quit.TButton",
                     foreground="#FFFFFF",
                     background=PALETTE["erreur"],
                     font=("Century Gothic", 12),
                     relief="flat",
                     padding=10)
     
-    style.configure("Petit.TButton",
+    style.configure("Chaine.Petit.TButton",
                     foreground="#FFFFFF",
                     background=PALETTE["secondaire"],
                     font=("Century Gothic", 10),
@@ -196,7 +196,7 @@ def lancer_compt_voy(parent):
     bouton_frame.pack(pady=15)
 
     button_test = ttk.Button(bouton_frame, text="🔢 Compter les voyelles", 
-                            style="Custom.TButton", command=test_voyelle)
+                            style="Chaine.Custom.TButton", command=test_voyelle)
     button_test.pack(side=LEFT, padx=5)
 
     button_effacer = ttk.Button(bouton_frame, text="🗑️ Effacer tout", 
@@ -292,11 +292,11 @@ def lancer_compt_lettre():
     bouton_frame.pack(pady=15)
 
     button_test = ttk.Button(bouton_frame, text="🔍 Compter la lettre", 
-                            style="Custom.TButton", command=test_lettre)
+                            style="Chaine.Custom.TButton", command=test_lettre)
     button_test.pack(side=LEFT, padx=5)
 
     button_effacer = ttk.Button(bouton_frame, text="🗑️ Effacer tout", 
-                               style="Custom.TButton", command=effacer_saisie)
+                               style="Chaine.Custom.TButton", command=effacer_saisie)
     button_effacer.pack(side=LEFT, padx=5)
 
     # Bouton Quitter
@@ -384,11 +384,11 @@ def lancer_rech_mot():
     bouton_frame.pack(pady=15)
 
     button_test = ttk.Button(bouton_frame, text="🔍 Rechercher le mot", 
-                            style="Custom.TButton", command=test_mot)
+                            style="Chaine.Custom.TButton", command=test_mot)
     button_test.pack(side=LEFT, padx=5)
 
     button_effacer = ttk.Button(bouton_frame, text="🗑️ Effacer tout", 
-                               style="Custom.TButton", command=effacer_saisie)
+                               style="Chaine.Custom.TButton", command=effacer_saisie)
     button_effacer.pack(side=LEFT, padx=5)
 
     # Bouton Quitter

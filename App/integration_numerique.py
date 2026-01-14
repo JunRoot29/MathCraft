@@ -444,7 +444,6 @@ def lancer_integration_numerique(parent=None):
         except Exception:
             pass
         style = ttk.Style()
-        style.theme_use("clam")
         
         # Style pour les onglets
         style.configure("TNotebook", background=PALETTE["fond_principal"])
@@ -452,8 +451,8 @@ def lancer_integration_numerique(parent=None):
                        font=("Century Gothic", 10),
                        padding=[10, 5])
         
-        # Style pour les boutons
-        style.configure("Custom.TButton",
+        # Style pour les boutons (scope local au module)
+        style.configure("Integration.Custom.TButton",
                         foreground=PALETTE["fond_secondaire"],
                         background=PALETTE["primaire"],
                         font=("Century Gothic", 9, "bold"),
@@ -461,7 +460,7 @@ def lancer_integration_numerique(parent=None):
                         relief="flat",
                         width=18)
         
-        style.configure("Quit.TButton",
+        style.configure("Integration.Quit.TButton",
                         foreground=PALETTE["fond_secondaire"],
                         background=PALETTE["erreur"],
                         font=("Century Gothic", 10, "bold"),
@@ -469,7 +468,7 @@ def lancer_integration_numerique(parent=None):
                         relief="flat")
 
         # Style pour petits boutons (raccourcis)
-        style.configure("Small.TButton",
+        style.configure("Integration.Small.TButton",
                         foreground=PALETTE["fond_secondaire"],
                         background=PALETTE["primaire"],
                         font=("Century Gothic", 9),
@@ -478,14 +477,14 @@ def lancer_integration_numerique(parent=None):
                         width=8)
         
         # Effets de survol
-        style.map("Custom.TButton",
+        style.map("Integration.Custom.TButton",
                  background=[('active', PALETTE["secondaire"]),
                             ('pressed', '#1E3A8A')])
-        style.map("Small.TButton",
+        style.map("Integration.Small.TButton",
                  background=[('active', PALETTE["secondaire"]),
                             ('pressed', '#1E3A8A')])
         
-        style.map("Quit.TButton",
+        style.map("Integration.Quit.TButton",
                  background=[('active', '#B91C1C'),
                             ('pressed', '#991B1B')])
         
@@ -597,7 +596,7 @@ def lancer_integration_numerique(parent=None):
     ]
     
     for text, insert_text in boutons_ligne1:
-        btn = ttk.Button(ligne1, text=text, style="Small.TButton",
+        btn = ttk.Button(ligne1, text=text, style="Integration.Small.TButton",
                         command=lambda t=insert_text: inserer_texte(t, entree_f))
         btn.pack(side="left", padx=2)
     
@@ -614,7 +613,7 @@ def lancer_integration_numerique(parent=None):
     ]
     
     for text, insert_text in boutons_ligne2:
-        btn = ttk.Button(ligne2, text=text, style="Small.TButton",
+        btn = ttk.Button(ligne2, text=text, style="Integration.Small.TButton",
                         command=lambda t=insert_text: inserer_texte(t, entree_f))
         btn.pack(side="left", padx=2)
     
@@ -632,13 +631,13 @@ def lancer_integration_numerique(parent=None):
     
     for text, action in boutons_ligne3:
         if action == "clear":
-            btn = ttk.Button(ligne3, text=text, style="Small.TButton",
+            btn = ttk.Button(ligne3, text=text, style="Integration.Small.TButton",
                             command=lambda: var_f.set(""))
         elif action == "backspace":
-            btn = ttk.Button(ligne3, text=text, style="Small.TButton",
+            btn = ttk.Button(ligne3, text=text, style="Integration.Small.TButton",
                             command=lambda: supprimer_caractere(entree_f))
         else:
-            btn = ttk.Button(ligne3, text=text, style="Small.TButton",
+            btn = ttk.Button(ligne3, text=text, style="Integration.Small.TButton",
                             command=lambda t=action: inserer_texte(t, entree_f))
         btn.pack(side="left", padx=2)
     

@@ -456,7 +456,6 @@ def lancer_equation_Numerique(parent=None):
         except Exception:
             pass
         style = ttk.Style()
-        style.theme_use("clam")
         
         # Style pour les onglets
         style.configure("TNotebook", background=PALETTE["fond_principal"])
@@ -464,8 +463,8 @@ def lancer_equation_Numerique(parent=None):
                        font=("Century Gothic", 10),
                        padding=[10, 5])
         
-        # Style pour les boutons
-        style.configure("Custom.TButton",
+        # Style pour les boutons (scope local au module)
+        style.configure("Equation.Custom.TButton",
                         foreground=PALETTE["fond_secondaire"],
                         background=PALETTE["primaire"],
                         font=("Century Gothic", 10, "bold"),
@@ -473,7 +472,7 @@ def lancer_equation_Numerique(parent=None):
                         relief="flat")
         
         # Style pour petits boutons (raccourcis mathématiques)
-        style.configure("Small.TButton",
+        style.configure("Equation.Small.TButton",
                         foreground=PALETTE["fond_secondaire"],
                         background=PALETTE["primaire"],
                         font=("Century Gothic", 10),
@@ -481,7 +480,7 @@ def lancer_equation_Numerique(parent=None):
                         relief="flat",
                         width=10)
         
-        style.configure("Quit.TButton",
+        style.configure("Equation.Quit.TButton",
                         foreground=PALETTE["fond_secondaire"],
                         background=PALETTE["erreur"],
                         font=("Century Gothic", 10, "bold"),
@@ -489,11 +488,11 @@ def lancer_equation_Numerique(parent=None):
                         relief="flat")
         
         # Effets de survol
-        style.map("Custom.TButton",
+        style.map("Equation.Custom.TButton",
                  background=[('active', PALETTE["secondaire"]),
                             ('pressed', '#1E3A8A')])
         
-        style.map("Quit.TButton",
+        style.map("Equation.Quit.TButton",
                  background=[('active', '#B91C1C'),
                             ('pressed', '#991B1B')])
         
@@ -664,7 +663,7 @@ def lancer_equation_Numerique(parent=None):
     ]
     
     for text, insert_text in boutons_ligne1:
-        btn = ttk.Button(ligne1, text=text, style="Small.TButton",
+        btn = ttk.Button(ligne1, text=text, style="Equation.Small.TButton",
                         command=lambda t=insert_text: entree_f.insert(END, t))
         btn.pack(side="left", padx=2)
     
@@ -681,7 +680,7 @@ def lancer_equation_Numerique(parent=None):
     ]
     
     for text, insert_text in boutons_ligne2:
-        btn = ttk.Button(ligne2, text=text, style="Small.TButton",
+        btn = ttk.Button(ligne2, text=text, style="Equation.Small.TButton",
                         command=lambda t=insert_text: entree_f.insert(END, t))
         btn.pack(side="left", padx=2)
     
