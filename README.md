@@ -277,6 +277,7 @@ PALETTE = {
 - [x] Interface unifiée avec palette cohérente
 - [x] Export CSV et images
 - [x] Visualisation graphique interactive
+- [x] Ajout de barres de défilement verticales aux interfaces des jeux (en-têtes fixes, support de la molette de la souris)
 
 ### 🔄 En développement
 - [ ] Module 9 : Jeux mathématiques avancés

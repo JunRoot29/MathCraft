@@ -162,19 +162,11 @@ sidebar.pack(side=LEFT, fill=Y)
 sidebar.pack_propagate(False)
 
 sidebar_canvas = Canvas(sidebar, bg="#F0F4F8", highlightthickness=0)
-sidebar_scrollbar = ttk.Scrollbar(sidebar, orient="vertical", command=sidebar_canvas.yview)
 sidebar_inner = Frame(sidebar_canvas, bg="#F0F4F8")
 
 sidebar_inner.bind("<Configure>", lambda e: sidebar_canvas.configure(scrollregion=sidebar_canvas.bbox("all")))
 sidebar_canvas.create_window((0, 0), window=sidebar_inner, anchor="nw")
-sidebar_canvas.configure(yscrollcommand=sidebar_scrollbar.set)
 sidebar_canvas.pack(side=LEFT, fill=BOTH, expand=True)
-sidebar_scrollbar.pack(side=RIGHT, fill=Y)
-
-def _on_sidebar_mouse_wheel(event):
-    sidebar_canvas.yview_scroll(int(-1*(event.delta/120)), "units")
-
-sidebar_canvas.bind_all("<MouseWheel>", _on_sidebar_mouse_wheel)
 
 # Cadre de contenu (droite)
 content_frame = Frame(main_area, bg="#FFFFFF")

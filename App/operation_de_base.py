@@ -57,15 +57,6 @@ def launch_operation(parent=None):
         style = ttk.Style()
         style.theme_use("clam")  # ✅ Ajout du thème clam
         
-        # Style bouton principal
-        style.configure("Custom.TButton",
-                        foreground=PALETTE["fond_secondaire"],
-                        background=PALETTE["primaire"],
-                        font=("Century Gothic", 10, "bold"),
-                        padding=8,
-                        relief="flat",
-                        focuscolor="none")
-        
         # Style pour boutons de la calculatrice (taille réduite)
         style.configure("Calc.TButton",
                         foreground=PALETTE["fond_secondaire"],
@@ -75,8 +66,8 @@ def launch_operation(parent=None):
                         relief="flat",
                         width=6)
         
-        # Style spécial pour le bouton Quitter
-        style.configure("Quit.TButton",
+        # Style spécial pour le bouton Quitter du module Opération (nommé localement pour éviter d'écraser le global)
+        style.configure("Operation.Quit.TButton",
                         foreground=PALETTE["fond_secondaire"],
                         background=PALETTE["erreur"],
                         font=("Century Gothic", 11, "bold"),
@@ -84,13 +75,13 @@ def launch_operation(parent=None):
                         relief="flat",
                         focuscolor="none")
         
-        # Effets de survol
-        style.map("Custom.TButton",
+        # Effets de survol (appliqués aux styles locaux)
+        style.map("Calc.TButton",
                  background=[('active', PALETTE["secondaire"]),
                             ('pressed', '#1E3A8A')],
                  foreground=[('active', PALETTE["fond_secondaire"])])
         
-        style.map("Quit.TButton",
+        style.map("Operation.Quit.TButton",
                  background=[('active', '#B91C1C'),
                             ('pressed', '#991B1B')],
                  foreground=[('active', PALETTE["fond_secondaire"])])
@@ -444,6 +435,6 @@ def launch_operation(parent=None):
     frame_quitter = Frame(operation, bg=PALETTE["fond_principal"])
     frame_quitter.pack(pady=15)
     
-    btn_quitter = ttk.Button(frame_quitter, text="🚪 Quitter", style="Quit.TButton", 
+    btn_quitter = ttk.Button(frame_quitter, text="🚪 Quitter", style="Operation.Quit.TButton", 
                            command=operation.destroy)
     btn_quitter.pack()

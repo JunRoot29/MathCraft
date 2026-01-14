@@ -73,5 +73,35 @@ def ensure_styles_configured(palette: dict):
     except Exception:
         # En cas d'échec silencieux, ne pas arrêter l'exécution
         pass
+    else:
+        # Marquer comme configuré uniquement si la configuration s'est déroulée sans erreur
+        _styles_configured = True
 
-    _styles_configured = True
+
+def make_scrollable_frame(parent, bg=None):
+    """Crée une zone scrollable (frame intérieure) dans `parent` et retourne `inner_frame`.
+    Utilise un Canvas + Scrollbar et bind le scroll de la molette lorsque le curseur est au-dessus."""
+    import tkinter as tk
+    from tkinter import ttk
+
+    canvas = tk.Canvas(parent, bg=bg or "#FFFFFF", highlightthickness=0)
+    scrollbar = ttk.Scrollbar(parent, orient="vertical", command=canvas.yview)
+    inner = tk.Frame(canvas, bg=bg or "#FFFFFF")
+
+    inner.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+    canvas.create_window((0, 0), window=inner, anchor="nw")
+    canvas.configure(yscrollcommand=scrollbar.set)
+
+    canvas.pack(side="left", fill="both", expand=True)
+    scrollbar.pack(side="right", fill="y")
+
+    # Bind la molette seulement quand le curseur est sur le canvas (évite les conflits globaux)
+    def _on_enter(e):
+        canvas.bind_all("<MouseWheel>", lambda evt: canvas.yview_scroll(int(-1*(evt.delta/120)), "units"))
+    def _on_leave(e):
+        canvas.unbind_all("<MouseWheel>")
+
+    canvas.bind("<Enter>", _on_enter)
+    canvas.bind("<Leave>", _on_leave)
+
+    return inner

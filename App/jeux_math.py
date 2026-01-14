@@ -1004,8 +1004,18 @@ class MathQuizzChallenge:
         Label(header_frame, text="🎯 MATH QUIZZ CHALLENGE PRO", 
               font=("Century Gothic", 20, "bold"), bg=PALETTE["primaire"], fg="white").pack(pady=15)
 
+        # Cadre scrollable pour le contenu du jeu (garde l'en-tête fixe)
+        content_container = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"]) 
+        content_container.pack(fill=BOTH, expand=True, padx=10, pady=0)
+        try:
+            from .styles import make_scrollable_frame
+            content_frame = make_scrollable_frame(content_container, PALETTE["fond_principal"])
+        except Exception:
+            content_frame = Frame(content_container, bg=PALETTE["fond_principal"]) 
+            content_frame.pack(fill=BOTH, expand=True)
+
         # Frame des statistiques
-        stats_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        stats_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         stats_frame.pack(fill=X, padx=20, pady=10)
         
         # Score
@@ -1024,8 +1034,8 @@ class MathQuizzChallenge:
         self.timer_label.pack(side=RIGHT, padx=20)
 
         # Barre de progression
-        progress_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
-        progress_frame.pack(fill=X, padx=20, pady=10)
+        progress_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
+        progress_frame.pack(fill=X, padx=20, pady=10) 
         
         Label(progress_frame, text="Progression:", 
               font=("Century Gothic", 10), bg=PALETTE["fond_principal"]).pack(anchor=W)
@@ -1039,8 +1049,8 @@ class MathQuizzChallenge:
         self.progress_label.pack(anchor=W)
 
         # Badges
-        self.badges_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
-        self.badges_frame.pack(fill=X, padx=20, pady=10)
+        self.badges_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
+        self.badges_frame.pack(fill=X, padx=20, pady=10) 
         
         self.badges_label = Label(self.badges_frame, text="🎖️ Badges: Aucun pour le moment",
                                  font=("Century Gothic", 10), bg=PALETTE["fond_principal"], fg=PALETTE["texte_clair"])
@@ -1052,19 +1062,19 @@ class MathQuizzChallenge:
         guide_button.pack(side=RIGHT, padx=10)
 
         # Séparateur
-        ttk.Separator(self.fenetre_jeu, orient='horizontal').pack(fill=X, padx=20, pady=10)
+        ttk.Separator(content_frame, orient='horizontal').pack(fill=X, padx=20, pady=10)
 
         # Question
-        question_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
-        question_frame.pack(fill=BOTH, expand=True, padx=20, pady=20)
+        question_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
+        question_frame.pack(fill=BOTH, expand=True, padx=20, pady=20) 
         
         self.question_label = Label(question_frame, text="", font=("Century Gothic", 18, "bold"),
                                    bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"], wraplength=600, justify="center")
         self.question_label.pack(pady=30)
 
         # Réponse
-        reponse_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
-        reponse_frame.pack(fill=X, padx=20, pady=10)
+        reponse_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
+        reponse_frame.pack(fill=X, padx=20, pady=10) 
         
         Label(reponse_frame, text="Ta réponse:", 
               font=("Century Gothic", 12), bg=PALETTE["fond_principal"]).pack(pady=5)
@@ -1080,8 +1090,8 @@ class MathQuizzChallenge:
         self.points_label.pack()
 
         # Boutons
-        buttons_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
-        buttons_frame.pack(fill=X, padx=20, pady=20)
+        buttons_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
+        buttons_frame.pack(fill=X, padx=20, pady=20) 
         
         ttk.Button(buttons_frame, text="✅ Vérifier la réponse", style="Jeu.TButton", 
                   command=self._verifier_reponse).pack(side=LEFT, padx=10)
@@ -1093,7 +1103,7 @@ class MathQuizzChallenge:
                   command=self._afficher_badges).pack(side=RIGHT, padx=10)
 
         # Feedback
-        self.feedback_label = Label(self.fenetre_jeu, text="", font=("Century Gothic", 13), 
+        self.feedback_label = Label(content_frame, text="", font=("Century Gothic", 13), 
                                    bg=PALETTE["fond_principal"], wraplength=500)
         self.feedback_label.pack(pady=10)
 
@@ -1371,8 +1381,18 @@ class CourseAuxNombres:
         Label(header_frame, text="🏆 COURSE AUX NOMBRES", 
               font=("Century Gothic", 20, "bold"), bg=PALETTE["primaire"], fg="white").pack(pady=15)
 
+        # Cadre scrollable pour le contenu
+        content_container = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"]) 
+        content_container.pack(fill=BOTH, expand=True, padx=10, pady=0)
+        try:
+            from .styles import make_scrollable_frame
+            content_frame = make_scrollable_frame(content_container, PALETTE["fond_principal"])
+        except Exception:
+            content_frame = Frame(content_container, bg=PALETTE["fond_principal"]) 
+            content_frame.pack(fill=BOTH, expand=True)
+
         # Statistiques
-        stats_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        stats_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         stats_frame.pack(fill=X, padx=20, pady=10)
         
         self.score_label = Label(stats_frame, text=f"🎯 Score: {self.score}",
@@ -1393,7 +1413,7 @@ class CourseAuxNombres:
         guide_button.pack(side=RIGHT, padx=10)
 
         # Cible
-        cible_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        cible_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         cible_frame.pack(fill=X, padx=20, pady=20)
         
         Label(cible_frame, text="🎯 CIBLE À ATTEINDRE:", 
@@ -1404,7 +1424,7 @@ class CourseAuxNombres:
         self.cible_label.pack(pady=10)
 
         # Nombres disponibles
-        nombres_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        nombres_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         nombres_frame.pack(fill=X, padx=20, pady=15)
         
         Label(nombres_frame, text="🔢 NOMBRES DISPONIBLES:", 
@@ -1414,7 +1434,7 @@ class CourseAuxNombres:
         self.nombres_frame.pack(pady=10)
 
         # Zone de saisie
-        saisie_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        saisie_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         saisie_frame.pack(fill=X, padx=20, pady=20)
         
         Label(saisie_frame, text="🧮 TON CALCUL:", 
@@ -1430,7 +1450,7 @@ class CourseAuxNombres:
               font=("Century Gothic", 10), bg=PALETTE["fond_principal"], fg=PALETTE["texte_clair"]).pack()
 
         # Boutons
-        buttons_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        buttons_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         buttons_frame.pack(fill=X, padx=20, pady=15)
         
         ttk.Button(buttons_frame, text="✅ Vérifier le calcul", 
@@ -1443,7 +1463,7 @@ class CourseAuxNombres:
                   style="Jeu.TButton", command=self._afficher_solutions).pack(side=RIGHT, padx=10)
 
         # Solutions trouvées
-        solutions_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        solutions_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         solutions_frame.pack(fill=BOTH, expand=True, padx=20, pady=15)
         
         Label(solutions_frame, text="✅ SOLUTIONS TROUVÉES:", 
@@ -1457,7 +1477,7 @@ class CourseAuxNombres:
         scrollbar.pack(side=RIGHT, fill=Y)
         
         # Feedback
-        self.feedback_label = Label(self.fenetre_jeu, text="", 
+        self.feedback_label = Label(content_frame, text="", 
                                    font=("Century Gothic", 12), bg=PALETTE["fond_principal"])
         self.feedback_label.pack(pady=10)
 
@@ -1716,8 +1736,18 @@ class JeuDes24:
         Label(header_frame, text="🎯 LE JEU DES 24", 
               font=("Century Gothic", 20, "bold"), bg=PALETTE["primaire"], fg="white").pack(pady=15)
 
+        # Cadre scrollable pour le contenu
+        content_container = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"]) 
+        content_container.pack(fill=BOTH, expand=True, padx=10, pady=0)
+        try:
+            from .styles import make_scrollable_frame
+            content_frame = make_scrollable_frame(content_container, PALETTE["fond_principal"])
+        except Exception:
+            content_frame = Frame(content_container, bg=PALETTE["fond_principal"]) 
+            content_frame.pack(fill=BOTH, expand=True)
+
         # Statistiques
-        stats_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        stats_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         stats_frame.pack(fill=X, padx=20, pady=10)
         
         self.score_label = Label(stats_frame, text=f"🏆 Score: {self.score}",
@@ -1729,7 +1759,7 @@ class JeuDes24:
         self.niveau_label.pack(side=LEFT, padx=20)
 
         # Cible fixe (toujours 24)
-        cible_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        cible_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         cible_frame.pack(fill=X, padx=20, pady=20)
         
         Label(cible_frame, text="🎯 CIBLE À ATTEINDRE:", 
@@ -2041,8 +2071,18 @@ class MathEmoji:
         Label(header_frame, text="🍎 MATH EMOJI 🍌", 
               font=("Comic Sans MS", 22, "bold"), bg=PALETTE["primaire"], fg="white").pack(pady=15)
 
+        # Cadre scrollable pour le contenu
+        content_container = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"]) 
+        content_container.pack(fill=BOTH, expand=True, padx=10, pady=0)
+        try:
+            from .styles import make_scrollable_frame
+            content_frame = make_scrollable_frame(content_container, PALETTE["fond_principal"])
+        except Exception:
+            content_frame = Frame(content_container, bg=PALETTE["fond_principal"]) 
+            content_frame.pack(fill=BOTH, expand=True)
+
         # Statistiques
-        stats_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        stats_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         stats_frame.pack(fill=X, padx=20, pady=10)
         
         self.score_label = Label(stats_frame, text=f"🏆 Score: {self.score}",
@@ -2064,7 +2104,7 @@ class MathEmoji:
         guide_button.pack(side=RIGHT, padx=10)
 
         # Équations
-        equations_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        equations_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         equations_frame.pack(fill=X, padx=30, pady=20)
         
         Label(equations_frame, text="🧮 RÉSOUS CES ÉQUATIONS :", 
@@ -2077,7 +2117,7 @@ class MathEmoji:
         self.equations_text.config(state=DISABLED)
 
         # Zone de réponses
-        reponses_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        reponses_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         reponses_frame.pack(fill=X, padx=30, pady=15)
         
         Label(reponses_frame, text="✏️ TES RÉPONSES :", 
@@ -2087,7 +2127,7 @@ class MathEmoji:
         self.reponses_frame.pack(pady=10)
 
         # Boutons
-        buttons_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        buttons_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         buttons_frame.pack(fill=X, padx=30, pady=20)
         
         ttk.Button(buttons_frame, text="✅ Vérifier les réponses", style="Jeu.TButton", 
@@ -2360,8 +2400,18 @@ class CalculMentalExpress:
         Label(header_frame, text="🌀 CALCUL MENTAL EXPRESS", 
               font=("Century Gothic", 18, "bold"), bg=PALETTE["primaire"], fg="white").pack(pady=12)
 
+        # Cadre scrollable pour le contenu
+        content_container = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"]) 
+        content_container.pack(fill=BOTH, expand=True, padx=10, pady=0)
+        try:
+            from .styles import make_scrollable_frame
+            content_frame = make_scrollable_frame(content_container, PALETTE["fond_principal"])
+        except Exception:
+            content_frame = Frame(content_container, bg=PALETTE["fond_principal"]) 
+            content_frame.pack(fill=BOTH, expand=True)
+
         # Statistiques en temps réel
-        stats_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        stats_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         stats_frame.pack(fill=X, padx=20, pady=8)
         
         # Score et streak
@@ -2397,7 +2447,7 @@ class CalculMentalExpress:
         self.niveau_label.pack(anchor=E)
 
         # Barre de progression du timer
-        self.progress_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        self.progress_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         self.progress_frame.pack(fill=X, padx=50, pady=5)
         
         self.progress_bar = ttk.Progressbar(self.progress_frame, orient=HORIZONTAL, 
@@ -2406,7 +2456,7 @@ class CalculMentalExpress:
         self.progress_bar['value'] = self.temps_limite
 
         # Zone de question
-        question_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        question_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         question_frame.pack(fill=BOTH, expand=True, padx=40, pady=20)
         
         Label(question_frame, text="CALCULE RAPIDEMENT :", 
@@ -2418,7 +2468,7 @@ class CalculMentalExpress:
         self.question_label.pack(pady=20)
 
         # Zone de réponse
-        reponse_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        reponse_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         reponse_frame.pack(fill=X, padx=40, pady=15)
         
         self.reponse_entry = Entry(reponse_frame, font=("Century Gothic", 18), 
@@ -2428,7 +2478,7 @@ class CalculMentalExpress:
         self.reponse_entry.focus()
 
         # Boutons
-        buttons_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        buttons_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         buttons_frame.pack(fill=X, padx=40, pady=15)
         
         ttk.Button(buttons_frame, text="✅ Vérifier", 
@@ -2441,7 +2491,7 @@ class CalculMentalExpress:
                   style="Jeu.TButton", command=lambda: afficher_guide_jeu("calcul_mental_express", self.fenetre_jeu)).pack(side=RIGHT, padx=5)
 
         # Feedback
-        self.feedback_label = Label(self.fenetre_jeu, text="", 
+        self.feedback_label = Label(content_frame, text="", 
                                    font=("Century Gothic", 12), bg=PALETTE["fond_principal"])
         self.feedback_label.pack(pady=10)
 
@@ -2710,8 +2760,18 @@ class SudokuMathematique:
         Label(header_frame, text="🧩 SUDOKU MATHÉMATIQUE", 
               font=("Century Gothic", 18, "bold"), bg=PALETTE["primaire"], fg="white").pack(pady=12)
 
+        # Cadre scrollable pour le contenu
+        content_container = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"]) 
+        content_container.pack(fill=BOTH, expand=True, padx=10, pady=0)
+        try:
+            from .styles import make_scrollable_frame
+            content_frame = make_scrollable_frame(content_container, PALETTE["fond_principal"])
+        except Exception:
+            content_frame = Frame(content_container, bg=PALETTE["fond_principal"]) 
+            content_frame.pack(fill=BOTH, expand=True)
+
         # Statistiques
-        stats_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        stats_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         stats_frame.pack(fill=X, padx=20, pady=10)
         
         # Score et niveau
@@ -2752,7 +2812,7 @@ class SudokuMathematique:
         guide_button.pack(side=RIGHT, padx=10)
 
         # Cadre principal pour la grille
-        main_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        main_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         main_frame.pack(fill=BOTH, expand=True, padx=20, pady=10)
 
         # Instructions
@@ -3225,8 +3285,18 @@ class BatailleDesFractions:
         Label(header_frame, text="🎲 BATAILLE DES FRACTIONS", 
               font=("Century Gothic", 18, "bold"), bg=PALETTE["primaire"], fg="white").pack(pady=12)
 
+        # Cadre scrollable pour le contenu
+        content_container = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"]) 
+        content_container.pack(fill=BOTH, expand=True, padx=10, pady=0)
+        try:
+            from .styles import make_scrollable_frame
+            content_frame = make_scrollable_frame(content_container, PALETTE["fond_principal"])
+        except Exception:
+            content_frame = Frame(content_container, bg=PALETTE["fond_principal"]) 
+            content_frame.pack(fill=BOTH, expand=True)
+
         # Statistiques
-        stats_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        stats_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         stats_frame.pack(fill=X, padx=20, pady=10)
         
         # Score et niveau
@@ -3267,7 +3337,7 @@ class BatailleDesFractions:
         guide_button.pack(side=RIGHT, padx=10)
 
         # Zone de jeu principale
-        jeu_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        jeu_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         jeu_frame.pack(fill=BOTH, expand=True, padx=20, pady=15)
 
         # Cartes de l'ordinateur
@@ -3909,8 +3979,18 @@ class DessineMoiUneFonction:
         Label(header_frame, text="📈 DESSINE-MOI UNE FONCTION - BIBLIOTHÈQUE ÉTENDUE", 
               font=("Century Gothic", 16, "bold"), bg=PALETTE["primaire"], fg="white").pack(pady=12)
 
+        # Cadre scrollable pour le contenu
+        content_container = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"]) 
+        content_container.pack(fill=BOTH, expand=True, padx=10, pady=0)
+        try:
+            from .styles import make_scrollable_frame
+            content_frame = make_scrollable_frame(content_container, PALETTE["fond_principal"])
+        except Exception:
+            content_frame = Frame(content_container, bg=PALETTE["fond_principal"]) 
+            content_frame.pack(fill=BOTH, expand=True)
+
         # Statistiques
-        stats_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        stats_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         stats_frame.pack(fill=X, padx=20, pady=10)
         
         # Score et niveau
@@ -3952,7 +4032,7 @@ class DessineMoiUneFonction:
         guide_button.pack(side=RIGHT, padx=10)
 
         # Cadre principal
-        main_frame = Frame(self.fenetre_jeu, bg=PALETTE["fond_principal"])
+        main_frame = Frame(content_frame, bg=PALETTE["fond_principal"])
         main_frame.pack(fill=BOTH, expand=True, padx=20, pady=10)
 
         # Instructions
@@ -4435,8 +4515,18 @@ class MystereMathematique:
         Label(header_frame, text="🕵️ MYSTÈRE MATHÉMATIQUE", 
               font=("Century Gothic", 18, "bold"), bg=self.PALETTE["primaire"], fg="white").pack(pady=12)
 
+        # Cadre scrollable pour le contenu
+        content_container = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_principal"]) 
+        content_container.pack(fill=BOTH, expand=True, padx=10, pady=0)
+        try:
+            from .styles import make_scrollable_frame
+            content_frame = make_scrollable_frame(content_container, self.PALETTE["fond_principal"])
+        except Exception:
+            content_frame = Frame(content_container, bg=self.PALETTE["fond_principal"]) 
+            content_frame.pack(fill=BOTH, expand=True)
+
         # Statistiques
-        stats_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_principal"])
+        stats_frame = Frame(content_frame, bg=self.PALETTE["fond_principal"])
         stats_frame.pack(fill=X, padx=20, pady=10)
         
         # Score et niveau
@@ -4472,7 +4562,7 @@ class MystereMathematique:
         self.type_label.pack(anchor=E)
 
         # Cadre principal
-        main_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_principal"])
+        main_frame = Frame(content_frame, bg=self.PALETTE["fond_principal"])
         main_frame.pack(fill=BOTH, expand=True, padx=20, pady=10)
 
         # Énigme
@@ -4984,9 +5074,19 @@ class ChasseNombresPremiers:
         Label(header_frame, text="Testez vos connaissances sur les nombres premiers !", 
               font=("Century Gothic", 11), bg=self.PALETTE["primaire"], fg="white", 
               wraplength=700).pack(pady=(0, 10))
-        
+
+        # Cadre scrollable pour le contenu
+        content_container = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_principal"]) 
+        content_container.pack(fill=BOTH, expand=True, padx=10, pady=0)
+        try:
+            from .styles import make_scrollable_frame
+            content_frame = make_scrollable_frame(content_container, self.PALETTE["fond_principal"])
+        except Exception:
+            content_frame = Frame(content_container, bg=self.PALETTE["fond_principal"]) 
+            content_frame.pack(fill=BOTH, expand=True)
+
         # Statistiques principales
-        stats_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_clair"], relief="solid", borderwidth=1)
+        stats_frame = Frame(content_frame, bg=self.PALETTE["fond_clair"], relief="solid", borderwidth=1)
         stats_frame.pack(fill=X, padx=20, pady=10)
         
         # Première ligne de stats
@@ -5028,69 +5128,14 @@ class ChasseNombresPremiers:
         self.parties_label.pack(side=LEFT, padx=20)
         
         # Cadre principal
-        main_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_principal"])
+        main_frame = Frame(content_frame, bg=self.PALETTE["fond_principal"])
         main_frame.pack(fill=BOTH, expand=True, padx=20, pady=10)
-        
-        # Carte de la question
-        self.question_frame = Frame(main_frame, bg=self.PALETTE["fond_carte"], 
-                                   relief="solid", borderwidth=2)
-        self.question_frame.pack(fill=BOTH, expand=True, pady=10)
-        
-        # Zone de type de question
-        self.type_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
-        self.type_frame.pack(fill=X, pady=5)
-        
-        self.type_label = Label(self.type_frame, text="", 
-                               font=("Century Gothic", 10, "bold"), bg=self.PALETTE["fond_principal"], 
-                               fg=self.PALETTE["secondaire"])
-        self.type_label.pack()
-        
-        # Zone de réponse - Frame dynamique qui change selon le type
-        self.reponse_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
-        self.reponse_frame.pack(fill=X, pady=15)
-        
-        Label(self.reponse_frame, text="🎯 TA RÉPONSE :", 
-              font=("Century Gothic", 12, "bold"), bg=self.PALETTE["fond_principal"]).pack(pady=5)
-        
-        # Frame pour les contrôles de réponse (sera rempli dynamiquement)
-        self.controles_reponse_frame = Frame(self.reponse_frame, bg=self.PALETTE["fond_principal"])
-        self.controles_reponse_frame.pack(pady=10)
-        
-        # Indices
-        indices_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
-        indices_frame.pack(fill=X, pady=10)
-        
-        Label(indices_frame, text="💡 INDICES DISPONIBLES :", 
-              font=("Century Gothic", 12, "bold"), bg=self.PALETTE["fond_principal"]).pack(pady=5)
-        
-        self.indices_frame = Frame(indices_frame, bg=self.PALETTE["fond_principal"])
-        self.indices_frame.pack(pady=10)
-        
-        # Zone de feedback
-        self.feedback_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
-        self.feedback_frame.pack(fill=X, pady=15)
-        
-        self.feedback_label = Label(self.feedback_frame, text="", 
-                                   font=("Century Gothic", 12), bg=self.PALETTE["fond_principal"], 
-                                   wraplength=700)
-        self.feedback_label.pack()
-        
-        # Boutons d'action
+
+        # Boutons d'action (Explication, Guide)
         boutons_action_frame = Frame(main_frame, bg=self.PALETTE["fond_principal"])
-        boutons_action_frame.pack(fill=X, pady=10)
-        
-        ttk.Button(boutons_action_frame, text="🔍 Obtenir un indice", 
-                  style="Jeu.TButton", command=self._obtenir_indice).pack(side=LEFT, padx=5)
-        
-        ttk.Button(boutons_action_frame, text="🔄 Question suivante", 
-                  style="Jeu.TButton", command=self._nouvelle_question).pack(side=LEFT, padx=5)
-        
-        ttk.Button(boutons_action_frame, text="📊 Statistiques", 
-                  style="Jeu.TButton", command=self._afficher_statistiques).pack(side=RIGHT, padx=5)
-        
-        ttk.Button(boutons_action_frame, text="❓ Explication complète", 
+        boutons_action_frame.pack(fill=X, pady=5)
+        ttk.Button(boutons_action_frame, text="❓ Explication", 
                   style="Jeu.TButton", command=self._afficher_explication).pack(side=RIGHT, padx=5)
-        
         ttk.Button(boutons_action_frame, text="📚 Guide", 
                   style="Jeu.TButton", command=lambda: afficher_guide_jeu("chasse_premiers", self.fenetre_jeu)).pack(side=RIGHT, padx=5)
         
@@ -6026,6 +6071,16 @@ class MathBattle:
         Label(header_frame, text="Affrontez l'ordinateur en calcul mental rapide !", 
               font=("Century Gothic", 12), bg=self.PALETTE["primaire"], fg="white", 
               wraplength=800).pack(pady=(0, 10))
+
+        # Cadre scrollable pour le contenu
+        content_container = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_principal"]) 
+        content_container.pack(fill=BOTH, expand=True, padx=10, pady=0)
+        try:
+            from .styles import make_scrollable_frame
+            content_frame = make_scrollable_frame(content_container, self.PALETTE["fond_principal"])
+        except Exception:
+            content_frame = Frame(content_container, bg=self.PALETTE["fond_principal"]) 
+            content_frame.pack(fill=BOTH, expand=True)
         
         # Score et manches
         score_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_clair"], relief="solid", borderwidth=2)
@@ -6082,7 +6137,7 @@ class MathBattle:
         self.score_ordi_label.pack(pady=10)
         
         # Cadre principal
-        main_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_principal"])
+        main_frame = Frame(content_frame, bg=self.PALETTE["fond_principal"])
         main_frame.pack(fill=BOTH, expand=True, padx=20, pady=10)
         
         # Carte de la question
@@ -6954,9 +7009,19 @@ class DefisFibonacci:
         Label(header_frame, text="Découvrez la magie de la suite de Fibonacci !", 
               font=("Century Gothic", 12), bg=self.PALETTE["primaire"], fg="white", 
               wraplength=800).pack(pady=(0, 10))
-        
+
+        # Cadre scrollable pour le contenu
+        content_container = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_principal"]) 
+        content_container.pack(fill=BOTH, expand=True, padx=10, pady=0)
+        try:
+            from .styles import make_scrollable_frame
+            content_frame = make_scrollable_frame(content_container, self.PALETTE["fond_principal"])
+        except Exception:
+            content_frame = Frame(content_container, bg=self.PALETTE["fond_principal"]) 
+            content_frame.pack(fill=BOTH, expand=True)
+
         # Statistiques principales
-        stats_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_clair"], relief="solid", borderwidth=1)
+        stats_frame = Frame(content_frame, bg=self.PALETTE["fond_clair"], relief="solid", borderwidth=1)
         stats_frame.pack(fill=X, padx=20, pady=10)
         
         # Première ligne de stats
@@ -7004,7 +7069,7 @@ class DefisFibonacci:
         self.type_label.pack(side=RIGHT, padx=20)
         
         # Cadre principal
-        main_frame = Frame(self.fenetre_jeu, bg=self.PALETTE["fond_principal"])
+        main_frame = Frame(content_frame, bg=self.PALETTE["fond_principal"])
         main_frame.pack(fill=BOTH, expand=True, padx=20, pady=10)
         
         # Section supérieure : Défi et spirale
