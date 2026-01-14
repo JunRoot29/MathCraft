@@ -487,11 +487,11 @@ Fait avec ❤️ et beaucoup de ☕ à Abidjan
 **"Les mathématiques sont la porte et la clé de toutes les sciences."**
 *– Roger Bacon*
 
-© 2025 **Junior Kossivi** • Université Félix Houphouët-Boigny
+© 2026 **Jacques Junior Kossivi** • Université Félix Houphouët-Boigny
 
 </div>
 
 ---
 
-*Dernière mise à jour : Decembre 2025*  
-*Version : MathCraft 1.0 - "Numerical Revolution"*
+*Dernière mise à jour : Janvier 2025*  
+*Version : MathCraft 1.0.0 - "Numerical Revolution"*
