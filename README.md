@@ -493,5 +493,5 @@ Fait avec ❤️ et beaucoup de ☕ à Abidjan
 
 ---
 
-*Dernière mise à jour : Janvier 2025*  
+*Dernière mise à jour : Janvier 2026*  
 *Version : MathCraft 1.0.0 - "Numerical Revolution"*
