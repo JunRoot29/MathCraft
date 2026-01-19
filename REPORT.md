@@ -428,7 +428,7 @@ Prêt pour production et contribution communautaire.
 
 **Merci d'avoir utilisé ce service de documentation !**
 
-*Rapport généré : 19 Janvier 2026*
+*Rapport : 19 Janvier 2026*
 
 </div>
 

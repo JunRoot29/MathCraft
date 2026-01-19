@@ -16,6 +16,9 @@ PALETTE = {
     "texte_clair": "#1E40AF"
 }
 
+# Imports responsive UI
+from .responsive_ui import create_responsive_window
+
 class InterfaceHistorique:
     def __init__(self, parent=None):
         self.parent = parent
@@ -50,11 +53,8 @@ class InterfaceHistorique:
             self.fenetre.lift()
             return
         
-        self.fenetre = tk.Toplevel(self.parent)
-        self.fenetre.title("📊 Historique des Calculs - MathCraft")
-        self.fenetre.geometry("1000x700")
+        self.fenetre = create_responsive_window(self.parent, "📊 Historique des Calculs - MathCraft", base_width=1000, base_height=700)
         self.fenetre.configure(bg=PALETTE["fond_principal"])
-        self.fenetre.minsize(800, 600)
         
         # Style
         try:

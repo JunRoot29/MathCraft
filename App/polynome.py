@@ -23,6 +23,9 @@ PALETTE = {
     "bordure": "#E2E8F0",
 }
 
+# Imports responsive UI
+from .responsive_ui import create_responsive_window
+
 # Import simplifié
 try:
     from .historique_manager import historique_manager
@@ -87,11 +90,8 @@ def lancer_polynome1(parent=None):
     configurer_style()
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
-        fenetre_polynome1 = Toplevel(parent)
+        fenetre_polynome1 = create_responsive_window(parent, "Polynôme degré 1", base_width=500, base_height=650)
         fenetre_polynome1.configure(bg=PALETTE["fond_principal"])
-        fenetre_polynome1.title("Polynôme degré 1")
-        fenetre_polynome1.geometry("500x650")
-        fenetre_polynome1.resizable(False, False)
     else:
         fenetre_polynome1 = parent
         for child in list(fenetre_polynome1.winfo_children()):
@@ -226,11 +226,8 @@ def lancer_polynome2(parent=None):
     configurer_style()
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
-        fenetre_polynome2 = Toplevel(parent)
+        fenetre_polynome2 = create_responsive_window(parent, "Polynôme degré 2", base_width=500, base_height=900)
         fenetre_polynome2.configure(bg=PALETTE["fond_principal"])
-        fenetre_polynome2.title("Polynôme degré 2")
-        fenetre_polynome2.geometry("500x900")
-        fenetre_polynome2.resizable(False, False)
     else:
         fenetre_polynome2 = parent
         for child in list(fenetre_polynome2.winfo_children()):
@@ -376,11 +373,8 @@ def lancer_polynome3(parent=None):
     configurer_style()
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
-        fenetre_polynome3 = Toplevel(parent)
+        fenetre_polynome3 = create_responsive_window(parent, "Polynôme degré 3", base_width=500, base_height=950)
         fenetre_polynome3.configure(bg=PALETTE["fond_principal"])
-        fenetre_polynome3.title("Polynôme degré 3")
-        fenetre_polynome3.geometry("500x950")
-        fenetre_polynome3.resizable(False, False)
     else:
         fenetre_polynome3 = parent
         for child in list(fenetre_polynome3.winfo_children()):
@@ -560,15 +554,8 @@ def lancer_polynome(parent=None):
     configurer_style()
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
-        fenetre_polynome = Toplevel(parent)
+        fenetre_polynome = create_responsive_window(parent, "Polynômes", base_width=500, base_height=600)
         fenetre_polynome.configure(bg=PALETTE["fond_principal"])
-        fenetre_polynome.title("Polynômes")
-        fenetre_polynome.geometry("500x600")
-        fenetre_polynome.resizable(False, False)
-
-        # Centrer la fenêtre
-        fenetre_polynome.transient(parent)
-        fenetre_polynome.grab_set()
     else:
         fenetre_polynome = parent
         for child in list(fenetre_polynome.winfo_children()):

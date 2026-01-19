@@ -29,6 +29,9 @@ PALETTE = {
     "table_even": "#FFFFFF"
 }
 
+# Imports responsive UI
+from .responsive_ui import create_responsive_window
+
 # Liste des méthodes d'intégration disponibles
 donnees = ["Rectangle Retrograde", "Rectangle progressif", "Rectangle Centré",
            "Trapèzes Composite", "Trapèzes Simples", "Simpson Simple", "Simpson Composite"]
@@ -418,15 +421,8 @@ def lancer_integration_numerique(parent=None):
     # Initialisation de la fenêtre / zone de contenu
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
-        fenetre_integration = Toplevel(parent) if parent else Tk()
+        fenetre_integration = create_responsive_window(parent, "Intégration Numérique avec Itérations", base_width=1000, base_height=800)
         fenetre_integration.configure(bg=PALETTE["fond_principal"])
-        fenetre_integration.geometry("1000x800")  # Plus large pour accommoder le notebook
-        fenetre_integration.title("Intégration Numérique avec Itérations")
-        fenetre_integration.resizable(True, True)
-        # Centrer la fenêtre
-        if parent:
-            fenetre_integration.transient(parent)
-            fenetre_integration.grab_set()
     else:
         fenetre_integration = parent
         for w in list(fenetre_integration.winfo_children()):

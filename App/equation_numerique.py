@@ -29,6 +29,9 @@ PALETTE = {
     "table_even": "#FFFFFF"
 }
 
+# Imports responsive UI
+from .responsive_ui import create_responsive_window
+
 # Liste des méthodes disponibles
 METHODES = [
     "Dichotomie",
@@ -430,15 +433,8 @@ def lancer_equation_Numerique(parent=None):
     # Initialisation de la fenêtre / zone de contenu
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
-        fenetre = Toplevel(parent) if parent else Tk()
+        fenetre = create_responsive_window(parent, "Résolution d'Équations Numériques", base_width=1100, base_height=800)
         fenetre.configure(bg=PALETTE["fond_principal"])
-        fenetre.geometry("1100x800")
-        fenetre.title("Résolution d'Équations Numériques")
-        fenetre.resizable(True, True)
-        # Centrer la fenêtre
-        if parent:
-            fenetre.transient(parent)
-            fenetre.grab_set()
     else:
         fenetre = parent
         for w in list(fenetre.winfo_children()):
@@ -447,6 +443,16 @@ def lancer_equation_Numerique(parent=None):
             fenetre.configure(bg=PALETTE["fond_principal"])
         except Exception:
             pass
+    
+    # Ajouter le header bleu
+    from .responsive_ui import create_header_bar
+    from .scrollable_ui import ScrollableFrame
+    create_header_bar(fenetre, "🔢 Résolution d'Équations Numériques")
+    
+    # Frame scrollable pour le contenu
+    scrollable = ScrollableFrame(fenetre, bg=PALETTE["fond_principal"])
+    scrollable.pack(fill=BOTH, expand=True)
+    main_content = scrollable.scrollable_frame
     
     # Configuration du style
     def configurer_style():
@@ -500,8 +506,8 @@ def lancer_equation_Numerique(parent=None):
     
     style = configurer_style()
     
-    # Créer un notebook (onglets)
-    notebook = ttk.Notebook(fenetre)
+    # Créer un notebook (onglets) dans le conteneur scrollable
+    notebook = ttk.Notebook(main_content)
     notebook.pack(fill=BOTH, expand=True, padx=10, pady=10)
     
     # ==============================
@@ -510,30 +516,9 @@ def lancer_equation_Numerique(parent=None):
     frame_calcul = Frame(notebook, bg=PALETTE["fond_principal"])
     notebook.add(frame_calcul, text="🧮 Calcul")
     
-    # Conteneur principal avec scrollbar
-    main_container = Frame(frame_calcul, bg=PALETTE["fond_principal"])
-    main_container.pack(fill=BOTH, expand=True)
-    
-    canvas = Canvas(main_container, bg=PALETTE["fond_principal"], highlightthickness=0)
-    scrollbar = ttk.Scrollbar(main_container, orient="vertical", command=canvas.yview)
-    scrollable_frame = Frame(canvas, bg=PALETTE["fond_principal"])
-    
-    scrollable_frame.bind(
-        "<Configure>",
-        lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
-    )
-    
-    canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
-    canvas.configure(yscrollcommand=scrollbar.set)
-    
-    canvas.pack(side="left", fill="both", expand=True)
-    scrollbar.pack(side="right", fill="y")
-    
-    # Fonction pour le scroll avec la molette
-    def _on_mouse_wheel(event):
-        canvas.yview_scroll(int(-1*(event.delta/120)), "units")
-    
-    canvas.bind_all("<MouseWheel>", _on_mouse_wheel)
+    # Conteneur principal (scrollbar déjà gérée par ScrollableFrame parent)
+    scrollable_frame = Frame(frame_calcul, bg=PALETTE["fond_principal"])
+    scrollable_frame.pack(fill=BOTH, expand=True)
     
     # ========== CONTENU DE L'ONGLET CALCUL ==========
     
@@ -586,7 +571,7 @@ def lancer_equation_Numerique(parent=None):
           bg=PALETTE["fond_principal"]).pack(anchor="w")
     
     entree_f = Entry(frame_fonctions, font=("Century Gothic", 11), 
-                    textvariable=var_f, width=50, relief="solid", borderwidth=1)
+                    textvariable=var_f, width=25, relief="solid", borderwidth=1)
     entree_f.pack(pady=5, fill=X)
     
     # Frame pour les paramètres
@@ -603,7 +588,7 @@ def lancer_equation_Numerique(parent=None):
               width=15, anchor="w").pack(side=LEFT)
         
         entry = Entry(frame, font=("Century Gothic", 10), 
-                     textvariable=var_name, width=30, relief="solid", borderwidth=1)
+                     textvariable=var_name, width=15, relief="solid", borderwidth=1)
         entry.pack(side=LEFT, padx=10)
         
         if default:
@@ -630,7 +615,7 @@ def lancer_equation_Numerique(parent=None):
           bg=PALETTE["fond_principal"]).pack(anchor="w")
     
     entree_g = Entry(frame_fonctions_supp, font=("Century Gothic", 11), 
-                    textvariable=var_g, width=50, relief="solid", borderwidth=1)
+                    textvariable=var_g, width=25, relief="solid", borderwidth=1)
     entree_g.pack(pady=5, fill=X)
     
     # Fonction f'(x) pour Newton
@@ -639,7 +624,7 @@ def lancer_equation_Numerique(parent=None):
           bg=PALETTE["fond_principal"]).pack(anchor="w", pady=(10,0))
     
     entree_df = Entry(frame_fonctions_supp, font=("Century Gothic", 11), 
-                     textvariable=var_df, width=50, relief="solid", borderwidth=1)
+                     textvariable=var_df, width=25, relief="solid", borderwidth=1)
     entree_df.pack(pady=5, fill=X)
     
     # Boutons d'aide mathématique
@@ -785,16 +770,9 @@ def lancer_equation_Numerique(parent=None):
     frame_boutons = Frame(scrollable_frame, bg=PALETTE["fond_principal"])
     frame_boutons.pack(pady=25)
     
-    bouton_calculer = ttk.Button(frame_boutons, text="🧮 Résoudre l'équation",
+    bouton_calculer = ttk.Button(frame_boutons, text="Résoudre",
                                 style="Custom.TButton", command=calculer)
-    bouton_calculer.pack(side="left", padx=10)
-    
-    bouton_effacer = ttk.Button(frame_boutons, text="🧹 Effacer tout",
-                               style="Custom.TButton", 
-                               command=lambda: [var.set("") for var in 
-                                               [var_f, var_g, var_df, var_a, var_b, 
-                                                var_x0, var_x1, var_x2]])
-    bouton_effacer.pack(side="left", padx=10)
+    bouton_calculer.pack(side="left", padx=5)
     
     def _close_local():
         if is_toplevel:
@@ -802,9 +780,9 @@ def lancer_equation_Numerique(parent=None):
         else:
             for w in list(fenetre.winfo_children()):
                 w.destroy()
-    bouton_quitter = ttk.Button(frame_boutons, text="🚪 Fermer",
+    bouton_quitter = ttk.Button(frame_boutons, text="Fermer",
                                style="Quit.TButton", command=_close_local)
-    bouton_quitter.pack(side="left", padx=10)
+    bouton_quitter.pack(side="left", padx=5)
     
     # Exemples
     frame_exemples = Frame(scrollable_frame, bg=PALETTE["fond_principal"])

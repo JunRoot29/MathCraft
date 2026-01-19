@@ -21,6 +21,9 @@ PALETTE = {
     "texte_clair": "#1E40AF"
 }
 
+# Imports responsive UI
+from .responsive_ui import create_responsive_window
+
 # =============================================================================
 # GUIDES ET EXEMPLES POUR TOUS LES JEUX
 # =============================================================================
@@ -659,9 +662,7 @@ def afficher_guide_jeu(nom_jeu, parent=None):
         
     guide = GUIDES_JEUX[nom_jeu]
     
-    fenetre_guide = Toplevel(parent)
-    fenetre_guide.title(guide["titre"])
-    fenetre_guide.geometry("800x700")
+    fenetre_guide = create_responsive_window(parent, guide["titre"], base_width=800, base_height=700)
     fenetre_guide.configure(bg=PALETTE["fond_principal"])
     
     # Cadre principal avec scrollbar
@@ -746,14 +747,11 @@ def creer_interface_jeux(parent=None):
         for child in list(fenetre_jeux.winfo_children()):
             child.destroy()
         try:
-            fenetre_jeux.title("🎮 MathCraft - Sélection des Jeux")
             fenetre_jeux.configure(bg=PALETTE["fond_principal"])
         except Exception:
             pass
     else:
-        fenetre_jeux = Tk()
-        fenetre_jeux.title("🎮 MathCraft - Sélection des Jeux")
-        fenetre_jeux.geometry("900x800")
+        fenetre_jeux = create_responsive_window(None, "🎮 MathCraft - Sélection des Jeux", base_width=900, base_height=800)
         fenetre_jeux.configure(bg=PALETTE["fond_principal"])
     
     # Style
@@ -965,9 +963,7 @@ class MathQuizzChallenge:
         """Lance l'interface du jeu améliorée"""
         is_toplevel = self.parent is None or isinstance(self.parent, (Tk, Toplevel))
         if is_toplevel:
-            self.fenetre_jeu = Toplevel(self.parent)
-            self.fenetre_jeu.title("🎯 Math Quizz Challenge Pro")
-            self.fenetre_jeu.geometry("700x800")
+            self.fenetre_jeu = create_responsive_window(self.parent, "🎯 Math Quizz Challenge Pro", base_width=700, base_height=800)
             self.fenetre_jeu.configure(bg=PALETTE["fond_principal"])
         else:
             self.fenetre_jeu = self.parent

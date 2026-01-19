@@ -21,6 +21,9 @@ PALETTE = {
     "texte_clair": "#1E40AF"
 }
 
+# Imports responsive UI
+from .responsive_ui import create_responsive_window
+
 """================================Dictionnaire des conversions====================================="""
 
 # Dictionnaire de conversion des unités de longueur
@@ -269,9 +272,7 @@ def _is_toplevel_parent(parent):
 def launch_conversion(parent=None):
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
-        conversion = Toplevel(parent)
-        conversion.title("Conversion")
-        conversion.geometry("650x750")
+        conversion = create_responsive_window(parent, "Conversion", base_width=650, base_height=750)
         conversion.configure(bg=PALETTE["fond_principal"])
     else:
         conversion = parent

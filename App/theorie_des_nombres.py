@@ -23,6 +23,9 @@ PALETTE = {
     "bordure": "#E2E8F0",
 }
 
+# Imports responsive UI
+from .responsive_ui import create_responsive_window
+
 # Définition du style global pour les boutons arrondis
 def configurer_style():
     try:
@@ -85,11 +88,8 @@ def ajouter_conseils(fenetre, conseils):
 def lancer_nombre_parfait(parent=None):
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
-        nbr = Toplevel(parent)
-        nbr.title("Nombre Parfait")
+        nbr = create_responsive_window(parent, "Nombre Parfait", base_width=600, base_height=550)
         nbr.configure(bg=PALETTE["fond_principal"])
-        nbr.geometry("600x550")
-        nbr.resizable(False, False)
     else:
         nbr = parent
         for child in list(nbr.winfo_children()):
@@ -155,11 +155,8 @@ def lancer_nombre_parfait(parent=None):
 def lancer_nombre_distinct(parent=None):
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
-        nbr = Toplevel(parent)
-        nbr.title("Nombre distinct")
+        nbr = create_responsive_window(parent, "Nombre Distincts", base_width=600, base_height=600)
         nbr.configure(bg=PALETTE["fond_principal"])
-        nbr.geometry("600x550")
-        nbr.resizable(False, False)
     else:
         nbr = parent
         for child in list(nbr.winfo_children()):
@@ -225,11 +222,8 @@ def lancer_nombre_distinct(parent=None):
 def lancer_nombre_premier(parent=None):
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
-        nbr = Toplevel(parent)
-        nbr.title("Nombre Premier")
+        nbr = create_responsive_window(parent, "Nombre Premier", base_width=600, base_height=550)
         nbr.configure(bg=PALETTE["fond_principal"])
-        nbr.geometry("600x650")
-        nbr.resizable(False, False)
     else:
         nbr = parent
         for child in list(nbr.winfo_children()):
@@ -295,11 +289,8 @@ def lancer_nombre_premier(parent=None):
 def lancer_pgcd(parent=None):
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
-        nbr = Toplevel(parent)
-        nbr.title("PGCD")
+        nbr = create_responsive_window(parent, "PGCD", base_width=600, base_height=600)
         nbr.configure(bg=PALETTE["fond_principal"])
-        nbr.geometry("600x600")
-        nbr.resizable(False, False)
     else:
         nbr = parent
         for child in list(nbr.winfo_children()):
@@ -373,11 +364,8 @@ def lancer_pgcd(parent=None):
 def lancer_ppcm(parent=None):
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
-        nbr = Toplevel(parent)
-        nbr.title("PPCM")
+        nbr = create_responsive_window(parent, "PGCD / PPCM", base_width=600, base_height=650)
         nbr.configure(bg=PALETTE["fond_principal"])
-        nbr.geometry("600x650")
-        nbr.resizable(False, False)
     else:
         nbr = parent
         for child in list(nbr.winfo_children()):
@@ -451,11 +439,8 @@ def lancer_ppcm(parent=None):
 def lancer_nombre_catalan(parent=None):
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
-        nbr = Toplevel(parent)
-        nbr.title("Nombres Catalans")
+        nbr = create_responsive_window(parent, "Nombre de Catalan", base_width=600, base_height=650)
         nbr.configure(bg=PALETTE["fond_principal"])
-        nbr.geometry("600x550")
-        nbr.resizable(False, False)
     else:
         nbr = parent
         for child in list(nbr.winfo_children()):
@@ -519,6 +504,9 @@ def lancer_nombre_catalan(parent=None):
 
 # Fonction principale pour lancer le module "Théorie des nombres"
 def lancer_theorie(parent=None):
+    from .responsive_ui import create_header_bar
+    from .scrollable_ui import ScrollableFrame
+    
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
         th = Toplevel(parent)
@@ -539,18 +527,23 @@ def lancer_theorie(parent=None):
         except Exception:
             pass
 
-    # Présentation du module
-    frame_presentation = Frame(th, bg=PALETTE["fond_principal"])
-    frame_presentation.pack(pady=20, padx=20, fill=X)
+    # Ajouter le header bleu
+    create_header_bar(th, "🧮 THÉORIE DES NOMBRES")
     
-    Label(frame_presentation, text="🧮 THÉORIE DES NOMBRES", 
-          font=("Century Gothic", 18, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["primaire"]).pack(pady=10)
+    # Frame scrollable pour le contenu
+    scrollable = ScrollableFrame(th, bg=PALETTE["fond_principal"])
+    scrollable.pack(fill=BOTH, expand=True)
+    content = scrollable.scrollable_frame
+
+    # Présentation du module
+    frame_presentation = Frame(content, bg=PALETTE["fond_principal"])
+    frame_presentation.pack(pady=20, padx=20, fill=X)
     
     Label(frame_presentation, text="Explorez les propriétés fascinantes des nombres", 
           font=("Century Gothic", 12), bg=PALETTE["fond_principal"], fg=PALETTE["texte_clair"]).pack(pady=5)
 
     # Conseils généraux
-    frame_info = Frame(th, bg=PALETTE["fond_principal"])
+    frame_info = Frame(content, bg=PALETTE["fond_principal"])
     frame_info.pack(pady=10, padx=20, fill=X)
     
     Label(frame_info, text="📚 Fonctions disponibles :",
@@ -570,7 +563,7 @@ def lancer_theorie(parent=None):
               bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"], anchor="w").pack(fill="x", padx=10, pady=1)
 
     # Cadre pour les boutons
-    frame_boutons = Frame(th, bg=PALETTE["fond_principal"])
+    frame_boutons = Frame(content, bg=PALETTE["fond_principal"])
     frame_boutons.pack(pady=20, padx=20, fill=BOTH, expand=True)
 
     # Boutons pour chaque test
@@ -589,6 +582,6 @@ def lancer_theorie(parent=None):
                            command=lambda cmd=commande: cmd(th))
         bouton.pack(pady=8, fill=X)
 
-    # Bouton retour
-    ttk.Button(th, text="🚪 Retour au Menu Principal", style="Quit.TButton",
+    # Bouton retour au bas du contenu scrollable
+    ttk.Button(content, text="🚪 Retour au Menu Principal", style="Quit.TButton",
               command=th.destroy).pack(pady=20)

@@ -25,16 +25,15 @@ PALETTE = {
 
 def launch_operation(parent=None):
     import tkinter as tk
+    from .responsive_ui import ResponsiveUIManager, create_responsive_window
 
     # Si parent est une fenêtre (Tk ou Toplevel) ou None -> créer Toplevel
     # Sinon on rend le module dans le Frame fourni (mode intégration)
     is_toplevel = parent is None or isinstance(parent, (tk.Tk, tk.Toplevel))
     if is_toplevel:
-        operation = Toplevel(parent)
-        operation.title("Calculatrice de base")
-        operation.geometry("500x750")
+        # Utiliser la fenêtre responsive
+        operation = create_responsive_window(parent, "Calculatrice de base", base_width=500, base_height=750)
         operation.configure(bg=PALETTE["fond_principal"])
-        operation.resizable(False, False)
         # Centrer la fenêtre
         operation.transient(parent)
         operation.grab_set()

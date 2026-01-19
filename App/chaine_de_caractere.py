@@ -21,6 +21,9 @@ PALETTE = {
     "texte_clair": "#1E40AF"
 }
 
+# Imports responsive UI
+from .responsive_ui import create_responsive_window
+
 def configurer_style():
     try:
         from .styles import ensure_styles_configured
@@ -144,11 +147,8 @@ def creer_zone_resultat_copiable(parent, hauteur=6):
     return result_frame, result_label, result_text, afficher_resultat, effacer_resultat
 
 def lancer_compt_voy(parent):
-    page = Toplevel(parent)
+    page = create_responsive_window(parent, "Compteur de voyelles", base_width=700, base_height=600)
     page.configure(bg=PALETTE["fond_principal"])
-    page.geometry("700x600")
-    page.title("Compteur de voyelles")
-    centrer_fenetre(page)
     
     style = configurer_style()
 
@@ -212,11 +212,8 @@ def lancer_compt_voy(parent):
     button_quitter.pack(fill=X)
 
 def lancer_compt_lettre():
-    page = Toplevel()
+    page = create_responsive_window(None, "Compteur de lettres", base_width=750, base_height=650)
     page.configure(bg=PALETTE["fond_principal"])
-    page.geometry("750x650")
-    page.title("Compteur de lettres")
-    centrer_fenetre(page)
     
     style = configurer_style()
 
@@ -308,11 +305,8 @@ def lancer_compt_lettre():
     button_quitter.pack(fill=X)
 
 def lancer_rech_mot():
-    page = Toplevel()
+    page = create_responsive_window(None, "Recherche de mot", base_width=750, base_height=650)
     page.configure(bg=PALETTE["fond_principal"])
-    page.geometry("750x650")
-    page.title("Recherche de mot")
-    centrer_fenetre(page)
     
     style = configurer_style()
 
@@ -400,11 +394,8 @@ def lancer_rech_mot():
     button_quitter.pack(fill=X)
 
 def lancer_palindrome():
-    page = Toplevel()
+    page = create_responsive_window(None, "Détecteur de Palindromes", base_width=700, base_height=700)
     page.configure(bg=PALETTE["fond_principal"])
-    page.geometry("700x700")
-    page.title("Détecteur de Palindromes")
-    centrer_fenetre(page)
     
     style = configurer_style()
 
@@ -521,11 +512,8 @@ def lancer_operation_texte(operation, titre_text="Opération Texte", description
     """
     Interface générique pour les opérations sur le texte avec bouton copier
     """
-    page = Toplevel()
+    page = create_responsive_window(None, titre_text, base_width=750, base_height=700)
     page.configure(bg=PALETTE["fond_principal"])
-    page.geometry("750x700")
-    page.title(titre_text)
-    centrer_fenetre(page)
     
     style = configurer_style()
 
@@ -742,11 +730,8 @@ def lancer_chaine(parent=None):
         is_toplevel = True
 
     if is_toplevel:
-        chaine = Toplevel(parent)
+        chaine = create_responsive_window(parent, "Opérations sur les chaînes de caractères", base_width=600, base_height=750)
         chaine.configure(bg=PALETTE["fond_principal"])
-        chaine.geometry("600x750")
-        chaine.title("Opérations sur les chaînes de caractères")
-        centrer_fenetre(chaine)
     else:
         chaine = parent
         for w in list(chaine.winfo_children()):

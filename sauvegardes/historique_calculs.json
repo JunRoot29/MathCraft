@@ -1,16 +1,1 @@
-[
-  {
-    "id": 1,
-    "timestamp": "2025-12-18T10:20:14.957689",
-    "date_affichage": "18/12/2025 10:20:14",
-    "module": "Polynômes",
-    "operation": "Équation degré 3",
-    "entree": {
-      "a": 2.0,
-      "b": 2.0,
-      "c": 2.0,
-      "d": 33.0
-    },
-    "resultat": "✅ Une solution réelle et deux complexes :\nx₁ = 1.02+2.19j\nx₂ = 0.89 -2.12i\nx₃ = -2.91 -0.08i"
-  }
-]
+[]

@@ -33,6 +33,9 @@ PALETTE = {
     "table_even": "#FFFFFF"
 }
 
+# Imports responsive UI
+from .responsive_ui import create_responsive_window
+
 # Liste des méthodes d'interpolation disponibles
 METHODES = ["Lagrange", "Newton", "Linéaire par morceaux", "Spline Cubique Naturelle", "Hermite"]
 
@@ -873,15 +876,8 @@ def lancer_interpolation_numerique(parent=None):
     # Initialisation de la fenêtre / zone de contenu
     is_toplevel = _is_toplevel_parent(parent)
     if is_toplevel:
-        fenetre_interpolation = Toplevel(parent) if parent else Tk()
+        fenetre_interpolation = create_responsive_window(parent, "Interpolation Numérique avec Calculs Détaillés et Graphiques", base_width=1100, base_height=850)
         fenetre_interpolation.configure(bg=PALETTE["fond_principal"])
-        fenetre_interpolation.geometry("1100x850")  # Un peu plus grand pour les graphiques
-        fenetre_interpolation.title("Interpolation Numérique avec Calculs Détaillés et Graphiques")
-        fenetre_interpolation.resizable(True, True)
-        # Centrer la fenêtre
-        if parent:
-            fenetre_interpolation.transient(parent)
-            fenetre_interpolation.grab_set()
     else:
         fenetre_interpolation = parent
         for w in list(fenetre_interpolation.winfo_children()):
@@ -890,6 +886,16 @@ def lancer_interpolation_numerique(parent=None):
             fenetre_interpolation.configure(bg=PALETTE["fond_principal"])
         except Exception:
             pass
+    
+    # Ajouter le header bleu
+    from .responsive_ui import create_header_bar
+    from .scrollable_ui import ScrollableFrame
+    create_header_bar(fenetre_interpolation, "📈 Interpolation Numérique avec Calculs Détaillés et Graphiques")
+    
+    # Frame scrollable pour le contenu
+    scrollable = ScrollableFrame(fenetre_interpolation, bg=PALETTE["fond_principal"])
+    scrollable.pack(fill=BOTH, expand=True)
+    main_content = scrollable.scrollable_frame
     
     # Configuration du style
     def configurer_style():
@@ -935,8 +941,8 @@ def lancer_interpolation_numerique(parent=None):
     
     style = configurer_style()
     
-    # Créer un notebook (onglets)
-    notebook = ttk.Notebook(fenetre_interpolation)
+    # Créer un notebook (onglets) dans le conteneur scrollable
+    notebook = ttk.Notebook(main_content)
     notebook.pack(fill=BOTH, expand=True, padx=10, pady=10)
     
     # ==============================
@@ -960,29 +966,9 @@ def lancer_interpolation_numerique(parent=None):
     combo.pack(pady=10)
     combo.set("=== Sélectionnez une méthode ===")
     
-    # Cadre pour le contenu avec scrollbar
-    main_calc_frame = Frame(frame_calcul, bg=PALETTE["fond_principal"])
-    main_calc_frame.pack(fill=BOTH, expand=True, padx=20)
-    
-    canvas_calc = Canvas(main_calc_frame, bg=PALETTE["fond_principal"], highlightthickness=0)
-    scrollbar_calc = ttk.Scrollbar(main_calc_frame, orient="vertical", command=canvas_calc.yview)
-    scrollable_calc_frame = Frame(canvas_calc, bg=PALETTE["fond_principal"])
-    
-    scrollable_calc_frame.bind(
-        "<Configure>",
-        lambda e: canvas_calc.configure(scrollregion=canvas_calc.bbox("all"))
-    )
-    
-    canvas_calc.create_window((0, 0), window=scrollable_calc_frame, anchor="nw")
-    canvas_calc.configure(yscrollcommand=scrollbar_calc.set)
-    
-    canvas_calc.pack(side="left", fill="both", expand=True)
-    scrollbar_calc.pack(side="right", fill="y")
-    
-    def _on_mouse_wheel(event):
-        canvas_calc.yview_scroll(int(-1*(event.delta/120)), "units")
-    
-    canvas_calc.bind_all("<MouseWheel>", _on_mouse_wheel)
+    # Cadre pour le contenu (scrollbar déjà gérée par ScrollableFrame parent)
+    scrollable_calc_frame = Frame(frame_calcul, bg=PALETTE["fond_principal"])
+    scrollable_calc_frame.pack(fill=BOTH, expand=True, padx=20)
     
     # ========== CONTENU DE L'ONGLET CALCUL ==========
     
@@ -1012,7 +998,7 @@ def lancer_interpolation_numerique(parent=None):
     Label(scrollable_calc_frame, text="Point x où évaluer l'interpolation :",
           font=("Century Gothic", 12, "bold"), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"]).pack(pady=10)
     
-    entree_x = Entry(scrollable_calc_frame, font=("Century Gothic", 12), width=20,
+    entree_x = Entry(scrollable_calc_frame, font=("Century Gothic", 12), width=10,
                     relief="solid", borderwidth=1)
     entree_x.pack(padx=20, pady=5)
     entree_x.insert(0, "1.5")

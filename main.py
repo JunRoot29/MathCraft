@@ -156,17 +156,26 @@ style.map("Quit.TButton",
 main_area = Frame(fenetre, bg="#F0F4F8")
 main_area.pack(pady=10, padx=20, fill=BOTH, expand=True)
 
-# Sidebar (gauche) — avec scroll si nécessaire
+# Sidebar (gauche) — avec scrollbar
 sidebar = Frame(main_area, bg="#F0F4F8", width=500)
-sidebar.pack(side=LEFT, fill=Y)
+sidebar.pack(side=LEFT, fill=BOTH, expand=False)
 sidebar.pack_propagate(False)
 
 sidebar_canvas = Canvas(sidebar, bg="#F0F4F8", highlightthickness=0)
+sidebar_scrollbar = ttk.Scrollbar(sidebar, orient="vertical", command=sidebar_canvas.yview)
 sidebar_inner = Frame(sidebar_canvas, bg="#F0F4F8")
 
 sidebar_inner.bind("<Configure>", lambda e: sidebar_canvas.configure(scrollregion=sidebar_canvas.bbox("all")))
 sidebar_canvas.create_window((0, 0), window=sidebar_inner, anchor="nw")
+sidebar_canvas.configure(yscrollcommand=sidebar_scrollbar.set)
+
+# Mouse wheel support pour sidebar
+def _on_sidebar_wheel(event):
+    sidebar_canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+
+sidebar_canvas.bind_all("<MouseWheel>", _on_sidebar_wheel)
 sidebar_canvas.pack(side=LEFT, fill=BOTH, expand=True)
+sidebar_scrollbar.pack(side=RIGHT, fill=Y)
 
 # Cadre de contenu (droite)
 content_frame = Frame(main_area, bg="#FFFFFF")
