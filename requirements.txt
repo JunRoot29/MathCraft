@@ -1,0 +1,18 @@
+# MathCraft Requirements
+# Dépendances pour l'application éducative de mathématiques numériques
+
+# Calcul scientifique et algèbre linéaire
+numpy>=1.21.0
+
+# Visualisation graphique et graphiques interactifs
+matplotlib>=3.5.0
+
+# Note: Tkinter est généralement inclus avec Python 3.x
+# Sur Linux, installer via: apt-get install python3-tk
+# Sur macOS, installer via Homebrew: brew install python-tk@3.10 (adapter la version)
+
+# Optionnel (pour améliorations futures):
+# scipy>=1.7.0  # Pour optimisation avancée
+# sympy>=1.10   # Pour calcul symbolique
+# pandas>=1.3.0 # Pour manipulation de données
+# pyperclip>=1.8.2  # Pour copie/colle améliorée
