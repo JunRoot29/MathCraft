@@ -233,7 +233,7 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/) et [Semantic Ve
 ## 🙏 Remerciements
 
 Merci à :
-- Équipe pédagogique UFR-MI
+- Équipe mes amis UFR-MI
 - Utilisateurs pour les retours
 - Communauté Python Francophone
 - Contributors (actuels et futurs)
@@ -266,6 +266,7 @@ MathCraft atteint sa v1.0 avec :
 
 | Date | Issue | Statut |
 |------|-------|--------|
+| Jan 2026 | Stabilité les fenetres | ✅ Corrigé |
 | Jan 2026 | Stabilité Tkinter | ✅ Corrigé |
 | Jan 2026 | Export CSV avec caractères spéciaux | ✅ Corrigé |
 | Dec 2025 | Graphiques non affichés | ✅ Corrigé |
