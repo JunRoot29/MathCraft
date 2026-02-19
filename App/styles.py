@@ -1,104 +1,127 @@
-"""Module centralisé pour la configuration des styles et polices de l'application MathCraft.
-Fournit ensure_styles_configured(palette) qui est idempotent et peut être appelé depuis n'importe quel module
-au moment où une interface graphique doit être construite.
-"""
+"""Styles centraux et helpers UI pour MathCraft."""
+
 from tkinter import ttk
 
-_styles_configured = False
-
-# Police par défaut
 DEFAULT_FONT = ("Century Gothic", 12)
 HEADER_FONT = ("Century Gothic", 18, "bold")
 SMALL_FONT = ("Century Gothic", 10)
 
+DEFAULT_PALETTE = {
+    "fond_principal": "#F4F7FB",
+    "fond_secondaire": "#FFFFFF",
+    "fond_contraste": "#EAF1F8",
+    "primaire": "#0F4C81",
+    "secondaire": "#1767AA",
+    "accent": "#F59E0B",
+    "texte_fonce": "#102A43",
+    "texte_clair": "#5B7083",
+    "erreur": "#C0392B",
+    "bordure": "#D9E2EC",
+}
 
-def ensure_styles_configured(palette: dict):
-    """Configure les styles ttk de façon idempotente.
-    palette: dictionnaire contenant les couleurs attendues par les modules
-    """
-    global _styles_configured
-    if _styles_configured:
+_styles_configured = False
+_last_palette_signature = None
+
+
+def _build_palette(palette: dict | None = None) -> dict:
+    result = DEFAULT_PALETTE.copy()
+    if palette:
+        result.update(palette)
+    return result
+
+
+def ensure_styles_configured(palette: dict | None = None):
+    """Configure ou met à jour les styles ttk de façon idempotente."""
+    global _styles_configured, _last_palette_signature
+
+    final_palette = _build_palette(palette)
+    signature = tuple(sorted(final_palette.items()))
+
+    if _styles_configured and signature == _last_palette_signature:
         return
 
+    style = ttk.Style()
     try:
-        style = ttk.Style()
-        try:
-            style.theme_use("clam")
-        except Exception:
-            pass
-
-        # Bouton principal
-        try:
-            style.configure("Custom.TButton",
-                            foreground=palette.get("fond_secondaire", "#FFFFFF"),
-                            background=palette.get("primaire", "#1E40AF"),
-                            font=("Century Gothic", 12, "bold"),
-                            padding=15,
-                            relief="flat")
-        except Exception:
-            pass
-
-        # Bouton Quitter
-        try:
-            style.configure("Quit.TButton",
-                            foreground=palette.get("fond_secondaire", "#FFFFFF"),
-                            background=palette.get("erreur", "#DC2626"),
-                            font=("Century Gothic", 12, "bold"),
-                            padding=12,
-                            relief="flat")
-        except Exception:
-            pass
-
-        # Bouton Retour (header, top-left)
-        try:
-            style.configure("Return.Header.TButton",
-                            foreground=palette.get("fond_secondaire", "#FFFFFF"),
-                            background=palette.get("primaire", "#1E40AF"),
-                            font=("Century Gothic", 10, "bold"),
-                            padding=6,
-                            relief="flat")
-            style.map("Return.Header.TButton",
-                      background=[('active', palette.get("secondaire", '#3B82F6')), ('pressed', '#1E3A8A')])
-        except Exception:
-            pass
-
-        # Styles complémentaires usuels
-        try:
-            style.configure("Historique.TButton", padding=10, font=("Century Gothic", 10))
-            style.configure("Jeu.TButton", font=("Century Gothic", 12), padding=15, relief="flat")
-            style.configure("Guide.TButton", font=("Century Gothic", 10), padding=8)
-        except Exception:
-            pass
-
+        style.theme_use("clam")
     except Exception:
-        # En cas d'échec silencieux, ne pas arrêter l'exécution
         pass
-    else:
-        # Marquer comme configuré uniquement si la configuration s'est déroulée sans erreur
-        _styles_configured = True
+
+    style.configure(
+        "Custom.TButton",
+        foreground=final_palette["fond_secondaire"],
+        background=final_palette["primaire"],
+        font=("Century Gothic", 12, "bold"),
+        padding=12,
+        relief="flat",
+        borderwidth=0,
+    )
+    style.map(
+        "Custom.TButton",
+        background=[("active", final_palette["secondaire"]), ("pressed", "#0B3C66")],
+        foreground=[("active", final_palette["fond_secondaire"])],
+    )
+
+    style.configure(
+        "Quit.TButton",
+        foreground=final_palette["fond_secondaire"],
+        background=final_palette["erreur"],
+        font=("Century Gothic", 12, "bold"),
+        padding=12,
+        relief="flat",
+        borderwidth=0,
+    )
+    style.map(
+        "Quit.TButton",
+        background=[("active", "#A93226"), ("pressed", "#922B21")],
+        foreground=[("active", final_palette["fond_secondaire"])],
+    )
+
+    style.configure(
+        "Return.Header.TButton",
+        foreground=final_palette["fond_secondaire"],
+        background=final_palette["primaire"],
+        font=("Century Gothic", 10, "bold"),
+        padding=6,
+        relief="flat",
+    )
+    style.map(
+        "Return.Header.TButton",
+        background=[("active", final_palette["secondaire"]), ("pressed", "#0B3C66")],
+        foreground=[("active", final_palette["fond_secondaire"])],
+    )
+
+    style.configure("Historique.TButton", padding=10, font=("Century Gothic", 10))
+    style.configure("Jeu.TButton", font=("Century Gothic", 12), padding=12, relief="flat")
+    style.configure("Guide.TButton", font=("Century Gothic", 10), padding=8)
+
+    _styles_configured = True
+    _last_palette_signature = signature
 
 
 def make_scrollable_frame(parent, bg=None):
-    """Crée une zone scrollable (frame intérieure) dans `parent` et retourne `inner_frame`.
-    Utilise un Canvas + Scrollbar et bind le scroll de la molette lorsque le curseur est au-dessus."""
+    """Crée une zone scrollable et retourne le frame interne."""
     import tkinter as tk
     from tkinter import ttk
 
-    canvas = tk.Canvas(parent, bg=bg or "#FFFFFF", highlightthickness=0)
+    canvas = tk.Canvas(parent, bg=bg or DEFAULT_PALETTE["fond_secondaire"], highlightthickness=0)
     scrollbar = ttk.Scrollbar(parent, orient="vertical", command=canvas.yview)
-    inner = tk.Frame(canvas, bg=bg or "#FFFFFF")
+    inner = tk.Frame(canvas, bg=bg or DEFAULT_PALETTE["fond_secondaire"])
 
-    inner.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+    inner.bind("<Configure>", lambda _e: canvas.configure(scrollregion=canvas.bbox("all")))
     canvas.create_window((0, 0), window=inner, anchor="nw")
     canvas.configure(yscrollcommand=scrollbar.set)
 
     canvas.pack(side="left", fill="both", expand=True)
     scrollbar.pack(side="right", fill="y")
 
-    # Bind la molette seulement quand le curseur est sur le canvas (évite les conflits globaux)
-    def _on_enter(e):
-        canvas.bind_all("<MouseWheel>", lambda evt: canvas.yview_scroll(int(-1*(evt.delta/120)), "units"))
-    def _on_leave(e):
+    def _on_wheel(event):
+        canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+        return "break"
+
+    def _on_enter(_event):
+        canvas.bind_all("<MouseWheel>", _on_wheel)
+
+    def _on_leave(_event):
         canvas.unbind_all("<MouseWheel>")
 
     canvas.bind("<Enter>", _on_enter)

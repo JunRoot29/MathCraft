@@ -224,8 +224,8 @@ Cœur du projet contenant les algorithmes mathématiques optimisés avec support
 ### 🎯 Fonctions utilitaires :
 * `prepare_expression()` - Évaluation sécurisée d'expressions mathématiques
 * `equilibrer_parentheses()` - Validation et gestion des parentheses
-* `ngcd()` - PGCD récursif
-* `lcm()` - PPCM optimisé
+* `pgcd()` - PGCD récursif
+* `ppcm()` - PPCM optimisé
 * Fonctions arithmétiques avancées avec optimisations
 
 ---

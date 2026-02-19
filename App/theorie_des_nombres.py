@@ -12,15 +12,15 @@ from .historique_manager import historique_manager
 
 # Palette unifiée (même que main.py)
 PALETTE = {
-    "fond_principal": "#F0F4F8",
+    "fond_principal": "#F4F7FB",
     "fond_secondaire": "#FFFFFF",
-    "primaire": "#1E40AF",
-    "secondaire": "#3B82F6",
-    "texte_fonce": "#1E293B",
-    "texte_clair": "#64748B",
+    "primaire": "#0F4C81",
+    "secondaire": "#1767AA",
+    "texte_fonce": "#102A43",
+    "texte_clair": "#5B7083",
     "succes": "#10B981",
-    "erreur": "#DC2626",
-    "bordure": "#E2E8F0",
+    "erreur": "#C0392B",
+    "bordure": "#D9E2EC",
 }
 
 # Imports responsive UI
@@ -347,7 +347,7 @@ def lancer_pgcd(parent=None):
     label_resultat = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label_resultat.pack(pady=10)
 
-    bouton2 = ttk.Button(nbr, style="Custom.TButton", text="Remise à blanc", command=remise_a_blanc)
+    bouton2 = ttk.Button(nbr, style="Theorie.Custom.TButton", text="Remise à blanc", command=remise_a_blanc)
     bouton2.pack(pady=10)
 
     # Conseils pour le PGCD
@@ -416,13 +416,13 @@ def lancer_ppcm(parent=None):
         entre2.delete("1.0", "end")
 
     style = configurer_style()
-    bouton1 = ttk.Button(nbr, style="Custom.TButton", text="Calculer", command=test_ppcm)
+    bouton1 = ttk.Button(nbr, style="Theorie.Custom.TButton", text="Calculer", command=test_ppcm)
     bouton1.pack(pady=10) 
     
     label_resultat = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label_resultat.pack(pady=10)
 
-    bouton2 = ttk.Button(nbr, style="Custom.TButton", text="Remise à blanc", command=remise_a_blanc)
+    bouton2 = ttk.Button(nbr, style="Theorie.Custom.TButton", text="Remise à blanc", command=remise_a_blanc)
     bouton2.pack(pady=10)
 
     # Conseils pour le PPCM
@@ -483,13 +483,13 @@ def lancer_nombre_catalan(parent=None):
         entre.delete("1.0", "end")
 
     style = configurer_style()
-    bouton1 = ttk.Button(nbr, style="Custom.TButton", text="Calculer", command=test_catalan)
+    bouton1 = ttk.Button(nbr, style="Theorie.Custom.TButton", text="Calculer", command=test_catalan)
     bouton1.pack(pady=10) 
     
     label2 = Label(nbr, text="Résultat : ", font=("Century Gothic", 14), bg=PALETTE["fond_principal"], fg=PALETTE["texte_fonce"])
     label2.pack(pady=10)
 
-    bouton2 = ttk.Button(nbr, style="Custom.TButton", text="Remise à blanc", command=remise_a_blanc)
+    bouton2 = ttk.Button(nbr, style="Theorie.Custom.TButton", text="Remise à blanc", command=remise_a_blanc)
     bouton2.pack(pady=10)
 
     # Conseils pour les nombres de Catalan
@@ -578,10 +578,10 @@ def lancer_theorie(parent=None):
 
     style = configurer_style()
     for texte, commande in boutons_config:
-        bouton = ttk.Button(frame_boutons, text=texte, style="Custom.TButton", 
+        bouton = ttk.Button(frame_boutons, text=texte, style="Theorie.Custom.TButton", 
                            command=lambda cmd=commande: cmd(th))
         bouton.pack(pady=8, fill=X)
 
     # Bouton retour au bas du contenu scrollable
-    ttk.Button(content, text="🚪 Retour au Menu Principal", style="Quit.TButton",
+    ttk.Button(content, text="🚪 Retour au Menu Principal", style="Theorie.Quit.TButton",
               command=th.destroy).pack(pady=20)

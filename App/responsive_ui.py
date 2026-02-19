@@ -17,14 +17,28 @@ class ResponsiveUIManager:
         'large': 1920,     # Écrans 1366-1920px
         'xlarge': 2560,    # Écrans > 1920px
     }
+    _cached_screen_size = None
     
     @staticmethod
     def get_screen_size():
         """Obtenir la résolution de l'écran"""
-        root = tk.Tk()
+        if ResponsiveUIManager._cached_screen_size:
+            return ResponsiveUIManager._cached_screen_size
+
+        root = tk._default_root
+        created_temp_root = False
+        if root is None:
+            root = tk.Tk()
+            root.withdraw()
+            created_temp_root = True
+
         width = root.winfo_screenwidth()
         height = root.winfo_screenheight()
-        root.destroy()
+
+        if created_temp_root:
+            root.destroy()
+
+        ResponsiveUIManager._cached_screen_size = (width, height)
         return width, height
     
     @staticmethod
@@ -241,11 +255,7 @@ def create_responsive_window(parent=None, title="MathCraft", base_width=800, bas
     ResponsiveUIManager.center_window(window, width, height)
     
     # Permettre le redimensionnement pour très petits écrans
-    category = ResponsiveUIManager.get_screen_category()
-    if category == 'small':
-        window.resizable(True, True)
-    else:
-        window.resizable(True, True)  # Autoriser redimensionnement partout
+    window.resizable(True, True)
     
     return window
 
@@ -278,8 +288,10 @@ def create_header_bar(parent, title="Module", on_return_callback=None):
     Returns:
         Frame: Le header frame créé
     """
-    from tkinter import ttk
-    
+    from .styles import ensure_styles_configured
+
+    ensure_styles_configured()
+
     # Header frame bleu
     header = tk.Frame(parent, bg="#1E40AF", height=60)
     header.pack(fill=tk.X, side=tk.TOP)
@@ -287,19 +299,12 @@ def create_header_bar(parent, title="Module", on_return_callback=None):
     
     # Bouton retour (si callback fourni)
     if on_return_callback:
-        try:
-            style = ttk.Style()
-            style.configure("Header.TButton",
-                          foreground="white",
-                          background="#1E40AF",
-                          font=("Century Gothic", 10, "bold"),
-                          relief="flat",
-                          padding=5)
-        except:
-            pass
-        
-        btn_return = ttk.Button(header, text="🔙 Retour", 
-                               command=on_return_callback)
+        btn_return = ttk.Button(
+            header,
+            text="🔙 Retour",
+            style="Return.Header.TButton",
+            command=on_return_callback,
+        )
         btn_return.pack(side=tk.LEFT, padx=10, pady=10)
     
     # Titre au centre/gauche

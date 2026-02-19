@@ -10,15 +10,15 @@ from .jeux_math import JEUX_DISPONIBLES
 
 # Palette de couleurs améliorée
 PALETTE = {
-    "fond_principal": "#F0F4F8",
+    "fond_principal": "#F4F7FB",
     "fond_secondaire": "#FFFFFF",
-    "primaire": "#1E40AF",      # Bleu plus foncé pour meilleur contraste
-    "secondaire": "#3B82F6",    # Bleu original pour accents
-    "texte_fonce": "#1E293B",   # Texte très visible
-    "texte_clair": "#64748B",   # Texte secondaire
+    "primaire": "#0F4C81",      # Bleu plus foncé pour meilleur contraste
+    "secondaire": "#1767AA",    # Bleu original pour accents
+    "texte_fonce": "#102A43",   # Texte très visible
+    "texte_clair": "#5B7083",   # Texte secondaire
     "succes": "#10B981",        # Vert
-    "erreur": "#DC2626",        # Rouge
-    "bordure": "#E2E8F0",       # Bordure légère
+    "erreur": "#C0392B",        # Rouge
+    "bordure": "#D9E2EC",       # Bordure légère
 }
 
 def configurer_styles():

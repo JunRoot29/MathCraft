@@ -12,15 +12,15 @@ from .historique_manager import historique_manager
 
 # Palette unifiée (même que main.py)
 PALETTE = {
-    "fond_principal": "#F0F4F8",
+    "fond_principal": "#F4F7FB",
     "fond_secondaire": "#FFFFFF",
-    "primaire": "#1E40AF",
-    "secondaire": "#3B82F6",
-    "texte_fonce": "#1E293B",
-    "texte_clair": "#64748B",
+    "primaire": "#0F4C81",
+    "secondaire": "#1767AA",
+    "texte_fonce": "#102A43",
+    "texte_clair": "#5B7083",
     "succes": "#10B981",
-    "erreur": "#DC2626",
-    "bordure": "#E2E8F0",
+    "erreur": "#C0392B",
+    "bordure": "#D9E2EC",
 }
 
 def launch_operation(parent=None):

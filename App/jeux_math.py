@@ -13,12 +13,12 @@ from enum import Enum
 
 # Palette unifiée (identique aux autres fichiers)
 PALETTE = {
-    "fond_principal": "#F0F4F8",
-    "primaire": "#1E40AF",
-    "secondaire": "#3B82F6", 
-    "erreur": "#DC2626",
-    "texte_fonce": "#1E40AF",
-    "texte_clair": "#1E40AF"
+    "fond_principal": "#F4F7FB",
+    "primaire": "#0F4C81",
+    "secondaire": "#1767AA", 
+    "erreur": "#C0392B",
+    "texte_fonce": "#0F4C81",
+    "texte_clair": "#0F4C81"
 }
 
 # Imports responsive UI
@@ -3536,15 +3536,15 @@ class BatailleDesFractions:
         for widget in self.carte_ordi_frame.winfo_children():
             widget.destroy()
         
-        carte_frame = Frame(self.carte_ordi_frame, bg="#DC2626", relief="raised", borderwidth=2, width=80, height=100)
+        carte_frame = Frame(self.carte_ordi_frame, bg="#C0392B", relief="raised", borderwidth=2, width=80, height=100)
         carte_frame.pack(pady=10)
         carte_frame.pack_propagate(False)
         
         Label(carte_frame, text=carte['fraction'], font=("Arial", 14, "bold"), 
-              bg="#DC2626", fg="white").pack(expand=True)
+              bg="#C0392B", fg="white").pack(expand=True)
         
         Label(carte_frame, text=f"{carte['valeur']:.2f}", font=("Arial", 10), 
-              bg="#DC2626", fg="white").pack()
+              bg="#C0392B", fg="white").pack()
 
     def _jouer_carte(self, carte_joueur):
         """Le joueur joue une carte"""
@@ -4969,7 +4969,7 @@ class ChasseNombresPremiers:
             "succes": "#10B981",
             "erreur": "#EF4444",
             "avertissement": "#F59E0B",
-            "info": "#3B82F6",
+            "info": "#1767AA",
             "texte_fonce": "#1F2937",
             "texte_clair": "#6B7280",
             "fond_clair": "#F3F4F6",
@@ -5959,12 +5959,12 @@ class MathBattle:
             "succes": "#10B981",
             "erreur": "#EF4444",
             "avertissement": "#F59E0B",
-            "info": "#3B82F6",
+            "info": "#1767AA",
             "texte_fonce": "#1F2937",
             "texte_clair": "#6B7280",
             "fond_clair": "#F3F4F6",
             "fond_carte": "#F8FAFC",
-            "joueur": "#3B82F6",  # Bleu pour le joueur
+            "joueur": "#1767AA",  # Bleu pour le joueur
             "ordi": "#EF4444"     # Rouge pour l'ordinateur
         }
         
@@ -6886,7 +6886,7 @@ class DefisFibonacci:
             "succes": "#10B981",
             "erreur": "#EF4444",
             "avertissement": "#F59E0B",
-            "info": "#3B82F6",
+            "info": "#1767AA",
             "texte_fonce": "#1F2937",
             "texte_clair": "#6B7280",
             "fond_clair": "#F3F4F6",

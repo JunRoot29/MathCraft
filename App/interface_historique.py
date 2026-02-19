@@ -8,12 +8,12 @@ from .historique_manager import historique_manager
 
 # Palette unifiée (identique aux autres fichiers)
 PALETTE = {
-    "fond_principal": "#F0F4F8",
-    "primaire": "#1E40AF",
-    "secondaire": "#3B82F6", 
-    "erreur": "#DC2626",
-    "texte_fonce": "#1E40AF",
-    "texte_clair": "#1E40AF"
+    "fond_principal": "#F4F7FB",
+    "primaire": "#0F4C81",
+    "secondaire": "#1767AA", 
+    "erreur": "#C0392B",
+    "texte_fonce": "#0F4C81",
+    "texte_clair": "#0F4C81"
 }
 
 # Imports responsive UI
