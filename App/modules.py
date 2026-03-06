@@ -2140,3 +2140,471 @@ def interpolation_mincarres(x_points, y_points, degre):
     }
     
     return coeffs, erreur, polynome, details
+
+
+# ======================================================================================
+# Statistiques et probabilites
+# ======================================================================================
+
+def _valider_liste_numerique(data, min_len=1, nom="data"):
+    if data is None:
+        raise ValueError(f"{nom} ne peut pas etre vide")
+    valeurs = [float(v) for v in data]
+    if len(valeurs) < min_len:
+        raise ValueError(f"{nom} doit contenir au moins {min_len} valeur(s)")
+    return valeurs
+
+
+def statistiques_descriptives(data):
+    """Retourne les statistiques descriptives principales d'une serie numerique."""
+    valeurs = _valider_liste_numerique(data, min_len=1, nom="data")
+    n = len(valeurs)
+    arr = np.array(valeurs, dtype=float)
+
+    moyenne = float(np.mean(arr))
+    mediane = float(np.median(arr))
+    variance_pop = float(np.var(arr, ddof=0))
+    ecart_type_pop = float(np.std(arr, ddof=0))
+    variance_ech = float(np.var(arr, ddof=1)) if n > 1 else 0.0
+    ecart_type_ech = float(np.std(arr, ddof=1)) if n > 1 else 0.0
+
+    # Mode(s): conserve tous les modes en cas d'egalite
+    frequences = {}
+    for v in valeurs:
+        frequences[v] = frequences.get(v, 0) + 1
+    freq_max = max(frequences.values())
+    modes = sorted([k for k, v in frequences.items() if v == freq_max])
+
+    q1, q2, q3 = np.percentile(arr, [25, 50, 75])
+
+    return {
+        "effectif": n,
+        "somme": float(np.sum(arr)),
+        "moyenne": moyenne,
+        "mediane": mediane,
+        "modes": modes,
+        "frequence_mode": int(freq_max),
+        "minimum": float(np.min(arr)),
+        "maximum": float(np.max(arr)),
+        "etendue": float(np.max(arr) - np.min(arr)),
+        "variance_population": variance_pop,
+        "ecart_type_population": ecart_type_pop,
+        "variance_echantillon": variance_ech,
+        "ecart_type_echantillon": ecart_type_ech,
+        "q1": float(q1),
+        "q2": float(q2),
+        "q3": float(q3),
+        "iqr": float(q3 - q1),
+        "frequences": {str(k): int(v) for k, v in sorted(frequences.items(), key=lambda x: x[0])},
+    }
+
+
+def coefficient_pearson(x_data, y_data):
+    """Calcule le coefficient de correlation lineaire de Pearson."""
+    x = _valider_liste_numerique(x_data, min_len=2, nom="x_data")
+    y = _valider_liste_numerique(y_data, min_len=2, nom="y_data")
+    if len(x) != len(y):
+        raise ValueError("x_data et y_data doivent avoir la meme longueur")
+
+    x_arr = np.array(x, dtype=float)
+    y_arr = np.array(y, dtype=float)
+    r = float(np.corrcoef(x_arr, y_arr)[0, 1])
+    if math.isnan(r):
+        raise ValueError("Correlation indefinie (donnees constantes)")
+    return r
+
+
+def regression_lineaire_simple(x_data, y_data):
+    """Regression lineaire y = a*x + b avec details (r et R^2)."""
+    x = _valider_liste_numerique(x_data, min_len=2, nom="x_data")
+    y = _valider_liste_numerique(y_data, min_len=2, nom="y_data")
+    if len(x) != len(y):
+        raise ValueError("x_data et y_data doivent avoir la meme longueur")
+
+    x_arr = np.array(x, dtype=float)
+    y_arr = np.array(y, dtype=float)
+
+    a, b = np.polyfit(x_arr, y_arr, 1)
+    y_pred = a * x_arr + b
+    r = float(np.corrcoef(x_arr, y_arr)[0, 1])
+    r2 = float(1 - np.sum((y_arr - y_pred) ** 2) / np.sum((y_arr - np.mean(y_arr)) ** 2)) if len(y_arr) > 1 else 1.0
+
+    return {
+        "pente": float(a),
+        "ordonnee_origine": float(b),
+        "equation": f"y = {float(a):.8f}x + {float(b):.8f}",
+        "pearson_r": r,
+        "r2": r2,
+        "y_pred": [float(v) for v in y_pred],
+    }
+
+
+def permutations(n):
+    n = int(n)
+    if n < 0:
+        raise ValueError("n doit etre >= 0")
+    return math.factorial(n)
+
+
+def arrangements(n, k):
+    n = int(n)
+    k = int(k)
+    if n < 0 or k < 0 or k > n:
+        raise ValueError("Il faut 0 <= k <= n")
+    return math.factorial(n) // math.factorial(n - k)
+
+
+def combinaisons(n, k):
+    n = int(n)
+    k = int(k)
+    if n < 0 or k < 0 or k > n:
+        raise ValueError("Il faut 0 <= k <= n")
+    return math.comb(n, k)
+
+
+def distribution_binomiale(n, p):
+    """Retourne la loi binomiale complete pour X~B(n,p)."""
+    n = int(n)
+    p = float(p)
+    if n < 0:
+        raise ValueError("n doit etre >= 0")
+    if p < 0 or p > 1:
+        raise ValueError("p doit etre dans [0,1]")
+
+    valeurs = []
+    for k in range(n + 1):
+        proba = combinaisons(n, k) * (p ** k) * ((1 - p) ** (n - k))
+        valeurs.append({"k": k, "p": float(proba)})
+
+    return {
+        "n": n,
+        "p": p,
+        "esperance": float(n * p),
+        "variance": float(n * p * (1 - p)),
+        "ecart_type": float(math.sqrt(n * p * (1 - p))),
+        "distribution": valeurs,
+    }
+
+
+def loi_normale_pdf(x, mu=0.0, sigma=1.0):
+    x = float(x)
+    mu = float(mu)
+    sigma = float(sigma)
+    if sigma <= 0:
+        raise ValueError("sigma doit etre strictement positif")
+    coef = 1.0 / (sigma * math.sqrt(2 * math.pi))
+    expo = -0.5 * ((x - mu) / sigma) ** 2
+    return float(coef * math.exp(expo))
+
+
+def loi_normale_cdf(x, mu=0.0, sigma=1.0):
+    x = float(x)
+    mu = float(mu)
+    sigma = float(sigma)
+    if sigma <= 0:
+        raise ValueError("sigma doit etre strictement positif")
+    z = (x - mu) / (sigma * math.sqrt(2))
+    return float(0.5 * (1 + math.erf(z)))
+
+
+def loi_normale_quantile(probabilite, mu=0.0, sigma=1.0):
+    """Quantile de la loi N(mu, sigma^2)."""
+    from statistics import NormalDist
+
+    p = float(probabilite)
+    mu = float(mu)
+    sigma = float(sigma)
+    if p <= 0 or p >= 1:
+        raise ValueError("La probabilite doit etre dans ]0,1[")
+    if sigma <= 0:
+        raise ValueError("sigma doit etre strictement positif")
+    return float(NormalDist(mu=mu, sigma=sigma).inv_cdf(p))
+
+
+# ======================================================================================
+# Algebre lineaire
+# ======================================================================================
+
+def _valider_matrice(matrice, carree=False, nom="matrice"):
+    if matrice is None or len(matrice) == 0:
+        raise ValueError(f"{nom} ne peut pas etre vide")
+
+    try:
+        arr = np.array(matrice, dtype=float)
+    except Exception as exc:
+        raise ValueError(f"{nom} contient des valeurs invalides") from exc
+
+    if arr.ndim != 2:
+        raise ValueError(f"{nom} doit etre une matrice 2D")
+
+    if carree and arr.shape[0] != arr.shape[1]:
+        raise ValueError(f"{nom} doit etre carree")
+
+    return arr
+
+
+def matrice_addition(matrice1, matrice2):
+    a = _valider_matrice(matrice1, nom="matrice1")
+    b = _valider_matrice(matrice2, nom="matrice2")
+    if a.shape != b.shape:
+        raise ValueError("Les matrices doivent avoir la meme dimension")
+    return (a + b).tolist()
+
+
+def matrice_soustraction(matrice1, matrice2):
+    a = _valider_matrice(matrice1, nom="matrice1")
+    b = _valider_matrice(matrice2, nom="matrice2")
+    if a.shape != b.shape:
+        raise ValueError("Les matrices doivent avoir la meme dimension")
+    return (a - b).tolist()
+
+
+def matrice_multiplication(matrice1, matrice2):
+    a = _valider_matrice(matrice1, nom="matrice1")
+    b = _valider_matrice(matrice2, nom="matrice2")
+    if a.shape[1] != b.shape[0]:
+        raise ValueError("Dimensions incompatibles pour la multiplication")
+    return np.matmul(a, b).tolist()
+
+
+def matrice_transposee(matrice):
+    a = _valider_matrice(matrice, nom="matrice")
+    return a.T.tolist()
+
+
+def matrice_trace(matrice):
+    a = _valider_matrice(matrice, carree=True, nom="matrice")
+    return float(np.trace(a))
+
+
+def matrice_determinant(matrice):
+    a = _valider_matrice(matrice, carree=True, nom="matrice")
+    return float(np.linalg.det(a))
+
+
+def matrice_rang(matrice):
+    a = _valider_matrice(matrice, nom="matrice")
+    return int(np.linalg.matrix_rank(a))
+
+
+def matrice_inverse(matrice):
+    a = _valider_matrice(matrice, carree=True, nom="matrice")
+    det = float(np.linalg.det(a))
+    if abs(det) < 1e-12:
+        raise ValueError("Matrice non inversible (determinant nul)")
+    return np.linalg.inv(a).tolist()
+
+
+def resoudre_systeme_gauss(matrice_a, vecteur_b):
+    a = _valider_matrice(matrice_a, carree=True, nom="matrice_a")
+    b = np.array(vecteur_b, dtype=float)
+    if b.ndim != 1:
+        raise ValueError("vecteur_b doit etre un vecteur 1D")
+    if len(b) != a.shape[0]:
+        raise ValueError("La taille de b doit correspondre au nombre de lignes de A")
+    x = np.linalg.solve(a, b)
+    return [float(v) for v in x]
+
+
+def resoudre_systeme_gauss_jordan(matrice_a, vecteur_b):
+    """Resolution Ax=b par elimination de Gauss-Jordan."""
+    a = _valider_matrice(matrice_a, carree=True, nom="matrice_a")
+    b = np.array(vecteur_b, dtype=float)
+    n = a.shape[0]
+    if b.ndim != 1 or len(b) != n:
+        raise ValueError("vecteur_b doit etre de taille n")
+
+    aug = np.hstack([a, b.reshape(-1, 1)]).astype(float)
+
+    for i in range(n):
+        pivot = i + np.argmax(np.abs(aug[i:, i]))
+        if abs(aug[pivot, i]) < 1e-12:
+            raise ValueError("Systeme sans solution unique")
+        if pivot != i:
+            aug[[i, pivot]] = aug[[pivot, i]]
+
+        aug[i] = aug[i] / aug[i, i]
+
+        for j in range(n):
+            if j != i:
+                aug[j] = aug[j] - aug[j, i] * aug[i]
+
+    return [float(v) for v in aug[:, -1]]
+
+
+def decomposition_lu(matrice):
+    """Decomposition LU simple (Doolittle, sans pivot) pour matrice carree."""
+    a = _valider_matrice(matrice, carree=True, nom="matrice")
+    n = a.shape[0]
+    l = np.zeros((n, n), dtype=float)
+    u = np.zeros((n, n), dtype=float)
+
+    for i in range(n):
+        l[i, i] = 1.0
+
+        for k in range(i, n):
+            u[i, k] = a[i, k] - np.sum(l[i, :i] * u[:i, k])
+
+        for k in range(i + 1, n):
+            if abs(u[i, i]) < 1e-12:
+                raise ValueError("Pivot nul: decomposition LU impossible sans pivot")
+            l[k, i] = (a[k, i] - np.sum(l[k, :i] * u[:i, i])) / u[i, i]
+
+    return {"L": l.tolist(), "U": u.tolist()}
+
+
+def resoudre_systeme_lu(matrice_a, vecteur_b):
+    a = _valider_matrice(matrice_a, carree=True, nom="matrice_a")
+    b = np.array(vecteur_b, dtype=float)
+    if b.ndim != 1 or len(b) != a.shape[0]:
+        raise ValueError("vecteur_b doit etre de taille n")
+
+    lu = decomposition_lu(a)
+    l = np.array(lu["L"], dtype=float)
+    u = np.array(lu["U"], dtype=float)
+    n = a.shape[0]
+
+    # Substitution avant: Ly = b
+    y = np.zeros(n, dtype=float)
+    for i in range(n):
+        y[i] = b[i] - np.dot(l[i, :i], y[:i])
+
+    # Substitution arriere: Ux = y
+    x = np.zeros(n, dtype=float)
+    for i in range(n - 1, -1, -1):
+        if abs(u[i, i]) < 1e-12:
+            raise ValueError("Systeme sans solution unique")
+        x[i] = (y[i] - np.dot(u[i, i + 1:], x[i + 1:])) / u[i, i]
+
+    return [float(v) for v in x]
+
+
+def valeurs_propres_vecteurs_propres(matrice):
+    a = _valider_matrice(matrice, carree=True, nom="matrice")
+    valeurs, vecteurs = np.linalg.eig(a)
+
+    valeurs_out = []
+    for val in valeurs:
+        if abs(val.imag) < 1e-12:
+            valeurs_out.append(float(val.real))
+        else:
+            valeurs_out.append(complex(float(val.real), float(val.imag)))
+
+    vecteurs_out = []
+    for col in range(vecteurs.shape[1]):
+        vec = []
+        for val in vecteurs[:, col]:
+            if abs(val.imag) < 1e-12:
+                vec.append(float(val.real))
+            else:
+                vec.append(complex(float(val.real), float(val.imag)))
+        vecteurs_out.append(vec)
+
+    return {"valeurs_propres": valeurs_out, "vecteurs_propres": vecteurs_out}
+
+
+def diagonalisation_matrice(matrice, tolerance=1e-9):
+    """
+    Tente une diagonalisation A = P D P^-1.
+    Retourne aussi les multiplicites algebriques/geometriques.
+    """
+    a = _valider_matrice(matrice, carree=True, nom="matrice")
+    n = a.shape[0]
+    eigvals, eigvecs = np.linalg.eig(a)
+
+    # Comptage des multiplicites algebriques avec regroupement numerique
+    classes = []
+    utilises = [False] * len(eigvals)
+    for i, val in enumerate(eigvals):
+        if utilises[i]:
+            continue
+        groupe = [i]
+        utilises[i] = True
+        for j in range(i + 1, len(eigvals)):
+            if not utilises[j] and abs(eigvals[j] - val) <= tolerance:
+                groupe.append(j)
+                utilises[j] = True
+        classes.append(groupe)
+
+    multiplicites = []
+    for groupe in classes:
+        valeur = eigvals[groupe[0]]
+        m_alg = len(groupe)
+        # Dimension de ker(A-lambda I) = n - rang(A-lambda I)
+        m_geo = int(n - np.linalg.matrix_rank(a - valeur * np.eye(n), tol=tolerance))
+        multiplicites.append({
+            "valeur_propre": float(valeur.real) if abs(valeur.imag) < tolerance else complex(float(valeur.real), float(valeur.imag)),
+            "multiplicite_algebrique": int(m_alg),
+            "multiplicite_geometrique": int(m_geo),
+        })
+
+    rang_vecteurs = np.linalg.matrix_rank(eigvecs, tol=tolerance)
+    diagonalisable = bool(rang_vecteurs == n)
+
+    d = np.diag(eigvals)
+    p = eigvecs
+
+    def _clean_matrix(m):
+        out = []
+        for row in m:
+            clean_row = []
+            for val in row:
+                if abs(val.imag) < tolerance:
+                    clean_row.append(float(val.real))
+                else:
+                    clean_row.append(complex(float(val.real), float(val.imag)))
+            out.append(clean_row)
+        return out
+
+    resultat = {
+        "diagonalisable": diagonalisable,
+        "multiplicites": multiplicites,
+        "valeurs_propres": [
+            float(v.real) if abs(v.imag) < tolerance else complex(float(v.real), float(v.imag))
+            for v in eigvals
+        ],
+    }
+
+    if diagonalisable:
+        p_inv = np.linalg.inv(p)
+        resultat.update({
+            "P": _clean_matrix(p),
+            "D": _clean_matrix(d),
+            "P_inv": _clean_matrix(p_inv),
+        })
+
+    return resultat
+
+
+def trigonalisation_matrice(matrice, max_iter=300, tolerance=1e-10):
+    """
+    Triangularisation numerique (type QR iteration):
+    A ~= Q * T * Q^-1 avec T quasi triangulaire superieure.
+    """
+    a = _valider_matrice(matrice, carree=True, nom="matrice")
+    n = a.shape[0]
+    ak = a.copy().astype(float)
+    q_total = np.eye(n)
+
+    for _ in range(int(max_iter)):
+        q, r = np.linalg.qr(ak)
+        ak = r @ q
+        q_total = q_total @ q
+
+        # Critere: norme des termes sous-diagonaux
+        sous_diag = np.tril(ak, k=-1)
+        if np.linalg.norm(sous_diag, ord="fro") < tolerance:
+            break
+
+    t = np.triu(ak)
+    q_inv = np.linalg.inv(q_total)
+    reconstruction = q_total @ t @ q_inv
+    residu = float(np.linalg.norm(a - reconstruction, ord="fro"))
+
+    return {
+        "Q": q_total.tolist(),
+        "T": t.tolist(),
+        "Q_inv": q_inv.tolist(),
+        "residu_similarite": residu,
+        "quasi_triangulaire": bool(np.linalg.norm(np.tril(t, -1), ord="fro") < max(1e-8, tolerance * 10)),
+    }

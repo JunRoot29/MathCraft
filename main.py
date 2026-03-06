@@ -9,7 +9,9 @@ from App import integration_numerique as int_num
 from App import interpolation_lineaire as int_lin
 from App import operation_de_base as op
 from App import polynome as poly
+from App import statistiques_probabilites as stat_prob
 from App import theorie_des_nombres as theorie
+from App import algebre_lineaire as alg_lin
 from App.interface_historique import InterfaceHistorique
 from App.responsive_ui import ResponsiveUIManager
 from App.soutient_manager import afficher_soutien
@@ -210,7 +212,7 @@ def creer_menu_burger():
 
     status = Label(
         header_card,
-        text="● 9 modules actifs",
+        text="● 11 modules actifs",
         font=("Century Gothic", 10, "bold"),
         fg=PALETTE["accent"],
         bg=PALETTE["fond_secondaire"],
@@ -317,6 +319,8 @@ module_defs = [
     ("Module 7  |  Intégration numérique 📊", lambda: show_module(int_num.lancer_integration_numerique)),
     ("Module 8  |  Équations numériques 🟰", lambda: show_module(eq_num.lancer_equation_Numerique)),
     ("Module 9  |  Interpolation linéaire 📉", lambda: show_module(int_lin.lancer_interpolation_numerique)),
+    ("Module 10 |  Statistiques & Probabilités 📊", lambda: show_module(stat_prob.lancer_statistiques_probabilites)),
+    ("Module 11 |  Algèbre linéaire 🔢", lambda: show_module(alg_lin.lancer_algebre_lineaire)),
     ("📚 Historique des calculs", lambda: historique_interface.afficher_historique(parent=content_frame)),
 ]
 for text, command in module_defs:

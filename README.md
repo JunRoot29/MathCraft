@@ -80,7 +80,7 @@ L'objectif est simple : rendre les mathématiques **accessibles, visuelles et am
 
 ## 🛠️ Technologies utilisées
 
-* **Python 3.x** - Langage principal
+* **Python 3.12+** - Langage principal
 * **Tkinter / ttk** - Interface graphique moderne
 * **NumPy** - Calculs scientifiques et algèbre linéaire
 * **Matplotlib** - Visualisation graphique et graphiques interactifs
@@ -382,14 +382,11 @@ git push origin feature/NouvelleFonction
 ## 🧪 Tests
 
 ```bash
-# Tester les fonctions mathématiques
-python -m pytest tests/test_modules.py
+# Lancer la suite de tests actuelle (unittest)
+python test.py
 
-# Tester l'interface
-python -m pytest tests/test_interface.py
-
-# Lancer tous les tests
-python -m pytest tests/
+# Windows (si erreur d'encodage console cp1252)
+$env:PYTHONIOENCODING='utf-8'; python test.py
 ```
 
 ---

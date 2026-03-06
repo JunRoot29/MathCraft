@@ -32,7 +32,15 @@ from App.modules import (
     intTrapezeS, intTrapezeC, intSimpsonS, intSimpsonC,
     
     # Équations
-    racineDichotomie, racineNewton
+    racineDichotomie, racineNewton,
+
+    # Statistiques / Probabilités
+    statistiques_descriptives, coefficient_pearson, regression_lineaire_simple,
+    distribution_binomiale, loi_normale_cdf, combinaisons,
+
+    # Algèbre linéaire
+    matrice_addition, matrice_multiplication, matrice_inverse,
+    resoudre_systeme_gauss, diagonalisation_matrice, trigonalisation_matrice
 )
 
 from App.conversion import (
@@ -337,6 +345,58 @@ class TestFonctionsComplexes(unittest.TestCase):
         self.assertEqual(compterVoyelles(texte_complexe), 12)
         self.assertEqual(compterlettre(texte_complexe, "e"), "Il y'a 5 fois e")
 
+
+class TestStatsProbaEtAlgebre(unittest.TestCase):
+    """Tests pour les nouveaux modules statistiques/proba et algèbre."""
+
+    def test_statistiques_descriptives(self):
+        data = [1, 2, 2, 4, 5]
+        stats = statistiques_descriptives(data)
+        self.assertEqual(stats["effectif"], 5)
+        self.assertAlmostEqual(stats["moyenne"], 2.8, places=6)
+        self.assertIn(2.0, stats["modes"])
+
+    def test_regression_et_pearson(self):
+        x = [1, 2, 3, 4]
+        y = [2, 4, 6, 8]
+        reg = regression_lineaire_simple(x, y)
+        r = coefficient_pearson(x, y)
+        self.assertAlmostEqual(reg["pente"], 2.0, places=6)
+        self.assertAlmostEqual(reg["ordonnee_origine"], 0.0, places=6)
+        self.assertAlmostEqual(r, 1.0, places=6)
+
+    def test_binomiale(self):
+        loi = distribution_binomiale(4, 0.5)
+        total = sum(v["p"] for v in loi["distribution"])
+        self.assertAlmostEqual(total, 1.0, places=6)
+        self.assertEqual(combinaisons(5, 2), 10)
+
+    def test_normale(self):
+        # Phi(0) = 0.5
+        self.assertAlmostEqual(loi_normale_cdf(0), 0.5, places=6)
+
+    def test_algebre_lineaire(self):
+        a = [[1, 2], [3, 4]]
+        b = [[5, 6], [7, 8]]
+        self.assertEqual(matrice_addition(a, b), [[6.0, 8.0], [10.0, 12.0]])
+        prod = matrice_multiplication(a, b)
+        self.assertEqual(prod, [[19.0, 22.0], [43.0, 50.0]])
+
+        inv = matrice_inverse([[4, 7], [2, 6]])
+        self.assertAlmostEqual(inv[0][0], 0.6, places=6)
+
+        sol = resoudre_systeme_gauss([[2, 1], [1, 3]], [1, 2])
+        self.assertAlmostEqual(sol[0], 0.2, places=6)
+        self.assertAlmostEqual(sol[1], 0.6, places=6)
+
+        diag = diagonalisation_matrice([[4, 0], [0, 2]])
+        self.assertTrue(diag["diagonalisable"])
+
+        tri = trigonalisation_matrice([[4, 1], [2, 3]])
+        self.assertIn("T", tri)
+        self.assertIn("Q", tri)
+        self.assertLess(tri["residu_similarite"], 1e-4)
+
 def run_all_tests():
     """Fonction pour exécuter tous les tests"""
     # Créer une suite de tests
@@ -352,7 +412,8 @@ def run_all_tests():
         TestIntegrationNumerique,
         TestEquationsNonLineaires,
         TestConversions,
-        TestFonctionsComplexes
+        TestFonctionsComplexes,
+        TestStatsProbaEtAlgebre
     ]
     
     for test_class in test_classes:
