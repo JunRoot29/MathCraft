@@ -606,3 +606,31 @@ Université Félix Houphouët-Boigny • Abidjan, Côte d'Ivoire
 
 </div>  
 *Version : MathCraft 1.0.0 - "Numerical Revolution"*
+
+---
+
+## Update - March 2026
+
+### Newly integrated modules
+- Module 10: Statistics & Probability
+  - Descriptive statistics
+  - Pearson correlation
+  - Simple linear regression
+  - Combinatorics (P, A, C), Binomial, Normal (PDF/CDF/Quantile)
+  - Graphs: scatter plot, regression line, histogram, boxplot, density approximation
+- Module 11: Linear Algebra
+  - Matrix operations, determinant, rank, inverse
+  - Solvers: Gauss, Gauss-Jordan, LU
+  - Eigenvalues/eigenvectors
+  - Diagonalization (with algebraic/geometric multiplicity details)
+  - Trigonalization with triangular matrix display
+
+### UI and quality improvements
+- Operation-first workflow in modules 10 and 11 (dynamic fields by selected operation)
+- Clear matrix outputs for diagonalization (`P`, `D`, `P_inv`) and trigonalization (`Q`, `T`, `Q_inv`)
+- Numerical quality indicator for trigonalization residual
+- Updated main menu: 11 active modules
+
+### Testing status
+- Unit and integration-oriented smoke tests updated
+- Current suite status: all tests passing (`python test.py`)

@@ -222,8 +222,22 @@ def lancer_algebre_lineaire(parent=None):
                 result = modu.valeurs_propres_vecteurs_propres(a)
             elif op == "Diagonalisation(A)":
                 result = modu.diagonalisation_matrice(a)
+                if not result.get("diagonalisable", False):
+                    result["note"] = (
+                        "Matrice non diagonalisable: au moins une valeur propre a "
+                        "une multiplicite geometrique strictement inferieure a sa multiplicite algebrique."
+                    )
             elif op == "Trigonalisation(A)":
                 result = modu.trigonalisation_matrice(a)
+                residu = float(result.get("residu_similarite", 0.0))
+                if residu < 1e-7:
+                    result["qualite_numerique"] = "Excellente"
+                elif residu < 1e-4:
+                    result["qualite_numerique"] = "Bonne"
+                else:
+                    result["qualite_numerique"] = (
+                        "Approximation numerique moyenne: essayez une matrice mieux conditionnee."
+                    )
             else:
                 raise ValueError("Operation inconnue")
 

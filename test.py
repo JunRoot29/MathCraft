@@ -6,6 +6,7 @@ import unittest
 import math
 import sys
 import os
+import numpy as np
 
 # Ajouter le chemin pour importer les modules
 sys.path.append(os.path.dirname(__file__))
@@ -47,6 +48,8 @@ from App.conversion import (
     convertir_longueur, convertir_temperature, convertir_masse_et_poids,
     convertir_vitesse, convertir_angles
 )
+from App import statistiques_probabilites as stats_ui
+from App import algebre_lineaire as alg_ui
 
 class TestArithmetique(unittest.TestCase):
     """Tests pour les fonctions arithmétiques"""
@@ -397,6 +400,42 @@ class TestStatsProbaEtAlgebre(unittest.TestCase):
         self.assertIn("Q", tri)
         self.assertLess(tri["residu_similarite"], 1e-4)
 
+
+class TestIntegrationWorkflows(unittest.TestCase):
+    """Tests d'integration/smoke (hors interface graphique active)."""
+
+    def test_ui_catalogues_operations(self):
+        self.assertIn("Regression lineaire simple", stats_ui.OPS_STATS)
+        self.assertIn("Loi binomiale B(n,p)", stats_ui.OPS_PROBA)
+        self.assertIn("Diagonalisation(A)", alg_ui.OPERATIONS)
+        self.assertIn("Trigonalisation(A)", alg_ui.OPERATIONS)
+
+    def test_parse_helpers(self):
+        data = stats_ui._parse_liste_nombres("1, 2; 3\n4")
+        self.assertEqual(data, [1.0, 2.0, 3.0, 4.0])
+
+        a = alg_ui._parse_matrix("1 2; 3 4")
+        b = alg_ui._parse_vector("5,11")
+        self.assertEqual(a, [[1.0, 2.0], [3.0, 4.0]])
+        self.assertEqual(b, [5.0, 11.0])
+
+    def test_diag_trig_pipeline(self):
+        a = [[4, 1], [0, 2]]
+        diag = diagonalisation_matrice(a)
+        self.assertTrue(diag["diagonalisable"])
+        p = np.array(diag["P"], dtype=float)
+        d = np.array(diag["D"], dtype=float)
+        p_inv = np.array(diag["P_inv"], dtype=float)
+        a_rec = p @ d @ p_inv
+        self.assertLess(np.linalg.norm(np.array(a, dtype=float) - a_rec), 1e-6)
+
+        tri = trigonalisation_matrice(a)
+        t = np.array(tri["T"], dtype=float)
+        q = np.array(tri["Q"], dtype=float)
+        q_inv = np.array(tri["Q_inv"], dtype=float)
+        a_rec_tri = q @ t @ q_inv
+        self.assertLess(np.linalg.norm(np.array(a, dtype=float) - a_rec_tri), 1e-4)
+
 def run_all_tests():
     """Fonction pour exécuter tous les tests"""
     # Créer une suite de tests
@@ -413,7 +452,8 @@ def run_all_tests():
         TestEquationsNonLineaires,
         TestConversions,
         TestFonctionsComplexes,
-        TestStatsProbaEtAlgebre
+        TestStatsProbaEtAlgebre,
+        TestIntegrationWorkflows
     ]
     
     for test_class in test_classes:

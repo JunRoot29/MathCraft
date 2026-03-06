@@ -70,6 +70,52 @@ def afficher_a_propos():
     )
 
 
+# Override des boites d'aide pour garder les contenus a jour et lisibles.
+def afficher_guides():
+    from tkinter import messagebox
+
+    messagebox.showinfo(
+        "Guides d'utilisation",
+        "Guides MathCraft\n\n"
+        "1. Operations de base : calculatrice scientifique\n"
+        "2. Theorie des nombres : primalite, PGCD, PPCM, Catalan\n"
+        "3. Conversion : unites et angles\n"
+        "4. Explorateur de concepts : apprentissage interactif\n"
+        "5. Polynomes : equations degre 1/2/3\n"
+        "6. Chaines de caracteres : analyse textuelle\n"
+        "7. Integration numerique : methodes et iterations\n"
+        "8. Equations numeriques : methodes comparees\n"
+        "9. Interpolation numerique : 5 methodes + graphe\n"
+        "10. Statistiques/Probabilites : analyses + visualisation\n"
+        "11. Algebre lineaire : matrices, diagonalisation, trigonalisation\n\n"
+        "Astuce: choisissez une operation puis remplissez seulement les champs visibles."
+    )
+
+
+def afficher_a_propos():
+    from tkinter import messagebox
+
+    messagebox.showinfo(
+        "A propos de MathCraft",
+        "MathCraft v1.1\n\n"
+        "Un espace pour calculer, apprendre et visualiser les mathematiques.\n\n"
+        "Developpe par Junior Kossivi\n"
+        "© 2026 - Tous droits reserves\n\n"
+        "Modules disponibles :\n"
+        "- Operations de base\n"
+        "- Theorie des nombres\n"
+        "- Conversion\n"
+        "- Explorateur de concepts\n"
+        "- Polynomes et equations\n"
+        "- Chaines de caracteres\n"
+        "- Integration numerique\n"
+        "- Resolution d'equations numeriques\n"
+        "- Interpolation numerique\n"
+        "- Statistiques et probabilites\n"
+        "- Algebre lineaire"
+    )
+
+
 fenetre = Tk()
 fenetre.title("MathCraft")
 window_width, window_height = ResponsiveUIManager.get_safe_window_geometry(base_width=1240, base_height=820)
